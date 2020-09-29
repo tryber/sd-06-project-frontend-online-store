@@ -1,6 +1,10 @@
 import React from 'react';
+import * as api from '../services/api';
 
 function homeList() {
+  console.log(api.getCategories());
+  console.log(api
+    .getProductsFromCategoryAndQuery('MLB1368', 'Arte, Papelaria e Armarinho'));
   return (
     <div>
       <input />

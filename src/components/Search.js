@@ -17,7 +17,7 @@ class Search extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <button data-testid='shopping-cart-button'><Link to="/ShoppingCart">Carrinho de compras</Link></button>
+          <button><Link data-testid='shopping-cart-button' to="/ShoppingCart">Carrinho de compras</Link></button>
         </form>
       </div>
     );

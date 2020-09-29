@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
+import Home from './components/Home'
 
 function App() {
   return (
     <div className="App">
-      <p data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </p>
+      <Home />
     </div>
   );
 }

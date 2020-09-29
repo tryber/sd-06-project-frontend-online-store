@@ -1,10 +1,10 @@
 import React from 'react';
 
 class Loading extends React.Component {
-  render () {
+  render() {
     return (
       <p>Loading...</p>
-    )
+    );
   }
 }
 

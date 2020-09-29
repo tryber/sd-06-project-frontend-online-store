@@ -4,13 +4,13 @@ import CategoriesList from '../components/CategoriesList';
 
 
 class Home extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <SearchBar />
         <CategoriesList />
       </div>
-    )
+    );
   }
 }
 

@@ -1,0 +1,15 @@
+.home {
+  align-items: center;
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.home-input {
+  height: 20px;
+  margin: 10px;
+  width: 80%;
+}
+
+.home-span {
+  font-family: Roboto, sans-serif;
+}

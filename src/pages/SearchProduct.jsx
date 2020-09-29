@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { getCategories } from '../services/api';
 
 // comment to commit
@@ -43,6 +44,7 @@ class SearchProduct extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h1>
         </form>
+        <Link to="/shopping-cart" data-testid="shopping-cart-button">cart</Link>
       </div>
     );
   }

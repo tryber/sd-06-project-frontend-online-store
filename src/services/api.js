@@ -21,7 +21,3 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   const data = await fecthData.json();
   return data;
 }
-
-// import * as api from './services/api';
-// api.getCategories().then(categories => { console.log(categories) })
-// api.getProductsFromCategoryAndQuery("MLB271599").then(categories => { console.log(categories.results) })

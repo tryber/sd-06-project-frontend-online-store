@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
+import * as api from './services/api' 
 import './App.css';
 
 function App() {
   return (
-    <div className="App">Olá
+    <div>
     </div>
   );
 }

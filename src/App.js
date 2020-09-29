@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from './MainPage';
 import './App.css';
-
+// import * as api from './services/api';
 class App extends React.Component {
   render() {
     return (
@@ -14,5 +14,4 @@ class App extends React.Component {
     );
   }
 }
-
 export default App;

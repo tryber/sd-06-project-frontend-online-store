@@ -1,6 +1,10 @@
-/* .side-bar {
-
-} */
+.side-bar {
+  border-width: 1px;
+  border-color: rgb(0,0,0);
+  border-style: solid;
+  padding-bottom: 15px;
+  width: 33%;
+}
 
 .category-container {
   margin-top: 15px;

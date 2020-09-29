@@ -5,6 +5,7 @@ class HomePage extends Component {
     return (
       <p data-testid="home-initial-message">
         Digite algum termo de pesquisa ou escolha uma categoria.
+        {/* teste */}
       </p>
     );
   }

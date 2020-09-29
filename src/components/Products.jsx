@@ -25,9 +25,9 @@ class Products extends Component {
   render() {
     const { name } = this.state;
     return (
-      <nav data-testid="category">
+      <nav>
         <ul>
-          {name.map(names => <li key={names.id}>{names.name}</li>)}
+          {name.map(name => <li data-testid="category" key={name.id}>{name.name}</li>)}
         </ul>
       </nav>
     );

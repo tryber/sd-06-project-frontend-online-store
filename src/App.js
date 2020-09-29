@@ -9,7 +9,7 @@ function App() {
         <img src={ logo } className="App-logo" alt="logo" />
         <p>
           Edit
-          {'teste1'}
+          {' '}
           <code>src/App.js</code>
           {' '}
           and save to reload.

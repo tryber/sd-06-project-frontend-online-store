@@ -6,9 +6,9 @@ import ProductListing from './components/ProductListing';
 function App() {
   return (
     <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={ProductListing}/>
-    </Switch>
+      <Switch>
+        <Route exact path="/" component={ ProductListing } />
+      </Switch>
     </BrowserRouter>
   );
 }

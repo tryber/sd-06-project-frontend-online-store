@@ -1,11 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import PagInicial from './PagInicial';
+
 
 function App() {
   return (
-    <div>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ PagInicial } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

@@ -27,7 +27,7 @@ class Products extends Component {
     return (
       <nav>
         <ul>
-          {category.map(name => <li data-testid="category" key={name.id}>{name.name}</li>)}
+          {category.map(names => <li data-testid="category" key={names.id}>{names.name}</li>)}
         </ul>
       </nav>
     );

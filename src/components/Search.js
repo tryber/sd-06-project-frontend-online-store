@@ -6,6 +6,7 @@ class Search extends Component {
       <div className="container">
         <form className="searchForm">
           <input
+            id="home-initial-message"
             type="text"
             data-testid="home-initial"
             className="home-initial-message"

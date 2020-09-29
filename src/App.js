@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <Route path="/" component={HomePage} />
+      <Route path="/" component={ HomePage } />
     </BrowserRouter>
   );
 }

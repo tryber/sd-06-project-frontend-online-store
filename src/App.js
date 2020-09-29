@@ -1,12 +1,13 @@
 import React from 'react';
-import * as api from './services/api';
+import { BrowserRouter, Route } from 'react-router-dom';
+import HomePage from './HomePage';
 import './App.css';
 
 function App() {
   return (
-    <div>
-      {console.log(api.getCategories())}
-    </div>
+    <BrowserRouter>
+      <Route path="/" component={HomePage} />
+    </BrowserRouter>
   );
 }
 

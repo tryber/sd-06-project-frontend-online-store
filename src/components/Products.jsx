@@ -6,7 +6,7 @@ class Products extends Component {
     super();
 
     this.state = {
-      name: [],
+      category: [],
     };
   }
   
@@ -18,16 +18,16 @@ class Products extends Component {
     const getCategories = await Api.getCategories()
       .then(resolve => resolve);
     this.setState({
-      name: getCategories,
+      category: getCategories,
     });
   }
 
   render() {
-    const { name } = this.state;
+    const { category } = this.state;
     return (
-      <nav data-testid="category">
+      <nav>
         <ul>
-          {name.map(names => <li key={names.id}>{names.name}</li>)}
+          {category.map(names => <li data-testid="category" key={names.id}>{names.name}</li>)}
         </ul>
       </nav>
     );

@@ -18,7 +18,7 @@ function homeList() {
       <input placeholder="Digite Aqui" />
       <Link to="/cart">
         <img
-          data-testid='shopping-cart-button'
+          data-testid="shopping-cart-button"
           width="50px"
           src="https://images.vexels.com/media/users/3/200097/isolated/preview/942820836246f08c2d6be20a45a84139-carrinho-de-compras-icon-carrinho-de-compras-by-vexels.png"
           alt="card"

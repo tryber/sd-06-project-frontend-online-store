@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ShoppingCart from './ShoppingCart'
 import { Link } from 'react-router-dom'
 
 class Search extends Component {

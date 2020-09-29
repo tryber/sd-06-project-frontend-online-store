@@ -1,6 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import * as api from './services/api';
+
+console.log(api.getCategories())
+console.log(api.getProductsFromCategoryAndQuery('MLB1403', 'Coca').results)
 
 function App() {
   return (

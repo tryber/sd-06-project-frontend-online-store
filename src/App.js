@@ -1,9 +1,10 @@
 import React from 'react';
-import * as api from './services/api';
+import logo from './logo.svg';
+import './App.css';
 
 function App() {
   return (
-    api.getCategories().then((categories) => { console.log(categories); })
+    <div />
   );
 }
 

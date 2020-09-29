@@ -1,14 +1,19 @@
 import React from 'react';
-import './App.css';
-import './services/api';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import SearchBar from './components/SearchBar';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>teste</h1>
-      {getCategories()}
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route path="/" component={ SearchBar } />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

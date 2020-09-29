@@ -13,9 +13,9 @@ class Search extends Component {
             placeholder="Digite aqui o termo da sua busca"
             required="required"
           />
-          <label htmlFor="home-initial-message" data-testid="home-initial-message">
+          <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
-          </label>
+          </p>
         </form>
       </div>
     );

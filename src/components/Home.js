@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/Home.css';
 import { Link } from 'react-router-dom';
+import '../styles/Home.css';
 import Carrinho from '../imgs/carrinho.png';
 
 class Home extends React.Component {

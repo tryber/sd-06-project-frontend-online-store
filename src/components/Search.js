@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
 
 class Search extends Component {
   render() {
     return (
       <div className="container">
         <form className="searchForm">
-          <input 
+          <input
             type="text"
             data-testid="home-initial"
-            className="home-initial-message"  
+            className="home-initial-message"
             placeholder="Digite aqui o termo da sua busca"
             required="required"
           />

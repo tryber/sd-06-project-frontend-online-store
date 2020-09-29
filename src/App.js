@@ -1,9 +1,14 @@
-import './App.css';
-import { getCategories } from './services/api';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Search from './components/Search';
 
 function App() {
   return (
-    getCategories()
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ Search } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

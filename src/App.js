@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import * as API from './services/api.js';
+import * as API from './services/api';
 
 function App() {
   return (

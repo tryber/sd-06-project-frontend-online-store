@@ -8,7 +8,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={MainPage} />
+          <Route exact path="/" component={ MainPage } />
         </Switch>
       </BrowserRouter>
     );

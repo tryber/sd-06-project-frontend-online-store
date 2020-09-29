@@ -5,6 +5,10 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 
 class App extends Component {
+  constructor() {
+    super();
+  }
+
   render() {
     return (
       <Router>

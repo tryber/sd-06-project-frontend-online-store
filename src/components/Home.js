@@ -1,5 +1,7 @@
 import React from 'react';
 import getProductsFromCategoryAndQuery from '../services/api'
+import { Link } from 'react-router-dom';
+import Cart from '../images/shopping-cart.png';
 
 
 class Home extends React.Component {
@@ -24,6 +26,9 @@ class Home extends React.Component {
           <input data-testid="query-input" type="text" onChange={this.setState{(query)}} />
           <button data-testid="query-button" onClick={(categoryId, query) => getProductsFromCategoryAndQuery(categoryId, query)}>Pesquisar</button>
         </div>
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">
+          <img src={ Cart } alt="shopping cart"/>
+        </Link>
       </div>
     );
   }

@@ -7,7 +7,9 @@ class ShopList extends React.Component {
       <div data-testid="home-initial-message">
         <input type="text" />
         Digite algum termo de pesquisa ou escolha uma categoria.
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <button type="button">
+          <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        </button>
       </div>
     );
   }

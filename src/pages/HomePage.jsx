@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Products from '../components/Products';
 
 class HomePage extends Component {
   
@@ -6,6 +7,7 @@ class HomePage extends Component {
     return (
       <div>
         <h1 data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</h1>
+        <Products />
       </div>
     );
   }

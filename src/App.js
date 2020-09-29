@@ -5,7 +5,7 @@ import HomePage from './pages/PaginaInicial';
 function App() {
   return (
     <BrowserRouter>
-      <Route exact path="/" component={ HomePage }/>
+      <Route exact path="/" component={ HomePage } />
     </BrowserRouter>
   );
 }

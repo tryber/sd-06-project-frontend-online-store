@@ -22,6 +22,6 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   return data;
 }
 
-// import * as api from './services/api'
+// import * as api from './services/api';
 // api.getCategories().then(categories => { console.log(categories) })
 // api.getProductsFromCategoryAndQuery("MLB271599").then(categories => { console.log(categories.results) })

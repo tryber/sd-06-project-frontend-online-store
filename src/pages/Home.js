@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductList from '../components/ProductList';
 
 
 class Home extends React.Component {
@@ -13,6 +14,7 @@ class Home extends React.Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <ProductList products={ this.state.products } />
       </div>
     );
   }

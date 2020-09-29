@@ -5,13 +5,11 @@ import './App.css';
 
 function App() {
   return (
-    <div>
-      <Router>
-        <Switch>
-          <Route exect path="/" component={Home}/>
-        </Switch>
-      </Router>
-    </div>
+    <Router>
+      <Switch>
+        <Route exect path="/" component={ Home } />
+      </Switch>
+    </Router>
   );
 }
 

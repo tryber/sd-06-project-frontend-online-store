@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import * as api from './services/api';
-
-console.log(api.getCategories());
+// import * as api from './services/api';
 
 function App() {
   return (

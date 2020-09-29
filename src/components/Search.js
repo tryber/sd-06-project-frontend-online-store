@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 class Search extends Component {
   render() {
@@ -17,7 +17,11 @@ class Search extends Component {
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <button><Link data-testid='shopping-cart-button' to="/ShoppingCart">Carrinho de compras</Link></button>
+          <button type="button">
+            <Link data-testid="shopping-cart-button" to="/ShoppingCart">
+              Carrinho de compras
+            </Link>
+          </button>
         </form>
       </div>
     );

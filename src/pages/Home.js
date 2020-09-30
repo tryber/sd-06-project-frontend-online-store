@@ -23,50 +23,33 @@ class Home extends Component {
     };
   }
 
-
-  // componentDidUpdate() {
-  //   // console.log('component did update');
-  //   const { searchedItems, selectedCategory } = this.state;
-  //   // console.log(searchedItems);
-  //   // console.log(selectedCategory);
-
-  //   if (searchedItems !== undefined) {
-  //     const filteredItems = searchedItems
-  //       .filter((item) => item.category_id === selectedCategory);
-  //     // console.log(filteredItems);
-  //   }
-  //   // console.log('/// component did update');
-  // }
-
-
   onSearchTextChange({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
 
   saveSelectedCategory(id) {
-    this.setState({ selectedCategory: id });
+    this.setState({ selectedCategory: id }, () => {
+      this.fetchSearchedItem();
+    });
   }
 
-  fetchSearchedItem() {
-    this.setState(
-      async () => {
-        const { searchInput, selectedCategory: ID } = this.state;
+  async fetchSearchedItem() {
+    const { searchInput, selectedCategory } = this.state;
+    const searchResult = await getProductsFromCategoryAndQuery(selectedCategory, searchInput);
+    console.log(searchResult);
 
-        const searchResult = await getProductsFromCategoryAndQuery(ID, searchInput);
-        if (searchResult.results.length >= 1) {
-          return this.setState({
-            searchedItems: searchResult.results,
-            spanMessage: '',
-          });
-        }
-
-        return this.setState({
-          searchedItems: undefined,
-          spanMessage: 'Nenhum produto foi encontrado',
-        });
-      },
-    );
+    if (searchResult.results.length >= 1) {
+      this.setState({
+        searchedItems: searchResult.results,
+        spanMessage: '',
+      });
+    } else {
+      this.setState({
+        searchedItems: undefined,
+        spanMessage: 'Nenhum produto foi encontrado',
+      });
+    }
   }
 
   render() {

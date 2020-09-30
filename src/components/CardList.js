@@ -3,8 +3,8 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
 
 class CardList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       value: '',

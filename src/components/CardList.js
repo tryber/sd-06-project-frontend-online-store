@@ -1,5 +1,5 @@
 import React from 'react';
-import { getProductsFromQuery } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
 
 class CardList extends React.Component {
@@ -9,6 +9,7 @@ class CardList extends React.Component {
     this.state = {
       value: '',
       products: [],
+      categoryId: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchCard = this.fetchCard.bind(this);
@@ -20,18 +21,27 @@ class CardList extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({value: event.target.value});
+    this.setState({ value: event.target.value });
   }
 
   async fetchCard() {
-    const { value } = this.state;
-    const cards = await getProductsFromQuery(value);
-    const { results } = cards;
+    const { categoryId, value } = this.state;
+    const card = await getProductsFromCategoryAndQuery(categoryId, value);
+    const { results } = card;
     this.setState({
       products: results,
-    });
-    console.log(results)
+    })
   }
+
+  // async fetchCard() {
+  //   const { value } = this.state;
+  //   const cards = await getProductsFromQuery(value);
+  //   console.log(cards)
+  //   const { results } = cards;
+  //   this.setState({
+  //     products: results,
+  //   });
+  // }
 
   render() {
     const { products } = this.state;
@@ -39,7 +49,7 @@ class CardList extends React.Component {
       <div>
         <div>
           <input data-testid="query-input" value={this.state.value} onChange={this.handleChange}></input>
-          <button data-testid="query-button" onClick={() => this.handleClick()}>Pesquisar</button>
+          <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
         </div>
         <div>
           {products.map((product) => <Card product={ product } key={product.id}/> )}

@@ -36,7 +36,7 @@ class ProductDetails extends Component {
     return (
       <section>
         <section key={id}>
-          <p data-testid="product-detail-name">{title}</p>
+          <h1 data-testid="product-detail-name">{title}</h1>
           <img src={thumbnail} />
           <span>{`R$${price}`}</span>
         </section>

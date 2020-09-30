@@ -1,24 +1,23 @@
-import React, { createElement } from 'react';
+import React from 'react';
+import * as api from '../services/api';
 import categories from '../__mocks__/categories';
-import * as api from './services/api';
 
 class Categories extends React.Component {
-	constructor(){
+	constructor() {
 		super()
-
-		function novoLi(params) {
-			const li = document.createElement("li");
-			const filho = li.innerText(params);
-			const lateral = document.getElementsByTagName("aside");
-			lateral.appendChild(filho);
+		this.state = {
+			categories: '',
 		}
 	}
-
+	componentDidMount() {
+		api.getCategories().then(categories => { this.setState({categories}) })
+	}
 
 	render () {
 		return (
 			<aside>
-				<ul>api.getCategories().then(categories => { novoLi(categories.name) })</ul> 
+				<input type="checkbox"></input>
+				<label></label>
 			</aside>
 		);
 	};

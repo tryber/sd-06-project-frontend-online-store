@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ItemList from './pages/ItemList';
 import Cart from './pages/Cart';
+import ItemList from './pages/ItemList';
 
 function App() {
   return (

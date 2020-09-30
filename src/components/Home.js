@@ -1,8 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ItemCard from './ItemCard';
+import Categories from './Categories';
+import Cart from '../images/shopping-cart.png';
 
-class SearchBar extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
 
@@ -56,12 +59,16 @@ class SearchBar extends React.Component {
           <div>
             {search === undefined
               ? <p data-testid="home-initial-message">Nenhum produto foi encontrado</p>
-              : products.map((item) => <ItemCard key={ item.id } item={ item } />)}
+              : products.map((item) => <ItemCard key={ item.id } product={ item } />)}
           </div>
         </div>
+        <Categories />
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">
+          <img src={ Cart } alt="shopping cart" />
+        </Link>
       </div>
     );
   }
 }
 
-export default SearchBar;
+export default Home;

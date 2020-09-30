@@ -6,14 +6,13 @@ class Header extends Component {
     return (
       <div className="elements">
         <div id="box">
-          <input type="text" placeholder="Buscar produtos, marcas e muito mais..." />
+          <input data-testid="query-input" type="text" placeholder="Buscar produtos, marcas e muito mais..." />
+          <button data-testid="query-button" type="button">Procurar</button>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
-        <div id="cart-button">
-          <CartButton />
-        </div>
+        <CartButton />
       </div>
     );
   }

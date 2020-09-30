@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class Categories extends React.Component {
+class Category extends React.Component {
   render() {
     const { data } = this.props;
     return (
@@ -21,9 +21,9 @@ class Categories extends React.Component {
   }
 }
 
-Categories.propTypes = { data: PropTypes.shape({
+Category.propTypes = { data: PropTypes.shape({
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
 }).isRequired };
 
-export default Categories;
+export default Category;

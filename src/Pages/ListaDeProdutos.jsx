@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CampoBusca from '../Components/CampoBusca';
+import ListaCategorias from '../Components/ListaCategorias'
 
 class ListaDeProdutos extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class ListaDeProdutos extends Component {
   render() {
     return (
       <div>
+        <ListaCategorias />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>

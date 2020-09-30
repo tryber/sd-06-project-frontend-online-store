@@ -88,7 +88,7 @@ export default class ProductListing extends Component {
         <div>
           <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
           <Link to="/ShoppingCart"><img
-            src={shoppingCartImage} alt="Shopping cart button image." width="30px"
+            src={shoppingCartImage} alt="Shopping cart button." width="30px"
             data-testid="shopping-cart-button"
           /></Link>
         </div>

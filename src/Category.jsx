@@ -9,7 +9,6 @@ class Category extends Component {
     };
   }
 
-
   async componentDidMount() {
     this.fetchCategories();
   }
@@ -26,12 +25,18 @@ class Category extends Component {
     console.log(category);
     return (
       <div>
-        {category.map((categoria) => (
-          <label htmlFor={ categoria.id }>
-            <li type="radio" data-testid="category" id={ categoria.id } >
+        {category.map((categoria, id) => (
+          <div key={id}>
+            <label>
+              <input
+                htmlFor={id}
+                data-testid="category"
+                type="radio"
+                id={categoria.id}
+              />
               {categoria.name}
-            </li>
-          </label>
+            </label>
+          </div>
         ))}
       </div>
     );

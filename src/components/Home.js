@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ProductList from './ProductList';
 import * as api from '../services/api';
 import imgCart from '../img/imgCart.jpg';
+import CategoryList from './CategoryList';
 
 class Home extends React.Component {
   constructor(props) {
@@ -51,6 +52,7 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+        <CategoryList />
         <ProductList products={ ProductArray } />
         <button
           data-testid="shopping-cart-button"

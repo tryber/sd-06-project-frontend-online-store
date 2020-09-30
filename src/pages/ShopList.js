@@ -9,20 +9,31 @@ class ShopList extends React.Component {
     this.state = {
       categories: [],
     };
+
+    this.loadCategories = this.loadCategories.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.loadCategories();
+  }
+
+  async loadCategories() {
     const categories = await api.getCategories();
     this.setState({ categories });
   }
 
   render() {
     const { categories } = this.state;
+    const none = 0;
+
     return (
       <section>
         <section>
-          {(categories.length > 0)
-            ? categories.map((category) => <p data-testid="category" key={category.id}>{category.name}</p>)
+          {(categories.length > none)
+            ? categories
+              .map((category) => (
+                <p data-testid="category" key={ category.id }>{category.name}</p>
+              ))
             : <span>Loading...</span>}
         </section>
         <div data-testid="home-initial-message">

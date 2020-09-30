@@ -1,5 +1,6 @@
 import React from 'react';
-import ListCategories from './ListCategories';
+import ListCategories from './components/ListCategories';
+import ShoppingCartButton from './components/ShoppingCartButton';
 
 function Home() {
   return (
@@ -14,6 +15,7 @@ function Home() {
       <div>
         <ListCategories />
       </div>
+      <ShoppingCartButton />
     </main>
   );
 }

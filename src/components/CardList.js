@@ -48,15 +48,21 @@ class CardList extends React.Component {
     return (
       <div>
         <div>
-          <input data-testid="query-input" value={ value } onChange={ this.handleChange } />
+          <input
+            data-testid="query-input"
+            value={ value }
+            onChange={ this.handleChange }
+          />
           <button
             type="button"
             data-testid="query-button"
             onClick={ this.handleClick }
-          >Pesquisar</button>
+          >
+            Pesquisar
+          </button>
         </div>
         <div>
-          {products.map((product) => <Card product={ product } key={ product.id }/> )}
+          { products.map((product) => <Card product={ product } key={ product.id } />)}
         </div>
       </div>
     );

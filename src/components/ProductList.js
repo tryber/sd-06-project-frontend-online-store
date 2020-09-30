@@ -1,3 +1,4 @@
+/* eslint-disable react/prefer-stateless-function */
 import PropTypes from 'prop-types';
 import React from 'react';
 

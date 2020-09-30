@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PagInicial from './PagInicial';
 import CarrinhoCompras from './components/CarrinhoCompras';
 
-
 function App() {
   return (
     <BrowserRouter>

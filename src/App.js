@@ -5,7 +5,6 @@ import './App.css';
 import Home from './Home';
 import ShoppingCart from './pages/ShoppingCart';
 
-
 function App() {
   return (
     <div>

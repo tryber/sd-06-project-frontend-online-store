@@ -1,8 +1,7 @@
 import React from 'react';
-import * as api from '../services/api'
+import * as api from '../services/api';
 
 class ListCategories extends React.Component {
-
   constructor() {
     super();
     this.fetchCategories = this.fetchCategories.bind(this);
@@ -18,16 +17,17 @@ class ListCategories extends React.Component {
   async fetchCategories() {
     this.setState({
       categories: await api.getCategories(),
-    })
+    });
   }
 
   render() {
-    const categories = this.state.categories;
+    const { categories } = this.state.categories;
     return (
       <div>
-        {categories.map(category => <li id={category.id} data-testid="category">{category.name}</li>)}
+        {categories.map((category, index) => <li key={index} id={category.id}
+          data-testid="category">{category.name}</li>)}
       </div>
-    )
+    );
   }
 }
 

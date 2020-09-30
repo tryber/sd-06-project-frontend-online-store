@@ -1,5 +1,5 @@
 import React from 'react';
-import ListCategories from './components/ListCategories'
+import ListCategories from './components/ListCategories';
 
 function PagInicial() {
   return (

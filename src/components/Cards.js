@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import '../App.css';
 
@@ -18,5 +19,13 @@ class Cards extends Component {
     );
   }
 }
+
+Cards.propTypes = {
+  item: PropTypes.exact({
+    thumbnail: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
+  }).isRequired,
+};
 
 export default Cards;

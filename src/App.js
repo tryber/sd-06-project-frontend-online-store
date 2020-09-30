@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 
-import SearchEngine from './pages/SearchEngine';
+import Home from './pages/Home';
 import ShoppingCartPage from './pages/ShoppingCartPage';
 
 
@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/shopping-cart" component={ ShoppingCartPage } />
-          <Route path="/" component={ SearchEngine } exact />
+          <Route path="/" component={ Home } />
         </Switch>
       </BrowserRouter>
     </div>

@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-div.cartImg img{
+div.cartImg img {
   height: 30px;
   width: 30px;
 }
@@ -22,12 +22,12 @@ div.cartImg img{
 	display: flex;
 }
 
-.searchField{
+.searchField {
 	width: 80%;
 	margin: 0 auto;
 }
 
-.searchField input{
+.searchField input {
   width: 100%;
 
 }

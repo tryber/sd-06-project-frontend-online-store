@@ -6,9 +6,6 @@ function Cart() {
   return (
     <div className="container">
       <div className="searchField">
-        <form>
-          <input type="text" name="research" />
-        </form>
         <p
           data-testid="shopping-cart-empty-message"
         >

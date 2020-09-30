@@ -17,7 +17,6 @@ class ShopList extends React.Component {
       query: '',
       products: [],
     };
-
   }
 
   componentDidMount() {

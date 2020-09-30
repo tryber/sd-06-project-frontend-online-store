@@ -4,7 +4,6 @@ import './App.css';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
-import CategoriesSideBar from './components/CategoriesSideBar';
 import CardDetails from './pages/CardDetails';
 
 

@@ -52,7 +52,6 @@ class Home extends Component {
         spanMessage: 'Nenhum produto foi encontrado',
       });
     }
-
   }
 
   render() {

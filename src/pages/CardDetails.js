@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class CardDetails extends React.Component {
@@ -11,17 +12,17 @@ class CardDetails extends React.Component {
 
   componentDidMount() {
     api.getCategories();
-    this.loadApiDetails();    
+    this.loadApiDetails();
   }
 
   async loadApiDetails() {
-    const { query } = this.props.location.state;
-    const { id } = this.props.match.params;
+    const { location: { state: { data } } } = this.props;
+    const { match: { params: { id } } } = this.props;
 
     this.setState(
       async () => {
-        const apiDetails = await api.getProductsFromCategoryAndQuery('', query);
-        const itemSearched = apiDetails.results.find((item) => item.id === id);        
+        const apiDetails = await api.getProductsFromCategoryAndQuery('', data);
+        const itemSearched = apiDetails.results.find((item) => item.id === id);
 
         this.setState({
           product: itemSearched,
@@ -31,7 +32,7 @@ class CardDetails extends React.Component {
   }
 
   render() {
-    const { thumbnail, name, price } = this.state.product;
+    const { product: { thumbnail, name, price } } = this.state;
 
     return (
       <div data-testid="product-detail-name">
@@ -42,5 +43,18 @@ class CardDetails extends React.Component {
     );
   }
 }
+
+CardDetails.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      data: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
 
 export default CardDetails;

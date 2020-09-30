@@ -9,11 +9,11 @@ class SearchedItems extends Component {
     return (
       <div data-testid="product">
         <h2>{title}</h2>
-        <img src={thumbnail} alt="thumbnail" />
+        <img src={ thumbnail } alt="thumbnail" />
         <span>{price}</span>
         <Link
           data-testid="product-detail-link"
-          to={{ pathname: `/card/${id}`, state: { query: query } }}
+          to={ { pathname: `/card/${id}`, state: { data: query } } }
         >
           Detalhes
         </Link>
@@ -29,6 +29,7 @@ SearchedItems.propTypes = {
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
+  query: PropTypes.string.isRequired,
 };
 
 export default SearchedItems;

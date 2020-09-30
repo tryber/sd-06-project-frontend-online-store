@@ -6,14 +6,22 @@ class Home extends React.Component {
   constructor() {
     super();
 
+    this.handleChanges = this.handleChanges.bind(this);
+
+
     this.state = {
-      query: "",
-      categoryId: "",
+      search: "",
     }
   }
 
+
+  handleChanges({target}) {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  }
+
   render() {
-    const { query } = this.state;
+    const { search } = this.state;
 
     return (
       <div>
@@ -21,8 +29,9 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <div>
-          <input data-testid="query-input" type="text" onChange={this.setState{(query)}} />
-          <button data-testid="query-button" onClick={(categoryId, query) => getProductsFromCategoryAndQuery(categoryId, query)}>Pesquisar</button>
+          <input data-testid="query-input" type="text" name="search" value={search} onChange={this.handleChanges} />
+          {/* aqui eu preciso fazer com que os valores digitados do search entrem nas condições dos parâmetros dessa função, e resolva a promise e me traga os resultados */}
+          <button data-testid="query-button" onClick={getProductsFromCategoryAndQuery()}>Pesquisar</button>
         </div>
       </div>
     );

@@ -2,7 +2,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import ListaDeProdutos from './Pages/ListaDeProdutos';
-import CarrinhoDeCompras from '../Pages/CarrinhoDeCompras'
+import CarrinhoDeCompras from './Pages/CarrinhoDeCompras'
+
 
 
 function App() {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ProductDetail extends Component {
   render() {
     const { products } = this.props.location.state;
     const { id } = this.props.match.params;
-    const product = products.find((product) => id === product.id);
+    const product = products.find((productItem) => id === productItem.id);
     return (
       <>
         <Link to="/shopping-cart" data-testid="shopping-cart-button">cart</Link>
@@ -28,5 +29,17 @@ class ProductDetail extends Component {
     );
   }
 }
+
+ProductDetail.propTypes = {
+  match: PropTypes.shape({ params: PropTypes.shape({
+    id: PropTypes.string,
+  }) }).isRequired,
+  location: PropTypes.shape({ state: PropTypes.shape({
+    products: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+    })) }) }).isRequired,
+};
 
 export default ProductDetail;

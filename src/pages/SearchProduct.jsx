@@ -113,7 +113,16 @@ class SearchProduct extends Component {
                     title={ title }
                     price={ price }
                     thumbnail={ thumbnail }
-                  />
+                  >
+                    <Link
+                      data-testid="product-detail-link"
+                      to={ { pathname: `/products/${id}`, state: { products } } }
+                    >
+                      Detalhes
+                    </Link>
+                  </ProductCard>
+
+
                 ))
                 : (<p>Nenhum produto foi encontrado</p>
                 )}

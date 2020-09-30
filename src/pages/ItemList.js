@@ -1,21 +1,26 @@
 import React from 'react';
+import { BrowserRouter, Link, Redirect } from 'react-router-dom';
 
-function ItemList() {
-  return (
-    <div>
-      <h1 data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </h1>
-      <a href="/cart">
-        <button
-          data-testid="shopping-cart-button"
-          type="button"
-        >
-          Carrinho
-        </button>
-      </a>
-    </div>
-  );
+class ItemList extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    return <Link to="/Cart">Carrinho</Link>;
+  }
+
+  render() {
+    return (
+      <div>
+        <h1 data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </h1>
+        {this.handleClick()}
+      </div>
+    );
+  }
 }
 
 export default ItemList;

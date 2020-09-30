@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CartButton from '../components/CartButton';
+import CartButton from './CartButton';
 
 class Header extends Component {
   render() {

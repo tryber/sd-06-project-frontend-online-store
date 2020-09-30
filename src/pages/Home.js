@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import ListCategories from './components/ListCategories';
+import ListCategories from '../components/ListCategories';
 
-import ShoppingCartButton from './components/ShoppingCartButton';
-import ProductCard from './components/ProductCard';
-import { getProductsFromCategoryAndQuery } from './services/api';
+import ShoppingCartButton from '../components/ShoppingCartButton';
+import ProductCard from '../components/ProductCard';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
   constructor() {

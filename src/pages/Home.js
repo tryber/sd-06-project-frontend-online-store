@@ -10,9 +10,11 @@ class Home extends React.Component {
     super();
     this.handleSearch = this.handleSearch.bind(this);
     this.handleProduct = this.handleProduct.bind(this);
+    this.filterCategory = this.filterCategory.bind(this);
     this.state = {
       search: '',
       items: '',
+      filter: '',
     };
   }
 
@@ -27,15 +29,22 @@ class Home extends React.Component {
     this.setState({ search: event.target.value });
   }
 
+  async filterCategory({ target }) {
+    this.setState({ filter: target.id });
+
+    const { filter } = this.state;
+    API
+      .getProductsFromCategoryAndQuery(filter)
+      .then((result) => this.setState({ items: result.results }));
+  }
+
   render() {
-    const { search, items } = this.state;
+    const { search, items, filter } = this.state;
     return (
       <div data-testid="home-initial-message">
         <div>
-          <CategoryList />
-        </div>
-        <div className="home">
-          <span className="home-span">
+          <CategoryList filter={ filter } filterCategory={ this.filterCategory } />
+          <span>
             Digite algum termo de pesquisa ou escolha uma categoria.
           </span>
           <Input

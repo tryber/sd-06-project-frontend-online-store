@@ -25,7 +25,7 @@ class Home extends Component {
 
   onClick() {
     const query = this.state.textInput;
-    this.fetchProducts({ query });
+    if (query !== "") this.fetchProducts({ query });
   }
 
   async fetchProducts({ categoryId, query }) {
@@ -42,7 +42,6 @@ class Home extends Component {
           handleEvent={this.handleEvent} 
           onClick={this.onClick}
         />
-        {/* {(data) ? console.log(data) : null} */}
         <div className="content">
           <Categories />
           <Products data={data}/>

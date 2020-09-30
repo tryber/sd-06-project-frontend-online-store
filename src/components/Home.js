@@ -2,7 +2,7 @@ import React from 'react';
 import * as api from '../services/api';
 import ItemCard from './ItemCard';
 
-class SearchBar extends React.Component {
+class Home extends React.Component {
   constructor() {
     super();
 
@@ -25,6 +25,7 @@ class SearchBar extends React.Component {
   async handleAPI() {
     const { search } = this.state;
     const result = await api.getProductsFromCategoryAndQuery('', search);
+    console.log(result)
     this.setState({
       products: result.results,
     });
@@ -56,7 +57,8 @@ class SearchBar extends React.Component {
           <div>
             {search === undefined
               ? <p data-testid="home-initial-message">Nenhum produto foi encontrado</p>
-              : products.map((item) => <ItemCard key={ item.id } item={ item } />)}
+              : products.map((product) => 
+                <ItemCard key={ product.id } product={ product } />)}
           </div>
         </div>
       </div>
@@ -64,4 +66,4 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar;
+export default Home;

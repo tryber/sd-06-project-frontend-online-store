@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductCard from './ProductCard';
+import Category from '../Category';
 
 
 class Search extends Component {
@@ -39,6 +40,7 @@ class Search extends Component {
     const zero = 0;
     return (
       <div className="container">
+        <Category />
         <form className="searchForm">
           <input
             id="home-initial-input"

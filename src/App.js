@@ -1,15 +1,15 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import ButtonShoppingCart from './ButtonShoppingCart';
 import Home from './Home';
-// O Grupo 27 é massa!!! VQV
 
 function App() {
   return (
-    <div>
-      <Home />
-      <ButtonShoppingCart />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ Home } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

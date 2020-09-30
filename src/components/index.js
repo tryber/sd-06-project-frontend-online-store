@@ -1,1 +1,1 @@
-// export { default as XXX } from './XXX';
+// export { default as ProductCard } from './ProductCard';

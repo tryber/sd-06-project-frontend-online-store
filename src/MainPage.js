@@ -1,6 +1,6 @@
 import React from 'react';
-import Product from './Product';
 import { Link } from 'react-router-dom';
+import Product from './Product';
 import * as api from './services/api';
 
 class MainPage extends React.Component {

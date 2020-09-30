@@ -4,6 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
+import CardDetails from './pages/CardDetails';
 
 
 class App extends Component {
@@ -12,7 +13,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={ Home } />
-          <Route component={ Cart } />
+          <Route exact path="/card/:id" component={ CardDetails } />
+          <Route path="/cart" component={ Cart } />
           <Route component={ NotFound } />
         </Switch>
       </Router>

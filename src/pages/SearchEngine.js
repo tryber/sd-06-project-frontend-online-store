@@ -1,5 +1,7 @@
 import React from 'react';
+
 import FoundProducts from '../components/FoundProducts';
+import ShoppingCartButton from '../component/ShoppingCartButton';
 
 import * as api from '../services/api';
 
@@ -58,6 +60,7 @@ class SearchEngine extends React.Component {
           value={ queryInput }
           onChange={ this.handleChange }
         />
+       <ShoppingCartButton />
         <button
           data-testid="query-button"
           type="button"

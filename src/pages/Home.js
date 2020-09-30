@@ -70,7 +70,9 @@ class Home extends Component {
 
           {searchedItems === undefined
             ? <span data-testid="home-initial-message">{spanMessage}</span>
-            : searchedItems.map((item) => <SearchedItems key={ item.id } item={ item } />)}
+            : searchedItems.map((item) => (
+              <SearchedItems key={ item.id } item={ item } />
+            ))}
         </div>
         <div>
           <Link data-testid="shopping-cart-button" to="/Cart">

@@ -68,7 +68,6 @@ export default class ProductListing extends Component {
           const { selectedCategory } = this.state;
           const fetchCategoryProducts = await api.getProductsFromCategoryAndQuery(selectedCategory, undefined);
           const myProds = fetchCategoryProducts.results;
-          console.log(myProds);
           this.setState({
             products: myProds,
             loading: false,

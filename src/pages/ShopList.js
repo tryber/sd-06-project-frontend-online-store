@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import { ProductCard } from '../components';
+import ProductCard from '../components/ProductCard';
 
 class ShopList extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.renderProduct = this.renderProduct.bind(this);
@@ -22,31 +22,43 @@ class ShopList extends React.Component {
   }
 
   async handleClick() {
-    const productsFromCategoryAndQuery = await api.getProductsFromCategoryAndQuery(this.state.query);
+    const { query } = this.state;
+    const productsFromQuery = await api.getProductsFromCategoryAndQuery(query);
     this.setState({
-      products: productsFromCategoryAndQuery.results,
+      products: productsFromQuery.results,
     });
   }
 
   renderProduct() {
     const { products } = this.state;
-    if (products.length > 0) {
-      return products.map((product) => <ProductCard props={product} />);
+    const empty = 0;
+    if (products.length > empty) {
+      return products.map((product) => (
+        <ProductCard
+          key={ product.id }
+          props={ product }
+        />));
     }
-    return <span>Sem Items</span>
+    return <span>Sem Items</span>;
   }
 
   render() {
     return (
       <div data-testid="home-initial-message">
-        <input data-testid="query-input" type="text" onChange={this.handleChange} />
+        <input data-testid="query-input" type="text" onChange={ this.handleChange } />
         Digite algum termo de pesquisa ou escolha uma categoria.
-        <button data-testid="query-button" onClick={this.handleClick} type="button">Pesquisar</button>
+        <button
+          data-testid="query-button"
+          onClick={ this.handleClick }
+          type="button"
+        >
+          Pesquisar
+        </button>
         <button type="button">
           <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         </button>
         <div className="productsList">
-          {this.renderProduct()}
+          { this.renderProduct() }
         </div>
       </div>
     );

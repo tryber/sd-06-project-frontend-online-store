@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShoppingCartButton from './ShoppingCartButton';
 
 export default class SearchBar extends Component {
   constructor() {
@@ -24,7 +25,8 @@ export default class SearchBar extends Component {
           <input type="text" name="input-text" data-testid="query-input" onChange={this.getTextSearch} />
         Digite algum termo de pesquisa ou escolha uma categoria.
       </label>
-      </div >
-    );
-  }
+      <ShoppingCartButton />
+    </div>
+  );
+ }
 }

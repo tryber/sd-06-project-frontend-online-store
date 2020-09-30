@@ -10,11 +10,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/ShoppingCart" component={ShoppingCart} />
-        <Route exact path="/" component={ProductListing} />
+        <Route exact path="/ShoppingCart" component={ ShoppingCart } />
+        <Route exact path="/" component={ ProductListing } />
         <Route
-          exact path="/products/:category_id/:id"
-          render={ (props) => <ProductDetails { ...props } /> } />
+          exact
+          path="/products/:category_id/:id"
+          render={ (props) => <ProductDetails { ...props } /> }
+        />
       </Switch>
     </BrowserRouter>
   );

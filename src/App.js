@@ -9,8 +9,8 @@ class App extends React.Component {
       <BrowserRouter>
         <div>
           <Switch>
-            <Route exact path="/" component={ Home } />
             <Route path="/carrinho" component={ ShoppingCart } />
+            <Route path="/" component={ Home } />
           </Switch>
         </div>
       </BrowserRouter>

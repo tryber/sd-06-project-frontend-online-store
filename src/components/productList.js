@@ -16,7 +16,6 @@ class ProductList extends Component {
 
   async listCategory() {
     const cat = await getCategories();
-    // const product = await getProductsFromCategoryAndQuery();
     this.setState({
       categories: cat,
     });
@@ -24,7 +23,7 @@ class ProductList extends Component {
 
   render() {
     const { categories } = this.state;
-    console.log(categories)
+
     return (
       <aside>
         <label

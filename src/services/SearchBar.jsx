@@ -19,12 +19,12 @@ class SearchBar extends React.Component {
 
   render() {
     return (
-      <div>
-        <section>
-          <input type="text" name="searchbar" id="Search" value={this.state.searchbar} onChange={this.handleChanges} />
-          <label htmlFor="Search" data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</label>
+      <div className="search">
+        <section className="search-box">
+          <label htmlFor="Search" data-testid="home-initial-message" className="search-text">Digite algum termo de pesquisa ou escolha uma categoria.</label>
+          <input type="text" name="searchbar" id="Search" value={this.state.searchbar} onChange={this.handleChanges} className="search-input"/>
         </section>
-        <section>
+        <section className="shopping-car-button">
           <ShoppingCartButton />
         </section>
       </div>

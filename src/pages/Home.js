@@ -4,7 +4,7 @@ import '../styles/Home.css';
 import ProductList from '../components/ProductList';
 import Input from '../components/Input';
 import CategoryList from '../components/CategoryList';
-import Carrinho from '../imgs/carrinho.png'
+import Carrinho from '../imgs/carrinho.png';
 import * as API from '../services/api';
 
 class Home extends React.Component {
@@ -13,6 +13,7 @@ class Home extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleProduct = this.handleProduct.bind(this);
     this.filterCategory = this.filterCategory.bind(this);
+    this.renderProducts = this.renderProducts.bind(this);
     this.state = {
       search: '',
       items: '',
@@ -41,6 +42,16 @@ class Home extends React.Component {
       .then((result) => this.setState({ items: result.results }));
   }
 
+  renderProducts() {
+    if (this.state.loadProducts) {
+      if (this.state.search === '') {
+        return <span>Nenhum produto foi encontrado</span>;
+      } else {
+        return <ProductList items={ this.state.items } />;
+      }
+    }
+  }
+
   render() {
     const { search, items, loadProducts, filter } = this.state;
     return (
@@ -57,16 +68,12 @@ class Home extends React.Component {
             onChange={ this.handleSearch }
             onClick={ this.handleProduct }
           />
-          {loadProducts ?
-            (search === '' ? <span>Nenhum produto foi encontrado</span> :
-            <ProductList items={ items } />) : ''}
-          </div>
-          <div>
-            <Link to="/shopping-cart">
-              <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
-            </Link>
-          </div>
-          <div>
+          {this.renderProducts()}
+        </div>
+        <div>
+          <Link to="/shopping-cart">
+            <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
+          </Link>
         </div>
       </div>
     );

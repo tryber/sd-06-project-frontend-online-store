@@ -11,6 +11,7 @@ class HomePage extends React.Component {
 
     this.state = {
       searchInput: '',
+      categoryId: '',
       categorySelected: '',
       products: [],
       categories: [],
@@ -40,19 +41,15 @@ class HomePage extends React.Component {
     this.setState({ searchInput: target.value });
   }
 
-  handleSelect({ target }) {
-    const { categories } = this.state;
-    const filteredCategory = categories.filter((item) => item.name === target.value);
-    if (filteredCategory) {
+  async handleSelect({ target }) {
+    const myValue = target.id;
+    const resposta = await api.getProductsFromId(myValue);
+    if (resposta) {
       this.setState({
+        products: resposta.results,
         categorySelected: target.value,
-        categoryId: filteredCategory[0].id,
+        categoryId: target.id,
       });
-
-      api.getProductsFromId(filteredCategory[0].id)
-        .then((items) => this.setState({
-          products: items.results,
-        }));
     }
   }
 
@@ -60,18 +57,18 @@ class HomePage extends React.Component {
     const { products, categories } = this.state;
     return (
       <div>
-        <select name="category" onChange={ this.handleSelect }>
-          <option value="" disabled selected>Selecione a Categoria</option>
-          {categories.map((items) => (
-            <option
-              data-testid="category"
-              key={ items.id }
+        {categories.map((items) => (
+          <div key={ items.id }>
+            <input
+              type="radio"
+              name="category"
               value={ items.name }
-            >
-              { items.name }
-            </option>
-          ))}
-        </select>
+              id={ items.id }
+              onClick={ this.handleSelect }
+              data-testid="category"
+            />
+            <label htmlFor={ items.id }>{items.name }</label>
+          </div>))}
         <label htmlFor="search-label">
           <input
             data-testid="query-input"

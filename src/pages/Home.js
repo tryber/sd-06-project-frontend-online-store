@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import addCart from '../addCart.svg';
 import './style/home.css';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchedItems from '../components/SearchedItems';
@@ -48,26 +50,35 @@ class Home extends Component {
     const { searchedItems, spanMessage } = this.state;
 
     return (
-      <div className="search-container">
-        <input
-          name="searchInput"
-          className="search-input"
-          type="text"
-          data-testid="query-input"
-          onChange={ this.onSearchTextChange }
-        />
+      <div>
+        <div className="search-container">
+          <input
+            name="searchInput"
+            className="search-input"
+            type="text"
+            data-testid="query-input"
+            onChange={ this.onSearchTextChange }
+          />
 
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ this.fetchSearchedItem }
-        >
-          Search
-        </button>
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ this.fetchSearchedItem }
+          >
+            Search
+          </button>
 
-        {searchedItems === undefined
-          ? <span data-testid="home-initial-message">{spanMessage}</span>
-          : searchedItems.map((item) => <SearchedItems key={ item.id } item={ item } />)}
+          {searchedItems === undefined
+            ? <span data-testid="home-initial-message">{spanMessage}</span>
+            : searchedItems.map((item) => (
+              <SearchedItems key={ item.id } item={ item } />
+            ))}
+        </div>
+        <div>
+          <Link data-testid="shopping-cart-button" to="/Cart">
+            <img src={ addCart } alt="button car shopping" />
+          </Link>
+        </div>
       </div>
     );
   }

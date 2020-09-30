@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
 import CategoriesSideBar from './components/CategoriesSideBar';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
         <CategoriesSideBar />
         <Switch>
           <Route exact path="/" component={ Home } />
+          <Route component={ Cart } />
           <Route component={ NotFound } />
         </Switch>
       </Router>

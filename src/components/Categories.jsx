@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as Api from '../services/api'; 
 
-class Products extends Component {
+class Categories extends Component {
   constructor() {
     super();
 
@@ -34,4 +34,4 @@ class Products extends Component {
   }
 }
 
-export default Products;
+export default Categories;

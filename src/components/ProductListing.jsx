@@ -26,11 +26,13 @@ export default class ProductListing extends Component {
   }
 
   async handleClick() {
+    const { selectedCategory } = this.state;
     this.setState(
       { loading: true },
       async () => {
         const textState = this.state.searchText;
-        const myProds = await api.getProductsFromCategoryAndQuery(undefined, textState);
+        const categoryParam = selectedCategory !== 'none' ? selectedCategory : undefined;
+        const myProds = await api.getProductsFromCategoryAndQuery(categoryParam, textState);
         const myProds2 = myProds ? myProds.results : [];
         if (!myProds2 || myProds2.length === 0) {
           this.setState({
@@ -59,7 +61,7 @@ export default class ProductListing extends Component {
 
   handleClickCategory(event) {
     event.preventDefault();
-    this.setState({ selectedCategory: event.target.name });
+    this.setState({ selectedCategory: event.target.id });
   }
 
   render() {

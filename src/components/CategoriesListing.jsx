@@ -34,7 +34,7 @@ export default class CategoriesListing extends Component {
   renderCategories() {
     const { onClick } = this.props;
     const { categories } = this.state;
-    return categories.map((category) => <button onClick={onClick} name={category.name} key={category.id} data-testid="category">{category.name}</button>);
+    return categories.map((category) => <button onClick={onClick} key={category.id} data-testid="category" id={category.id}>{category.name}</button>);
   }
   
   render() {
@@ -42,9 +42,9 @@ export default class CategoriesListing extends Component {
     const { renderCategories } = this;
 
     return (
-    <form>
-      {loading ? <span>Loading...</span> : renderCategories()}
-    </form>
+      <div>
+        {loading ? <span>Loading...</span> : renderCategories()}
+      </div>
     )
   }
 }

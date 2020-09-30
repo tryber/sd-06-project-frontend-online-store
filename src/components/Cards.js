@@ -24,7 +24,7 @@ Cards.propTypes = {
   item: PropTypes.exact({
     thumbnail: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired
+    price: PropTypes.number.isRequired,
   }).isRequired,
 };
 

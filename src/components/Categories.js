@@ -21,18 +21,15 @@ class Categories extends React.Component {
 
   returnCategories() {
     const { categories } = this.state;
-    return categories.map((category) => {
-      return (
-        <button
-          data-testid="category"
-          key={ category.id }
-          type="button"
-        >
-          { category.name }
-        </button>
-      );
-    });
-
+    return categories.map((category) => (
+      <button
+        data-testid="category"
+        key={ category.id }
+        type="button"
+      >
+        { category.name }
+      </button>
+    ));
   }
 
   render() {

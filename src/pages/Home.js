@@ -1,4 +1,5 @@
 import React from 'react';
+import CartBtn from '../services/CartBtn';
 import ProductList from '../components/ProductList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -38,7 +39,8 @@ class Home extends React.Component {
   render() {
     const { products } = this.state;
     return (
-      <div>
+      <div className="container">
+        <div className="searchField">
         <form>
           <input
             data-testid="query-input"
@@ -60,9 +62,11 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <ProductList products={ products } />
+
       </div>
-    );
-  }
+      <CartBtn />
+    </div>
+  );
 }
 
 export default Home;

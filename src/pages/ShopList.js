@@ -11,7 +11,7 @@ class ShopList extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.renderProduct = this.renderProduct.bind(this);
     this.loadCategories = this.loadCategories.bind(this);
-    
+
     this.state = {
       categories: [],
       query: '',
@@ -27,6 +27,7 @@ class ShopList extends React.Component {
   async loadCategories() {
     const categories = await api.getCategories();
     this.setState({ categories });
+  }
 
   handleChange({ target }) {
     this.setState({
@@ -86,6 +87,7 @@ class ShopList extends React.Component {
             { this.renderProduct() }
           </div>
         </div>
+      </section>
     );
   }
 }

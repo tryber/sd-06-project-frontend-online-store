@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Home.css';
+import Carrinho from '../imgs/carrinho.png';
 import ProductList from './ProductList';
 import Input from './Input';
-import '../styles/Home.css';
 import * as API from '../services/api';
 
 class Home extends React.Component {
@@ -29,16 +31,21 @@ class Home extends React.Component {
   render() {
     const { search, items } = this.state;
     return (
-      <div>
-        <span className="home-span">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
-        <Input
-          value={ search }
-          onChange={ this.handleSearch }
-          onClick={ this.handleProduct }
-        />
-        <ProductList items={ items } />
+      <div className="home">
+        <div data-testid="home-initial-message" className="search-bar">
+          <span className="home-span">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </span>
+          <Input
+            value={ search }
+            onChange={ this.handleSearch }
+            onClick={ this.handleProduct }
+          />
+          <ProductList items={ items } />
+          <Link to="/shopping-cart">
+            <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
+          </Link>
+        </div>
       </div>
     );
   }

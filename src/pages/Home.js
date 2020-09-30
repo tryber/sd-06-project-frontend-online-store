@@ -1,5 +1,5 @@
 import React from 'react';
-import Categories from '../components/Categories';
+import Categories from './Categories';
 import CartBtn from '../services/CartBtn';
 import ProductList from '../components/ProductList';
 import { getProductsFromCategoryAndQuery } from '../services/api';

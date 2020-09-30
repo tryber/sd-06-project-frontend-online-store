@@ -25,12 +25,12 @@ class CardList extends React.Component {
 
   async fetchCard() {
     const { value } = this.state;
-    console.log(value);
     const cards = await getProductsFromQuery(value);
     const { results } = cards;
     this.setState({
       products: results,
     });
+    console.log(results)
   }
 
   render() {
@@ -42,7 +42,7 @@ class CardList extends React.Component {
           <button data-testid="query-button" onClick={() => this.handleClick()}>Pesquisar</button>
         </div>
         <div>
-          {products.forEach((product) => <Card title={product.title}/> )}
+          {products.map((product) => <Card product={ product } key={product.id}/> )}
         </div>
       </div>
     )

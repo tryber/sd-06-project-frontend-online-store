@@ -2,7 +2,7 @@ import React from 'react';
 
 class Card extends React.Component {
   render() {
-    const { title, thumbnail, price } = this.props;
+    const { title, thumbnail, price } = this.props.product;
     return(
       <div>
         <h3>{title}</h3>

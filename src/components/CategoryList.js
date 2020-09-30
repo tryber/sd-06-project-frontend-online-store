@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import * as API from '../services/api';
 import '../styles/CategoryList.css';
 
@@ -24,8 +25,20 @@ class CategoryList extends Component {
   }
 
   renderListItem(id, name) {
+    const { filterCategory, filter } = this.props;
     return (
-      <li key={ id } data-testid="category">{name}</li>
+      <div>
+        <input
+          type="radio"
+          key={ id }
+          name="input-radio"
+          id={ id }
+          filter={ filter }
+          onClick={ filterCategory }
+          data-testid="category"
+        />
+        <label htmlFor="input-radio">{name}</label>
+      </div>
     );
   }
 
@@ -35,12 +48,17 @@ class CategoryList extends Component {
     return (
       <div className="category-list">
         <span>Categorias :</span>
-        <ul>
+        <form>
           {categories.map((catego) => this.renderListItem(catego.id, catego.name))}
-        </ul>
+        </form>
       </div>
     );
   }
 }
+
+CategoryList.propTypes = {
+  filterCategory: PropTypes.func.isRequired,
+  filter: PropTypes.string.isRequired,
+};
 
 export default CategoryList;

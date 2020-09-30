@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-
 import { Link } from 'react-router-dom';
 
+import ProductList from './ProductList';
 
 class HomePage extends Component {
   render() {
@@ -15,6 +15,7 @@ class HomePage extends Component {
             Cart
           </button>
         </Link>
+        <ProductList />
       </header>
     );
   }

@@ -1,15 +1,21 @@
 import React from 'react';
-import CardList from '../components/CardList';
+import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
+import CartButton from '../components/CartButton';
+import CategoriesList from '../components/CategoriesList';
 
 class Home extends React.Component {
-  render () {
+  render() {
     return (
       <div>
+        Home
         <SearchBar />
-        <CardList />
+        <Link to="/carrinho">
+          <CartButton />
+          <CategoriesList />
+        </Link>
       </div>
-    )
+    );
   }
 }
 

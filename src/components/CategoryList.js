@@ -20,14 +20,15 @@ class CategoryList extends React.Component {
   render() {
     const { categories } = this.state;
     return (
-      <ul>
+      <div>
         {categories
           .map((category) => (
-            <li key={ category.id } data-testid="category">
+            <label htmlFor="categories" key={ category.id }>
+              <input type="radio" id="inpu" data-testid="category" />
               {category.name}
-            </li>
+            </label>
           ))}
-      </ul>
+      </div>
     );
   }
 }

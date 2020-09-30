@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import Loading from './Loading';
 
@@ -6,10 +7,14 @@ import Loading from './Loading';
 class CategoriesList extends React.Component {
   constructor() {
     super();
+
     this.state = {
       categories: [],
       loading: true,
+      categoryID: '',
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -24,6 +29,16 @@ class CategoriesList extends React.Component {
     });
   }
 
+  handleClick({ target }) {
+    this.setState({
+      categoryID: target.id,
+    }, () => {
+      const { handleID } = this.props;
+      const { categoryID } = this.state;
+      handleID(categoryID);
+    });
+  }
+
   render() {
     const { loading, categories } = this.state;
 
@@ -32,11 +47,24 @@ class CategoriesList extends React.Component {
         <ul>
           { loading ? <Loading />
             : categories.map((category) => (
-              <li key={ category.id } data-testid="category">{ category.name }</li>)) }
+              <button
+                type="button"
+                onClick={ this.handleClick }
+                onKeyDown={ this.handleClick }
+                key={ category.id }
+                id={ category.id }
+                data-testid="category"
+              >
+                { category.name }
+              </button>)) }
         </ul>
       </div>
     );
   }
 }
+
+CategoriesList.propTypes = {
+  handleID: PropTypes.func.isRequired,
+};
 
 export default CategoriesList;

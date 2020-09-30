@@ -1,6 +1,7 @@
 import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
+import CategoriesList from './CategoriesList';
 
 class CardList extends React.Component {
   constructor() {
@@ -14,19 +15,32 @@ class CardList extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.fetchCard = this.fetchCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickID = this.handleClickID.bind(this);
   }
 
   handleClick() {
-    this.fetchCard();
+    const { value } = this.state;
+    if (value !== '') {
+      this.fetchCard('');
+    }
+  }
+
+  handleClickID(catID) {
+    this.setState({
+      categoryId: catID,
+    }, () => {
+      const { categoryId } = this.state;
+      this.fetchCard(categoryId);
+    });
   }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
 
-  async fetchCard() {
-    const { categoryId, value } = this.state;
-    const card = await getProductsFromCategoryAndQuery(categoryId, value);
+  async fetchCard(id) {
+    const { value } = this.state;
+    const card = await getProductsFromCategoryAndQuery(id, value);
     const { results } = card;
     this.setState({
       products: results,
@@ -51,6 +65,7 @@ class CardList extends React.Component {
             Pesquisar
           </button>
         </div>
+        <CategoriesList handleID={ this.handleClickID } />
         <div>
           { products.map((product) => <Card product={ product } key={ product.id } />)}
         </div>

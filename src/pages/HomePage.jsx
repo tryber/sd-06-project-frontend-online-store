@@ -1,8 +1,9 @@
 /* eslint-disable react/no-unused-state */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
-import { Link } from 'react-router-dom';
+
 
 class HomePage extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     api.getCategories().then((value) => this.setState({
-      categories: value, // Recebe ID e NAME
+      categories: value, // Recebe ID e  NAME
     }));
   }
 

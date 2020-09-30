@@ -33,16 +33,6 @@ class CardList extends React.Component {
     });
   }
 
-  // async fetchCard() {
-  //   const { value } = this.state;
-  //   const cards = await getProductsFromQuery(value);
-  //   console.log(cards)
-  //   const { results } = cards;
-  //   this.setState({
-  //     products: results,
-  //   });
-  // }
-
   render() {
     const { products, value } = this.state;
     return (

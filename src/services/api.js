@@ -11,7 +11,7 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
 }
 
 export function getAllProduct() {
-  const UrlAllProducts = `https://api.mercadolibre.com/sites/MLB/search?q=$QUERY`
+  const UrlAllProducts = 'https://api.mercadolibre.com/sites/MLB/search?q=$QUERY';
   return fetch(UrlAllProducts)
     .then((response) => response.json());
 }

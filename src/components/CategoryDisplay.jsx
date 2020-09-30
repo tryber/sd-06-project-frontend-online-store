@@ -20,7 +20,6 @@ class CategoryDisplay extends Component {
         this.setState({
             category: getCategories,
         })
-        console.log(getCategories)
     }
 
     render() {
@@ -32,7 +31,7 @@ class CategoryDisplay extends Component {
                 {category.map(category => (
                     <label htmlFor="category">
                         {category.name}
-                        <input type="radio" datatest-id="category" key={category.id} name="category" />
+                        <input key={category.id} type="radio" data-testid="category" name="category" />
                     </label>
                 ))}
                 </ul>

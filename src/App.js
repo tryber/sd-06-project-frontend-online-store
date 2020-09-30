@@ -1,14 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Search from './components/Search';
+import Category from './Category';
+
+import Search from './components/Search/Search';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/" component={ Search } />
-      </Switch>
-    </BrowserRouter>
+    <div className="main-container">
+      <Category />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={Search} />
+        </Switch>
+      </BrowserRouter>
+    </div>
   );
 }
 

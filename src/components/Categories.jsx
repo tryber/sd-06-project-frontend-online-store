@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import * as Api from '../services/api'; 
 
+
 class Categories extends Component {
   constructor() {
     super();
-
+    this.inputOnClick = this.inputOnClick.bind(this);
     this.state = {
       name: [],
     };
@@ -22,14 +23,22 @@ class Categories extends Component {
     });
   }
 
+  inputOnClick({ target }) {
+    const updateId = this.props.updateId;
+    updateId(target.id);
+  }
+
   render() {
     const { name } = this.state;
     return (
       <nav>
         <ul>
           {name.map(names => (
-            <label htmlFor="input-radio">
-              <input type="radio" id="input-radio" data-testid="category" key={names.id} name="category" />
+            <label htmlFor={names.id}>
+              <input
+              type="radio" id={names.id} data-testid="category"
+              key={names.id} name="category" onClick={this.inputOnClick} 
+            />
               {names.name}
             </label>
           )

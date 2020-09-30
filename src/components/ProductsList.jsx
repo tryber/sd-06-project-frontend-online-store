@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import * as Api from '../services/api';
 
 class ProductsList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.inputOnChange = this.inputOnChange.bind(this);
     this.buttonOnClick = this.buttonOnClick.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
@@ -15,10 +15,13 @@ class ProductsList extends Component {
 
   componentDidMount() {
     this.fetchProducts();
+    // const card = this.props.card;
+    // this.setState({ card, })
   }
 
   fetchProducts = async (query) => {
-    const getProducts = await Api.getProductsFromCategoryAndQuery(query)
+    const categoriesId = this.props.categoriesId
+    const getProducts = await Api.getProductsFromCategoryAndQuery(query, categoriesId)
       .then(resolve => resolve.results);
     this.setState({
       card: getProducts,
@@ -38,7 +41,7 @@ class ProductsList extends Component {
 
   render() {
     const { card, value } = this.state;
-
+    console.log(card);
     return (
       <div>
         <section>

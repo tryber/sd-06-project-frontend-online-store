@@ -6,10 +6,14 @@ import Loading from './Loading';
 class CategoriesList extends React.Component {
   constructor() {
     super();
+
     this.state = {
       categories: [],
       loading: true,
+      categoryID: '',
     };
+
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -26,7 +30,12 @@ class CategoriesList extends React.Component {
   }
 
   handleClick({ target }) {
-    console.log(target.value)
+    this.setState({ 
+      categoryID: target.id
+    }, () => {
+      const { handleID } = this.props;
+      handleID(this.state.categoryID)
+    })
   }
 
   render() {
@@ -37,7 +46,7 @@ class CategoriesList extends React.Component {
         <ul>
           { loading ? <Loading />
             : categories.map((category) => (
-              <li onClick={this.handleClick} key={ category.id } data-testid="category">{ category.name }</li>)) }
+              <li onClick={this.handleClick} key={ category.id } id={ category.id } data-testid="category">{ category.name }</li>)) }
         </ul>
       </div>
     );

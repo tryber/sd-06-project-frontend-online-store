@@ -15,10 +15,23 @@ class CardList extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.fetchCard = this.fetchCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleClickID = this.handleClickID.bind(this);
   }
 
   handleClick() {
-    this.fetchCard();
+    const { categoryId } = this.state;
+    if (categoryId === '') {
+      this.fetchCard();
+    } 
+    console.log('fetchCard')
+  }
+
+  handleClickID(catID) {
+    this.setState({
+      categoryId: catID,
+    }, () => {
+      console.log(this.state.categoryId)
+    })
   }
 
   handleChange(event) {
@@ -52,7 +65,7 @@ class CardList extends React.Component {
             Pesquisar
           </button>
         </div>
-          <CategoriesList />
+          <CategoriesList handleID={this.handleClickID}/>
         <div>
           { products.map((product) => <Card product={ product } key={ product.id } />)}
         </div>

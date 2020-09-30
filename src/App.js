@@ -12,7 +12,9 @@ export default function App() {
       <Switch>
         <Route exact path="/ShoppingCart" component={ShoppingCart} />
         <Route exact path="/" component={ProductListing} />
-        <Route exact path="/products/:category_id/:id" render={(props) => <ProductDetails {...props} />} />
+        <Route
+          exact path="/products/:category_id/:id"
+          render={ (props) => <ProductDetails { ...props } /> } />
       </Switch>
     </BrowserRouter>
   );

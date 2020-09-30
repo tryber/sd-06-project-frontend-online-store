@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PagInicial from './PagInicial';
-import CarrinhoCompras from './services/CarrinhoCompras';
+import CarrinhoCompras from './components/CarrinhoCompras';
 
 
 function App() {

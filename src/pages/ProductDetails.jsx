@@ -8,14 +8,14 @@ class ProductDetails extends Component {
     this.state = {
       cards: [],
       product: {},
-    }
+    };
   }
-  
+
   componentDidMount() {
     this.fetchProducts();
   }
 
-  fetchProducts = async () => {
+  async fetchProducts() {
     const { id, name } = this.props.match.params;
     const getProducts = await Api.getProductsFromCategoryAndQuery(name)
       .then(resolve => resolve.results);
@@ -29,8 +29,8 @@ class ProductDetails extends Component {
   filterProduct(id) {
     return this.state.cards.find((element) => element.id === id);
   }
-  
-  render() {      
+
+  render() {
     const { title, thumbnail, price, id } = this.state.product;
     console.log(this.state.product);
     return (

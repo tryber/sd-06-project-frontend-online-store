@@ -1,19 +1,24 @@
-import React from 'react';
-import ItemCard from './ItemCard'
+// import React from 'react';
+// import ItemCard from './ItemCard'
 
 
-class ItemList extends React.Component {
-    render() {
-      const { movies } = this.props;
-      return (
-        <section>
-          {movies.map((movie) => (
-            <ItemCard key={movie.title} movie={movie} />
-          ))}
-        </section>
-      );
-    }
-  }
+// class ItemList extends React.Component {
+//   constructor() {
+//     super();
+
+//   }
+
+//   render() {
+//     const { products } = this.props;
+//     return (
+//     <section>
+//       {products.map((product) => (
+//       <ItemCard key={product.title} product={product} />
+//       ))}
+//     </section>
+//     );
+//   }
+// }
 
 
-  export default ItemList;
+//   export default ItemList;

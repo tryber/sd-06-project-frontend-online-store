@@ -1,5 +1,5 @@
 import React from 'react';
-import * as api from '../services/api'
+import * as api from '../services/api';
 
 class SearchBar extends React.Component {
   constructor() {
@@ -10,20 +10,25 @@ class SearchBar extends React.Component {
 
 
     this.state = {
-      search: "",
+      search: '',
       products: [],
-    }
+    };
   }
 
 
-  handleChanges({target}) {
+  handleChanges({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
   }
 
-  async handleAPI () {
-    const result =  await api.getProductsFromCategoryAndQuery("", "livro")
-      console.log(result)
+  async handleAPI() {
+    const { products, search } = this.state;
+    const result = await api.getProductsFromCategoryAndQuery('', search)
+    console.log(result);
+    console.log(search);
+    this.setState({
+      [products]: result,
+    });
   }
 
   render() {
@@ -35,8 +40,20 @@ class SearchBar extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <div>
-          <input data-testid="query-input" type="text" name="search" value={search} onChange={this.handleChanges} />
-          <button data-testid="query-button" onClick={this.handleAPI}>Pesquisar</button>
+          <input
+            data-testid="query-input"
+            type="text"
+            name="search"
+            value={ search }
+            onChange={ this.handleChanges }
+          />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ this.handleAPI }
+          >
+            Pesquisar
+          </button>
         </div>
       </div>
     );

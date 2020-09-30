@@ -60,7 +60,7 @@ class ShopList extends React.Component {
 
     return (
       <section>
-        <CategoryList props={categories} />
+        <CategoryList categories={ categories } />
         <div data-testid="home-initial-message">
           <input data-testid="query-input" type="text" onChange={ this.handleChange } />
           Digite algum termo de pesquisa ou escolha uma categoria.

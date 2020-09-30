@@ -34,7 +34,7 @@ class Home extends Component {
 
   onClick() {
     const query = this.state.textInput;
-    this.fetchProducts({ query });
+    if (query !== "") this.fetchProducts({ query });
   }
 
   onChecked(categoryId) {
@@ -57,7 +57,6 @@ class Home extends Component {
           handleEvent={this.handleEvent} 
           onClick={this.onClick}
         />
-        {/* {(data) ? console.log(data) : null} */}
         <div className="content">
           <Categories 
             // onChecked={this.onChecked} 

@@ -4,8 +4,8 @@ import Card from './Card';
 import CategoriesList from './CategoriesList';
 
 class CardList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       value: '',

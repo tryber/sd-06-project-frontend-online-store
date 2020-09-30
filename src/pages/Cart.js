@@ -4,7 +4,7 @@ class Cart extends React.Component {
   render() {
     return (
       <div>
-        <p>Component Cart</p>
+        <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>
       </div>
     );
   }

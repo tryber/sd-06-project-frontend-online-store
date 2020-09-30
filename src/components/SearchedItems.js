@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class SearchedItems extends Component {
   render() {
-    const { item: { title, thumbnail, price } } = this.props;
+    const { item: { id, title, thumbnail, price } } = this.props;
 
     return (
       <div data-testid="product">
-        <h2>{ title }</h2>
-        <img src={ thumbnail } alt="thumbnail" />
-        <span>{ price }</span>
+        <Link data-testid="product-detail-link" to={ `/${id}` }>
+          <h2>{ title }</h2>
+          <img src={ thumbnail } alt="thumbnail" />
+          <span>{ price }</span>
+        </Link>
       </div>
     );
   }
@@ -17,9 +20,10 @@ class SearchedItems extends Component {
 
 SearchedItems.propTypes = {
   item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
   }).isRequired,
 };
 

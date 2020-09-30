@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import CategoriesSideBar from './components/CategoriesSideBar';
+import CardDetails from './pages/CardDetails';
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
         <CategoriesSideBar />
         <Switch>
           <Route exact path="/" component={ Home } />
-          <Route component={ Cart } />
+          <Route exact path="/card/:id" component={ CardDetails } />
+          <Route path="/Cart" component={ Cart } />
           <Route component={ NotFound } />
         </Switch>
       </Router>

@@ -4,13 +4,11 @@ import PagInicial from './PagInicial';
 
 function App() {
   return (
-    <div>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/" component={PagInicial} />
-        </Switch>
-      </BrowserRouter>
-    </div >
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ PagInicial } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

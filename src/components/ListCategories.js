@@ -21,11 +21,18 @@ class ListCategories extends React.Component {
   }
 
   render() {
-    const { categories } = this.state.categories;
+    const { categories } = this.state;
     return (
       <div>
-        {categories.map((category, index) => <li key={index} id={category.id}
-          data-testid="category">{category.name}</li>)}
+        {categories.map((category) => (
+          <li
+            key={ category.id }
+            id={ category.id }
+            data-testid="category"
+          >
+            { category.name }
+          </li>
+        ))}
       </div>
     );
   }

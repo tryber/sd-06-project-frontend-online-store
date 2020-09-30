@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
 
-import Header from '../pages/Header.js';
+import Header from '../pages/Header';
 import Cart from '../pages/Cart';
 
 class Routes extends React.Component {

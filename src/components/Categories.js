@@ -32,6 +32,7 @@ class Categories extends React.Component {
         </button>
       );
     });
+
   }
 
   render() {
@@ -39,7 +40,7 @@ class Categories extends React.Component {
       <div>
         <p>{this.returnCategories()}</p>
       </div>
-    );
+    )
   }
 }
 

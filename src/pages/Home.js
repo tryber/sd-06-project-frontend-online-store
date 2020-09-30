@@ -57,14 +57,17 @@ class Home extends Component {
           onChange={ this.onSearchTextChange }
         />
 
-        <button data-testid="query-button" onClick={ this.fetchSearchedItem }>
+        <button
+          data-testid="query-button"
+          type="button"
+          onClick={ this.fetchSearchedItem }
+        >
           Search
         </button>
 
-        {searchedItems === undefined 
-        ? <span data-testid="home-initial-message">{spanMessage}</span>
-        : searchedItems.map((item) => <SearchedItems key={ item.id } item={ item } />)
-        }
+        {searchedItems === undefined
+          ? <span data-testid="home-initial-message">{spanMessage}</span>
+          : searchedItems.map((item) => <SearchedItems key={ item.id } item={ item } />)}
       </div>
     );
   }

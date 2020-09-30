@@ -22,8 +22,19 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" render={ () => <Home addToCart={ this.handleAddToCart } /> } />
-          <Route path="/cart" render={ () => <ShoppingCart cartItems={ cartItems } /> } />
+          <Route
+            exact
+            path="/"
+            render={ () => (
+              <Home addToCart={ this.handleAddToCart } />
+            ) }
+          />
+          <Route
+            path="/cart"
+            render={ (props) => (
+              <ShoppingCart { ...props } cartItems={ cartItems } />
+            ) }
+          />
         </Switch>
       </BrowserRouter>
     );

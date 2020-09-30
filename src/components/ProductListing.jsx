@@ -26,13 +26,11 @@ export default class ProductListing extends Component {
   }
 
   async handleClick() {
-    const { selectedCategory } = this.state;
     this.setState(
       { loading: true },
       async () => {
         const textState = this.state.searchText;
-        const categoryParam = selectedCategory !== 'none' ? selectedCategory : undefined;
-        const myProds = await api.getProductsFromCategoryAndQuery(categoryParam, textState);
+        const myProds = await api.getProductsFromCategoryAndQuery(undefined, textState);
         const myProds2 = myProds ? myProds.results : [];
         if (!myProds2 || myProds2.length === 0) {
           this.setState({
@@ -49,19 +47,35 @@ export default class ProductListing extends Component {
       },
     );
   }
-
+    
   renderCards() {
     const { products, empty } = this.state;
     const mapCards = products.map((product) => (
       <ProductCard key={product.id} title={product.title}
-        thumbnail={product.thumbnail} price={product.price}
-      />));
+      thumbnail={product.thumbnail} price={product.price}
+    />));
     return empty ? <span>Nenhum produto foi encontrado</span> : mapCards;
   }
 
   handleClickCategory(event) {
     event.preventDefault();
-    this.setState({ selectedCategory: event.target.id });
+    this.setState({
+      loading: true,
+      selectedCategory: event.target.id,
+    }, () => {
+      this.setState({ loading: true },
+        async () => {
+          const { selectedCategory } = this.state;
+          const fetchCategoryProducts = await api.getProductsFromCategoryAndQuery(selectedCategory, undefined);
+          const myProds = fetchCategoryProducts.results;
+          console.log(myProds);
+          this.setState({
+            products: myProds,
+            loading: false,
+          });
+        }
+      );
+    });
   }
 
   render() {

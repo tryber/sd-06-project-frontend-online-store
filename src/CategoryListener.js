@@ -21,7 +21,7 @@ class CategoryListener extends React.Component {
       <div>
         {apiCategories.map((category) => (
           <div key={ category.id } data-testid="category">
-            <input type="radio" name="filterId" value={ category.id } onClick={handleCategory}/>
+            <input type="radio" name="filterId" value={ category.id } onClick={ handleCategory }/>
             <label htmlFor={ category.id }>{ category.name }</label>
           </div>))}
       </div>

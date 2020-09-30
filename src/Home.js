@@ -10,7 +10,7 @@ class Home extends React.Component {
     super();
     this.state = {
       products: '',
-      filterId: 'MLB5672',
+      filterId: '',
       searchQuery: '',
       loading: false,
     };
@@ -28,15 +28,17 @@ class Home extends React.Component {
   handleState({ target }) {
     const { name } = target;
     const value = (target.type === 'checkbox') ? target.checked : target.value;
-    this.setState({ [name]: value });
+    if (name === "filterId") {
+      this.setState({ [name]: value }, () => {
+        this.handleSearch();
+      })
+   } else {
+     this.setState({ [name]: value });
+   }
   }
 
   render() {
-    if (this.state.filterId !== "") {
-      const teste = results.filter(result => result.categoryId);
-      console.log(teste)
-      return teste
-    }
+    
     const { searchQuery, products, loading } = this.state;
     const initMsg = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     return (
@@ -46,7 +48,7 @@ class Home extends React.Component {
         </div>
         <div className="store-container">
           <div className="categories-container">
-            <CategoryListener handleCategory={this.handleState}/>
+            <CategoryListener handleCategory={ this.handleState }/>
           </div>
           <div className="gallery-container">
             <div>

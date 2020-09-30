@@ -1,0 +1,28 @@
+section {
+  border: 1px solid black;
+  display: flex;
+  flex-flow: column wrap;
+  padding: 10px;
+}
+
+section input {
+  margin: 10px auto;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+main label {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100px;
+  width: 90%;
+}
+
+main label input {
+  height: 20px;
+  width: 100%;
+}

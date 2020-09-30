@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class SearchedItems extends Component {
   render() {
     const { item: { title, thumbnail, price } } = this.props;
+    console.log(this.props);
 
     return (
       <div data-testid="product">

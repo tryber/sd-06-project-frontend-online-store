@@ -4,6 +4,7 @@ import addCart from '../addCart.svg';
 import './style/home.css';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import SearchedItems from '../components/SearchedItems';
+import CategoriesSideBar from '../components/CategoriesSideBar';
 
 class Home extends Component {
   constructor() {
@@ -11,11 +12,14 @@ class Home extends Component {
 
     this.fetchSearchedItem = this.fetchSearchedItem.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
+    this.saveSelectedCategory = this.saveSelectedCategory.bind(this);
+
 
     this.state = {
       searchInput: '',
       spanMessage: 'Digite algum termo de pesquisa ou escolha uma categoria.',
       searchedItems: undefined,
+      selectedCategory: '',
     };
   }
 
@@ -24,13 +28,19 @@ class Home extends Component {
     this.setState({ [name]: value });
   }
 
+  saveSelectedCategory(id) {
+    this.setState({ selectedCategory: id });
+  }
+
   fetchSearchedItem() {
     this.setState(
       async () => {
-        const { searchInput } = this.state;
-        const searchResult = await getProductsFromCategoryAndQuery('', searchInput);
+        const { searchInput, selectedCategory: ID } = this.state;
 
+        const searchResult = await getProductsFromCategoryAndQuery(ID, searchInput);
+        const retorno = await searchResult;
         if (searchResult.results.length >= 1) {
+          console.log(retorno);
           return this.setState({
             searchedItems: searchResult.results,
             searchInput: '',
@@ -51,6 +61,7 @@ class Home extends Component {
 
     return (
       <div>
+        <CategoriesSideBar saveSelectedCategory={ this.saveSelectedCategory } />
         <div className="search-container">
           <input
             name="searchInput"

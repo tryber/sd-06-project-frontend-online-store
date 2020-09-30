@@ -23,7 +23,7 @@ class Home extends React.Component {
     const { search } = this.state;
     console.log(search);
     API
-      .getProductsFromCategoryAndQuery(search)
+      .getProductsFromCategoryAndQuery(undefined, search)
       .then((result) => this.setState({ items: result.results, loadProducts: true }));
   }
 

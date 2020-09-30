@@ -1,6 +1,9 @@
 import React from 'react';
 import * as api from '../services/api';
 import ItemCard from './ItemCard';
+import Categories from './Categories';
+import { Link } from 'react-router-dom';
+import Cart from '../images/shopping-cart.png';
 
 class Home extends React.Component {
   constructor() {
@@ -61,6 +64,10 @@ class Home extends React.Component {
                 <ItemCard key={ product.id } product={ product } />)}
           </div>
         </div>
+        <Categories />
+        <Link data-testid="shopping-cart-button" to="/shopping-cart">
+          <img src={ Cart } alt="shopping cart"/>
+        </Link>
       </div>
     );
   }

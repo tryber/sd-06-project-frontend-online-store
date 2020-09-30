@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Cart extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <p>Component Cart</p>

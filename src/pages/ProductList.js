@@ -1,7 +1,7 @@
 import React from 'react';
 
 class ProductList extends React.Component {
-  render () {
+  render() {
     return (
       <div>Product List Component</div>
     );

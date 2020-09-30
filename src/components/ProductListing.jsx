@@ -8,34 +8,17 @@ import * as api from '../services/api';
 export default class ProductListing extends Component {
   constructor() {
     super();
-    this.updateState = this.updateState.bind(this);
     this.handleChangeTxt = this.handleChangeTxt.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.renderCards = this.renderCards.bind(this);
+    this.handleClickCategory = this.handleClickCategory.bind(this);
     this.state = {
-      categories: [],
       loading: false,
       empty: false,
       searchText: '',
       products: [],
+      selectedCategory: 'none',
     };
-  }
-
-  componentDidMount() {
-    this.updateState();
-  }
-
-  async updateState() {
-    this.setState(
-      { loading: true },
-      async () => {
-        const myCategories = await api.getCategories();
-        this.setState({
-          categories: myCategories,
-          loading: false,
-        });
-      },
-    );
   }
 
   handleChangeTxt(e) {
@@ -64,19 +47,40 @@ export default class ProductListing extends Component {
       },
     );
   }
-
+    
   renderCards() {
     const { products, empty } = this.state;
     const mapCards = products.map((product) => (
       <ProductCard key={product.id} title={product.title}
-        thumbnail={product.thumbnail} price={product.price}
-      />));
+      thumbnail={product.thumbnail} price={product.price}
+    />));
     return empty ? <span>Nenhum produto foi encontrado</span> : mapCards;
   }
 
+  handleClickCategory(event) {
+    event.preventDefault();
+    this.setState({
+      loading: true,
+      selectedCategory: event.target.id,
+    }, () => {
+      this.setState({ loading: true },
+        async () => {
+          const { selectedCategory } = this.state;
+          const fetchCategoryProducts = await api.getProductsFromCategoryAndQuery(selectedCategory, undefined);
+          const myProds = fetchCategoryProducts.results;
+          this.setState({
+            products: myProds,
+            loading: false,
+          });
+        }
+      );
+    });
+  }
+
   render() {
-    const { categories, loading } = this.state;
-    const mapCategories = categories.map((categorie) => <CategoriesListing key={categorie.id} categorie={categorie} />)
+    const { loading } = this.state;
+    const { handleClickCategory } = this;
+
     return (
       <div>
         <input type="text" data-testid="query-input" onChange={this.handleChangeTxt} />
@@ -84,11 +88,11 @@ export default class ProductListing extends Component {
         <div>
           <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
           <Link to="/ShoppingCart"><img
-            src={shoppingCartImage} alt="Shopping cart button image." width="30px"
+            src={shoppingCartImage} alt="Shopping cart button." width="30px"
             data-testid="shopping-cart-button"
           /></Link>
         </div>
-        {this.state.loading ? <span>Loading</span> : mapCategories}
+          <CategoriesListing onClick={handleClickCategory} />
         <div>
           {loading ? <span>Loading</span> : this.renderCards()}
         </div>

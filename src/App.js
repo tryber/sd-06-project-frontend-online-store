@@ -5,6 +5,7 @@ import './App.css';
 // import * as api from './services/api';
 class App extends React.Component {
   render() {
+    // api.getCategories().then(categories => { console.log(categories) })
     return (
       <BrowserRouter>
         <Switch>

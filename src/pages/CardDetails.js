@@ -1,4 +1,5 @@
 import React from 'react';
+import * as api from '../services/api';
 
 class CardDetails extends React.Component {
   constructor() {
@@ -9,16 +10,21 @@ class CardDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.loadApiDetails();
+    api.getCategories();
+    this.loadApiDetails();    
   }
 
   async loadApiDetails() {
-    // const { id, name } = this.props.match.params;
+    const { query } = this.props.location.state;
+    const { id } = this.props.match.params;
+
     this.setState(
       async () => {
-        const apiDetails = await api.getCategories();
+        const apiDetails = await api.getProductsFromCategoryAndQuery('', query);
+        const itemSearched = apiDetails.results.find((item) => item.id === id);        
+
         this.setState({
-          product: apiDetails,
+          product: itemSearched,
         });
       },
     );

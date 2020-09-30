@@ -18,7 +18,6 @@ class CategoriesSideBar extends React.Component {
 
   render() {
     const { apiCategories } = this.state;
-    console.log(apiCategories);
     return (
       <aside className="side-bar">
         <h3>Categories:</h3>

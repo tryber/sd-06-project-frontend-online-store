@@ -33,7 +33,6 @@ class Home extends Component {
         if (searchResult.results.length >= 1) {
           return this.setState({
             searchedItems: searchResult.results,
-            searchInput: '',
             spanMessage: '',
           });
         }
@@ -47,7 +46,7 @@ class Home extends Component {
   }
 
   render() {
-    const { searchedItems, spanMessage } = this.state;
+    const { searchedItems, spanMessage, searchInput } = this.state;
 
     return (
       <div>
@@ -69,9 +68,9 @@ class Home extends Component {
           </button>
 
           {searchedItems === undefined
-            ? <span data-testid="home-initial-message">{spanMessage}</span>
+            ? <span data-testid="home-initial-message">{ spanMessage }</span>
             : searchedItems.map((item) => (
-              <SearchedItems key={ item.id } item={ item } />
+              <SearchedItems key={ item.id } item={ item } query={ searchInput } />
             ))}
         </div>
         <div>

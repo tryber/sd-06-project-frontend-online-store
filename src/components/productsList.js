@@ -11,7 +11,7 @@ export default class ProductsList extends Component {
             <p>{element.title}</p>
             <img src={ element.thumbnail } alt={ element.title } />
             <p>
-              R$:
+              $:
               {element.price}
             </p>
           </div>

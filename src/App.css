@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -36,3 +37,10 @@
     transform: rotate(360deg);
   }
 }
+
+#root {
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 15px;
+}
+

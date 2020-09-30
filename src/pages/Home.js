@@ -41,32 +41,33 @@ class Home extends React.Component {
     return (
       <div className="container">
         <div className="searchField">
-        <form>
-          <input
-            data-testid="query-input"
-            type="text"
-            name="research"
-            onChange={ this.handleSearch }
-          />
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ this.handleClick }
+          <form>
+            <input
+              data-testid="query-input"
+              type="text"
+              name="research"
+              onChange={ this.handleSearch }
+            />
+            <button
+              data-testid="query-button"
+              type="button"
+              onClick={ this.handleClick }
+            >
+              Pesquisar
+            </button>
+          </form>
+          <p
+            data-testid="home-initial-message"
           >
-            Pesquisar
-          </button>
-        </form>
-        <p
-          data-testid="home-initial-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        <ProductList products={ products } />
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+          <ProductList products={ products } />
 
+        </div>
+        <CartBtn />
       </div>
-      <CartBtn />
-    </div>
-  );
+    );
+  }
 }
 
 export default Home;

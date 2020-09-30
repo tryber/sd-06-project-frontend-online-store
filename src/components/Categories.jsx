@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import * as Api from '../services/api'; 
 
-class Products extends Component {
+class Categories extends Component {
   constructor() {
     super();
 
@@ -27,11 +27,11 @@ class Products extends Component {
     return (
       <nav>
         <ul>
-          {name.map(name => <li data-testid="category" key={name.id}>{name.name}</li>)}
+          {name.map(names => <li data-testid="category" key={names.id}>{names.name}</li>)}
         </ul>
       </nav>
     );
   }
 }
 
-export default Products;
+export default Categories;

@@ -1,4 +1,5 @@
 import React from 'react';
+import ListCategories from './ListCategories';
 
 function Home() {
   return (
@@ -10,6 +11,9 @@ function Home() {
         Digite algum termo de pesquisa ou escolha uma categoria.
         <input id="input-message" />
       </label>
+      <div>
+        <ListCategories />
+      </div>
     </main>
   );
 }

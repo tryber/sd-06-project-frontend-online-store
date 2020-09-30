@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import * as api from './services/api';
 
 class MainPage extends React.Component {
@@ -27,6 +28,11 @@ class MainPage extends React.Component {
           <input type="text" />
           <span data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
+          </span>
+          <span>
+            <Link to="/shoppingcart" data-testid="shopping-cart-button">
+              Icone de carrinho
+            </Link>
           </span>
         </div>
 

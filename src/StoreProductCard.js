@@ -1,13 +1,14 @@
 import React from 'react';
+import './StoreProductCard.css';
 
 function StoreProductCard(product) {
   const { price, title, thumbnail } = product;
   return (
-    <div key={ title } data-testid="product">
+    <div className="card" key={ title } data-testid="product">
       <img src={ thumbnail } alt={ title } />
-      <div>
-        <p>{title}</p>
-        <p>{`R$: ${price}`}</p>
+      <div className="product-data">
+        <p className="title">{title}</p>
+        <p className="price">{`R$: ${price}`}</p>
       </div>
     </div>
   );

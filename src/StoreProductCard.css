@@ -1,0 +1,31 @@
+.card {
+  background-color: rgb(255,255,255);
+  border-radius: 5%;
+  box-shadow: 0 0 10px rgb(158, 157, 157);
+  display: flex;
+  flex-direction: column;
+  height: 40%;
+  margin: 1%;
+  width: 20%;
+}
+
+.card img {
+  border-radius: 5% 5% 0 0;
+  width: 100%;
+}
+
+.product-data {
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+}
+
+.title {
+  max-height: 2vh;
+  overflow: hidden;
+}
+
+.title:hover {
+  overflow: visible;
+  margin-bottom: 30%;
+}

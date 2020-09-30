@@ -1,6 +1,9 @@
 import React from 'react';
 import * as api from './services/api';
 import ListCards from './ListCards';
+import CategoryListener from './CategoryListener';
+import ButtonShoppingCart from './ButtonShoppingCart';
+import './Home.css';
 
 class Home extends React.Component {
   constructor() {
@@ -32,21 +35,39 @@ class Home extends React.Component {
     const { searchQuery, products, loading } = this.state;
     const initMsg = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     return (
-      <div>
-        <input
-          type="text"
-          placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
-          data-testid="query-input"
-          name="searchQuery"
-          value={ searchQuery }
-          onChange={ this.handleState }
-        />
-        <button type="button" data-testid="query-button" onClick={ this.handleSearch }>
-          Pesquisar
-        </button>
-        { products === '' ? <p data-testid="home-initial-message">{ initMsg }</p>
-          : ListCards(products) }
-        {(loading === true) ? <p>Loading...</p> : ''}
+      <div className="home-container">
+        <div className="header-container">
+          <ButtonShoppingCart />
+        </div>
+        <div className="store-container">
+          <div className="categories-container">
+            <CategoryListener />
+          </div>
+          <div className="gallery-container">
+            <div>
+              <input
+                type="text"
+                placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
+                data-testid="query-input"
+                name="searchQuery"
+                value={ searchQuery }
+                onChange={ this.handleState }
+              />
+              <button
+                type="button"
+                data-testid="query-button"
+                onClick={ this.handleSearch }
+              >
+                Pesquisar
+              </button>
+            </div>
+            <div>
+              { products === '' ? <p data-testid="home-initial-message">{ initMsg }</p>
+                : ListCards(products) }
+              {(loading === true) ? <p>Loading...</p> : ''}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

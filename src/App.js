@@ -1,14 +1,15 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import ButtonShoppingCart from './ButtonShoppingCart';
 import Home from './Home';
 
 function App() {
   return (
-    <div>
-      <Home />
-      <ButtonShoppingCart />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" component={ Home } />
+      </Switch>
+    </BrowserRouter>
   );
 }
 

@@ -23,6 +23,22 @@ class Home extends Component {
     };
   }
 
+
+  componentDidUpdate() {
+    // console.log('component did update');
+    const { searchedItems, selectedCategory } = this.state;
+    // console.log(searchedItems);
+    // console.log(selectedCategory);
+
+    if (searchedItems !== undefined) {
+      const filteredItems = searchedItems
+        .filter((item) => item.category_id === selectedCategory);
+      // console.log(filteredItems);
+    }
+    // console.log('/// component did update');
+  }
+
+
   onSearchTextChange({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
@@ -37,6 +53,7 @@ class Home extends Component {
       async () => {
         const { searchInput, selectedCategory: ID } = this.state;
 
+        console.log(ID);
         const searchResult = await getProductsFromCategoryAndQuery(ID, searchInput);
         const retorno = await searchResult;
         if (searchResult.results.length >= 1) {

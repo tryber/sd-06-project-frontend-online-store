@@ -34,13 +34,14 @@ class Categories extends Component {
       <nav>
         <ul>
           {name.map(names => (
-            <label htmlFor={names.id}>
-              <input
-              type="radio" id={names.id} data-testid="category"
-              key={names.id} name="category" onClick={this.inputOnClick} 
-            />
-              {names.name}
-            </label>
+              <label htmlFor={names.id}>
+                <input
+                type="radio" id={names.id} 
+                key={names.id} name="category" onClick={this.inputOnClick}
+                data-testid="category"
+                />
+                {names.name}
+              </label>
           )
 
           )}

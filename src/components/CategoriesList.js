@@ -7,8 +7,8 @@ class CategoriesList extends React.Component {
   constructor() {
     super();
     this.state = {
-      categ: [],
-      load: true,
+      categories: [],
+      loading: true,
     };
   }
 
@@ -19,19 +19,20 @@ class CategoriesList extends React.Component {
   async fetchCategories() {
     const categories = await api.getCategories();
     this.setState({
-      categ: categories,
-      load: false,
+      categories,
+      loading: false,
     });
   }
 
   render() {
-    const { load, categ } = this.state;
+    const { loading, categories } = this.state;
 
     return (
       <div>
         <ul>
-          { load ? <Loading />
-            : categ.map((c) => <li key={ c.id } data-testid="category">{ c.name }</li>) }
+          { loading ? <Loading />
+            : categories.map((category) => (
+              <li key={ category.id } data-testid="category">{ category.name }</li>)) }
         </ul>
       </div>
     );

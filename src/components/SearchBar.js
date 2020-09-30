@@ -9,7 +9,7 @@ const SearchBar = () => (
     <form>
       <input />
     </form>
-  <ShoppingCartButton />
+    <ShoppingCartButton />
   </div>
 );
 

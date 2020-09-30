@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import MainPage from './MainPage';
 import './App.css';
+import ShoppingCartPage from './ShoppingCartPage';
 // import * as api from './services/api';
 class App extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ MainPage } />
+          <Route path="/shoppingcart" component={ ShoppingCartPage } />
         </Switch>
       </BrowserRouter>
     );

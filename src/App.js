@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PagInicial from './PagInicial';
 
-
 function App() {
-  return (
+  return (<div>
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={ PagInicial } />
+        <Route path="/" component={PagInicial} />
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter>  
+  </div >
   );
 }
 

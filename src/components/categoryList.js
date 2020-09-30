@@ -13,6 +13,7 @@ class CategoryList extends Component {
       categories: [],
       query: '',
       categoryId: '',
+      products: '',
     };
   }
 
@@ -46,8 +47,9 @@ class CategoryList extends Component {
     });
   }
 
-  searchApiProducts(categoryId, query) {
-    api.getProductsFromCategoryAndQuery(categoryId, query);
+  async searchApiProducts(categoryId, query) {
+    const products = await api.getProductsFromCategoryAndQuery(categoryId, query)
+    console.log(products.results)
   }
 
   render() {
@@ -60,37 +62,35 @@ class CategoryList extends Component {
         <input
           type="text"
           name="query"
-          value={ query }
+          value={query}
           data-testid="query-input"
-          onChange={ this.handleAreaChange }
+          onChange={this.handleAreaChange}
         />
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.searchApiProducts(categoryId, query) }
+          onClick={this.searchApiProducts(`${categoryId}, ${query}`)}
         >
-          Pesquisar
+          Pesquisar   
         </button>
-        ;
         <Link to="/cart">
           <img
             data-testid="shopping-cart-button"
             width="50px"
-            src={ Cart }
+            src={Cart}
             alt="card"
           />
         </Link>
         <ul>
           {categories.map((element) => (
-            <div data-testid="category" key={ element.id }>
-              <label htmlFor="label">
+            <div data-testid="category" key={element.id}>
+              <button
+                type="checkbox"
+                name={element.id}
+                onClick={this.checkInputCategorie}
+              >
                 {element.name}
-                <input
-                  type="checkbox"
-                  name={ element.id }
-                  onClick={ this.checkInputCategorie }
-                />
-              </label>
+              </button>
             </div>
           ))}
           {/* aqui usamos .map para mapear o array que vem do objeto json,

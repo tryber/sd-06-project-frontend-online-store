@@ -4,10 +4,10 @@ import * as Api from '../services/api';
 
 class CategoryDisplay extends Component {
     constructor() {
-        super()
+        super();
         this.state = {
             category: [],
-        }
+        };
     }
 
     componentDidMount() {
@@ -18,7 +18,7 @@ class CategoryDisplay extends Component {
         const getCategories = await Api.getCategories()
         this.setState({
             category: getCategories,
-        })
+        });
     }
 
     render() {

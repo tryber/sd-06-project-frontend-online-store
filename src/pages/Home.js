@@ -43,17 +43,17 @@ class Home extends React.Component {
   }
 
   renderProducts() {
-    if (this.state.loadProducts) {
-      if (this.state.search === '') {
+    const { loadProducts, search, items } = this.state;
+    if (loadProducts) {
+      if (search === '') {
         return <span>Nenhum produto foi encontrado</span>;
-      } else {
-        return <ProductList items={ this.state.items } />;
       }
+      return <ProductList items={ items } />;
     }
   }
 
   render() {
-    const { search, items, loadProducts, filter } = this.state;
+    const { search, filter } = this.state;
     return (
       <div data-testid="home-initial-message" className="home-container">
         <div className="category-list-container">

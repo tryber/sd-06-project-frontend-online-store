@@ -7,7 +7,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Switch>
-          <Route exact path="/" component={ listaDeProdutos } />
+          <Route exact path="/" component={ ListaDeProdutos } />
         </Switch>
       </BrowserRouter>
     </div>

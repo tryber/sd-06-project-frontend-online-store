@@ -2,6 +2,7 @@ import React from 'react';
 import * as api from '../services/api';
 import '../App.css';
 import ProductList from '../components/ProductList';
+import { Link } from 'react-router-dom';
 import CategoryFilter from './CategoryFilter';
 
 class EmptyProductList extends React.Component {
@@ -40,10 +41,9 @@ class EmptyProductList extends React.Component {
       <div className="App">
         <input data-testid="query-input" onChange={this.handleChange} />
         <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
+        <button><Link data-testid="shopping-cart-button" to="/shopping-cart">Seu carrinho está vazio</Link></button>
+        {product ? <ProductList list={product} /> : <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>}
         <CategoryFilter />
-        <div>
-          {product ? <ProductList list={product} /> : <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>}
-        </div>
       </div>
     );
   }

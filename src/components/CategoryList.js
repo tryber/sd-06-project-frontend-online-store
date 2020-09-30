@@ -22,9 +22,10 @@ class CategoryList extends React.Component {
     return (
       <ul>
         {categories
-          .map(category => {
-            return (<li key={ category.id } data-testid="category">{category.name}</li>);
-          })}
+          .map((category) => (
+            <li key={ category.id } data-testid="category">
+              {category.name}
+            </li>))}
       </ul>
     );
   }

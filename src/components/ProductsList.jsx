@@ -41,14 +41,14 @@ class ProductsList extends Component {
 
     return (
       <div>
-        <section>
+        <section >
           <input type="text" data-testid="query-input" value={value} onChange={this.inputOnChange} />
-          <button onClick={this.buttonOnClick} data-testid="query-input">botao</button>
+          <button onClick={this.buttonOnClick} data-testid="query-button">botao</button>
         </section>
         {card.map((product) => {
           const { title, thumbnail, price, id } = product;
           return (
-            <section key={id}>
+            <section data-testid='product' key={id}>
               <p>{title}</p>
               <img src={thumbnail} />
               <p>{`R$${price}`}</p>

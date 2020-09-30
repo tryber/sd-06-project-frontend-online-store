@@ -5,7 +5,7 @@ import * as api from '../services/api';
 class Home extends React.Component {
   constructor() {
     super();
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.state = {
       ProductArray: [],
@@ -13,7 +13,7 @@ class Home extends React.Component {
     };
   }
 
-  async handleClick() {
+  async handleSearch() {
     const { inputQuery } = this.state;
     const resultApi = await api.getProductsFromCategoryAndQuery('categoryId', inputQuery);
     this.setState({ ProductArray: resultApi.results });
@@ -36,7 +36,7 @@ class Home extends React.Component {
         <button
           type="submit"
           data-testid="query-button"
-          onClick={ this.handleClick }
+          onClick={ this.handleSearch }
         >
           BUSCAR
         </button>

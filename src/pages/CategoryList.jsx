@@ -5,15 +5,18 @@ class CategoryList extends React.Component {
     const { categories } = this.props;
     return (
       <div className="category-container">
-        {categories.map((category) => (
-          <form key={category.id}>
-            <input
-              type="checkbox"
-              name={category.id}
-              data-testid="category"
-            />
-          </form>
-        ))}
+        <form>
+          {categories.map((category) => (
+            <label htmlFor={category.id}>{category.name}
+              <input
+                key={category.id}
+                type="checkbox"
+                name={category.id}
+                data-testid="category"
+              />
+            </label>
+          ))}
+        </form>
       </div>
     )
   }

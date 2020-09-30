@@ -72,12 +72,13 @@ class ProductList extends React.Component {
           onClick={() => { if (searchText !== '') this.filterProducts(searchText)}}
         >Search
         </button>
-        <Link to="/pages/ShoppingCart" data-testid="shopping-cart-button">Shopping Cart</Link>
+        <button type="button">
+          <Link to="/pages/ShoppingCart" data-testid="shopping-cart-button">
+            Shopping Cart
+          </Link>
+        </button>
         <h4 data-testid="home-initial-message">{message}</h4>
         { products.length > 0 ? this.verifyProducts(products) : null }
-        {console.log("render")}
-        {console.log(products)}
-        {/* {this.verifyProducts(products)} */}
       </div>
     );
   }

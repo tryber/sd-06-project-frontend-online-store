@@ -47,7 +47,9 @@ class Home extends React.Component {
             onChange={ this.handleSearch }
             onClick={ this.handleProduct }
           />
-          {loadProducts ? <ProductList items={ items } /> : ''}
+          {loadProducts ?
+            (search === '' ? <span>Nenhum produto foi encontrado</span> :
+            <ProductList items={ items } />) : ''}
           </div>
           <div>
             <Link to="/shopping-cart">

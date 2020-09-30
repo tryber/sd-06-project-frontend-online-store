@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import Category from '../../Category';
 
 class Search extends Component {
   render() {
     return (
       <div className="container">
+        <Category />
         <form className="searchForm">
           <input
             id="home-initial-message"

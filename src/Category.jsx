@@ -27,8 +27,8 @@ class Category extends Component {
     return (
       <div>
         {category.map((categoria) => (
-          <label htmlFor={ categoria.id }>
-            <li type="radio" data-testid="category" id={ categoria.id } >
+          <label key={ categoria.id } htmlFor={ categoria.id }>
+            <li data-testid="category" id={ categoria.id }>
               {categoria.name}
             </li>
           </label>

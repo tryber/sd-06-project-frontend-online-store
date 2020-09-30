@@ -7,7 +7,6 @@ import Search from './components/Search/Search';
 function App() {
   return (
     <div className="main-container">
-      <Category />
       <BrowserRouter>
         <Switch>
           <Route path="/" component={Search} />

@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchBar from '../components/SearchBar';
 import { Link } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
 import CartButton from '../components/CartButton';
 
 class Home extends React.Component {

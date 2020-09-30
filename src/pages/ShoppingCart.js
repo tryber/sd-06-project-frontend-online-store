@@ -9,7 +9,7 @@ class ShoppingCart extends React.Component {
           Seu carrinho está vazio
         </h3>
       </div>
-    )
+    );
   }
 }
 

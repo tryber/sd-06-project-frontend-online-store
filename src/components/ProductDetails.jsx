@@ -39,9 +39,12 @@ export default class ProductDetails extends Component {
     return (
       <div>
         <div>
-          <p><span data-testid="product-detail-name">{title}</span> <span>{`Price: R$${price}`}</span></p>
-          <p>{`ID: ${id}`}</p>
-          <p><img src={thumbnail} alt={`${title}PIC`} /></p>
+          <p>
+            <span data-testid="product-detail-name">{ title }</span>
+            <span>{ `Price: R$${price}` }</span>
+          </p>
+          <p>{ `ID: ${id}` }</p>
+          <p><img src={ thumbnail } alt={ `${title}PIC` } /></p>
         </div>
         <div></div>
       </div>
@@ -54,7 +57,7 @@ export default class ProductDetails extends Component {
     return (
       <div>
         <Link to="/" >Voltar</Link>
-        {this.state.loading ? <span>Loading</span> : this.renderDetails()}
+        {this.state.loading ? <span>Loading</span> : this.renderDetails() }
         <Link to="/ShoppingCart" >Carrinho</Link>
       </div>
     )

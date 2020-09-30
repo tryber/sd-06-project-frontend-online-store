@@ -11,7 +11,7 @@ export default class ProductCard extends Component {
         <img src={ thumbnail } alt={`${title} PIC`} />
         <p>{`Price: ${price} R$`}</p>
         <div>
-          <Link to={`/products/${category_id}/${id}`}>Detalhes do produto</Link>          
+          <Link data-testid="product-detail-link" to={`/products/${category_id}/${id}`}>Detalhes do produto</Link>
         </div>
       </div>
     );

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import addCart from '../addCart.svg';
 import './style/home.css';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import * as api from '../services/api';
 import SearchedItems from '../components/SearchedItems';
 import CategoriesSideBar from '../components/CategoriesSideBar';
 
@@ -36,7 +36,7 @@ class Home extends Component {
 
   async fetchSearchedItem() {
     const { searchInput, selectedCategory: Id } = this.state;
-    const searchResult = await getProductsFromCategoryAndQuery(Id, searchInput);
+    const searchResult = await api.getProductsFromCategoryAndQuery(Id, searchInput);
     console.log(searchResult);
 
     if (searchResult.results.length >= 1) {
@@ -56,7 +56,7 @@ class Home extends Component {
     const { searchedItems, spanMessage } = this.state;
 
     return (
-      <div>
+      <div className="home-page">
         <CategoriesSideBar saveSelectedCategory={ this.saveSelectedCategory } />
         <div className="search-container">
           <input

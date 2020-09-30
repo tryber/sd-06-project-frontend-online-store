@@ -33,12 +33,13 @@ class CategoriesSideBar extends React.Component {
       <aside className="side-bar">
         <h3>Categories:</h3>
         {apiCategories.map((category) => (
-          <div key={ category.id } data-testid="category" className="category-container">
+          <div key={ category.id } className="category-container">
             <input
               type="radio"
               name="categories"
               id={ category.id }
               onClick={ this.handleClick }
+              data-testid="category"
             />
             <label htmlFor={ category.id }>{ category.name }</label>
           </div>))}

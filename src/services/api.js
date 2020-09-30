@@ -1,10 +1,10 @@
-export async function getCategories() {
+export function getCategories() {
   const url = 'https://api.mercadolibre.com/sites/MLB/categories';
   return fetch(url)
     .then((response) => response.json());
 }
 
-export async function getProductsFromCategoryAndQuery(categoryId, query) {
+export function getProductsFromCategoryAndQuery(categoryId, query) {
   const url = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}q=${query}`;
   return fetch(url)
     .then((response) => response.json());

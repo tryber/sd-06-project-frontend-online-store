@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import ListCategories from './components/ListCategories';
+
 import ShoppingCartButton from './components/ShoppingCartButton';
 import ProductCard from './ProductCard';
 import { getProductsFromCategoryAndQuery } from './services/api';
@@ -56,6 +59,9 @@ class Home extends Component {
         >
           SEARCH
         </button>
+        <div>
+          <ListCategories />
+        </div>
         <ShoppingCartButton />
         <ProductCard products={ products } isFail={ isFail } />
       </main>

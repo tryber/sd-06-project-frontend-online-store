@@ -1,5 +1,6 @@
 import React from 'react';
 import ProductList from '../components/ProductList';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 
 class Home extends React.Component {
@@ -8,30 +9,57 @@ class Home extends React.Component {
 
     this.state = {
       searchText: '',
-      products: ["produto1", "produto2"],
+      products: [],
+      categoryId: '',
     };
+
+    this.handleClick = this.handleClick.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.fetchApi = this.fetchApi.bind(this);
   }
 
-  fetchApi() {
-
+  handleClick() {
+    this.fetchApi();
   }
 
   handleSearch(event) {
-    this.setState({ products: "produto3" });
+    this.setState({ searchText: event.target.value });
+  }
+
+  async fetchApi() {
+    const { categoryId, searchText } = this.state;
+    const request = await getProductsFromCategoryAndQuery(categoryId, searchText);
+    const { results } = request;
+    this.setState({
+      products: results,
+    });
   }
 
   render() {
+    const { products } = this.state;
     return (
       <div>
         <form>
-          <input data-testid="query-input" type="text" name="research" />
+          <input
+            data-testid="query-input"
+            type="text"
+            name="research"
+            onChange={ this.handleSearch }
+          />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            Pesquisar
+          </button>
         </form>
         <p
           data-testid="home-initial-message"
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <ProductList products={ this.state.products } />
+        <ProductList products={ products } />
       </div>
     );
   }

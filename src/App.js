@@ -11,9 +11,9 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      categoryId: '',
-      query: '',
-      boxCheck: false,
+      // categoryId: '',
+      // query: '',
+      // boxCheck: false,
       categories: [],
     };
   }
@@ -25,21 +25,21 @@ class App extends React.Component {
   }
 
   render() {
+    const  { categories } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
           <Switch>
             <Route exact path="/">
-              <CategoryList categories={this.state.categories} />
+              <CategoryList categories={ categories } />
               <ProductList />
             </Route>
             <Route path="/pages/ShoppingCart" component={ ShoppingCart } />
           </Switch>
         </BrowserRouter>
       </div>
-  )
-
-}
+    );
+  }
 }
 
 export default App;

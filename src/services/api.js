@@ -9,4 +9,4 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   return response;
 }
 
-export default getCategories;
+// export default getCategories;

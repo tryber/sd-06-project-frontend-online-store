@@ -41,7 +41,7 @@ class ProductsList extends Component {
 
     return (
       <div>
-        <section >
+        <section>
           <input type="text" data-testid="query-input" value={value} onChange={this.inputOnChange} />
           <button onClick={this.buttonOnClick} data-testid="query-button">botao</button>
         </section>

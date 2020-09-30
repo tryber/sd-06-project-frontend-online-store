@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import ListCategory from '../components/ListCategory';
 
-import SearchEngine from './SearchEngine';
+import SearchEngine from '../components/SearchEngine';
 
 class Home extends Component {
   render() {

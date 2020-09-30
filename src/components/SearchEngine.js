@@ -1,7 +1,7 @@
 import React from 'react';
 
-import FoundProducts from '../components/FoundProducts';
-import ShoppingCartButton from '../component/ShoppingCartButton';
+import FoundProducts from './FoundProducts';
+import ShoppingCartButton from './ShoppingCartButton';
 
 import * as api from '../services/api';
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as Api from '../services/api';
 
 class ProductsList extends Component {
@@ -48,11 +49,13 @@ class ProductsList extends Component {
         {card.map((product) => {
           const { title, thumbnail, price, id } = product;
           return (
-            <section data-testid='product' key={id}>
-              <p>{title}</p>
-              <img src={thumbnail} />
-              <p>{`R$${price}`}</p>
-            </section>
+            <Link to={`/details/${value}/${id}`} data-testid="product-detail-link">
+              <section key={id}>
+                <p>{title}</p>
+                <img src={thumbnail} />
+                <p>{`R$${price}`}</p>
+              </section>
+            </Link>
           );
         })}
       </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SearchBar from './components/SearchBar';
 import { getCategories, getProductsFromCategoryAndQuery } from './services/api';
-import CartEmptyMessage from './components/Cart';
+import ShoppingCartButton from './components/ShoppingCartButton';
 
 import './App.css';
 
@@ -24,5 +24,5 @@ class App extends React.Component {
       </div>
     );
   }
-}
+  
 export default App;

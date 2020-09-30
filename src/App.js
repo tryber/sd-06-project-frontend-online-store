@@ -6,5 +6,7 @@ function App() {
     <div>
       <ItemList />
     </div>
+  );
+}
 
 export default App;

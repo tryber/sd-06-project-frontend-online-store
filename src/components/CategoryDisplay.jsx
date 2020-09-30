@@ -14,7 +14,7 @@ class CategoryDisplay extends Component {
         this.fetchApi();
     }
 
-    fetchApi = async () => {
+    async fetchApi() {
         const getCategories = await Api.getCategories()
         this.setState({
             category: getCategories,

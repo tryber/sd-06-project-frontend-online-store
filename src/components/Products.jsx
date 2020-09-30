@@ -1,5 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
+import Product from './Product';
 
 class Products extends React.Component {
   constructor() {
@@ -25,12 +26,12 @@ class Products extends React.Component {
     const { data } = this.state;
     return (
       <main className="products-list">
-        <h4 className="products-title">Produtos:</h4>
-        <div>
-          {(data) ? console.log(data.results) : null}
-          {/* {(data.results === null)
+        <h4 className="section-title">Produtos:</h4>
+        <div className="product-items">
+          {/* {(data) ? console.log(data.results) : null} */}
+          {(!data)
             ? 'Loading...'
-            : data.results.map((product) => console.log(product))} */}
+            : data.results.map((product) => <Product key={product.id} data={product} />)}
         </div>
       </main>
     );

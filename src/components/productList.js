@@ -29,11 +29,10 @@ class ProductList extends Component {
       <aside>
         <label
           htmlFor="select"
-          data-testid="category"
         >
-          Selecione  tipo de produto
+          Selecione tipo de produto
           <select id="select">
-            <option aria-label="vazio" data-testid="category" key="vazio" value="" />
+            <option aria-label="vazio" key="vazio" value="" />
             { categories.map((el) => (
               <option
                 data-testid="category"

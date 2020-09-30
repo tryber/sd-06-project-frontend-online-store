@@ -3,7 +3,7 @@ import React from 'react';
 const SearchBar = () => (
   <div>
     <p data-testid="home-initial-message">
-      Digite algum termo  pesquisa ou escolha uma categoria.
+      Digite algum termo de pesquisa ou escolha uma categoria.
     </p>
     <form>
       <input />

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import ProductCard from '../components/ProductCard';
+
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class SearchProduct extends Component {
@@ -43,9 +45,9 @@ class SearchProduct extends Component {
       return;
     }
 
-    const { results: products } = await getProductsFromCategoryAndQuery(categoryId, inputValue);
-
-    console.log(products);
+    const {
+      results: products,
+    } = await getProductsFromCategoryAndQuery(categoryId, inputValue);
 
     this.setState({
       products,
@@ -73,23 +75,27 @@ class SearchProduct extends Component {
               <h1 data-testid="home-initial-message">
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </h1>
-              <input onChange={ (e) => this.saveInputValue(e.target.value) } value={ inputValue } data-testid="query-input" type="text" />
+              <input
+                onChange={ (e) => this.saveInputValue(e.target.value) }
+                value={ inputValue }
+                data-testid="query-input"
+                type="text"
+              />
               <button data-testid="query-button" type="submit">Pesquisar</button>
             </form>
             <div className="product-list">
-              {products.map(({ title, thumbnail, price, id }) => (
-                <div className="card" key={ id } data-testid="product">
-                  <h3 className="product-title">{title}</h3>
-                  <img className="product-img" src={ thumbnail } alt={ title } />
-                  <p className="product-price">
-                    R$
-                    {' '}
-                    {price}
-                  </p>
-                </div>
-              ))}
+              {products[0]
+                ? products.map(({ title, thumbnail, price, id }) => (
+                  <ProductCard
+                    key={ id }
+                    title={ title }
+                    price={ price }
+                    thumbnail={ thumbnail }
+                  />
+                ))
+                : (<p>Nenhum produto foi encontrado</p>
+                )}
             </div>
-
           </div>
         </div>
       </>

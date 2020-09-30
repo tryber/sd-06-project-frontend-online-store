@@ -21,15 +21,16 @@ class CardList extends React.Component {
   handleClick() {
     const { categoryId } = this.state;
     if (categoryId === '') {
-      this.fetchCard();
-    } 
-    console.log('fetchCard')
+      this.fetchCard('');
+    }
   }
 
   handleClickID(catID) {
     this.setState({
       categoryId: catID,
     }, () => {
+      const { categoryId } = this.state;
+      this.fetchCard(categoryId)
       console.log(this.state.categoryId)
     })
   }
@@ -38,9 +39,9 @@ class CardList extends React.Component {
     this.setState({ value: event.target.value });
   }
 
-  async fetchCard() {
-    const { categoryId, value } = this.state;
-    const card = await getProductsFromCategoryAndQuery(categoryId, value);
+  async fetchCard(id) {
+    const { value } = this.state;
+    const card = await getProductsFromCategoryAndQuery(id, value);
     const { results } = card;
     this.setState({
       products: results,

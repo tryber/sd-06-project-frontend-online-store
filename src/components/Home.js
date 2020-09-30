@@ -12,13 +12,11 @@ class Home extends React.Component {
     this.handleChanges = this.handleChanges.bind(this);
     this.handleAPI = this.handleAPI.bind(this);
 
-
     this.state = {
       search: '',
       products: [],
     };
   }
-
 
   handleChanges({ target }) {
     const { name, value } = target;
@@ -65,7 +63,6 @@ class Home extends React.Component {
         <Categories />
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ Cart } alt="shopping cart" />
-
         </Link>
       </div>
     );

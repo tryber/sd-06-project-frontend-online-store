@@ -12,6 +12,7 @@ class SearchProduct extends Component {
     this.fetchCategories = this.fetchCategories.bind(this);
     this.saveInputValue = this.saveInputValue.bind(this);
     this.handleSearchProduct = this.handleSearchProduct.bind(this);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
 
     this.state = {
       categories: [],
@@ -54,6 +55,19 @@ class SearchProduct extends Component {
     });
   }
 
+  async handleCategoryClick(categoryId) {
+    const { inputValue } = this.state;
+
+    const {
+      results: products,
+    } = await getProductsFromCategoryAndQuery(categoryId, inputValue);
+
+    this.setState({
+      products,
+      categoryId,
+    });
+  }
+
   render() {
     const { categories, inputValue, products } = this.state;
     return (
@@ -64,7 +78,15 @@ class SearchProduct extends Component {
             <h2>Categorias</h2>
             <ul>
               {categories.map(({ name, id }) => (
-                <li data-testid="category" key={ id }>{name}</li>
+                <li key={ id }>
+                  <button
+                    data-testid="category"
+                    type="button"
+                    onClick={ () => this.handleCategoryClick(id) }
+                  >
+                    {name}
+                  </button>
+                </li>
               ))}
 
             </ul>

@@ -1,16 +1,18 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import ListCategory from './components/ListCategory';
+import Home from './pages/Home';
 
 import './App.css';
-
-import SearchEngine from './pages/SearchEngine';
 
 function App() {
   return (
     <div className="App">
-      <SearchEngine />
-      <ListCategory />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={ Home } />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

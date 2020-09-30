@@ -4,11 +4,13 @@ function Home() {
   return (
     <main>
       <label
-        htmlFor="input-message"
+        htmlFor="query-input"
         data-testid="home-initial-message"
       >
         Digite algum termo de pesquisa ou escolha uma categoria.
-        <input id="input-message" />
+        <input
+          data-testid="query-input"
+        />
       </label>
     </main>
   );

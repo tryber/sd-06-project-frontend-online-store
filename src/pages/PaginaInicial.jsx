@@ -32,7 +32,6 @@ class HomePage extends React.Component {
       .then((items) => this.setState({
         products: items.results,
       }));
-    // if (this.state.products.length === 0) alert('nao achei');
   }
 
   handleInputChange({ target }) {

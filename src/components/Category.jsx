@@ -6,16 +6,16 @@ class Category extends React.Component {
     const { data } = this.props;
     const { onChecked, handleEventChecked } = this.props;
     return (
-      <div className="radio">
+      <div className="radio" >
         <label htmlFor={ data.id }>
           <input
             id={ data.id }
             type="radio"
             name="categories"
             data-testid="category"
-            onChecked={onChecked}
+            // onChecked={onChecked}
             value={ data.id }
-            onChange={handleEventChecked}
+            onChange={() => handleEventChecked(data.id)}
           />
           {data.name}
         </label>

@@ -17,7 +17,7 @@ class Home extends Component {
     this.state = {
       textInput: "", 
       data: null,
-      checkedId: null,
+      checkedId: "",
     };
   }
 
@@ -26,8 +26,9 @@ class Home extends Component {
     this.setState({ textInput: query });
   }
 
-  handleEventChecked({ target }) {
-    const categoryId = target.value;
+  handleEventChecked(categoryId) {
+    // const categoryId = target.value;
+    console.log(categoryId);
     this.setState({ checkedId: categoryId });
     this.onChecked(categoryId)
   }

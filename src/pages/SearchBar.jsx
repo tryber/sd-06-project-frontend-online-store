@@ -1,4 +1,5 @@
 import React from 'react';
+import ShoppingCartButton from './ShoppingCartButton';
 
 function SearchBar() {
   return (
@@ -7,6 +8,7 @@ function SearchBar() {
         <input type="text" name="input-text" />
         Digite algum termo de pesquisa ou escolha uma categoria.
       </label>
+      <ShoppingCartButton />
     </div>
   );
 }

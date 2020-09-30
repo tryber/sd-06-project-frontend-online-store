@@ -49,7 +49,6 @@ class CategoriesList extends React.Component {
             : categories.map((category) => (
               <li
                 onClick={ this.handleClick }
-                onKeyPress={ this.handleClick }
                 key={ category.id }
                 id={ category.id }
                 data-testid="category"

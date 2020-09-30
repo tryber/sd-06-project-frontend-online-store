@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../services/api';
 import './style_sheets/CategoriesSideBar.css';
+//
 
 class CategoriesSideBar extends React.Component {
   constructor() {

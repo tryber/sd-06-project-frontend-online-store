@@ -37,7 +37,7 @@ class ProductList extends React.Component {
     this.setState(
       { message: myMessage },   // primeiro parametro por causa do Loading
       async () => {             // segundo parametro
-        const products = await Api.getProductsFromCategoryAndQuery(undefined, searchText);
+        const products = (await Api.getProductsFromCategoryAndQuery(undefined, searchText)).results;
         if (products.length === 0) {
           myMessage = 'Nenhum produto foi encontrado';
         } else {
@@ -51,19 +51,19 @@ class ProductList extends React.Component {
   }
 
   verifyProducts(products) {
-    if (products.length > 0) {
+    // if (products.length > 0) {
       return (
         <div className="product-list">
-          {products.map((item) => <ProductCard key={item.id} product={item} />)};
+          {products.map((item) => <ProductCard key={item.id} product={item} />)}
         </div>
       )
-    }
+    // }
   }
 
   render () {
     const { searchText, message, products } = this.state;
     return (
-      <div>
+      <div className="home">
         <input type="text" data-testid="query-input" name="query-input" 
           onChange={this.onChangeInput}>
         </input>
@@ -74,8 +74,10 @@ class ProductList extends React.Component {
         </button>
         <Link to="/pages/ShoppingCart" data-testid="shopping-cart-button">Shopping Cart</Link>
         <h4 data-testid="home-initial-message">{message}</h4>
-
-        {this.verifyProducts(products)}
+        { products.length > 0 ? this.verifyProducts(products) : null }
+        {console.log("render")}
+        {console.log(products)}
+        {/* {this.verifyProducts(products)} */}
       </div>
     );
   }

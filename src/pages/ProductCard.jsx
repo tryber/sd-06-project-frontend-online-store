@@ -4,11 +4,11 @@ class ProductCard extends React.Component {
     render() {
       const { title, thumbnail, price } = this.props.product;
       return (
-        <div className="product-card" data-testid="product">
-          <img alt="Product" src={thumbnail} />
+        <div data-testid="product" className="product-card" >
+          <img alt="Product" src={ thumbnail } />
           <div className="product-card-body">
-            <h6 >{title}</h6>
-            <h6 >{price}</h6>
+            <p>{title}</p>
+            <p>{`R$ ${price}`}</p>
           </div>
         </div>
       );

@@ -3,6 +3,23 @@ import ProductList from '../components/ProductList';
 
 
 class Home extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      searchText: '',
+      products: ["produto1", "produto2"],
+    };
+  }
+
+  fetchApi() {
+
+  }
+
+  handleSearch(event) {
+    this.setState({ products: "produto3" });
+  }
+
   render() {
     return (
       <div>

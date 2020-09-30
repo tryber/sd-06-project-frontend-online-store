@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ProductCard extends React.ComponentComponent {
+class ProductCard extends React.Component {
   render() {
     const { title, price, thumbnail } = this.props.product;
     return (

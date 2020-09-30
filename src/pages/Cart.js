@@ -17,8 +17,4 @@ function Cart() {
   );
 }
 
-<<<<<<< HEAD
 export default Cart;
-=======
-export default Cart;
->>>>>>> 6a451411820fb77b04bd00dcbbef77d604b0850b

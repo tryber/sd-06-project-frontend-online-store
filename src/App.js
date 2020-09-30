@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 
+/* PR Grupo 09 */
+
 function App() {
   return (
     <BrowserRouter>

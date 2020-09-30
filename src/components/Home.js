@@ -2,6 +2,7 @@ import React from 'react';
 import ProductList from './ProductList';
 import Input from './Input';
 import '../styles/Home.css';
+import CategoryList from './CategoryList';
 import * as API from '../services/api';
 
 class Home extends React.Component {
@@ -29,7 +30,10 @@ class Home extends React.Component {
   render() {
     const { search, items } = this.state;
     return (
-      <div>
+      <div data-testid="home-initial-message" className="home">
+        <div>
+          <CategoryList />
+        </div>        
         <span className="home-span">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>

@@ -6,7 +6,7 @@ class Categories extends React.Component {
   constructor() {
     super();
 
-    this.fecthCategories = this.fecthCategories.bind(this);
+    this.fetchCategories = this.fetchCategories.bind(this);
 
     this.state = {
       data: null,
@@ -14,12 +14,12 @@ class Categories extends React.Component {
   }
 
   componentDidMount() {
-    this.fecthCategories();
+    this.fetchCategories();
   }
 
-  async fecthCategories() {
-    const fecthData = await api.getCategories();
-    this.setState({ data: fecthData });
+  async fetchCategories() {
+    const fetchData = await api.getCategories();
+    this.setState({ data: fetchData });
   }
 
   render() {

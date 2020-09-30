@@ -4,6 +4,8 @@ import addCart from '../addCart.svg';
 import './style/home.css';
 import * as api from '../services/api';
 import SearchedItems from '../components/SearchedItems';
+import SearchButton from '../components/SearchButton';
+import SearchInput from '../components/SearchInput';
 import CategoriesSideBar from '../components/CategoriesSideBar';
 
 class Home extends Component {
@@ -58,28 +60,20 @@ class Home extends Component {
     return (
       <div className="home-page">
         <CategoriesSideBar saveSelectedCategory={ this.saveSelectedCategory } />
-        <div className="search-container">
-          <input
-            name="searchInput"
-            className="search-input"
-            type="text"
-            data-testid="query-input"
-            onChange={ this.onSearchTextChange }
-          />
 
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ this.fetchSearchedItem }
-          >
-            Search
-          </button>
+        <div className="items-display">
+
+          <SearchInput onSearchTextChange={ this.onSearchTextChange } />
+
+          <SearchButton fetchSearchedItem={ this.fetchSearchedItem } />
+
 
           {searchedItems === undefined
             ? <span data-testid="home-initial-message">{spanMessage}</span>
             : searchedItems.map((item) => (
               <SearchedItems key={ item.id } item={ item } />
             ))}
+
         </div>
         <div>
           <Link data-testid="shopping-cart-button" to="/Cart">

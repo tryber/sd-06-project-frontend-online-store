@@ -5,13 +5,16 @@
   padding: 15px;
 }
 
-.search-container {
-  margin: 20px auto;
+.items-display {
   display: flex;
-  flex-direction: column;
-  width: 60%;
+  flex-flow: column wrap;
+  width: 100%;
+  align-items: center;
 }
 
-.search-input {
-  width: 50%;
+.search-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
 }
+

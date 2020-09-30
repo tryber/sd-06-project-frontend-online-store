@@ -10,7 +10,7 @@ function App() {
       <Category />
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={Search} />
+          <Route path="/" component={ Search } />
         </Switch>
       </BrowserRouter>
     </div>

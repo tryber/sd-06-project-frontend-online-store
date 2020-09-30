@@ -25,7 +25,7 @@ class App extends React.Component {
   }
 
   render() {
-    const  { categories } = this.state;
+    const { categories } = this.state;
     return (
       <div className="App">
         <BrowserRouter>

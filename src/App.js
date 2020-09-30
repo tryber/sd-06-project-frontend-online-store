@@ -4,13 +4,12 @@ import './App.css';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
-import CategoriesSideBar from './components/CategoriesSideBar';
+
 
 class App extends Component {
   render() {
     return (
       <Router>
-        <CategoriesSideBar />
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route component={ Cart } />

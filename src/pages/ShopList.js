@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import ProductCard from '../components/ProductCard';
+import { ProductCard, CategoryList } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -57,18 +57,10 @@ class ShopList extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const none = 0;
 
     return (
       <section>
-        <section>
-          {(categories.length > none)
-            ? categories
-              .map((category) => (
-                <p data-testid="category" key={ category.id }>{category.name}</p>
-              ))
-            : <span>Loading...</span>}
-        </section>
+        <CategoryList props={categories} />
         <div data-testid="home-initial-message">
           <input data-testid="query-input" type="text" onChange={ this.handleChange } />
           Digite algum termo de pesquisa ou escolha uma categoria.

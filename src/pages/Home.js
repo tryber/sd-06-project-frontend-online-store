@@ -41,7 +41,7 @@ class Home extends React.Component {
     const { products } = this.state;
     return (
       <div className="container">
-      <Categories></Categories>
+        <Categories />
         <div className="searchField">
           <form>
             <input

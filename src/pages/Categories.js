@@ -24,9 +24,9 @@ class Categories extends React.Component {
     const { categories } = this.state;
     return (
       <div>
-        { categories.map((catego) => (
-          <li data-testid="category" key={ catego.id }>
-            { catego.name }
+        { categories.map((itemCatery) => (
+          <li data-testid="category" key={ itemCatery.id }>
+            { itemCatery.name }
           </li>
         )) }
       </div>

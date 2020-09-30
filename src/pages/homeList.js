@@ -2,6 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 
+// constructor(props) {
+//   super()
+//   this.state = {
+//     title: null,
+//     image: null,
+//     price: 0,
+//   }
+// }
+
 function homeList() {
   console.log(api.getCategories());
   console.log(

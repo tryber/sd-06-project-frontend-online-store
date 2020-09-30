@@ -20,10 +20,10 @@ class Home extends Component {
   fetchSearchedItem() {
     this.setState(
       async () => {
-        const itemToBeSearched = this.state.searchInput;
-        const searchResult = await getProductsFromCategoryAndQuery('', itemToBeSearched);
+        const { searchInput } = this.state;
+        const searchResult = await getProductsFromCategoryAndQuery('', searchInput);
 
-        if (searchResult.results.length !== 0) {
+        if (searchResult.results.length >= 1) {
           return this.setState({
             searchedItems: searchResult.results,
             searchInput: '',
@@ -35,8 +35,8 @@ class Home extends Component {
           searchedItems: undefined,
           spanMessage: 'Nenhum produto foi encontrado',
         });
-      }
-    )
+      },
+    );
   }
 
   onSearchTextChange({ target }) {
@@ -50,15 +50,20 @@ class Home extends Component {
     return (
       <div className="search-container">
         <input
-          name="searchInput" className="search-input" type="text"
-          data-testid="query-input" onChange={this.onSearchTextChange}
+          name="searchInput"
+          className="search-input"
+          type="text"
+          data-testid="query-input"
+          onChange={ this.onSearchTextChange }
         />
 
-        <button data-testid="query-button" onClick={this.fetchSearchedItem}>Search</button>
+        <button data-testid="query-button" onClick={ this.fetchSearchedItem }>
+          Search
+        </button>
 
-        {searchedItems === undefined ?
-          <span data-testid="home-initial-message">{spanMessage}</span> :
-          searchedItems.map((item) => <SearchedItems key={item.id} item={item} />)
+        {searchedItems === undefined 
+        ? <span data-testid="home-initial-message">{spanMessage}</span>
+        : searchedItems.map((item) => <SearchedItems key={ item.id } item={ item } />)
         }
       </div>
     );

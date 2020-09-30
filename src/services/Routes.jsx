@@ -5,13 +5,13 @@ import Header from '../pages/Header.js';
 import Cart from '../pages/Cart';
 
 class Routes extends React.Component {
-  render(){
+  render() {
     return (
       <Switch>
-        <Route exact path="/" component={Header}/>
-        <Route path="/Cart" component={Cart}/>
+        <Route exact path="/" component={ Header } />
+        <Route path="/Cart" component={ Cart } />
       </Switch>
-    )
+    );
   }
 }
 export default Routes;

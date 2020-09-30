@@ -60,7 +60,7 @@ class SearchEngine extends React.Component {
           value={ queryInput }
           onChange={ this.handleChange }
         />
-       <ShoppingCartButton />
+        <ShoppingCartButton />
         <button
           data-testid="query-button"
           type="button"

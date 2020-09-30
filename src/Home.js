@@ -1,4 +1,5 @@
 import React from 'react';
+import ShoppingCartButton from './components/ShoppingCartButton';
 
 function Home() {
   return (
@@ -10,6 +11,7 @@ function Home() {
         Digite algum termo de pesquisa ou escolha uma categoria.
         <input id="input-message" />
       </label>
+      <ShoppingCartButton />
     </main>
   );
 }

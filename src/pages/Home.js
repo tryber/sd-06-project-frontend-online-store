@@ -17,6 +17,11 @@ class Home extends Component {
     };
   }
 
+  onSearchTextChange({ target }) {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  }
+
   fetchSearchedItem() {
     this.setState(
       async () => {
@@ -37,11 +42,6 @@ class Home extends Component {
         });
       },
     );
-  }
-
-  onSearchTextChange({ target }) {
-    const { name, value } = target;
-    this.setState({ [name]: value });
   }
 
   render() {

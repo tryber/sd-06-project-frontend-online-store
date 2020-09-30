@@ -1,13 +1,22 @@
 import React from 'react';
 import * as api from '../services/api';
+import { Link } from 'react-router-dom';
 
 class Categories extends React.Component {
   constructor() {
     super();
 
+    this.chooseCategories = this.chooseCategories.bind(this);
+
     this.state = {
       categories: [],
+      categoryId: '',
     };
+  }
+
+  chooseCategories (e) {
+    this.setState({ categoryId: e.target.id})
+    
   }
 
   componentDidMount() {
@@ -23,9 +32,11 @@ class Categories extends React.Component {
     const { categories } = this.state;
     return categories.map((category) => (
       <button
-        data-testid="category"
-        key={ category.id }
-        type="button"
+      id={ category.id }
+      data-testid="category"
+      key={ category.id }
+      type="button"
+      onClick={this.chooseCategories}
       >
         { category.name }
       </button>

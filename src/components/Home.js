@@ -30,8 +30,12 @@ class Home extends React.Component {
         </p>
         <div>
           <input data-testid="query-input" type="text" name="search" value={search} onChange={this.handleChanges} />
-          {/* aqui eu preciso fazer com que os valores digitados do search entrem nas condições dos parâmetros dessa função, e resolva a promise e me traga os resultados */}
+          {/* aqui eu preciso fazer com que os valores digitados do search entrem nas condições dos parâmetros dessa função getProductsFromCategoryAndQuery, e resolva essa promise abaixo */}
           <button data-testid="query-button" onClick={getProductsFromCategoryAndQuery()}>Pesquisar</button>
+          {/* Provavelmente aqui terei que renderizar cada card, recebendo os dados da API e fazendo um map no resultado da promise para gerar cada card com seu título, foto e preço. */}
+          <li data-testid="product">Produto 1</li>
+          <li data-testid="product">Produto 2</li>
+          <li data-testid="product">Produto 3</li>
         </div>
       </div>
     );

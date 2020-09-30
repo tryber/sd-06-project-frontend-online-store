@@ -16,7 +16,6 @@ class CategoryDisplay extends Component {
 
     fetchApi = async () => {
         const getCategories = await Api.getCategories()
-        .then(response => response);
         this.setState({
             category: getCategories,
         })
@@ -25,17 +24,14 @@ class CategoryDisplay extends Component {
     render() {
         const { category } = this.state;
         return (
-            <section className="category-field">
+            <div className="category-field">
                 <p>Categorias</p>
-                <ul>
-                {category.map(category => (
-                    <label htmlFor="category">
-                        {category.name}
-                        <input key={category.id} type="radio" data-testid="category" name="category" />
-                    </label>
+                {category.map(element => (
+                    <ul htmlFor="category" key={element.id} type="radio" data-testid="category">
+                        {element.name}
+                    </ul>
                 ))}
-                </ul>
-            </section>
+            </div>
         )
     }
 }

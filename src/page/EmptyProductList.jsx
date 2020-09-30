@@ -2,6 +2,7 @@ import React from 'react';
 import * as api from '../services/api';
 import '../App.css';
 import ProductList from '../components/ProductList';
+import CategoryFilter from './CategoryFilter';
 
 class EmptyProductList extends React.Component {
   constructor() {
@@ -39,6 +40,7 @@ class EmptyProductList extends React.Component {
       <div className="App">
         <input data-testid="query-input" onChange={this.handleChange} />
         <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
+        <CategoryFilter />
         <div>
           {product ? <ProductList list={product} /> : <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>}
         </div>

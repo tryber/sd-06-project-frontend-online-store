@@ -1,4 +1,5 @@
 import React from 'react';
+import CategoryList from '../functions/list_categories'
 
 class HomePage extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class HomePage extends React.Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
+        <CategoryList />
       </div>
     );
   }

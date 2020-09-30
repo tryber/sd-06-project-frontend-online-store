@@ -1,4 +1,6 @@
 import React from 'react';
+import ShoppingCartButton from './btn_cart';
+import ProductList from './productList';
 
 const SearchBar = () => (
   <div>
@@ -8,6 +10,8 @@ const SearchBar = () => (
     <form>
       <input />
     </form>
+    <ProductList />
+    <ShoppingCartButton />
   </div>
 );
 

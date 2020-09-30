@@ -32,6 +32,11 @@ class Home extends React.Component {
   }
 
   render() {
+    if (this.state.filterId !== "") {
+      const teste = results.filter(result => result.categoryId);
+      console.log(teste)
+      return teste
+    }
     const { searchQuery, products, loading } = this.state;
     const initMsg = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     return (
@@ -41,7 +46,7 @@ class Home extends React.Component {
         </div>
         <div className="store-container">
           <div className="categories-container">
-            <CategoryListener />
+            <CategoryListener handleCategory={this.handleState}/>
           </div>
           <div className="gallery-container">
             <div>

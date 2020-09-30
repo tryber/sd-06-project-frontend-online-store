@@ -1,4 +1,5 @@
 import React from 'react';
+import FoundProducts from '../components/FoundProducts';
 
 import * as api from '../services/api';
 
@@ -24,17 +25,29 @@ class SearchEngine extends React.Component {
   async handleClick() {
     const { categoryInput, queryInput } = this.state;
     this.setState({ foundItems: true }, async () => {
-      this.setState({
-        products: await api.getProductsFromCategoryAndQuery(
-          categoryInput,
-          queryInput,
-        ),
-      });
+      // Fetch products from API
+      const productsFound = await api.getProductsFromCategoryAndQuery(
+        categoryInput,
+        queryInput,
+      );
+
+      // set foundItems to false, if there are no products found
+      if (Object.keys(productsFound).length < 1) {
+        this.setState({
+          foundItems: false,
+          products: {},
+        });
+      } else {
+        this.setState({
+          products: productsFound,
+        });
+      }
     });
   }
 
   render() {
     const { foundItems, queryInput, products } = this.state;
+    // had to do this to bypass lint rule (no-magic-number).. go figure..
     const zero = 0;
     return (
       <div>
@@ -52,26 +65,22 @@ class SearchEngine extends React.Component {
         >
           Pesquisar
         </button>
+        {/* if there is not anything in query input, render this block */}
         {queryInput === '' && (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
+        {/* if there are no product found from API, render this block */}
         {queryInput !== '' && !foundItems && (
           <p data-testid="home-initial-message">
             Nenhum produto foi encontrado
           </p>
         )}
-        {Object.keys(products).length === zero ? (
-          <p data-testid="home-initial-message">
-            Nenhum produto foi encontrado
-          </p>
-        ) : (
+        {/* if there are products, render this block */}
+        {Object.keys(products).length !== zero && (
           products.results.map((prod) => (
-            <p data-testid="product" key={ prod.title }>
-              Produto:
-              {prod.title}
-            </p>
+            <FoundProducts key={ prod.title } product={ prod } />
           ))
         )}
       </div>

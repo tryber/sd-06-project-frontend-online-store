@@ -1,8 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ProductDetails extends Component {
+class ProductDetails extends React.Component {
   render() {
-    return ();
+    const { title, thumbnail, price } = this.props.product;
+    return (
+      <div>
+        <h1 data-testid="product-detail-name"></h1>
+      </div>
+    )
   }
 }
 

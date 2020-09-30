@@ -1,5 +1,6 @@
 import React from 'react';
-import { getCategories } from '../services/api';
+import { getProductsFromQuery } from '../services/api';
+import Card from './Card';
 
 class CardList extends React.Component {
   constructor() {
@@ -7,9 +8,15 @@ class CardList extends React.Component {
 
     this.state = {
       value: '',
+      products: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchCard = this.fetchCard.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.fetchCard();
   }
 
   handleChange(event) {
@@ -17,21 +24,25 @@ class CardList extends React.Component {
   }
 
   async fetchCard() {
-    const cards = await getCategories;
-    console.log(cards);
-    //this.setState({ cards });
+    const { value } = this.state;
+    console.log(value);
+    const cards = await getProductsFromQuery(value);
+    const { results } = cards;
+    this.setState({
+      products: results,
+    });
   }
 
   render() {
+    const { products } = this.state;
     return (
       <div>
         <div>
           <input data-testid="query-input" value={this.state.value} onChange={this.handleChange}></input>
+          <button data-testid="query-button" onClick={() => this.handleClick()}>Pesquisar</button>
         </div>
-        <div data-testid="query-button">
-          <h3>Nome do produto</h3>
-          <img/>
-          <h4>Preço</h4>
+        <div>
+          {products.forEach((product) => <Card title={product.title}/> )}
         </div>
       </div>
     )

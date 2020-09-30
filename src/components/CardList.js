@@ -30,7 +30,7 @@ class CardList extends React.Component {
     const { results } = card;
     this.setState({
       products: results,
-    })
+    });
   }
 
   // async fetchCard() {
@@ -44,18 +44,22 @@ class CardList extends React.Component {
   // }
 
   render() {
-    const { products } = this.state;
+    const { products, value } = this.state;
     return (
       <div>
         <div>
-          <input data-testid="query-input" value={this.state.value} onChange={this.handleChange}></input>
-          <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
+          <input data-testid="query-input" value={ value } onChange={ this.handleChange } />
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.handleClick }
+          >Pesquisar</button>
         </div>
         <div>
-          {products.map((product) => <Card product={ product } key={product.id}/> )}
+          {products.map((product) => <Card product={ product } key={ product.id }/> )}
         </div>
       </div>
-    )
+    );
   }
 }
 

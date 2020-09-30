@@ -20,7 +20,7 @@ class ProductList extends React.Component {
 ProductList.propTypes = {
   items: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
   }).isRequired,
 };

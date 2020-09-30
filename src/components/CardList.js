@@ -30,9 +30,8 @@ class CardList extends React.Component {
       categoryId: catID,
     }, () => {
       const { categoryId } = this.state;
-      this.fetchCard(categoryId)
-      console.log(this.state.categoryId)
-    })
+      this.fetchCard(categoryId);
+    });
   }
 
   handleChange(event) {
@@ -66,9 +65,9 @@ class CardList extends React.Component {
             Pesquisar
           </button>
         </div>
-          <CategoriesList handleID={this.handleClickID}/>
+        <CategoriesList handleID={ this.handleClickID } />
         <div>
-          { products.map((product) => <Card product={ product } key={ product.id } />)}
+          { products.map((product) => <Card product={ product } key={ product.id } />) }
         </div>
       </div>
     );

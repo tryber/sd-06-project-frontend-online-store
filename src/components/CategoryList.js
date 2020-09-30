@@ -6,10 +6,17 @@ class CategoryList extends React.Component {
     super();
     this.fetchCategoryList = this.fetchCategoryList.bind(this);
     this.state = { categories: [] };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.fetchCategoryList();
+  }
+
+  handleClick({ target }) {
+  // const selectedOption  = this.
+    const IdTarget = target.id;
+  // selectedCategory(IdTarget);// função para busca
   }
 
   async fetchCategoryList() {
@@ -23,8 +30,15 @@ class CategoryList extends React.Component {
       <div>
         {categories
           .map((category) => (
-            <label htmlFor="categories" key={ category.id }>
-              <input type="radio" id="input" data-testid="category" name="categories" />
+            <label htmlFor={ category.id } key={ category.id }>
+              <input
+                type="radio"
+                id={ category.id }
+                data-testid="category"
+                name="categories"
+                // checked={ selectedOption } adicionar função selecionadora
+                onClick={ this.handleClick }
+              />
               {category.name}
             </label>
           ))}

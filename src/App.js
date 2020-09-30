@@ -5,15 +5,29 @@ import Home from './components/Home';
 import ShoppingCart from './components/ShoppingCart';
 // import * as api from './services/api';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={ Home } />
-        <Route path="/cart" component={ ShoppingCart } />
-      </Switch>
-    </BrowserRouter>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.state = { cartItems: [] };
+  }
+
+  handleAddToCart(product) {
+    const { cartItems } = this.state;
+    this.setState({ cartItems: [...cartItems, product] });
+  }
+
+  render() {
+    const { cartItems } = this.state;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" render={ () => <Home addToCart={ this.handleAddToCart } /> } />
+          <Route path="/cart" render={ () => <ShoppingCart cartItems={ cartItems } /> } />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

@@ -34,6 +34,7 @@ class Home extends React.Component {
 
   render() {
     const { ProductArray } = this.state;
+    const { addToCart } = this.props;
     return (
       <div>
         <input
@@ -53,7 +54,7 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <CategoryList />
-        <ProductList products={ ProductArray } />
+        <ProductList products={ ProductArray } addFromList={ addToCart } />
         <button
           data-testid="shopping-cart-button"
           type="button"
@@ -66,8 +67,11 @@ class Home extends React.Component {
   }
 }
 
-Home.propTypes = { history: PropTypes.shape({
-  push: PropTypes.func.isRequired,
-}).isRequired };
+Home.propTypes = { 
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Home;

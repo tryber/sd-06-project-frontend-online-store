@@ -4,7 +4,7 @@ import './App.css';
 import ShoppingCart from './components/ShoppingCart';
 import ProductListing from './components/ProductListing';
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Switch>
@@ -14,5 +14,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

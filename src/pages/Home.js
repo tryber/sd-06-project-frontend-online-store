@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/Home.css';
 import ProductList from '../components/ProductList';
 import Input from '../components/Input';
-import '../styles/Home.css';
 import CategoryList from '../components/CategoryList';
+import Carrinho from '../imgs/carrinho.png'
 import * as API from '../services/api';
 
 class Home extends React.Component {
@@ -13,14 +15,16 @@ class Home extends React.Component {
     this.state = {
       search: '',
       items: '',
+      loadProducts: false,
     };
   }
 
   handleProduct() {
     const { search } = this.state;
+    console.log(search);
     API
       .getProductsFromCategoryAndQuery(search)
-      .then((result) => this.setState({ items: result.results }));
+      .then((result) => this.setState({ items: result.results, loadProducts: true }));
   }
 
   handleSearch(event) {
@@ -28,10 +32,10 @@ class Home extends React.Component {
   }
 
   render() {
-    const { search, items } = this.state;
+    const { search, items, loadProducts } = this.state;
     return (
-      <div data-testid="home-initial-message">
-        <div>
+      <div data-testid="home-initial-message" className="home-container">
+        <div className="category-list-container">
           <CategoryList />
         </div>
         <div className="home">
@@ -43,8 +47,15 @@ class Home extends React.Component {
             onChange={ this.handleSearch }
             onClick={ this.handleProduct }
           />
+          {loadProducts ? <ProductList items={ items } /> : ''}
+          </div>
+          <div>
+            <Link to="/shopping-cart">
+              <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
+            </Link>
+          </div>
+          <div>
         </div>
-        <ProductList items={ items } />
       </div>
     );
   }

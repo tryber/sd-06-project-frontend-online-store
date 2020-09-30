@@ -13,6 +13,10 @@ export default class CategoryList extends Component {
     };
   }
 
+  async componentDidMount() {
+    await this.searchApiProducts('MLB5672', '');
+  }
+
   checkInputCategorie({ target }) {
     const { name } = target;
     this.setState({

@@ -24,14 +24,14 @@ class ProductList extends Component {
 
   render() {
     const { categories } = this.state;
-    // console.log(categories)
+    console.log(categories)
     return (
       <aside>
         <label
           htmlFor="select"
           data-testid="category"
         >
-          Selecione  tipo de produto
+          Selecione de tipo de produto
           <select id="select">
             <option aria-label="vazio" data-testid="category" key="vazio" value="" />
             { categories.map((el) => (

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 class ProductList extends React.Component {
@@ -6,12 +7,22 @@ class ProductList extends React.Component {
     return (
       <div data-testid="product">
         <h2>{ title }</h2>
-        <img src={ thumbnail } width="250px" />
-        <p> R${ price } </p>
+        <img src={ thumbnail } alt="item" width="250px" />
+        <p>
+          R$
+          { price }
+        </p>
       </div>
     );
   }
 }
 
+ProductList.propTypes = {
+  items: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default ProductList;

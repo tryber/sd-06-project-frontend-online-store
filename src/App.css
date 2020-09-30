@@ -36,9 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.empty-cart {
-  display:flex;
-  flex-direction: column;
-  margin-left: 45%;
-}

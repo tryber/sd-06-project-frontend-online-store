@@ -13,6 +13,7 @@ class SearchProduct extends Component {
     this.saveInputValue = this.saveInputValue.bind(this);
     this.handleSearchProduct = this.handleSearchProduct.bind(this);
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
 
     this.state = {
       categories: [],
@@ -68,6 +69,19 @@ class SearchProduct extends Component {
     });
   }
 
+  addItemToCart(id) {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const { products } = this.state;
+    const cartItem = products.find((product) => product.id === id);
+    const itemAlreadyInCart = cartItems.findIndex(({ product }) => product.id === id);
+    if (cartItems[itemAlreadyInCart]) {
+      cartItems[itemAlreadyInCart].quantity += 1;
+    } else {
+      cartItems.push({ product: cartItem, quantity: 1 });
+    }
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }
+
   render() {
     const { categories, inputValue, products } = this.state;
     return (
@@ -120,6 +134,13 @@ class SearchProduct extends Component {
                     >
                       Detalhes
                     </Link>
+                    <button
+                      type="button"
+                      data-testid="product-add-to-cart"
+                      onClick={ () => this.addItemToCart(id) }
+                    >
+                      Adicionar
+                    </button>
                   </ProductCard>
 
 

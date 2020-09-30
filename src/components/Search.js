@@ -10,6 +10,7 @@ class Search extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleCategory = this.handleCategory.bind(this);
 
     this.state = {
       searchInput: '',
@@ -33,13 +34,21 @@ class Search extends Component {
     });
   }
 
+  async handleCategory(category) {
+    const { searchInput } = this.state;
+    const resultado = await api.getProductsFromCategoryAndQuery(category, searchInput);
+    this.setState({
+      products: resultado,
+    })
+  }
+
 
   render() {
     const { searchInput, products, seachDone } = this.state;
     const zero = 0;
     return (
       <div className="main-container">
-        <Category />
+        <Category handleCategory={ this.handleCategory } />
         <div className="search-container">
           <form className="searchForm">
             <input

@@ -8,11 +8,11 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={EmptyProductList} />
+            <Route exact path="/" component={ EmptyProductList } />
           </Switch>
         </BrowserRouter>
       </div>
-    )
+    );
   }
 }
 

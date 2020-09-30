@@ -1,6 +1,6 @@
 import React from 'react';
-import * as api from './services/api';
 import { Link } from 'react-router-dom';
+import * as api from './services/api';
 
 class MainPage extends React.Component {
   constructor() {
@@ -30,7 +30,9 @@ class MainPage extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </span>
           <span>
-            <Link to="/shoppingcart" data-testid="shopping-cart-button">Icone de carrinho</Link>
+            <Link to="/shoppingcart" data-testid="shopping-cart-button">
+              Icone de carrinho
+            </Link>
           </span>
         </div>
 

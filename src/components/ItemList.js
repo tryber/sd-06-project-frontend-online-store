@@ -12,9 +12,9 @@
 //     const { products } = this.props;
 //     return (
 //     <section>
-//       {products.map((product) => (
-//       <ItemCard key={product.title} product={product} />
-//       ))}
+//       {search === undefined
+//       ? <span data-testid="home-initial-message">Nenhum produto foi encontrado</span>
+//       : products.map((product) => <ItemCard key={ product.id } product={ product } />)}
 //     </section>
 //     );
 //   }

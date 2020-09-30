@@ -5,7 +5,7 @@ export function getCategories() {
 }
 
 export function getProductsFromCategoryAndQuery(categoryId, query) {
-  const url = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}q=${query}`;
+  const url = `https://api.mercadolibre.com/sites/MLB/search?category=${categoryId}&q=${query}`;
   return fetch(url)
     .then((response) => response.json());
 }

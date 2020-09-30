@@ -1,5 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
+import ItemCard from './ItemCard';
 
 class SearchBar extends React.Component {
   constructor() {
@@ -22,17 +23,15 @@ class SearchBar extends React.Component {
   }
 
   async handleAPI() {
-    const { products, search } = this.state;
-    const result = await api.getProductsFromCategoryAndQuery('', search)
-    console.log(result);
-    console.log(search);
+    const { search } = this.state;
+    const result = await api.getProductsFromCategoryAndQuery('', search);
     this.setState({
-      [products]: result,
+      products: result.results,
     });
   }
 
   render() {
-    const { search } = this.state;
+    const { search, products } = this.state;
 
     return (
       <div>
@@ -54,6 +53,11 @@ class SearchBar extends React.Component {
           >
             Pesquisar
           </button>
+          <div>
+            {search === undefined
+              ? <p data-testid="home-initial-message">Nenhum produto foi encontrado</p>
+              : products.map((item) => <ItemCard key={ item.id } item={ item } />)}
+          </div>
         </div>
       </div>
     );

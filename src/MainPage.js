@@ -1,13 +1,46 @@
 import React from 'react';
+import * as api from './services/api';
 
 class MainPage extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      categories: [],
+    };
+  }
+
+  componentDidMount() {
+    this.renderCategories();
+  }
+
+  async renderCategories() {
+    const categories = await api.getCategories();
+    this.setState({ categories });
+  }
+
   render() {
+    const { categories } = this.state;
     return (
-      <div className="div-search">
-        <input type="text" />
-        <span data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </span>
+      <div>
+        <div className="div-search">
+          <input type="text" />
+          <span data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </span>
+        </div>
+
+        <h2>Categorias:</h2>
+
+        <div className="div-main">
+          <ul className="list-side-categories">
+            {categories.map((categorie) => (
+              <li key={ categorie.id } data-testid="category" className="categories">
+                { categorie.name }
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

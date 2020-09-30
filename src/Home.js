@@ -1,4 +1,5 @@
 import React from 'react';
+import ListCategories from './components/ListCategories';
 import ShoppingCartButton from './components/ShoppingCartButton';
 
 function Home() {
@@ -11,6 +12,9 @@ function Home() {
         Digite algum termo de pesquisa ou escolha uma categoria.
         <input id="input-message" />
       </label>
+      <div>
+        <ListCategories />
+      </div>
       <ShoppingCartButton />
     </main>
   );

@@ -7,11 +7,11 @@ import Cart from './pages/Cart';
 import CategoriesSideBar from './components/CategoriesSideBar';
 import CardDetails from './pages/CardDetails';
 
+
 class App extends Component {
   render() {
     return (
       <Router>
-        <CategoriesSideBar />
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route exact path="/card/:id" component={ CardDetails } />

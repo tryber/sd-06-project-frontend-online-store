@@ -1,10 +1,20 @@
-.search-container {
-  margin: 20px auto;
+
+.home-page {
   display: flex;
-  flex-direction: column;
-  width: 80%;
+  flex-flow: row nowrap;
+  padding: 15px;
 }
 
-.search-input {
-  width: 50%;
+.items-display {
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
+  align-items: center;
 }
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+

@@ -1,18 +1,27 @@
+/* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 
 class Produtos extends Component {
   render() {
-    const { id, title, price, thumbnail } = this.props.product;
+    const { produto } = this.props;
+    const { title, price, thumbnail } = produto;
     return (
       <div data-testid="product">
-        <img src={thumbnail} alt={ title } />
         <h3>{ title }</h3>
+        <img src={ thumbnail } alt={ title } />
         <p>{ price }</p>
       </div>
     );
   }
 }
 
+Produtos.propTypes = {
+  produto: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Produtos;

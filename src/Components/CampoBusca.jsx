@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 
-class CampoBusca extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: '',
-    };
-    this.handleChanges = this.handleChanges.bind(this);
-  }
+// class CampoBusca extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { search: '' };
+//     this.handleChanges = this.handleChanges.bind(this);
+//   }
 
-  handleChanges(event) {
-    this.setState({ search: event.target.value });
-  }
+//   handleChanges(event) {
+//     this.setState({
+//       search: event.target.value,
+//     });
+//   }
 
-  render() {
-    return (
-      <div>
-        <input
-          data-testid="query-input"
-          type="text"
-          name="search"
-          value={ search }
-          onChange={ this.handleChanges }
-        />
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ this.handleAPI }
-        >
-          Pesquisar
-        </button>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <input
+//           data-testid="query-input"
+//           type="text"
+//           value={ search }
+//           onChange={ this.handleChanges }
+//         />
+//         <button
+//           data-testid="query-button"
+//           type="button"
+//           onClick={ () => this.props.onClick(this.state.search) }
+//         >
+//           Pesquisar
+//         </button>
+//       </div>
+//     );
+//   }
+// }
 
-export default CampoBusca;
+// export default CampoBusca;

@@ -4,7 +4,6 @@ import * as api from '../services/api';
 import ProductCard from './ProductCard';
 import Category from '../Category';
 
-
 class Search extends Component {
   constructor() {
     super();
@@ -39,41 +38,44 @@ class Search extends Component {
     const { searchInput, products, seachDone } = this.state;
     const zero = 0;
     return (
-      <div className="container">
+      <div className="main-container">
         <Category />
-        <form className="searchForm">
-          <input
-            id="home-initial-input"
-            type="text"
-            data-testid="query-input"
-            placeholder="Digite aqui o termo da sua busca"
-            // required="required"
-            value={ searchInput }
-            onChange={ this.handleChange }
-          />
-          <button
-            type="button"
-            data-testid="query-button"
-            onClick={ this.handleClick }
-          >
-            Buscar
-          </button>
-          <button type="button">
-            <Link data-testid="shopping-cart-button" to="/ShoppingCart">
-              Carrinho de compras
-            </Link>
-          </button>
-        </form>
-        { searchInput === '' && (
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        )}
-        { Object.keys(products).length !== zero && (seachDone) && (
-          products.results
-            .map((item) => <ProductCard product={ item } key={ item.title } />)
-        )}
-
+        <div className="search-container">
+          <form className="searchForm">
+            <input
+              id="home-initial-input"
+              type="text"
+              data-testid="query-input"
+              placeholder="Digite aqui o termo da sua busca"
+              // required="required"
+              value={ searchInput }
+              onChange={ this.handleChange }
+            />
+            <button
+              type="button"
+              data-testid="query-button"
+              onClick={ this.handleClick }
+            >
+              Buscar
+            </button>
+            <button type="button">
+              <Link data-testid="shopping-cart-button" to="/ShoppingCart">
+                Carrinho de compras
+              </Link>
+            </button>
+          </form>
+          <div className="product-container">
+            { searchInput === '' && (
+              <p data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>
+            )}
+            { Object.keys(products).length !== zero && (seachDone) && (
+              products.results
+                .map((item) => <ProductCard product={ item } key={ item.title } />)
+            )}
+          </div>
+        </div>
       </div>
     );
   }

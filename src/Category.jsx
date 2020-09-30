@@ -24,7 +24,7 @@ class Category extends Component {
     const { category } = this.state;
     console.log(category);
     return (
-      <div>
+      <div className="category-container">
         {category.map((categoria, id) => (
           <div key={id}>
             <label>

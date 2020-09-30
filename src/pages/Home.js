@@ -35,8 +35,8 @@ class Home extends Component {
   }
 
   async fetchSearchedItem() {
-    const { searchInput, selectedCategory } = this.state;
-    const searchResult = await getProductsFromCategoryAndQuery(selectedCategory, searchInput);
+    const { searchInput, selectedCategory: Id } = this.state;
+    const searchResult = await getProductsFromCategoryAndQuery(Id, searchInput);
     console.log(searchResult);
 
     if (searchResult.results.length >= 1) {

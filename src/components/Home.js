@@ -1,16 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProductList from './ProductList';
 import * as api from '../services/api';
+import imgCart from '../img/imgCart.jpg';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.state = {
       ProductArray: [],
       inputQuery: 'query',
     };
+  }
+
+  handleClick() {
+    const { history } = this.props;
+    history.push('/cart');
   }
 
   async handleSearch() {
@@ -44,9 +52,20 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <ProductList products={ ProductArray } />
+        <button
+          data-testid="shopping-cart-button"
+          type="button"
+          onClick={ this.handleClick }
+        >
+          <img src={ imgCart } alt="shopping-cart-button" width="25" />
+        </button>
       </div>
     );
   }
 }
+
+Home.propTypes = { history: PropTypes.shape({
+  push: PropTypes.func.isRequired,
+}).isRequired };
 
 export default Home;

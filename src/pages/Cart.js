@@ -1,7 +1,8 @@
 import React from 'react';
+import '../index.css';
 import CartBtn from '../services/CartBtn';
 
-function Home() {
+function Cart() {
   return (
     <div className="container">
       <div className="searchField">
@@ -9,9 +10,9 @@ function Home() {
           <input type="text" name="research" />
         </form>
         <p
-          data-testid="home-initial-message"
+          data-testid="shopping-cart-empty-message"
         >
-          Digite algum termo de pesquisa ou escolha uma categoria.
+          Seu carrinho está vazio
         </p>
       </div>
       <CartBtn />
@@ -19,4 +20,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Cart;

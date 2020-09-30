@@ -65,6 +65,7 @@ class Home extends React.Component {
         <Categories />
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ Cart } alt="shopping cart" />
+
         </Link>
       </div>
     );

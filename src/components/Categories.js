@@ -37,7 +37,7 @@ class Categories extends React.Component {
       <div>
         <p>{this.returnCategories()}</p>
       </div>
-    );
+    )
   }
 }
 

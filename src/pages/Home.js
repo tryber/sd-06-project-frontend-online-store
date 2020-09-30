@@ -21,7 +21,6 @@ class Home extends React.Component {
 
   handleProduct() {
     const { search } = this.state;
-    console.log(search);
     API
       .getProductsFromCategoryAndQuery(undefined, search)
       .then((result) => this.setState({ items: result.results, loadProducts: true }));

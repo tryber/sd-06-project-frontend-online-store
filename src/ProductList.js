@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { getProductsFromCategoryAndQuery } from './services/api';
-
 import Product from './Product';
 
 class ProductList extends Component {

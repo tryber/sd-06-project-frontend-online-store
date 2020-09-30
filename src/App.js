@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
+import ButtonShoppingCart from './ButtonShoppingCart';
 import Home from './Home';
 import CategoryListener from './CategoryListener';
+
 
 class App extends Component {
   render() {
@@ -13,6 +15,7 @@ class App extends Component {
           <Route path="/categoryListener" component={ CategoryListener } />
         </Switch>
         <CategoryListener />
+        <ButtonShoppingCart />
       </BrowserRouter>
 
     );

@@ -24,7 +24,7 @@ class CategoryList extends React.Component {
         {categories
           .map((category) => (
             <label htmlFor="categories" key={ category.id }>
-              <input type="radio" id="inpu" data-testid="category" />
+              <input type="radio" id="input" data-testid="category" name="categories" />
               {category.name}
             </label>
           ))}

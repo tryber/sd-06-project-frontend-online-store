@@ -14,6 +14,7 @@ class MainPage extends React.Component {
     };
 
     this.searchProduct = this.searchProduct.bind(this);
+    this.searchCategoryProduct = this.searchCategoryProduct.bind(this);
   }
 
   componentDidMount() {
@@ -23,6 +24,13 @@ class MainPage extends React.Component {
   async searchProduct() {
     const { value } = document.getElementById('text-search');
     const { results } = await api.getProductsFromCategoryAndQuery('', value);
+    console.log(results);
+    this.setState({ products: results, loading: false });
+  }
+
+  async searchCategoryProduct({ target }) {
+    const { id } = target;
+    const { results } = await api.getProductsFromCategoryAndQuery(id, '');
     this.setState({ products: results, loading: false });
   }
 
@@ -58,14 +66,26 @@ class MainPage extends React.Component {
 
         <div className="div-main">
           <ul className="list-side-categories">
-            {categories.map((categorie) => (
-              <li key={ categorie.id } data-testid="category" className="categories">
-                { categorie.name }
-              </li>
-            ))}
+            { categories.map((categorie) => (
+              <div key={ categorie.id }>
+                <input
+                  type="radio"
+                  name="categoria"
+                  id={ categorie.id }
+                  onClick={ this.searchCategoryProduct }
+                />
+                <label
+                  htmlFor={ categorie.id }
+                  data-testid="category"
+                  className="categories"
+                >
+                  { categorie.name }
+                </label>
+              </div>
+            )) }
           </ul>
           <div className="div-all-products">
-            {loading ? <span />
+            { loading ? <span />
               : products.map((product) => (
                 <Product
                   key={ product.id }
@@ -73,7 +93,7 @@ class MainPage extends React.Component {
                   image={ product.thumbnail }
                   price={ product.price }
                 />
-              ))}
+              )) }
           </div>
         </div>
 

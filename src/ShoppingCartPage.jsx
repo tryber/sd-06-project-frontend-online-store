@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 class ShoppingCartPage extends React.Component {
-  render () {
+  render() {
     return (
       <p data-testid="shopping-cart-empty-message">
         Seu carrinho está vazio

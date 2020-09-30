@@ -1,6 +1,7 @@
 import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
+import CategoriesList from './CategoriesList';
 
 class CardList extends React.Component {
   constructor() {
@@ -51,6 +52,7 @@ class CardList extends React.Component {
             Pesquisar
           </button>
         </div>
+          <CategoriesList />
         <div>
           { products.map((product) => <Card product={ product } key={ product.id } />)}
         </div>

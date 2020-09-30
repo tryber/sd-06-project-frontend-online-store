@@ -22,6 +22,11 @@ class CategoriesList extends React.Component {
       categories,
       loading: false,
     });
+    console.log(this.state.categories)
+  }
+
+  handleClick({ target }) {
+    console.log(target.value)
   }
 
   render() {
@@ -32,7 +37,7 @@ class CategoriesList extends React.Component {
         <ul>
           { loading ? <Loading />
             : categories.map((category) => (
-              <li key={ category.id } data-testid="category">{ category.name }</li>)) }
+              <li onClick={this.handleClick} key={ category.id } data-testid="category">{ category.name }</li>)) }
         </ul>
       </div>
     );

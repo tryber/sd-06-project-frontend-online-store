@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CartButton from '../components/CartButton';
-import CategoriesList from '../components/CategoriesList';
 import CardList from '../components/CardList';
 
 class Home extends React.Component {
@@ -14,7 +13,6 @@ class Home extends React.Component {
         <Link to="/carrinho">
           <CartButton />
         </Link>
-        <CategoriesList />
         <CardList />
       </div>
     );

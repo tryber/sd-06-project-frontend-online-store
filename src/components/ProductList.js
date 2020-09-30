@@ -3,7 +3,8 @@ import React from 'react';
 
 class ProductList extends React.Component {
   render() {
-    const { title, price, thumbnail } = this.props.items;
+    const { items } = this.props;
+    const { title, price, thumbnail } = items;
     return (
       <div data-testid="product">
         <h2>{ title }</h2>

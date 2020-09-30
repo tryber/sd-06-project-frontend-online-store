@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import ListCategory from '../components/ListCategory';
+
 import SearchEngine from './SearchEngine';
 
 class Home extends Component {
@@ -7,6 +9,7 @@ class Home extends Component {
     return (
       <div>
         <SearchEngine />
+        <ListCategory />
       </div>
     );
   }

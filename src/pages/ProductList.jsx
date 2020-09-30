@@ -9,7 +9,11 @@ class ProductList extends React.Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-        <Link to="/pages/ShoppingCart" data-testid="shopping-cart-button">Shopping Cart</Link>
+        <button type="button">
+          <Link to="/pages/ShoppingCart" data-testid="shopping-cart-button">
+            Shopping Cart
+          </Link>
+        </button>
       </div>
     );
   }

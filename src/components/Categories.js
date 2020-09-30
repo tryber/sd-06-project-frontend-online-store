@@ -1,35 +1,38 @@
 import React from 'react';
-import * as api from '../services/api'
+import * as api from '../services/api';
 
 class Categories extends React.Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       categories: [],
-    }
+    };
   }
 
   componentDidMount() {
-    let categoriesList = [];
+    const categoriesList = [];
     api.getCategories()
-      .then(result => result.forEach((item) => categoriesList.push(item)))
+      .then((result) => result.forEach((item) => categoriesList.push(item)))
       .then(() => this.setState({
-        categories: categoriesList
-      }))
+        categories: categoriesList,
+      }));
   }
-  
-  returnCategories = () => {
-    return this.state.categories.map(category => {
+
+  returnCategories() {
+    const { categories } = this.state;
+    return categories.map((category) => {
       return (
         <button
           data-testid="category"
-          key={category.id}
+          key={ category.id }
+          type="button"
         >
-          {category.name}
+          { category.name }
         </button>
-      )
-    })
+      );
+    });
+
   }
 
   render() {

@@ -33,7 +33,7 @@ class Home extends React.Component {
       <div data-testid="home-initial-message" className="home">
         <div>
           <CategoryList />
-        </div>        
+        </div>
         <span className="home-span">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </span>

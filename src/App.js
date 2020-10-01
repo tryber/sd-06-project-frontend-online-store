@@ -7,11 +7,8 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        <div>
-          <ItemList />
-        </div>
-
         <Switch>
+          <Route exact path="/" component={ ItemList } />
           <Route path="/Cart" component={ Cart } />
         </Switch>
       </BrowserRouter>

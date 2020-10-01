@@ -4,33 +4,33 @@ import * as api from '../services/api';
 import ProductsList from './productsList';
 
 export default class CategoryList extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.checkInputCategorie = this.checkInputCategorie.bind(this);
+    this.searchApiProducts = this.searchApiProducts.bind(this);
     this.state = {
       categoryId: '',
       products: [],
     };
   }
 
-  async componentDidMount() {
-    await this.searchApiProducts('MLB5672', '');
-  }
-
   checkInputCategorie({ target }) {
+    const { query } = this.state;
     const { name } = target;
-    this.setState({
-      categoryId: '',
-    });
     this.setState({
       categoryId: name,
     });
+    this.searchApiProducts(name, query);
   }
 
   async searchApiProducts(categoryId, query) {
-    const array = await api.getProductsFromCategoryAndQuery(categoryId, query);
-    this.setState({
-      products: array.results,
+    await api.getProductsFromCategoryAndQuery(categoryId, query).then((res) => {
+      this.setState(
+        {
+          products: res.results,
+        },
+        console.log(res.results),
+      );
     });
   }
 
@@ -48,8 +48,9 @@ export default class CategoryList extends Component {
         </button>
         <ul>
           {categories.map((element) => (
-            <div data-testid="category" key={ element.id }>
+            <div key={ element.id }>
               <button
+                data-testid="category"
                 type="button"
                 name={ element.id }
                 onClick={ this.checkInputCategorie }
@@ -60,7 +61,7 @@ export default class CategoryList extends Component {
           ))}
         </ul>
         <ul>
-          <ProductsList products={ products } />
+          <ProductsList products={ products } categoryId={ categoryId } />
         </ul>
       </div>
     );

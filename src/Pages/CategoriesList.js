@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import * as api from './services/api';
-import Loading from './Loading';
-import Category from './Category';
+import propTypes from 'prop-types';
+import * as api from '../services/api';
+import Loading from '../services/Loading';
+import Category from '../Components/Category';
 
 export default class CategoriesList extends Component {
   constructor() {
     super();
 
     this.state = {
-      list: {},
+      list: [],
       loading: false,
     };
   }
@@ -27,16 +28,19 @@ export default class CategoriesList extends Component {
   }
 
   render() {
+    const { onClick } = this.props;
     const { list, loading } = this.state;
     if (loading === false) return <Loading />;
     return (
       <ul>
         {list.map((eachCat) => (
           <li key={ eachCat.id }>
-            <Category id={ eachCat.id } category={ eachCat.name } />
+            <Category id={ eachCat.id } category={ eachCat.name } onClick={ onClick } />
           </li>
         ))}
       </ul>
     );
   }
 }
+
+CategoriesList.propTypes = { onClick: propTypes.func.isRequired };

@@ -8,9 +8,9 @@ class Product extends Component {
     return (
       <div>
         <div data-testid="product">
-          <h3>{ title }</h3>
+          <h5>{ title }</h5>
           <img src={ thumbnail } alt="fotografia do produto" />
-          <span>{ price }</span>
+          <span>{`R$: ${price}`}</span>
         </div>
       </div>
     );

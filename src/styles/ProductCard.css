@@ -1,0 +1,23 @@
+article {
+  border: 1px solid black;
+  border-radius: 5%;
+  display: flex;
+  flex-flow: column;
+  min-height: 200px;
+  margin: 10px auto;
+  padding: 10px;
+  width: 20%;
+}
+
+article p:first-of-type {
+  text-align: start;
+}
+
+article p:last-of-type {
+  text-align: end;
+}
+
+article img {
+  margin: auto;
+  width: fit-content;
+}

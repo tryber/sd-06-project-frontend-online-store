@@ -6,12 +6,12 @@ import * as Api from '../services/api';
 
 class Homepage extends React.Component {
   constructor() {
-    super()
+    super();
 
     this.state = {
       searchbar: '',
       items: [],
-    }
+    };
 
     this.handleChanges = this.handleChanges.bind(this);
     // this.handleClick = this.handleClick.bind(this);
@@ -23,7 +23,6 @@ class Homepage extends React.Component {
         items: result.results,
       });
     });
-    console.log(Api.getCategories())
   }
 
   handleChanges({ target }) {
@@ -39,29 +38,43 @@ class Homepage extends React.Component {
   // }
 
   render() {
+    const { searchbar, items } = this.state;
+
     return (
       <div className="search">
         <section className="search-box">
           <label
-            htmlFor="query-input " data-testid="home-initial-message"
+            htmlFor="query-input"
+            data-testid="home-initial-message"
             className="search-text"
-          >Digite algum termo de pesquisa ou escolha uma categoria.
+          >
+            Digite algum termo de pesquisa ou escolha uma categoria.
           </label>
-          <input type="text" name="searchbar" data-testid="query-input"
-            value={this.state.searchbar} onChange={this.handleChanges}
+          <input
+            type="text"
+            name="searchbar"
+            data-testid="query-input"
+            value={ searchbar }
+            onChange={ this.handleChanges }
             className="search-input"
+            id="query-input"
           />
-          <button type="button" onClick={this.handleClick} data-testid="query-button">Buscar</button>
+          <button
+            type="button"
+            onClick={ this.handleClick }
+            data-testid="query-button"
+          >
+            Buscar
+          </button>
         </section>
         <section className="shopping-car-button">
           <ShoppingCartButton />
         </section>
         <CategoryDisplay />
-        <ProductList items={this.state.items} />
+        <ProductList items={ items } />
       </div>
-    )
+    );
   }
-
 }
 
 export default Homepage;

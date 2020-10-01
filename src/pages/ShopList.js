@@ -11,9 +11,11 @@ class ShopList extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.loadCategories = this.loadCategories.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       categories: [],
+      cartList: [],
       query: '',
       products: [],
       selectedCategory: '',
@@ -57,8 +59,12 @@ class ShopList extends React.Component {
     });
   }
 
+  addToCart(product) {
+    this.setState({ cartList: [ ...this.state.cartList, product ] });
+  }
+
   render() {
-    const { categories, loading, products } = this.state;
+    const { categories, loading, products, cartList } = this.state;
 
     return (
       <section>
@@ -74,10 +80,17 @@ class ShopList extends React.Component {
             Pesquisar
           </button>
           <button type="button">
-            <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+            <Link
+              to={ { pathname: '/cart', state: cartList } }
+              data-testid="shopping-cart-button"
+            >Carrinho</Link>
           </button>
           <div className="productsList">
-            <RenderProduct loading={ loading } products={ products } />
+            <RenderProduct
+              loading={ loading }
+              products={ products }
+              addToCart={ this.addToCart }
+            />
           </div>
         </div>
       </section>

@@ -11,52 +11,51 @@ class SearchBar extends Component {
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
 
     this.state = {
-      searchText: '',
       isSearching: false,
       products: [],
-    }
+    };
   }
 
   onSearchTextChange(event) {
     event.preventDefault();
     const searchInput = document.getElementById('search-input');
     const { value } = searchInput;
-    this.setState({ searchText: value, isSearching: true }, async () => {
+    this.setState({ isSearching: true }, async () => {
       const data = await getProductsFromCategoryAndQuery(value);
-      const results = data.results;
-      this.setState({ products: [ ...results, ...this.state.products ] });
+      const { results } = data;
+      this.setState((prevState) => ({ products: [...results, ...prevState.products] }));
     });
   }
 
   render() {
-    const { isSearching, products } = this.state
-    let listOfProducts;
-
-    (isSearching)
-    ? listOfProducts = <ProductsList products={products} />
-    : (
-      listOfProducts = <p data-testid="home-initial-message">
-        Digite algum termo de pesquisa ou escolha uma categoria.
-      </p>
-    );
+    const { isSearching, products } = this.state;
 
     return (
       <div>
         <form>
-          <input id='search-input' data-testid="query-input" placeholder="Search..." />
+          <input id="search-input" data-testid="query-input" placeholder="Search..." />
           <button
             data-testid="query-button"
-            onClick={this.onSearchTextChange}
+            onClick={ this.onSearchTextChange }
+            type="submit"
           >
             Search
           </button>
         </form>
-        
-        {/* Não faria mais sentido se chamar CategoryList? */}
+
+        {/* Não faria mais sentido chamar CategoriesList? */}
         <ProductList />
         {/*  */}
 
-        {listOfProducts}
+        {(isSearching)
+          ? <ProductsList products={ products } />
+          : (
+            (
+              <p data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>
+            )
+          )}
       </div>
     );
   }

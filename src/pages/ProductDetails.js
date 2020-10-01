@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartButton from '../components/CartButton';
+import EvaluationForm from '../components/EvaluationForm';
 import AddToCartButtonDetails from '../components/AddToCartButtonDetails';
-
 
 class ProductDetails extends React.Component {
   render() {
@@ -30,11 +30,11 @@ class ProductDetails extends React.Component {
           </ul>
         </div>
         <AddToCartButtonDetails product={ product } />
+        <EvaluationForm productId={ product.id } />
       </div>
     );
   }
 }
-
 
 ProductDetails.propTypes = {
   location: PropTypes.shape({
@@ -44,6 +44,7 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         attributes: PropTypes.array,
+        id: PropTypes.string,
       }),
     }),
   }).isRequired,

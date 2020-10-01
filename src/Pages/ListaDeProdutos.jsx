@@ -1,43 +1,40 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import CampoBusca from '../Components/CampoBusca';
 import Produtos from '../Components/Produtos';
 import * as Api from '../services/api';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ListaDeProdutos extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       produtos: [],
       categoryId: '',
     };
-    this.handleAPI = this.handleAPI.bind(this);
+    this.fetchAPI = this.fetchAPI.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.handleApi();
+    this.fetchAPI();
   }
 
-  async handleAPI() {
+  async fetchAPI() {
+    const { categoryId, search } = this.state;
     const response = await Api.getProductsFromCategoryAndQuery(
       categoryId,
       search,
     );
-    const { resultado } = response;
+    const { results } = response;
     this.setState({
-      produtos: resultado,
+      produtos: results,
     });
   }
 
   render() {
-    const { produtos } = this.props;
+    const { produtos } = this.state;
     return (
       <div>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
         <CampoBusca onClick={ this.handleClick } />
         <ul>
           {produtos.map((produto) => (
@@ -48,9 +45,5 @@ class ListaDeProdutos extends Component {
     );
   }
 }
-
-ListaDeProdutos.propTypes = {
-  produtos: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default ListaDeProdutos;

@@ -4,7 +4,7 @@ import Product from '../Components/Product';
 import CategoriesList from './CategoriesList';
 import Input from '../Components/Input';
 import Button from '../Components/Button';
-import Teste from '../Components/Teste';
+import Teste from './ProductDetails';
 
 class ProductList extends Component {
   constructor() {

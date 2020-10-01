@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import { ProductCard, CategoryList } from '../components';
+import { CategoryList, RenderProduct } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -9,7 +9,6 @@ class ShopList extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.renderProduct = this.renderProduct.bind(this);
     this.loadCategories = this.loadCategories.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
 
@@ -18,6 +17,7 @@ class ShopList extends React.Component {
       query: '',
       products: [],
       selectedCategory: '',
+      loading: false,
     };
   }
 
@@ -48,28 +48,17 @@ class ShopList extends React.Component {
   }
 
   async handleClick() {
+    this.setState({ loading: true });
     const { query, selectedCategory } = this.state;
     const products = await api.getProductsFromCategoryAndQuery(selectedCategory, query);
     this.setState({
       products: products.results,
+      loading: false,
     });
   }
 
-  renderProduct() {
-    const { products } = this.state;
-    const empty = 0;
-    if (products.length > empty) {
-      return products.map((product) => (
-        <ProductCard
-          key={ product.id }
-          props={ product }
-        />));
-    }
-    return <span>Sem Items</span>;
-  }
-
   render() {
-    const { categories } = this.state;
+    const { categories, loading, products } = this.state;
 
     return (
       <section>
@@ -88,7 +77,7 @@ class ShopList extends React.Component {
             <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
           </button>
           <div className="productsList">
-            { this.renderProduct() }
+            <RenderProduct loading={ loading } products={ products } />
           </div>
         </div>
       </section>

@@ -2,7 +2,7 @@ import React from 'react';
 import * as api from '../services/api';
 
 class Categories extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.fetchCategories = this.fetchCategories.bind(this);
     this.state = {
@@ -22,11 +22,21 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { filterCategory } = this.props;
+
     return (
       <div>
         { categories.map((itemCategory) => (
           <li data-testid="category" key={ itemCategory.id }>
-            { itemCategory.name }
+            <label htmlFor={ filterCategory.id }>
+              <input
+                type="radio"
+                name="category"
+                value={ itemCategory.id }
+                onClick={ (event) => filterCategory(event) }
+              />
+              { itemCategory.name }
+            </label>
           </li>
         )) }
       </div>

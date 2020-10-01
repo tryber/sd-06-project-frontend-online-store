@@ -18,6 +18,11 @@ class Home extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.fetchApi = this.fetchApi.bind(this);
+    this.filterCategory = this.filterCategory.bind(this);
+  }
+
+  filterCategory(event) {
+    this.setState({ categoryId: event.target.value });
   }
 
   handleClick() {
@@ -41,7 +46,7 @@ class Home extends React.Component {
     const { products } = this.state;
     return (
       <div className="container">
-        <Categories />
+        <Categories filterCategory={ this.filterCategory } />
         <div className="searchField">
           <form>
             <input

@@ -19,7 +19,7 @@ class Home extends React.Component {
     this.handleState = this.handleState.bind(this);
   }
 
-  handleSearch() {
+  handleSearch() { // teste
     const { filterId: categoryId, searchQuery: query } = this.state;
     api.getProductsFromCategoryAndQuery(categoryId, query)
       .then((response) => response.results)

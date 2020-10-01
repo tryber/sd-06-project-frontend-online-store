@@ -28,14 +28,14 @@ class EvaluationForm extends React.Component {
     });
   }
 
-  renderText() {
+  renderText(productId) {
+    
     const { email, texto } = this.state;
     const user = document.createElement('span');
     user.innerText = email;
     const textsDiv = document.getElementById('texts-div');
     const comment = document.createElement('p');
     comment.innerText = texto;
-    const productId = "qualquercoisa"
     const evaluation = {
       'email': email,
       'nota': 0,
@@ -53,6 +53,8 @@ class EvaluationForm extends React.Component {
 
   render() {
     const { email, texto } = this.state;
+    const { productId } = this.props;
+    
     return (
       <div id="main-div">
         <fieldset>
@@ -76,7 +78,7 @@ class EvaluationForm extends React.Component {
               value={ texto }
             />
             <br />
-            <button onClick={ this.renderText } type="button">Avaliar</button>
+            <button onClick={ () => { this.renderText(productId) } } type="button">Avaliar</button>
           </form>
         </fieldset>
         <div id="texts-div" />

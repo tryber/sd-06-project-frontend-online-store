@@ -28,7 +28,7 @@ class ProductDetails extends React.Component {
             ))}
           </ul>
         </div>
-        <EvaluationForm />
+        <EvaluationForm productId={ product.id }/>
       </div>
     );
   }

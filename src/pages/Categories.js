@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 
 class Categories extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.fetchCategories = this.fetchCategories.bind(this);
     this.state = {
@@ -43,5 +44,7 @@ class Categories extends React.Component {
     );
   }
 }
+
+Categories.propTypes = { filterCategory: PropTypes.func.isRequired };
 
 export default Categories;

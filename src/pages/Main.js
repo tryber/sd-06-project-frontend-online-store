@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import ProductsList from './ProductsList';
-import CategoriesList from './CategoriesList';
-import ShoppingCartButton from './ShoppingCartButton';
-import SearchBar from './SearchBar';
+import {
+  SearchBar, ProductsList, CategoriesList, ShoppingCartButton,
+} from '../components';
+
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Main extends Component {

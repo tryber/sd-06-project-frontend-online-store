@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Main from './components/Main';
-import CartEmptyMessage from './components/CartEmptyMessage';
+import Main from './pages/Main';
+import CartEmptyMessage from './pages/CartEmptyMessage';
 
 import './App.css';
 

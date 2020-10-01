@@ -22,8 +22,8 @@ export default class ProductList extends Component {
           </p>
         )}
         {/* if there are products, render this block */}
-        {Object.keys(products).length !== zero &&
-          products.results.map((prod) => (
+        {Object.keys(products).length !== zero
+          && products.results.map((prod) => (
             <FoundProducts key={ prod.title } product={ prod } />
           ))}
       </div>
@@ -37,6 +37,6 @@ ProductList.defaultProps = {
 
 ProductList.propTypes = {
   queryInput: PropTypes.string.isRequired,
-  foundItems: PropTypes.bool, 
+  foundItems: PropTypes.bool,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

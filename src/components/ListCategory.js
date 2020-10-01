@@ -25,9 +25,11 @@ class ListCategory extends Component {
 
   handleClick({ target }) {
     const { value } = target;
+    const { onClick } = this.props;
+    const { categorySelected } = this.state;
 
     this.setState({ categorySelected: value }, () => {
-      this.props.onClick(this.state.categorySelected);
+      onClick(categorySelected);
     });
   }
 
@@ -37,14 +39,14 @@ class ListCategory extends Component {
       <div>
         Categorias:
         {categoriesList.map(({ id, name }) => (
-          <div key={id}>
-            <label htmlFor={id} data-testid="category" key={id}>
+          <div key={ id }>
+            <label htmlFor={ id } data-testid="category" key={ id }>
               <input
                 name="category"
-                id={id}
+                id={ id }
                 type="radio"
-                value={id}
-                onClick={this.handleClick}
+                value={ id }
+                onClick={ this.handleClick }
               />
               {name}
             </label>

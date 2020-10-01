@@ -14,6 +14,13 @@ class ProductCard extends React.Component {
         <Link to={ { pathname: `productDetails/${id}`, state: props } }>
           <div data-testid="product-detail-link">View Details</div>
         </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          // onClick={ this.addToCart }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }

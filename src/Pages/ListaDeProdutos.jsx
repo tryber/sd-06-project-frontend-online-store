@@ -42,16 +42,14 @@ class ListaDeProdutos extends Component {
     return (
       <div>
         <ListaCategorias />
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
-        
+       
+
         <CampoBusca onClick={ this.handleClick } />
         <ul>
           { produtos.length === zero ? <p>Nenhum produto foi encontrado</p>
             : produtos.map((produto) => (
               <Produto key={ produto.id } produto={ produto } />
-            ))}
+            )) }
         </ul>
         <Link to="/CarrinhoDeCompras" data-testid="shopping-cart-button"><img src={ carrinho } class="cart-img" /></Link>
       </div>

@@ -50,29 +50,33 @@ class Search extends Component {
       <div className="main-container">
         <Category handleCategory={ this.handleCategory } />
         <div className="search-container">
-          <form className="searchForm">
-            <input
-              id="home-initial-input"
-              type="text"
-              data-testid="query-input"
-              placeholder="Digite aqui o termo da sua busca"
-              // required="required"
-              value={ searchInput }
-              onChange={ this.handleChange }
-            />
-            <button
-              type="button"
-              data-testid="query-button"
-              onClick={ this.handleClick }
-            >
-              Buscar
-            </button>
-            <button type="button">
+          <div className="form-div">
+            <form className="searchForm">
+              <input
+                className="search-input"
+                id="home-initial-input"
+                type="text"
+                data-testid="query-input"
+                placeholder="Digite aqui o termo da sua busca"
+                // required="required"
+                value={ searchInput }
+                onChange={ this.handleChange }
+              />
+              <button
+                className="search-button"
+                type="button"
+                data-testid="query-button"
+                onClick={ this.handleClick }
+              >
+                Buscar
+              </button>
+            </form>
+            <div className="shopping-cart-div">
               <Link data-testid="shopping-cart-button" to="/ShoppingCart">
-                Carrinho de compras
+                <img src="https://www.flaticon.com/svg/static/icons/svg/263/263142.svg" width="50"/>
               </Link>
-            </button>
-          </form>
+            </div>
+          </div>
           <div className="product-container">
             { searchInput === '' && (
               <p data-testid="home-initial-message">

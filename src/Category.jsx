@@ -38,12 +38,12 @@ class Category extends Component {
     return (
       <div className="category-container" >
         {categories.map((categoria, id) => (
-          <div key={id}>
+          <div className="category-element" key={id}>
             <label>
               <input
                 htmlFor={id}
                 data-testid="category"
-                type="radio"
+                type="checkbox"
                 id={categoria.id}
                 onClick={ this.handleClick }
               />

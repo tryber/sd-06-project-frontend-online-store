@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import CampoBusca from '../Components/CampoBusca';
+import ListaCategorias from '../Components/ListaCategorias'
 import Produto from '../Components/Produto';
 import * as Api from '../services/api';
 import carrinho from '../img/shopping-cart.png';
@@ -40,6 +41,11 @@ class ListaDeProdutos extends Component {
     const zero = 0;
     return (
       <div>
+        <ListaCategorias />
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        
         <CampoBusca onClick={ this.handleClick } />
         <ul>
           { produtos.length === zero ? <p>Nenhum produto foi encontrado</p>

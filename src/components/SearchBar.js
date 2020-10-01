@@ -47,7 +47,6 @@ class SearchBar extends Component {
 
           {/* Não faria mais sentido chamar CategoriesList? */}
           <ProductList />
-          {/*  */}
 
           <ShoppingCartButton />
         </div>

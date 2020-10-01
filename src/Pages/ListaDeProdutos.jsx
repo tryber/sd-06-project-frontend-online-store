@@ -42,8 +42,6 @@ class ListaDeProdutos extends Component {
     return (
       <div>
         <ListaCategorias />
-       
-
         <CampoBusca onClick={ this.handleClick } />
         <ul>
           { produtos.length === zero ? <p>Nenhum produto foi encontrado</p>

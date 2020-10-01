@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from './services/api';
 
 class CategoryListener extends React.Component {
@@ -15,12 +16,19 @@ class CategoryListener extends React.Component {
   }
 
   render() {
+    const { handleCategory } = this.props;
     const { apiCategories } = this.state;
     return (
       <div>
         {apiCategories.map((category) => (
-          <div key={ category.id } data-testid="category">
-            <input type="radio" name="categories" id={ category.id } />
+          <div key={ category.id }>
+            <input
+              type="radio"
+              name="filterId"
+              data-testid="category"
+              value={ category.id }
+              onClick={ handleCategory }
+            />
             <label htmlFor={ category.id }>{ category.name }</label>
           </div>))}
       </div>
@@ -29,3 +37,11 @@ class CategoryListener extends React.Component {
 }
 
 export default CategoryListener;
+
+CategoryListener.defaultProps = {
+  handleCategory: null,
+};
+
+CategoryListener.propTypes = {
+  handleCategory: PropTypes.func,
+};

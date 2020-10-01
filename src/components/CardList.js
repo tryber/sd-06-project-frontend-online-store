@@ -2,6 +2,7 @@ import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
 import CategoriesList from './CategoriesList';
+import Cart from '../services/cart';
 
 class CardList extends React.Component {
   constructor(props) {
@@ -16,6 +17,10 @@ class CardList extends React.Component {
     this.fetchCard = this.fetchCard.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.handleClickID = this.handleClickID.bind(this);
+  }
+
+  componentDidMount() {
+    Cart.createStorage();
   }
 
   handleClick() {

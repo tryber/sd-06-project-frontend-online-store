@@ -6,17 +6,10 @@ class CategoryList extends React.Component {
     super();
     this.fetchCategoryList = this.fetchCategoryList.bind(this);
     this.state = { categories: [] };
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     this.fetchCategoryList();
-  }
-
-  handleClick({ target }) {
-  // const selectedOption  = this.
-    const IdTarget = target.id;
-  // selectedCategory(IdTarget);// função para busca
   }
 
   async fetchCategoryList() {
@@ -26,6 +19,7 @@ class CategoryList extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const { handleCategory } = this.props;
     return (
       <div>
         {categories
@@ -36,8 +30,8 @@ class CategoryList extends React.Component {
                 id={ category.id }
                 data-testid="category"
                 name="categories"
-                // checked={ selectedOption } adicionar função selecionadora
-                onClick={ this.handleClick }
+                // checked={ true }
+                onClick={ handleCategory }
               />
               {category.name}
             </label>

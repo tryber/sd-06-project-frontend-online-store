@@ -11,9 +11,11 @@ class Home extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleCategory = this.handleCategory.bind(this);
     this.state = {
       ProductArray: [],
       inputQuery: 'query',
+      idCategory: 'categoryId',
     };
   }
 
@@ -23,13 +25,18 @@ class Home extends React.Component {
   }
 
   async handleSearch() {
-    const { inputQuery } = this.state;
-    const resultApi = await api.getProductsFromCategoryAndQuery('categoryId', inputQuery);
+    const { inputQuery, idCategory } = this.state;
+    const resultApi = await api.getProductsFromCategoryAndQuery(idCategory, inputQuery);
     this.setState({ ProductArray: resultApi.results });
   }
 
   handleChange({ target }) {
     this.setState({ inputQuery: target.value });
+  }
+
+  handleCategory({ target }) {
+    const IdTarget = target.id;
+    this.setState({ idCategory: IdTarget });
   }
 
   render() {
@@ -52,7 +59,7 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoryList />
+        <CategoryList handleCategory={ this.handleCategory } />
         <ProductList products={ ProductArray } />
         <button
           data-testid="shopping-cart-button"

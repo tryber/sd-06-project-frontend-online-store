@@ -24,7 +24,7 @@ export default class Product extends Component {
   async searchApiProducts() {
     const { category, id } = this.state;
     await api
-      .getProductsFromCategoryAndQuery(category)
+      .getProductsFromCategoryAndQuery(category, '')
       .then((res) => res.results.filter((element) => element.id === id))
       .then((res) => {
         this.setState({

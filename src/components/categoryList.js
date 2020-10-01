@@ -63,7 +63,7 @@ export default class CategoryList extends Component {
           ))}
         </ul>
         <ul>
-          <ProductsList products={ products } categoryId={ categoryId } />
+          <ProductsList products={ products } categoryId={ categoryId } query={ query } />
         </ul>
       </div>
     );

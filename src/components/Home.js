@@ -20,7 +20,7 @@ class Home extends React.Component {
       selectedCategoryArray: [],
     };
   }
-  
+
   componentDidMount() {
     const categoriesList = [];
     api.getCategories()
@@ -29,7 +29,7 @@ class Home extends React.Component {
         categories: categoriesList,
       }));
   }
-  
+
   handleChanges({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });

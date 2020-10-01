@@ -76,16 +76,16 @@ class MainPage extends React.Component {
           <ul className="list-side-categories">
             { categories.map((categorie) => (
               <div className="categories" key={ categorie.id }>
-                <input
-                  type="radio"
-                  name="categoria"
-                  id={ categorie.id }
-                  onClick={ this.searchCategoryProduct }
-                />
                 <label
                   htmlFor={ categorie.id }
                   data-testid="category"
                 >
+                  <input
+                    type="radio"
+                    name="categoria"
+                    id={ categorie.id }
+                    onClick={ this.searchCategoryProduct }
+                  />
                   { categorie.name }
                 </label>
               </div>
@@ -96,9 +96,11 @@ class MainPage extends React.Component {
               : products.map((product) => (
                 <Product
                   key={ product.id }
+                  id={ product.id }
                   title={ product.title }
                   image={ product.thumbnail }
                   price={ product.price }
+                  product={ product }
                 />
               )) }
           </div>

@@ -13,7 +13,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={ Home } />
-          <Route exact path="/card/:id" component={ CardDetails } />
+          <Route path="/card/:id" component={ CardDetails } />
           <Route path="/cart" component={ Cart } />
           <Route component={ NotFound } />
         </Switch>

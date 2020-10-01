@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
 
@@ -26,7 +26,7 @@ export default class Home extends Component {
   render() {
     const { products, emptyList } = this.state;
     return (
-      <div>
+      <Fragment>
         <form>
           <label
             htmlFor="search-input"
@@ -42,10 +42,10 @@ export default class Home extends Component {
               data-testid="query-button"
               onClick={this.onSearchTextSubmit}
             >Search</button>
-            <ProductList products={products} emptyList={emptyList}/>
           </label>
         </form>
-      </div>
+        <ProductList products={products} emptyList={emptyList}/>
+      </Fragment>
     );
   }
 }

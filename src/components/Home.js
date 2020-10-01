@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ItemCard from './ItemCard';
-import Categories from './Categories';
 import Cart from '../images/shopping-cart.png';
 
 class Home extends React.Component {
@@ -11,14 +10,26 @@ class Home extends React.Component {
 
     this.handleChanges = this.handleChanges.bind(this);
     this.handleAPI = this.handleAPI.bind(this);
+    this.returnCategories = this.returnCategories.bind(this);
+    this.chooseCategories = this.chooseCategories.bind(this);
 
 
     this.state = {
       search: '',
       products: [],
+      categories: [],
+      selectedCategoryArray: [],
     };
   }
 
+  componentDidMount() {
+    const categoriesList = [];
+    api.getCategories()
+      .then((result) => result.forEach((item) => categoriesList.push(item)))
+      .then(() => this.setState({
+        categories: categoriesList,
+      }));
+  }
 
   handleChanges({ target }) {
     const { name, value } = target;
@@ -33,9 +44,28 @@ class Home extends React.Component {
     });
   }
 
-  render() {
-    const { search, products } = this.state;
+  returnCategories() {
+    const { categories } = this.state;
+    return categories.map((category) => (
+      <button
+        data-testid="category"
+        key={ category.id }
+        type="button"
+        id={ category.id }
+        onClick={ this.chooseCategories }
+      >
+        { category.name }
+      </button>
+    ));
+  }
 
+  async chooseCategories({ target }) {
+    const result = await api.getProductsFromCategoryAndQuery(target.id, '');
+    this.setState({ selectedCategoryArray: result.results });
+  }
+
+  render() {
+    const { search, products, selectedCategoryArray } = this.state;
     return (
       <div>
         <p data-testid="home-initial-message">
@@ -62,10 +92,13 @@ class Home extends React.Component {
               : products.map((item) => <ItemCard key={ item.id } product={ item } />)}
           </div>
         </div>
-        <Categories />
+        <p>{this.returnCategories()}</p>
+        <div>
+          {selectedCategoryArray
+            .map((product) => <ItemCard key={ product.id } product={ product } />)}
+        </div>
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ Cart } alt="shopping cart" />
-
         </Link>
       </div>
     );

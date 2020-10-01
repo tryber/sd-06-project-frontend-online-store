@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as Api from '../services/api'; 
+import * as Api from '../services/api';
 
 class Categories extends Component {
   constructor() {
@@ -9,7 +9,7 @@ class Categories extends Component {
       name: [],
     };
   }
-  
+
   componentDidMount() {
     this.fetchProducts();
   }
@@ -22,12 +22,28 @@ class Categories extends Component {
     });
   }
 
+  handleClick(callback, query) {
+    callback(query);
+  }
+
   render() {
     const { name } = this.state;
+    const { handleRadioClick } = this.props;
+    
     return (
       <nav>
         <ul>
-          {name.map(names => <li data-testid="category" key={names.id}>{names.name}</li>)}
+          {name.map(names => (
+            <label htmlFor={names.id} key={names.id}>
+              <input
+                type="radio" id={names.id}
+                name="category"
+                data-testid="category"
+                onClick={() => this.handleClick(handleRadioClick, `${names.id}`)}
+              />
+              {names.name}
+            </label>
+          ))}
         </ul>
       </nav>
     );

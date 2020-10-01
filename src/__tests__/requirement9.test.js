@@ -13,7 +13,7 @@ api.getProductsFromCategoryAndQuery.mockImplementation(
   () => Promise.resolve(mockedQueryResult),
 );
 
-describe(`Adicionar um produto ao carrinho a partir de sua tela de exibição
+describe.skip(`Adicionar um produto ao carrinho a partir de sua tela de exibição
           detalhada`, () => {
   it('Adiciona um produto ao carrinho da sua tela de detalhes', async () => {
     render(<App />);

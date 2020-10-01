@@ -13,7 +13,7 @@ api.getProductsFromCategoryAndQuery.mockImplementation(
   () => Promise.resolve(mockedQueryResult),
 );
 
-describe(`Avaliar e comentar acerca de um produto em sua tela de exibição
+describe.skip(`Avaliar e comentar acerca de um produto em sua tela de exibição
           detalhada`, () => {
   it('Avalia um produto na sua tela de detalhes', async () => {
     const evaluationContent = `Esta é uma avaliação sobre o produto realizada na

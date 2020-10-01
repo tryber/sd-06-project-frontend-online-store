@@ -68,7 +68,7 @@ class ShopList extends React.Component {
     const { categories, loading, products, cartList } = this.state;
 
     return (
-      <section>
+      <section className="wrapper-category-shoplist">
         <CategoryList categories={ categories } handleSelect={ this.handleSelect } />
         <div data-testid="home-initial-message">
           <input data-testid="query-input" type="text" onChange={ this.handleChange } />

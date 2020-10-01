@@ -35,7 +35,9 @@ class ShopCart extends React.Component {
 }
 
 ShopCart.propTypes = {
-
+  location: PropTypes.shape({
+    state: PropTypes.arrayOf(PropTypes.any).isRequired,
+  }).isRequired,
 };
 
 export default ShopCart;

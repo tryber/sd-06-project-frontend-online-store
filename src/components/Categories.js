@@ -1,6 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
-import { Link } from 'react-router-dom';
+
 
 class Categories extends React.Component {
   constructor() {
@@ -12,11 +12,6 @@ class Categories extends React.Component {
       categories: [],
       categoryId: '',
     };
-  }
-
-  chooseCategories (e) {
-    this.setState({ categoryId: e.target.id})
-    
   }
 
   componentDidMount() {
@@ -32,10 +27,10 @@ class Categories extends React.Component {
     const { categories } = this.state;
     return categories.map((category) => (
       <button
-      id={ category.id }
       data-testid="category"
       key={ category.id }
       type="button"
+      id={ category.id }
       onClick={this.chooseCategories}
       >
         { category.name }
@@ -43,10 +38,19 @@ class Categories extends React.Component {
     ));
   }
 
+  chooseCategories ({ target }) {
+    this.setState({ categoryId: target.id})
+    fetch(`https://api.mercadolibre.com/sites/MLB/search?category=${target.id}`)
+      .then((response) => response.json())
+      .then((result) => console.log(result.results))
+      
+  }
+
   render() {
     return (
       <div>
         <p>{this.returnCategories()}</p>
+        {/* RETORNAR AQUI A LISTA POR CATEGORIA */}
       </div>
     );
   }

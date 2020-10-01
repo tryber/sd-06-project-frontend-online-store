@@ -9,7 +9,7 @@ class ProductDetails extends React.Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ data: this.getLocalStorageProduct()})
   }
 

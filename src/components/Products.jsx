@@ -12,7 +12,7 @@ class Products extends React.Component {
             ? 'Loading...'
             : (data.results.length === 0)
               ? 'Nenhum produto encontrado.'
-              : data.results.map((product) => <Product key={product.id} data={product} />)}
+              : data.results.map((product) => <Product bt="home" key={product.id} data={product} />)}
         </div>
       </main>
     );

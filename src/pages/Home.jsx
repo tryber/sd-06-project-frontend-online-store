@@ -38,7 +38,7 @@ class Home extends Component {
 
   async fetchProducts({ categoryId, query }) {
     const fetchData = await api.getProductsFromCategoryAndQuery({ categoryId, query });
-    this.setState({ data: fetchData, checkedLoad: false });
+    this.setState({ data: fetchData });
   }
 
   render() {

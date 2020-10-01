@@ -37,7 +37,7 @@ class ListCategories extends React.Component {
             <input
               type="radio"
               id={ categ.id }
-              name={ categ.id }
+              name="category"
               data-testid="category"
               onClick={ (event) => {
                 this.handleClick(event);

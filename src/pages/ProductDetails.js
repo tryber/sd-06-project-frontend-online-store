@@ -27,7 +27,7 @@ class ProductDetails extends React.Component {
       const { id } = match.params;
       const product = await api.getProduct(id);
       this.setState({ product, loading: false });
-    } catch(e) {
+    } catch (e) {
       return (e, 'error fetching product details');
     }
   }

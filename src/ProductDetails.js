@@ -5,7 +5,7 @@ function ProductDetails(props) {
   const { location: { state: { product } } } = props;
   return (
     <div>
-      {product.title}
+      <p data-testid="product-detail-name">{product.title}</p>
       <br />
       {product.price}
     </div>);

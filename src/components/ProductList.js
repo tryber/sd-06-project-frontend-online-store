@@ -4,11 +4,11 @@ import ProductItem from './ProductItem';
 
 class ProductList extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, query } = this.props;
     return (
       <div>
         {products
-          .map((product) => <ProductItem key={ product.id } product={ product } />)}
+          .map((product) => <ProductItem key={ product.id } product={ product } query={ query } />)}
       </div>
     );
   }

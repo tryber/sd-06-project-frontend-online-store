@@ -33,7 +33,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { ProductArray } = this.state;
+    const { ProductArray, inputQuery } = this.state;
     return (
       <div>
         <input
@@ -53,7 +53,7 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <CategoryList />
-        <ProductList products={ ProductArray } />
+        <ProductList products={ ProductArray } query={ inputQuery } />
         <button
           data-testid="shopping-cart-button"
           type="button"

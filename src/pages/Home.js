@@ -22,6 +22,13 @@ class Home extends React.Component {
     };
   }
 
+  componentDidUpdate() {
+    const { filter } = this.state;
+    API
+      .getProductsFromCategoryAndQuery(filter)
+      .then((result) => this.setState({ items: result.results }));
+  }
+
   handleProduct() {
     const { search } = this.state;
     API
@@ -33,13 +40,8 @@ class Home extends React.Component {
     this.setState({ search: event.target.value });
   }
 
-  async filterCategory({ target }) {
+  filterCategory({ target }) {
     this.setState({ filter: target.id });
-
-    const { filter } = this.state;
-    API
-      .getProductsFromCategoryAndQuery(filter)
-      .then((result) => this.setState({ items: result.results }));
   }
 
   renderProducts() {

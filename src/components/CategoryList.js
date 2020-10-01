@@ -27,10 +27,9 @@ class CategoryList extends Component {
   renderListItem(id, name) {
     const { filterCategory, filter } = this.props;
     return (
-      <div>
+      <div key={ id }>
         <input
           type="radio"
-          key={ id }
           name="input-radio"
           id={ id }
           filter={ filter }

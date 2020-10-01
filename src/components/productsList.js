@@ -15,7 +15,7 @@ export default class ProductsList extends Component {
               $ :
               {element.price}
             </p>
-            <Link to={ `/${categoryId}/${element.id}` }>
+            <Link data-testid="product-detail-link" to={ `/${categoryId}/${element.id}` }>
               <h2>Vejá Mais</h2>
             </Link>
           </div>

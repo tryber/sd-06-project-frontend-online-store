@@ -31,7 +31,6 @@ class CategoryList extends React.Component {
                 id={ category.id }
                 data-testid="category"
                 name="categories"
-                // checked={ true }
                 onClick={ handleCategory }
               />
               {category.name}

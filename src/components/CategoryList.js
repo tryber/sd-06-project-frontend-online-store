@@ -22,17 +22,21 @@ class CategoryList extends React.Component {
 
     return (
       <section>
-      {(categories.length > empty)
-        ? categories
-          .map((category) => (
-            <label htmlFor={category.id} key={ category.id }>
-              <input
-                type="radio" name="category" id={category.id} data-testid="category"
-                onChange={this.handleChange}
-              />
-            {category.name}</label>
-          ))
-        : <span>Loading...</span>}
+        {(categories.length > empty)
+          ? categories
+            .map((category) => (
+              <label htmlFor={ category.id } key={ category.id }>
+                <input
+                  type="radio"
+                  name="category"
+                  id={ category.id }
+                  data-testid="category"
+                  onChange={ this.handleChange }
+                />
+                {category.name}
+              </label>
+            ))
+          : <span>Loading...</span>}
       </section>
     );
   }

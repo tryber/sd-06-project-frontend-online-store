@@ -11,9 +11,11 @@ class Main extends Component {
     super();
 
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
+    this.onCategoriesSelectChange = this.onCategoriesSelectChange.bind(this);
 
     this.state = {
       products: [],
+      selectedCategory: '',
     };
   }
 
@@ -27,14 +29,29 @@ class Main extends Component {
     });
   }
 
+  onCategoriesSelectChange({ target }) {
+    const { value } = target;
+    this.setState(async () => {
+      const data = await getProductsFromCategoryAndQuery('', value);
+      const { results } = data;
+      this.setState({
+        products: [...results],
+        selectedCategory: value,
+      });
+    });
+  }
+
   render() {
-    const { products } = this.state;
+    const { products, selectedCategory } = this.state;
 
     return (
       <div>
         <div>
           <SearchBar onSearchTextSubmit={ this.onSearchTextSubmit } />
-          <CategoriesList />
+          <CategoriesList
+            selectedCategory={ selectedCategory }
+            onCategoriesSelectChange={ this.onCategoriesSelectChange }
+          />
           <ShoppingCartButton />
         </div>
 

@@ -23,19 +23,25 @@ class CategoriesList extends Component {
 
   render() {
     const { categories } = this.state;
-
+    const { onCategoriesSelectChange, selectedCategory } = this.props;
+    // console.log('selectedCat:', selectedCategory);
     return (
       <aside>
         <label
           htmlFor="select"
         >
           Selecione tipo de produto
-          <select id="select">
+          <select
+            id="select"
+            onChange={ onCategoriesSelectChange }
+            value={ selectedCategory }
+          >
             <option aria-label="vazio" key="vazio" value="" />
             { categories.map((el) => (
               <option
                 data-testid="category"
                 key={ el.id }
+                value={ el.id }
               >
                 {el.name}
               </option>)) }

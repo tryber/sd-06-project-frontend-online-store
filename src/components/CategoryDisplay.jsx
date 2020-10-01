@@ -34,7 +34,9 @@ class CategoryDisplay extends Component {
 
     handleSelect({ target }) {
         const { id } = target;
+        const { query } = this.props;
         this.setState({ categoryID: id});
+        this.handleClick(id, query);
     }
 
     async handleClick(categoryID, query) {

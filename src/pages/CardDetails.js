@@ -32,12 +32,12 @@ class CardDetails extends React.Component {
   }
 
   render() {
-    const { product: { thumbnail, name, price } } = this.state;
+    const { product: { thumbnail, title, price } } = this.state;
 
     return (
       <div data-testid="product-detail-name">
         <img src={ thumbnail } alt="product thumbnail" />
-        <p>{ name }</p>
+        <p>{ title }</p>
         <p>{ price }</p>
       </div>
     );

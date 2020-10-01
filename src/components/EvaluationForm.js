@@ -1,5 +1,5 @@
 import React from 'react';
-import ContortoEstrela from './ContornoEstrela';
+import ContortoEstrelaComponente from './ContornoEstrela';
 
 class EvaluationForm extends React.Component {
   constructor() {
@@ -10,12 +10,20 @@ class EvaluationForm extends React.Component {
     };
     this.textChange = this.textChange.bind(this);
     this.renderText = this.renderText.bind(this);
+    this.clearText = this.clearText.bind(this);
   }
 
   textChange({ target }) {
     const { name, value } = target;
     this.setState({
       [name]: value,
+    });
+  }
+
+  clearText() {
+    this.setState({
+      email: '',
+      texto: '',
     });
   }
 
@@ -28,7 +36,8 @@ class EvaluationForm extends React.Component {
     evaluation.innerText = texto;
     return (
       textsDiv.appendChild(user),
-      textsDiv.appendChild(evaluation)
+      textsDiv.appendChild(evaluation),
+      this.clearText()
     );
   }
 
@@ -38,11 +47,7 @@ class EvaluationForm extends React.Component {
       <div id="main-div">
         <fieldset>
           <form>
-            <ContortoEstrela />
-            <ContortoEstrela />
-            <ContortoEstrela />
-            <ContortoEstrela />
-            <ContortoEstrela />
+            <ContortoEstrelaComponente />
             <br />
             <input
               type="email"
@@ -61,8 +66,8 @@ class EvaluationForm extends React.Component {
               value={ texto }
             />
             <br />
+            <button onClick={ this.renderText } type="button">Avaliar</button>
           </form>
-          <button onClick={ this.renderText } type="button">Avaliar</button>
         </fieldset>
         <div id="texts-div" />
       </div>

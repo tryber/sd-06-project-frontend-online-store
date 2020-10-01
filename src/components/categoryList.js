@@ -6,11 +6,13 @@ import ProductsList from './productsList';
 export default class CategoryList extends Component {
   constructor(props) {
     super(props);
+    const { query } = this.props;
     this.checkInputCategorie = this.checkInputCategorie.bind(this);
     this.searchApiProducts = this.searchApiProducts.bind(this);
     this.state = {
       categoryId: '',
       products: [],
+      query,
     };
   }
 

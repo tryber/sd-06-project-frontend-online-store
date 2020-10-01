@@ -26,11 +26,14 @@ class CategoryDisplay extends Component {
         return (
             <div className="category-field">
                 <p>Categorias</p>
+                <ul>
                 {category.map(element => (
-                    <ul htmlFor="category" key={element.id} type="radio" data-testid="category">
-                        {element.name}
-                    </ul>
+                    <section key={element.name}>
+                        <input key={element.id} type="checkbox" data-testid="category" />
+                        <label htmlFor="category" key={element.name}>{element.name}</label>
+                    </section>
                 ))}
+                </ul>
             </div>
         )
     }

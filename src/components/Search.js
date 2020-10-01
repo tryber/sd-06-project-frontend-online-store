@@ -11,6 +11,7 @@ class Search extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
+    this.handleClickCategory = this.handleClickCategory.bind(this);
 
     this.state = {
       searchInput: '',
@@ -34,12 +35,19 @@ class Search extends Component {
     });
   }
 
+  handleClickCategory(categoryId) {
+    this.setState({
+      categoryInput: categoryId,
+      seachDone: true,
+    });
+  }
+
   async handleCategory(category) {
     const { searchInput } = this.state;
     const resultado = await api.getProductsFromCategoryAndQuery(category, searchInput);
     this.setState({
       products: resultado,
-    })
+    });
   }
 
 
@@ -48,7 +56,10 @@ class Search extends Component {
     const zero = 0;
     return (
       <div className="main-container">
-        <Category handleCategory={ this.handleCategory } />
+        <Category
+          handleCategory={ this.handleCategory }
+          handleClickCategory={ this.handleClickCategory }
+        />
         <div className="search-container">
           <div className="form-div">
             <form className="searchForm">
@@ -73,12 +84,16 @@ class Search extends Component {
             </form>
             <div className="shopping-cart-div">
               <Link data-testid="shopping-cart-button" to="/ShoppingCart">
-                <img src="https://www.flaticon.com/svg/static/icons/svg/263/263142.svg" width="50"/>
+                <img
+                  src="https://www.flaticon.com/svg/static/icons/svg/263/263142.svg"
+                  alt="Carrinho de compra"
+                  width="50"
+                />
               </Link>
             </div>
           </div>
           <div className="product-container">
-            { searchInput === '' && (
+            { !seachDone && (
               <p data-testid="home-initial-message">
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </p>

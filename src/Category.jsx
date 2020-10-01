@@ -23,8 +23,9 @@ class Category extends Component {
   }
 
   handleClick({ target }) {
-    const { handleCategory } = this.props;
+    const { handleCategory, handleClickCategory } = this.props;
     const targetId = target.id;
+    handleClickCategory(targetId);
     this.setState({
       category: targetId,
     }, () => {

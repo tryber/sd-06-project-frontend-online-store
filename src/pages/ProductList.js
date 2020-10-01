@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Product from './Product';
 import shoppingCart from '../images/shopping-cart.png';
-import { getCategories } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
 class ProductList extends React.Component {
   constructor() {
@@ -9,9 +10,14 @@ class ProductList extends React.Component {
 
     this.getCategoriesFromApi = this.getCategoriesFromApi.bind(this);
     this.createRadios = this.createRadios.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.getProducts = this.getProducts.bind(this);
 
     this.state = {
       cat: [],
+      filter: '',
+      products: [],
+      hasFilter: false,
     };
   }
 
@@ -24,6 +30,19 @@ class ProductList extends React.Component {
     this.setState({ cat: result });
   }
 
+  async getProducts() {
+    const { filter } = this.state;
+    const result = await getProductsFromCategoryAndQuery('', filter);
+    this.setState({
+      products: result,
+      hasFilter: true,
+    });
+  }
+
+  handleChange({ target }) {
+    this.setState({ filter: target.value });
+  }
+
   createRadios() {
     const { cat } = this.state;
     return cat.map((item) => (
@@ -31,8 +50,17 @@ class ProductList extends React.Component {
   }
 
   render() {
+    const { products, hasFilter } = this.state;
     return (
       <div>
+        <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+        <button
+          type="button"
+          data-testid="query-button"
+          onClick={ this.getProducts }
+        >
+          Busca
+        </button>
         <Link to="/cart" data-testid="shopping-cart-button">
           <img src={ shoppingCart } height="50" alt="carrinho de compras" />
         </Link>
@@ -42,6 +70,9 @@ class ProductList extends React.Component {
         <ul>
           {this.createRadios()}
         </ul>
+        <div>
+          {hasFilter ? <Product products={ products } /> : <p>Vazio</p> }
+        </div>
       </div>
     );
   }

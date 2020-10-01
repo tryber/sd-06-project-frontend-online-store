@@ -5,7 +5,9 @@ import * as Api from '../services/api';
 class Categories extends Component {
   constructor() {
     super();
-    this.inputOnClick = this.inputOnClick.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
+    
     this.state = {
       name: [],
     };

@@ -3,7 +3,52 @@ import './style_sheets/ProductReviewForm.css';
 import StarRating from './StarRating';
 
 class ProductReviewForm extends React.Component {
+  constructor() {
+    super();
+
+    this.saveRating = this.saveRating.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmitButton = this.handleSubmitButton.bind(this);
+
+
+    this.state = {
+      email: '',
+      message: '',
+      rating: 0,
+      messageDisplayStyle: 'none',
+    };
+  }
+
+  saveRating(star) {
+    this.setState({ rating: star });
+  }
+
+  handleInputChange({ target }) {
+    const stateName = target.id;
+    this.setState({ [stateName]: target.value });
+  }
+
+  handleSubmitButton() {
+    const { email, message, rating } = this.state;
+    localStorage.setItem('email', email);
+    localStorage.setItem('message', message);
+    localStorage.setItem('rating', rating);
+
+    this.setState({
+      email: '',
+      message: '',
+      rating: 0,
+      messageDisplayStyle: 'inherit',
+    });
+
+    setTimeout(() => {
+      this.setState({ messageDisplayStyle: 'none' });
+    // eslint-disable-next-line no-magic-numbers
+    }, 5000);
+  }
+
   render() {
+    const { rating, message, email, messageDisplayStyle } = this.state;
     return (
       <form>
         <h3>Avaliações</h3>
@@ -16,10 +61,27 @@ class ProductReviewForm extends React.Component {
                 type="text"
                 placeholder="E-mail"
                 className="form-inputs"
+                onChange={ this.handleInputChange }
+                value={ email }
               />
-              <StarRating />
+              <StarRating saveRating={ this.saveRating } rateGiven={ rating } />
             </div>
-            <textarea id="message" placeholder="Mensagem (opcional" />
+            <textarea
+              id="message"
+              placeholder="Mensagem (opcional)"
+              onChange={ this.handleInputChange }
+              value={ message }
+            />
+            <button
+              type="button"
+              className="form-button"
+              onClick={ this.handleSubmitButton }
+            >
+              Avaliar
+            </button>
+            <span style={ { display: messageDisplayStyle } }>
+              Obrigado pelo seu FeedBack
+            </span>
           </section>
         </fieldset>
       </form>

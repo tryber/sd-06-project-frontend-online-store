@@ -1,4 +1,5 @@
 import React from 'react';
+import Categories from './Categories';
 import CartBtn from '../services/CartBtn';
 import ProductList from '../components/ProductList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
@@ -40,6 +41,7 @@ class Home extends React.Component {
     const { products } = this.state;
     return (
       <div className="container">
+        <Categories />
         <div className="searchField">
           <form>
             <input

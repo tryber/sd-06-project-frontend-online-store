@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CampoBusca from '../Components/CampoBusca';
 import Produto from '../Components/Produto';
 import * as Api from '../services/api';
+import carrinho from '../img/shopping-cart.png';
+import '../App.css'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ListaDeProdutos extends Component {
@@ -44,9 +47,12 @@ class ListaDeProdutos extends Component {
               <Produto key={ produto.id } produto={ produto } />
             ))}
         </ul>
+        <Link to="/CarrinhoDeCompras" data-testid="shopping-cart-button"><img src={ carrinho } class="cart-img" /></Link>
       </div>
     );
   }
 }
 
 export default ListaDeProdutos;
+
+

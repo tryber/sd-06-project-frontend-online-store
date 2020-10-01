@@ -43,13 +43,12 @@ class Homepage extends React.Component {
     return (
       <div className="search">
         <section className="search-box">
-          <label
-            htmlFor="query-input"
+          <h3
             data-testid="home-initial-message"
             className="search-text"
           >
             Digite algum termo de pesquisa ou escolha uma categoria.
-          </label>
+          </h3>
           <input
             type="text"
             name="searchbar"

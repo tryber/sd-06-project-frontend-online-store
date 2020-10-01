@@ -23,12 +23,14 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
+
     const { filterCategory } = this.props;
 
     return (
       <div>
         { categories.map((itemCategory) => (
           <div key={ itemCategory.id }>
+
             <label htmlFor={ filterCategory.id }>
               <input
                 data-testid="category"
@@ -47,5 +49,6 @@ class Categories extends React.Component {
 }
 
 Categories.propTypes = { filterCategory: PropTypes.func.isRequired };
+
 
 export default Categories;

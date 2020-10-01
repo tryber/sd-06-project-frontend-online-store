@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
+import CategoryList from '../components/CategoryList';
 
 
 class HomePage extends React.Component {
@@ -24,7 +25,7 @@ class HomePage extends React.Component {
 
   componentDidMount() {
     api.getCategories().then((value) => this.setState({
-      categories: value, // Recebe ID e  NAME
+      categories: value,
     }));
   }
 
@@ -42,8 +43,7 @@ class HomePage extends React.Component {
   }
 
   async handleSelect({ target }) {
-    const myValue = target.id;
-    const resposta = await api.getProductsFromId(myValue);
+    const resposta = await api.getProductsFromCategoryAndQuery(target.id, target.value);
     if (resposta) {
       this.setState({
         products: resposta.results,
@@ -57,18 +57,6 @@ class HomePage extends React.Component {
     const { products, categories } = this.state;
     return (
       <div>
-        {categories.map((items) => (
-          <div key={ items.id }>
-            <input
-              type="radio"
-              name="category"
-              value={ items.name }
-              id={ items.id }
-              onClick={ this.handleSelect }
-              data-testid="category"
-            />
-            <label htmlFor={ items.id }>{items.name }</label>
-          </div>))}
         <label htmlFor="search-label">
           <input
             data-testid="query-input"
@@ -80,15 +68,22 @@ class HomePage extends React.Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-        <button type="button">
-          <Link data-testid="shopping-cart-button" to="/cart">teste</Link>
-        </button>
+        <Link data-testid="shopping-cart-button" to="/cart">
+          <button type="button">CARRINHO</button>
+        </Link>
         <button type="button" onClick={ this.onClick } data-testid="query-button">
           Buscar
         </button>
         <div>
           {products.map((items) => (<ProductList
             key={ items.id }
+            items={ items }
+          />))}
+        </div>
+        <div>
+          {categories.map((items) => (<CategoryList
+            key={ items.id }
+            onClick={ this.handleSelect }
             items={ items }
           />))}
         </div>

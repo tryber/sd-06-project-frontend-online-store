@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Product from './Product';
+import Product from '../components/Product';
 import shoppingCart from '../images/shopping-cart.png';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -27,7 +27,9 @@ class ProductList extends React.Component {
 
   async getCategoriesFromApi() {
     const result = await getCategories();
+    console.log(result);
     this.setState({ cat: result });
+    console.log(this.state.cat);
   }
 
   async getProducts() {

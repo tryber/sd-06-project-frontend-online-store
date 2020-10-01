@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 import SearchBar from './components/SearchBar';
 import CartEmptyMessage from './components/cart';
+
 import './App.css';
 
 function App() {

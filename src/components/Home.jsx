@@ -5,17 +5,19 @@ import * as Api from '../services/api';
 import Product from './Product';
 
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state ={
       userInput: '',
+      userId: '',
       product: {},
       shouldRender: false,
     }
 
     this.handleOnchange = this.handleOnchange.bind(this);
     this.handleOnclick = this.handleOnclick.bind(this);
+    this.setId = this.setId.bind(this);
   }
 
   handleOnchange({ target }) {
@@ -24,8 +26,15 @@ class Home extends React.Component {
     });
   }
 
+  setId (id) {
+    this.setState({
+      userId: id,
+    });
+  }
+
+
   async handleOnclick() {
-    const response = await Api.getProductsFromCategoryAndQuery(undefined, this.state.userInput);
+    const response = await Api.getProductsFromCategoryAndQuery(this.state.userId, this.state.userInput);
     this.setState({
       product: response,
       shouldRender: true,
@@ -33,6 +42,7 @@ class Home extends React.Component {
   }
 
   render() {
+    console.log(this.props.children);
     return (
       <div>
         <input
@@ -47,7 +57,7 @@ class Home extends React.Component {
         <button data-testid="query-button" onClick={this.handleOnclick}>search</button>
         {this.state.shouldRender ? this.state.product.results
           .map(items => <div key={items.id}><Product item={items} /></div>) : ''}
-        <Categories />
+        <Categories getId={this.setId} />
         <button>
           <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
         </button>

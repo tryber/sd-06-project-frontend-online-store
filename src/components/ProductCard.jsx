@@ -2,14 +2,13 @@ import React from 'react';
 
 export default class ProductCard extends React.Component {
   render() {
-    const { product } = this.props;
-    const { title, price, thumbnail } = product;
+    const { title, price, thumbnail } = this.props.product;
     return (
-      <div data-testid="product">
+      <article data-testid="product">
         <div>{title}</div>
         <div>{price}</div>
-        <img src={thumbnail} alt={`image${title}`}/>
-      </div>
-    )
+        <img src={thumbnail} alt={title}/>
+      </article>
+    );
   }
 }

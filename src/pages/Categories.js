@@ -23,19 +23,24 @@ class Categories extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const { handleClickCategory } = this.props;
+
+    const { filterCategory } = this.props;
+
     return (
       <div>
         { categories.map((itemCategory) => (
           <div key={ itemCategory.id }>
-            <button
-              type="button"
-              data-testid="category"
-              onClick={ handleClickCategory }
-              value={ itemCategory.id }
-            >
+
+            <label htmlFor={ filterCategory.id }>
+              <input
+                data-testid="category"
+                type="radio"
+                name="category"
+                value={ itemCategory.id }
+                onClick={ (event) => filterCategory(event) }
+              />
               { itemCategory.name }
-            </button>
+            </label>
           </div>
         )) }
       </div>
@@ -43,8 +48,7 @@ class Categories extends React.Component {
   }
 }
 
-Categories.propTypes = {
-  handleClickCategory: PropTypes.func.isRequired,
-};
+Categories.propTypes = { filterCategory: PropTypes.func.isRequired };
+
 
 export default Categories;

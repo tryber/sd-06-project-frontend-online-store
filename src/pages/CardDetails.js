@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import ProductReviewForm from '../components/ProductReviewForm';
 
 class CardDetails extends React.Component {
   constructor() {
@@ -35,11 +36,17 @@ class CardDetails extends React.Component {
     const { product: { thumbnail, title, price } } = this.state;
 
     return (
-      <div data-testid="product-detail-name">
-        <img src={ thumbnail } alt="product thumbnail" />
-        <p>{ title }</p>
-        <p>{ price }</p>
-      </div>
+      <main>
+        <div data-testid="product-detail-name">
+          <img src={ thumbnail } alt="product thumbnail" />
+          <p>{ title }</p>
+          <p>{ price }</p>
+        </div>
+
+        <section>
+          <ProductReviewForm />
+        </section>
+      </main>
     );
   }
 }

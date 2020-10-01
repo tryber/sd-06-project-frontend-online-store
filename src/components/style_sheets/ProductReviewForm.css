@@ -1,0 +1,44 @@
+@import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css';
+
+.form-input-section {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 60%;
+  margin: 10px 0;
+}
+
+.form-inputs {
+  margin: 7px 0;
+}
+
+.email-and-stars {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+}
+
+.star-rating {
+  margin: auto;
+}
+
+.star-rating div {
+  margin: 0 5px;
+}
+
+.star-rating .fa-star {
+  color: rgba(0, 0, 0, 0.350)
+}
+
+.star-rating .checked {
+  color: rgb(218, 165, 32);
+}
+
+
+#email {
+  width: 40%
+}
+
+#message {
+  height: 40vh;
+}

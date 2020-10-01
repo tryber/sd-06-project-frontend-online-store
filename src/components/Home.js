@@ -14,8 +14,8 @@ class Home extends React.Component {
     this.handleCategory = this.handleCategory.bind(this);
     this.state = {
       ProductArray: [],
-      inputQuery: 'query',
-      idCategory: 'categoryId',
+      inputQuery: '',
+      idCategory: '',
     };
   }
 
@@ -34,9 +34,10 @@ class Home extends React.Component {
     this.setState({ inputQuery: target.value });
   }
 
-  handleCategory({ target }) {
+  async handleCategory({ target }) {
     const IdTarget = target.id;
-    this.setState({ idCategory: IdTarget });
+    await this.setState({ idCategory: IdTarget });
+    await this.handleSearch();
   }
 
   render() {

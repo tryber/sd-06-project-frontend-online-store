@@ -29,7 +29,7 @@ class Category extends Component {
     this.setState({
       category: targetId,
     }, () => {
-      const { category } = this.state; 
+      const { category } = this.state;
       handleCategory(category);
     });
   }

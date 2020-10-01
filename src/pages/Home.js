@@ -12,7 +12,6 @@ class Home extends React.Component {
     this.state = {
       searchText: '',
       products: [],
-      categoryId: '',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -20,12 +19,12 @@ class Home extends React.Component {
     this.fetchApi = this.fetchApi.bind(this);
   }
 
-  handleClick() {
-    this.fetchApi();
-  }
-
   handleSearch(event) {
     this.setState({ searchText: event.target.value });
+  }
+
+  handleClick() {
+    this.fetchApi();
   }
 
   async fetchApi() {

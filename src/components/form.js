@@ -45,6 +45,10 @@ class Form extends Component {
     });
   }
 
+  starButton({ target }) {
+    target.innerHTML = '★';
+  }
+
   render() {
     const { rating, evaluation, name, email, evaluations } = this.state;
     return (
@@ -95,8 +99,16 @@ class Form extends Component {
                 value={ rating }
               />
             </label>
+            <div>
+              <button type="button" onClick={ this.starButton }>☆</button>
+              <button type="button" onClick={ this.starButton }>☆</button>
+              <button type="button" onClick={ this.starButton }>☆</button>
+              <button type="button" onClick={ this.starButton }>☆</button>
+              <button type="button" onClick={ this.starButton }>☆</button>
+            </div>
             <button type="button" onClick={ this.handleAddSubmit }>Enviar</button>
           </form>
+
           <p>{ evaluations }</p>
         </fieldset>
       </div>

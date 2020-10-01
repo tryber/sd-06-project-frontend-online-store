@@ -24,7 +24,7 @@ export default class CategoryList extends Component {
       products:[],
     });
     this.setState({
-      categoryId: name,""
+      categoryId: name,
     });
     this.searchApiProducts(name, query);
   }

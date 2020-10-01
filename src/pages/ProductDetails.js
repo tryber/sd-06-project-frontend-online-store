@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import { Loading } from '../components';
 
@@ -27,11 +28,13 @@ class ProductDetails extends React.Component {
 
   renderDetails() {
     const { product } = this.state;
-    const { price, title } = product;
+    const { price, title, thumbnail } = product;
     return (
       <div>
+        <Link to="/">voltar</Link>
         <div data-testid="product-details-name">{title}</div>
         <div>{price}</div>
+        <img src={ thumbnail } alt="product" />
       </div>
     );
   }

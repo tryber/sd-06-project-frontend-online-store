@@ -38,7 +38,6 @@ class ProductDetails extends React.Component {
 
   render() {
     const { loading } = this.state;
-    console.log(this.state);
     if (loading) {
       return <Loading />;
     }

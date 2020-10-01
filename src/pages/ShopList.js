@@ -44,7 +44,6 @@ class ShopList extends React.Component {
 
   renderProduct() {
     const { products } = this.state;
-    console.log(products);
     const empty = 0;
     if (products.length > empty) {
       return products.map((product) => (

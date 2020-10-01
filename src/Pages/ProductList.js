@@ -58,7 +58,11 @@ class ProductList extends Component {
       <div>
         <Input onChange={ this.handleInput } />
         <Button nameButton="Buscar" onClick={ () => this.onClickButton(valueInput) } />
-        { products.map((prod) => <Product product={ prod } key={ prod.id } />) }
+        { products.map((prod) => (<Product
+          product={ prod }
+          key={ prod.id }
+          search={ products }
+        />)) }
         <CategoriesList onClick={ (event) => this.onClickCategory(event.target.name) } />
       </div>
     );

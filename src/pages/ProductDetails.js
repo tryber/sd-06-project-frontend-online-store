@@ -8,7 +8,6 @@ class ProductDetails extends React.Component {
     super(props);
     this.state = {
       loading: true,
-
     };
     this.fetchProduct = this.fetchProduct.bind(this);
     this.renderDetails = this.renderDetails.bind(this);
@@ -28,7 +27,7 @@ class ProductDetails extends React.Component {
 
   renderDetails() {
     const { product } = this.state;
-    const { price, thumbnail, title } = product;
+    const { price, title } = product;
     return (
       <div>
         <div data-testid="product-details-name">{title}</div>
@@ -37,9 +36,7 @@ class ProductDetails extends React.Component {
     );
   }
 
-
   render() {
-    console.log('renderizei');
     const { loading } = this.state;
     console.log(this.state);
     if (loading) {

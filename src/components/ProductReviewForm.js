@@ -71,6 +71,7 @@ class ProductReviewForm extends React.Component {
               placeholder="Mensagem (opcional)"
               onChange={ this.handleInputChange }
               value={ message }
+              data-testid="product-detail-evaluation"
             />
             <button
               type="button"

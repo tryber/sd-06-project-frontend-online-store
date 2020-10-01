@@ -7,11 +7,10 @@ class CategoryList extends React.Component {
       <div className="category-container">
         <form>
           {categories.map((category) => (
-            <label htmlFor={category.id}>{category.name}
+            <label key={category.id} htmlFor={category.name}>{category.name}
               <input
-                key={category.id}
                 type="checkbox"
-                name={category.id}
+                name={category.name}
                 data-testid="category"
               />
             </label>

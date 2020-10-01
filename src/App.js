@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ProductList from './pages/ProductList';
 import ShoppingCart from './pages/ShoppingCart';
 import CategoryList from './pages/CategoryList';
+import ProductDetail from './pages/ProductDetail';
 import * as api from './services/api';
 import './App.css';
 
@@ -34,7 +35,8 @@ class App extends React.Component {
               <CategoryList categories={ categories } />
               <ProductList />
             </Route>
-            <Route path="/pages/ShoppingCart" component={ ShoppingCart } />
+            <Route path="/cart" component={ ShoppingCart } />
+            <Route path="/productdatail" component={ ProductDetail } />
           </Switch>
         </BrowserRouter>
       </div>

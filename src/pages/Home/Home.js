@@ -20,7 +20,8 @@ class Home extends Component {
       products: {},
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickButton = this.handleClickButton.bind(this);
+    this.handleClickCategories = this.handleClickCategories.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
   }
 
@@ -28,14 +29,36 @@ class Home extends Component {
     this.setState({ queryInput: query });
   }
 
-  async handleClick(searchEng) {
+  handleClickCategories(categorySelected) {
+    this.setState({ categoryInput: categorySelected }, async () => {
+      const { categoryInput } = this.state;
+      // Fetch products from API
+      const productsFound = await api.getProductsFromCategoryAndQuery(
+        categoryInput,
+      );
+
+      // set foundItems to false, if there are no products found
+      if (Object.keys(productsFound).length < 1) {
+        this.setState({
+          foundItems: false,
+          products: {},
+        });
+      } else {
+        this.setState({
+          products: productsFound,
+        });
+      }
+    });
+  }
+
+  async handleClickButton(searchEng) {
     const { queryInput } = searchEng;
     const { categoryInput } = this.state;
     this.setState({ foundItems: true }, async () => {
       // Fetch products from API
       const productsFound = await api.getProductsFromCategoryAndQuery(
         categoryInput,
-        queryInput
+        queryInput,
       );
 
       // set foundItems to false, if there are no products found
@@ -56,10 +79,10 @@ class Home extends Component {
     const { queryInput, foundItems, products } = this.state;
     return (
       <div className="home-page">
-        <ListCategory />
+        <ListCategory onClick={ this.handleClickCategories } />
         <SearchEngine
           sendQueryInputToHome={ this.handleChangeInput }
-          onClick={ this.handleClick }
+          onClick={ this.handleClickButton }
         />
         <ProductList
           queryInput={ queryInput }

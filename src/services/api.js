@@ -27,5 +27,10 @@ export async function saveEvaluation(productId, evaluation) {
 }
 
 export async function getEvaluations(productId) {
-  return localStorage.getItem(productId);
+  const value = localStorage.getItem(productId);
+  let evaluations = []
+  if(value != null) {
+    evaluations = JSON.parse(value);
+  }
+  return evaluations;
 }

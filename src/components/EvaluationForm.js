@@ -1,6 +1,6 @@
 import React from 'react';
 import ContortoEstrelaComponente from './ContornoEstrela';
-import { saveEvaluation } from '../services/api';
+import { saveEvaluation, getEvaluations } from '../services/api';
 
 class EvaluationForm extends React.Component {
   constructor() {
@@ -9,9 +9,10 @@ class EvaluationForm extends React.Component {
       email: '',
       texto: '',
     };
-    this.textChange = this.textChange.bind(this);
     this.renderText = this.renderText.bind(this);
+    this.textChange = this.textChange.bind(this);
     this.clearText = this.clearText.bind(this);
+    this.renderClick = this.renderClick.bind(this);
   }
 
   textChange({ target }) {
@@ -28,14 +29,24 @@ class EvaluationForm extends React.Component {
     });
   }
 
-  renderText(productId) {
+  renderText(email, texto) {
     
-    const { email, texto } = this.state;
+
     const user = document.createElement('span');
     user.innerText = email;
     const textsDiv = document.getElementById('texts-div');
     const comment = document.createElement('p');
     comment.innerText = texto;
+
+      textsDiv.appendChild(user)
+      textsDiv.appendChild(comment)
+  }
+
+  renderClick(productId) {
+    const { email, texto } = this.state;
+
+    this.renderText(email, texto);
+
     const evaluation = {
       'email': email,
       'nota': 0,
@@ -43,12 +54,23 @@ class EvaluationForm extends React.Component {
     }
   
     saveEvaluation(productId, evaluation)
+  } 
 
-    return (
-      textsDiv.appendChild(user),
-      textsDiv.appendChild(comment),
-      this.clearText()
-    );
+  componentDidMount() {
+    const { productId } = this.props;
+    let evaluations = 
+
+    getEvaluations(productId)
+    .then((result) => {
+      result.forEach(evaluation => {
+        this.renderText(evaluation.email, evaluation.comentario)
+      });
+    })
+
+    if(evaluations != null) {
+      
+ 
+    }
   }
 
   render() {
@@ -78,7 +100,7 @@ class EvaluationForm extends React.Component {
               value={ texto }
             />
             <br />
-            <button onClick={ () => { this.renderText(productId) } } type="button">Avaliar</button>
+            <button onClick={ () => { this.renderClick(productId) } } type="button">Avaliar</button>
           </form>
         </fieldset>
         <div id="texts-div" />

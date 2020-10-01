@@ -19,25 +19,22 @@ class Main extends Component {
     };
   }
 
-  onSearchTextSubmit(event) {
+  async onSearchTextSubmit(event) {
     event.preventDefault();
     const { value } = document.getElementById('search-input');
-    this.setState(async () => {
-      const data = await getProductsFromCategoryAndQuery(value);
-      const { results } = data;
-      this.setState((prevState) => ({ products: [...results, ...prevState.products] }));
-    });
+    const data = await getProductsFromCategoryAndQuery(value);
+    const { results } = data;
+    this.setState((prevState) => ({ products: [...results, ...prevState.products] }));
   }
 
-  onCategoriesSelectChange({ target }) {
+  async onCategoriesSelectChange({ target }) {
     const { value } = target;
-    this.setState(async () => {
-      const data = await getProductsFromCategoryAndQuery('', value);
-      const { results } = data;
-      this.setState({
-        products: [...results],
-        selectedCategory: value,
-      });
+    const data = await getProductsFromCategoryAndQuery('', value);
+    console.log(data);
+    const { results } = data;
+    this.setState({
+      products: [...results],
+      selectedCategory: value,
     });
   }
 

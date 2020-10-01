@@ -22,7 +22,7 @@ class EvaluationForm extends React.Component {
     getEvaluations(productId)
       .then((result) => {
         result.forEach((evaluation) => {
-          this.renderText(evaluation.email, evaluation.comentario);
+          this.renderText(evaluation.email, evaluation.texto);
         });
       });
   }
@@ -58,9 +58,8 @@ class EvaluationForm extends React.Component {
     this.renderText(email, texto);
 
     const evaluation = {
-      ['email']: email,
-      ['nota']: 0,
-      ['comentario']: texto,
+      email,
+      texto,
     };
     saveEvaluation(productId, evaluation);
   }

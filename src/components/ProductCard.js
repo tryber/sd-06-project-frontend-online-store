@@ -7,10 +7,12 @@ class ProductCard extends Component {
     const { title, thumbnail, price } = product;
     return (
       <section key={ title } data-testid="product" className="product-content">
-        <img src={ thumbnail } alt={ title } />
-        <div>
+        <div className="img-div">
+          <img className="img" src={ thumbnail } alt={ title } />
+        </div>
+        <div className="product-details-div">
           <p>{ title }</p>
-          <p>{`R$ ${price}`}</p>
+          <p className="price">{`R$ ${price}`}</p>
         </div>
       </section>
     );

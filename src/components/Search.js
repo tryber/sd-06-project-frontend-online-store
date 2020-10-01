@@ -10,6 +10,8 @@ class Search extends Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleCategory = this.handleCategory.bind(this);
+    this.handleClickCategory = this.handleClickCategory.bind(this);
 
     this.state = {
       searchInput: '',
@@ -33,39 +35,65 @@ class Search extends Component {
     });
   }
 
+  handleClickCategory(categoryId) {
+    this.setState({
+      categoryInput: categoryId,
+      seachDone: true,
+    });
+  }
+
+  async handleCategory(category) {
+    const { searchInput } = this.state;
+    const resultado = await api.getProductsFromCategoryAndQuery(category, searchInput);
+    this.setState({
+      products: resultado,
+    });
+  }
+
 
   render() {
     const { searchInput, products, seachDone } = this.state;
     const zero = 0;
     return (
       <div className="main-container">
-        <Category />
+        <Category
+          handleCategory={ this.handleCategory }
+          handleClickCategory={ this.handleClickCategory }
+        />
         <div className="search-container">
-          <form className="searchForm">
-            <input
-              id="home-initial-input"
-              type="text"
-              data-testid="query-input"
-              placeholder="Digite aqui o termo da sua busca"
-              // required="required"
-              value={ searchInput }
-              onChange={ this.handleChange }
-            />
-            <button
-              type="button"
-              data-testid="query-button"
-              onClick={ this.handleClick }
-            >
-              Buscar
-            </button>
-            <button type="button">
+          <div className="form-div">
+            <form className="searchForm">
+              <input
+                className="search-input"
+                id="home-initial-input"
+                type="text"
+                data-testid="query-input"
+                placeholder="Digite aqui o termo da sua busca"
+                // required="required"
+                value={ searchInput }
+                onChange={ this.handleChange }
+              />
+              <button
+                className="search-button"
+                type="button"
+                data-testid="query-button"
+                onClick={ this.handleClick }
+              >
+                Buscar
+              </button>
+            </form>
+            <div className="shopping-cart-div">
               <Link data-testid="shopping-cart-button" to="/ShoppingCart">
-                Carrinho de compras
+                <img
+                  src="https://www.flaticon.com/svg/static/icons/svg/263/263142.svg"
+                  alt="Carrinho de compra"
+                  width="50"
+                />
               </Link>
-            </button>
-          </form>
+            </div>
+          </div>
           <div className="product-container">
-            { searchInput === '' && (
+            { !seachDone && (
               <p data-testid="home-initial-message">
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </p>

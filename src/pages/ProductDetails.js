@@ -36,7 +36,6 @@ class ProductDetails extends React.Component {
   }
 }
 
-
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({

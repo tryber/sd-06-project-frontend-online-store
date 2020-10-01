@@ -1,38 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
-import { Loading } from '../components';
 
 class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-    };
-    this.fetchProduct = this.fetchProduct.bind(this);
+
     this.renderDetails = this.renderDetails.bind(this);
   }
 
-
-  componentDidMount() {
-    this.fetchProduct();
-  }
-
-  async fetchProduct() {
-    const { match } = this.props;
-    const { id } = match.params;
-    const product = await api.getProduct(id);
-    this.setState({ product, loading: false });
-  }
-
   renderDetails() {
-    const { product } = this.state;
-    const { price, title, thumbnail } = product;
+    const { location: { state: { title, thumbnail, price } } } = this.props;
+
     return (
       <div>
         <Link to="/">voltar</Link>
-        <div data-testid="product-details-name">{title}</div>
+        <div data-testid="product-detail-name">{title}</div>
         <div>{price}</div>
         <img src={ thumbnail } alt="product" />
       </div>
@@ -40,18 +23,16 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { loading } = this.state;
-    if (loading) {
-      return <Loading />;
-    }
     return this.renderDetails();
   }
 }
 
 ProductDetails.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
 };

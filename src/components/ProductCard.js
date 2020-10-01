@@ -11,7 +11,7 @@ class ProductCard extends React.Component {
       <div data-testid="product">
         <div>{title}</div>
         <div>{price}</div>
-        <Link to={ `productDetails/${id}` }>
+        <Link to={ { pathname: `productDetails/${id}`, state: props } }>
           <div data-testid="product-detail-link">View Details</div>
         </Link>
       </div>

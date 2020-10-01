@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
-import ProductCard from '../components/ProductCard';
+import { ProductCard, CategoryList } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -11,11 +11,13 @@ class ShopList extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.renderProduct = this.renderProduct.bind(this);
     this.loadCategories = this.loadCategories.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
 
     this.state = {
       categories: [],
       query: '',
       products: [],
+      selectedCategory: '',
     };
   }
 
@@ -23,9 +25,20 @@ class ShopList extends React.Component {
     this.loadCategories();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { selectedCategory } = this.state;
+    if (selectedCategory !== prevState.selectedCategory) this.handleClick();
+  }
+
   async loadCategories() {
     const categories = await api.getCategories();
     this.setState({ categories });
+  }
+
+  async handleSelect({ target }) {
+    this.setState({ selectedCategory: target.id }, async () => {
+      await this.handleClick();
+    });
   }
 
   handleChange({ target }) {
@@ -35,10 +48,10 @@ class ShopList extends React.Component {
   }
 
   async handleClick() {
-    const { query } = this.state;
-    const productsFromQuery = await api.getProductsFromCategoryAndQuery(query);
+    const { query, selectedCategory } = this.state;
+    const products = await api.getProductsFromCategoryAndQuery(selectedCategory, query);
     this.setState({
-      products: productsFromQuery.results,
+      products: products.results,
     });
   }
 
@@ -57,17 +70,10 @@ class ShopList extends React.Component {
 
   render() {
     const { categories } = this.state;
-    const none = 0;
+
     return (
       <section>
-        <section>
-          {(categories.length > none)
-            ? categories
-              .map((category) => (
-                <p data-testid="category" key={ category.id }>{category.name}</p>
-              ))
-            : <span>Loading...</span>}
-        </section>
+        <CategoryList categories={ categories } handleSelect={ this.handleSelect } />
         <div data-testid="home-initial-message">
           <input data-testid="query-input" type="text" onChange={ this.handleChange } />
           Digite algum termo de pesquisa ou escolha uma categoria.

@@ -6,11 +6,13 @@ import ProductsList from './productsList';
 export default class CategoryList extends Component {
   constructor(props) {
     super(props);
+    const { query } = this.props;
     this.checkInputCategorie = this.checkInputCategorie.bind(this);
     this.searchApiProducts = this.searchApiProducts.bind(this);
     this.state = {
       categoryId: '',
       products: [],
+      query,
     };
   }
 
@@ -18,18 +20,23 @@ export default class CategoryList extends Component {
     const { query } = this.state;
     const { name } = target;
     this.setState({
-      categoryId: name,
+      categoryId: '',
+      products:[],
+    });
+    this.setState({
+      categoryId: name,""
     });
     this.searchApiProducts(name, query);
   }
 
   async searchApiProducts(categoryId, query) {
-    await api.getProductsFromCategoryAndQuery(categoryId, query).then((res) => {
+    await api.getProductsFromCategoryAndQuery(categoryId, query)
+    .then((res) => {
       this.setState(
         {
           products: res.results,
         },
-        console.log(res.results),
+        console.log(res.results,categoryId,query),
       );
     });
   }

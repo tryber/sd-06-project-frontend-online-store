@@ -13,17 +13,22 @@ class Home extends Component {
       query: '',
       products: [],
       isFail: false,
+      categoryId: '',
     };
     this.handleInputSearchChange = this.handleInputSearchChange.bind(this);
     this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
+    this.handleListCategories = this.handleListCategories.bind(this);
   }
 
   async handleClickSearchButton() {
-    const { query } = this.state;
-    const valueFromApi = await getProductsFromCategoryAndQuery('', query);
+    const { query, categoryId } = this.state;
+    const valueFromApi = await getProductsFromCategoryAndQuery(categoryId, query);
     const emptyArray = 0;
     if (valueFromApi.results.length === emptyArray) {
-      this.setState({ isFail: true });
+      this.setState({
+        isFail: true,
+        products: [],
+      });
     } else {
       this.setState({
         products: valueFromApi.results,
@@ -36,6 +41,14 @@ class Home extends Component {
     const { value } = target;
     this.setState({ query: value });
   }
+
+  handleListCategories(id) {
+    const value = id;
+    this.setState({ categoryId: value }, async () => {
+      await this.handleClickSearchButton();
+    });
+  }
+
 
   render() {
     const { products, isFail } = this.state;
@@ -60,7 +73,7 @@ class Home extends Component {
           SEARCH
         </button>
         <div>
-          <ListCategories />
+          <ListCategories handleListCategories={ this.handleListCategories } />
         </div>
         <ShoppingCartButton />
         <ProductCard products={ products } isFail={ isFail } />

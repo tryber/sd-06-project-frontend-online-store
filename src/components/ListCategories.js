@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
+
 
 class ListCategories extends React.Component {
   constructor() {
@@ -23,18 +25,30 @@ class ListCategories extends React.Component {
 
   render() {
     const { categories } = this.state;
-
+    const { handleListCategories } = this.props;
     return (
       <div>
         <h4>Categories:</h4>
-        <ul>
+        <div onChange={ (event) => handleListCategories(event.target.id) }>
           {categories.map((category) => (
-            <li key={ category.id } data-testid="category">{ category.name }</li>
+            <label htmlFor={ category.id } key={ category.id }>
+              <input
+                type="radio"
+                value={ category.name }
+                name="categories"
+                data-testid="category"
+                id={ category.id }
+              />
+              { category.name }
+              <br />
+            </label>
           ))}
-        </ul>
+        </div>
       </div>
     );
   }
 }
 
 export default ListCategories;
+
+ListCategories.propTypes = { handleListCategories: PropTypes.func.isRequired };

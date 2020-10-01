@@ -24,13 +24,14 @@ class Categories extends React.Component {
 
   render() {
     const { data } = this.state;
+    const { handleEventChecked } = this.props;
     return (
       <aside className="categories">
         <h4 className="titleCategories">Categorias:</h4>
         <form>
           {(data === null)
             ? 'Loading...'
-            : data.map((category) => <Category key={ category.id } data={ category } />)}
+            : data.map((category) => <Category key={ category.id } data={ category } handleEventChecked={ handleEventChecked } />)}
         </form>
       </aside>
     );

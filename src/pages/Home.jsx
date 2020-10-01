@@ -2,16 +2,63 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import Categories from '../components/Categories'
 import Products from '../components/Products';
+import * as api from '../services/api';
 
+class Home extends Component {
+  constructor() {
+    super();
 
-export default function Home() {
-  return (
-    <div>
-      <Header />
-      <div className="content">
-        <Categories />
-        <Products />
+    this.onClick = this.onClick.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
+    this.handleEvent = this.handleEvent.bind(this);
+    this.handleEventChecked = this.handleEventChecked.bind(this);
+
+    this.state = {
+      textInput: "", 
+      data: null,
+      checkedId: null,
+    };
+  }
+
+  handleEvent({ target }) {
+    const query = target.value;
+    this.setState({ textInput: query });
+  }
+
+  handleEventChecked({ target }) {
+    const categoryId = target.value;
+    this.setState({ checkedId: categoryId });
+    this.fetchProducts({ categoryId });
+  }
+
+  onClick() {
+    const query = this.state.textInput;
+    if (query !== "") this.fetchProducts({ query });
+  }
+
+  async fetchProducts({ categoryId, query }) {
+    const fetchData = await api.getProductsFromCategoryAndQuery({ categoryId, query });
+    this.setState({ data: fetchData, checkedLoad: false });
+  }
+
+  render() {
+    const { data, textInput } = this.state;
+    return (
+      <div>
+        <Header
+          inputValue={textInput}
+          handleEvent={this.handleEvent} 
+          onClick={this.onClick}
+        />
+        <div className="content">
+          <Categories 
+            handleEventChecked={this.handleEventChecked} 
+          />
+          <Products data={data}/>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
+
+export default Home;

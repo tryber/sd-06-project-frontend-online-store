@@ -2,17 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Category extends React.Component {
+
+
+
+
   render() {
     const { data } = this.props;
+    const { handleEventChecked } = this.props;
     return (
-      <div className="radio">
+      <div className="radio" >
         <label htmlFor={ data.id }>
           <input
             id={ data.id }
             type="radio"
             name="categories"
-            value={ data.id }
             data-testid="category"
+            value={ data.id }
+            onChange={ handleEventChecked }
           />
           {data.name}
         </label>

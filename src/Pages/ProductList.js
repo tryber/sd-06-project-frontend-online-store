@@ -32,7 +32,7 @@ class ProductList extends Component {
   }
 
   async onClickButton(valueOfInput) {
-    this.resetState();
+    await this.resetState();
     const { categoryId } = this.state;
     const getCategories = await getProductsFromCategoryAndQuery(categoryId, valueOfInput);
     const { results } = getCategories;
@@ -47,7 +47,7 @@ class ProductList extends Component {
     this.setState({ valueInput: input });
   }
 
-  resetState() {
+  async resetState() {
     this.setState({
       categoryId: '',
     });
@@ -60,7 +60,8 @@ class ProductList extends Component {
         <Input onChange={ this.handleInput } />
         <Button onClick={ () => this.onClickButton(valueInput) } />
         { products.map((prod) => <Product product={ prod } key={ prod.id } search={ products } />) }
-        <CategoriesList onClick={ (event) => this.onClickCategory(event.target.value) } />
+        <CategoriesList onClick={ (event) => this.onClickCategory(event.target.name) } />
+
       </div>
     );
   }

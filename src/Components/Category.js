@@ -7,14 +7,14 @@ export default class Category extends Component {
     return (
       <label htmlFor={ id }>
         <input
-          name="check"
-          type="checkbox"
+          name={ id } // capturo o name no productList
+          type="button"
           data-testid="category"
           id={ id }
-          value={ id }
+          value={ category } // texto dentro de cada button
           onClick={ onClick }
         />
-        { category }
+        {/* { category } */}
       </label>
     );
   }

@@ -44,7 +44,7 @@ class SearchBar extends Component {
               Search
             </button>
           </form>
-      
+
           {/* Não faria mais sentido chamar CategoriesList? */}
           <ProductList />
           {/*  */}

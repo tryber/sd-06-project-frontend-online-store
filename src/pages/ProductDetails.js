@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartButton from '../components/CartButton';
+import EvaluationForm from '../components/EvaluationForm';
 
 class ProductDetails extends React.Component {
   render() {
@@ -27,6 +28,7 @@ class ProductDetails extends React.Component {
             ))}
           </ul>
         </div>
+        <EvaluationForm />
       </div>
     );
   }

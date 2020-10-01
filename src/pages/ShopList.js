@@ -17,7 +17,6 @@ class ShopList extends React.Component {
       query: '',
       products: [],
     };
-
   }
 
   componentDidMount() {
@@ -45,6 +44,7 @@ class ShopList extends React.Component {
 
   renderProduct() {
     const { products } = this.state;
+    console.log(products);
     const empty = 0;
     if (products.length > empty) {
       return products.map((product) => (
@@ -59,7 +59,6 @@ class ShopList extends React.Component {
   render() {
     const { categories } = this.state;
     const none = 0;
-
     return (
       <section>
         <section>

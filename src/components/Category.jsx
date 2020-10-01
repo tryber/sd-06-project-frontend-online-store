@@ -2,9 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Category extends React.Component {
+
+
+
+
   render() {
     const { data } = this.props;
-    const { onChecked, handleEventChecked } = this.props;
+    const { handleEventChecked } = this.props;
     return (
       <div className="radio" >
         <label htmlFor={ data.id }>
@@ -13,9 +17,8 @@ class Category extends React.Component {
             type="radio"
             name="categories"
             data-testid="category"
-            // onChecked={onChecked}
             value={ data.id }
-            onChange={() => handleEventChecked(data.id)}
+            onChange={ handleEventChecked }
           />
           {data.name}
         </label>

@@ -11,13 +11,12 @@ class Home extends Component {
     this.onClick = this.onClick.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleEvent = this.handleEvent.bind(this);
-    this.onChecked = this.onChecked.bind(this);
     this.handleEventChecked = this.handleEventChecked.bind(this);
 
     this.state = {
       textInput: "", 
       data: null,
-      checkedId: "",
+      checkedId: null,
     };
   }
 
@@ -26,11 +25,10 @@ class Home extends Component {
     this.setState({ textInput: query });
   }
 
-  handleEventChecked(categoryId) {
-    // const categoryId = target.value;
-    console.log(categoryId);
+  handleEventChecked({ target }) {
+    const categoryId = target.value;
     this.setState({ checkedId: categoryId });
-    this.onChecked(categoryId)
+    this.fetchProducts({ categoryId });
   }
 
   onClick() {
@@ -38,19 +36,13 @@ class Home extends Component {
     if (query !== "") this.fetchProducts({ query });
   }
 
-  onChecked(categoryId) {
-    // const categoryId = this.state.checkedId;
-    this.fetchProducts({ categoryId });
-  }
-
   async fetchProducts({ categoryId, query }) {
     const fetchData = await api.getProductsFromCategoryAndQuery({ categoryId, query });
-    this.setState({ data: fetchData });
+    this.setState({ data: fetchData, checkedLoad: false });
   }
 
   render() {
     const { data, textInput } = this.state;
-    // const { checkedId } = this.state;
     return (
       <div>
         <Header
@@ -60,11 +52,9 @@ class Home extends Component {
         />
         <div className="content">
           <Categories 
-            // onChecked={this.onChecked} 
             handleEventChecked={this.handleEventChecked} 
           />
           <Products data={data}/>
-          {console.log(data)}
         </div>
       </div>
     );

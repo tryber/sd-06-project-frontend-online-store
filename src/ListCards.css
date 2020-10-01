@@ -1,7 +1,7 @@
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  justify-content: start;
+  flex: start;
   padding: 1%;
   width: 100%;
 }

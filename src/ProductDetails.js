@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ProductEvaluator from './ProductEvaluator'
+import ProductEvaluator from './ProductEvaluator';
+
 function ProductDetails(props) {
   const { location: { state: { product } } } = props;
   return (

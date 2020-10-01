@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
+
 class ProductEvaluator extends Component {
   constructor() {
     super();
     this.state = {
       email: '',
       texto: '',
-      avaliação:  0,
     };
     this.eventText = this.eventText.bind(this);
     this.handlerText = this.handlerText.bind(this);
   }
+
   handlerText() {
     const { email, texto } = this.state;
     const user = document.createElement('span');
@@ -22,38 +23,38 @@ class ProductEvaluator extends Component {
       textsDiv.appendChild(evaluation)
     );
   }
+
   eventText(event) {
     const { name, value } = event.target;
     this.setState({
       [name]: value,
     });
   }
-//  name() {
-//     for(let i = 0; i < 5; i++) {
-//       if (i+1 > this.state.avaliação) {
-//          classeCor="cor-branco";
-//       } else {
-//          classeCor="cor-ouro";
-//       }
-//       return i+1;
-//   }
-// }
+
   render() {
     const { email, texto } = this.state;
-    const notas = [1, 2, 3, 4, 5];
+    // const notas = [];
+    // for (let i = 1; i < 6; i += 1) notas[i - 1] = i;
     return (
       <div id="form-container">
         <fieldset>
           <form>
-            {notas.map((index) => {
-              return  <input type="radio" value={ index } onClick={this.eventText} name="avaliação" />
-            })}
+            {/* {notas.map((index) => {
+              return;
+              <input
+                type="radio"
+                value={ index }
+                onClick={ this.eventText }
+                name="avaliação"
+                key={ index }
+              />;
+            })} */}
             <input
               type="email"
               placeholder="Email"
-              onChange={this.eventText}
+              onChange={ this.eventText }
               name="email"
-              value={email}
+              value={ email }
             />
             <br />
             <textarea
@@ -61,19 +62,17 @@ class ProductEvaluator extends Component {
               data-testid="product-detail-evaluation"
               placeholder="Mensagem opcional"
               rows="5"
-              onChange={this.eventText}
+              onChange={ this.eventText }
               name="texto"
-              value={texto}
+              value={ texto }
             />
             <br />
           </form>
           <div id="form-text" />
-          <button onClick={this.eventText} type="button">Avaliação</button>
+          <button onClick={ this.eventText } type="button">Avaliação</button>
         </fieldset>
       </div>
     );
   }
 }
 export default ProductEvaluator;
-
-

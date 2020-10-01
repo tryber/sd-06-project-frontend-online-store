@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class ProductsList extends Component {
   render() {
-    const { products } = this.props;
+    const { products, categoryId } = this.props;
     return (
       <div>
         {products.map((element) => (
@@ -11,9 +12,12 @@ export default class ProductsList extends Component {
             <p>{element.title}</p>
             <img src={ element.thumbnail } alt={ element.title } />
             <p>
-              $:
+              $ :
               {element.price}
             </p>
+            <Link to={ `/${categoryId}/${element.id}` }>
+              <h2>Vejá Mais</h2>
+            </Link>
           </div>
         ))}
       </div>
@@ -23,4 +27,5 @@ export default class ProductsList extends Component {
 
 ProductsList.propTypes = {
   products: PropTypes.objectOf.isRequired,
+  categoryId: PropTypes.string.isRequired,
 };

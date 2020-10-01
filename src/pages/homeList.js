@@ -34,7 +34,7 @@ class homeList extends Component {
   }
 
   render() {
-    const { query, categories } = this.state;
+    const { query, categories, valorInit } = this.state;
     return (
       <div>
         <h1 data-testid="home-initial-message">
@@ -55,7 +55,7 @@ class homeList extends Component {
           data-testid="query-input"
           onChange={ this.handleAreaChange }
         />
-        <CategoryList query={ query } categories={ categories } />
+        <CategoryList query={ query } categories={ categories } valorInit={ valorInit } />
       </div>
     );
   }

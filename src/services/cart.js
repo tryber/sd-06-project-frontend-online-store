@@ -6,7 +6,6 @@ function loadLocalStorage() {
   return JSON.parse(localStorage.getItem('products') || '[]');
 }
 
-
 export default {
   createStorage: () => {
     const teste = loadLocalStorage();

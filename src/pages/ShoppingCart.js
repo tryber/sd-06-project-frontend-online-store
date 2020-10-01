@@ -11,24 +11,16 @@ class ShoppingCart extends React.Component {
           Seu carrinho está vazio
           {produtos.map((element) => (
             <div key={ element.id }>
-              <div>
-                <p>
-                  ID:
-                  {element.id}
-                </p>
+              <div data-testid="shopping-cart-product-name">
+                Produto:
+                {element.title}
               </div>
-              <div data-test-id="shopping-cart-product-name">
-                <p>
-                  Produto:
-                  {element.title}
-                </p>
-              </div>
-              <div>
+              <div> 
                 <p>
                   Preço R$:
                   {element.price}
                 </p>
-                <div data-test-id="shopping-cart-product-quantit">
+                <div data-testid="shopping-cart-product-quantity">
                   <p>
                     Quantidade:
                     {element.amount}

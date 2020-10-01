@@ -19,14 +19,13 @@ class ProductCard extends React.Component {
     const { shouldRedirect } = this.state;
     if (shouldRedirect) {
       return (
-        <Redirect to={{ pathname: "/productdatail", state: { product: product }}} />
+        <Redirect to={{ pathname: "/productdetail", state: { product: product }}} />
       );
     }
-
+    
     return (
-      <div data-testid="product" className="product-card" 
-        onClick={ this.changeStateRedirect }>
-        <div date-testid="product-detail-link">
+      <div data-testid="product" className="product-card">
+        <div data-testid="product-detail-link" onClick={ this.changeStateRedirect } >
           <img alt="Product" src={ thumbnail } />
           <div className="product-card-body">
             <p>{title}</p>

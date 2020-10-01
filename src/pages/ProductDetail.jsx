@@ -21,7 +21,7 @@ class ProductDetail extends React.Component {
       <div>
         <img alt="Product" src={ thumbnail } />
         <div className="product-card-body">
-          <p date-testid="product-detail-name">{title}</p>
+          <h4 data-testid="product-detail-name">{title}</h4>
           <p>{`R$ ${price}`}</p>
           <p></p>
         </div>

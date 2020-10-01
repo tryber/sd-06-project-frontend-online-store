@@ -1,21 +1,46 @@
 import React from 'react';
+import * as api from '../services/api';
+
 
 class CategoryList extends React.Component {
+  constructor() {
+    super();
+
+    this.handleClick = this.handleClick.bind(this);
+
+    this.state = {
+      products: [],
+      categories: [],
+    };
+  }
+
+  componentDidMount() {
+    api.getCategories().then((category) => {
+      this.setState({ categories: category });
+    });
+  }
+
+  handleClick({ target }) {
+    const { onFilter } = this.props;
+    onFilter(target.id, undefined);
+  }
+
   render() {
-    const { categories } = this.props;
+    const { categories } = this.state;
     return (
       <div className="category-container">
-        <form>
-          {categories.map((category) => (
-            <label key={category.id} htmlFor={category.name}>{category.name}
-              <input
-                type="checkbox"
-                name={category.name}
-                data-testid="category"
-              />
-            </label>
-          ))}
-        </form>
+        <h3>Escolha a categoria:</h3>
+        {categories.map((category) => (
+          <div key={ category.id } className="category-container">
+            <input
+              type="radio"
+              name="categories"
+              id={ category.id }
+              onClick={ this.handleClick }// criar a função não precisa ser genérica
+              data-testid="category"
+            />
+            <label htmlFor={ category.id }>{ category.name }</label>
+          </div>))}
       </div>
     )
   }

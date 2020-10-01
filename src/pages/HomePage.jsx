@@ -24,7 +24,6 @@ class HomePage extends React.Component {
   }
 
   componentDidMount() {
-    // api.getProductsFromCategoryAndQuery('teste', 'teste');
     api.getCategories().then((value) => this.setState({
       categories: value,
     }));

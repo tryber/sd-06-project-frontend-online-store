@@ -18,11 +18,6 @@ class CategoryDisplay extends Component {
 
     componentDidMount() {
         this.fetchApi();
-        Api.getProductsFromCategoryAndQuery().then((result) => {
-            this.setState({
-                items: result.results,
-            });
-        });
     }
 
     async fetchApi() {

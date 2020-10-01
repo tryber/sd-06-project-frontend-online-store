@@ -30,6 +30,8 @@ class ProductReviewForm extends React.Component {
 
   handleSubmitButton() {
     const { email, message, rating } = this.state;
+    const displayTimeoutReset = 5000;
+
     localStorage.setItem('email', email);
     localStorage.setItem('message', message);
     localStorage.setItem('rating', rating);
@@ -43,8 +45,7 @@ class ProductReviewForm extends React.Component {
 
     setTimeout(() => {
       this.setState({ messageDisplayStyle: 'none' });
-    // eslint-disable-next-line no-magic-numbers
-    }, 5000);
+    }, displayTimeoutReset);
   }
 
   render() {

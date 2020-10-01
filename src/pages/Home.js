@@ -22,7 +22,7 @@ class Home extends React.Component {
   }
 
   filterCategory(event) {
-    this.setState({ categoryId: event.target.value });
+    this.setState({ categoryId: event.target.value }, () => this.fetchApi());
   }
 
   handleClick() {

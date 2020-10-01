@@ -28,7 +28,7 @@ class Categories extends React.Component {
     return (
       <div>
         { categories.map((itemCategory) => (
-          <li data-testid="category" key={ itemCategory.id }>
+          <div data-testid="category" key={ itemCategory.id }>
             <label htmlFor={ filterCategory.id }>
               <input
                 type="radio"
@@ -38,7 +38,7 @@ class Categories extends React.Component {
               />
               { itemCategory.name }
             </label>
-          </li>
+          </div>
         )) }
       </div>
     );

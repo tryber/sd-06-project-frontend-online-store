@@ -9,6 +9,9 @@ class PagInicial extends Component {
     super();
     this.setValue = this.setValue.bind(this);
     this.fetchApi = this.fetchApi.bind(this);
+    this.selectCategory = this.selectCategory.bind(this);
+    this.fetchCategory = this.fetchCategory.bind(this);
+
     this.state = {
       category: '',
       value: '',
@@ -22,12 +25,27 @@ class PagInicial extends Component {
     });
   }
 
+  async fetchCategory(param) {
+    const { empty } = this.state;
+    const result = await api.getProductsFromCategoryAndQuery(param, empty);
+    this.setState(() => ({
+      products: result.results,
+    }));
+  }
+
   async fetchApi() {
     const { value, category } = this.state;
     const result = await api.getProductsFromCategoryAndQuery(category, value);
     this.setState(() => ({
       products: result.results,
     }));
+  }
+
+  selectCategory(select, categ) {
+    this.setState({
+      products: select,
+      category: categ,
+    });
   }
 
   render() {
@@ -57,7 +75,7 @@ class PagInicial extends Component {
           </button>
         </form>
         <section>
-          <ListCategories />
+          <ListCategories fetchCategory={ this.fetchCategory } />
         </section>
         <section>
           <CardsContainer products={ products } />

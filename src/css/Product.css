@@ -1,0 +1,13 @@
+.card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 300px;
+  border: 1px solid black;
+}
+
+.image-item {
+  align-self: center;
+  width: 100px;
+}

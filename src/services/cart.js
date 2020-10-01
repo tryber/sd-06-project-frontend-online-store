@@ -23,8 +23,12 @@ export default {
       thumbnail: product.thumbnail,
       amount: 1,
     };
-    products.push(item);
-    console.log(products);
+    let uniqueProduct = false;
+    products.forEach((element) => {
+      uniqueProduct = (uniqueProduct || item.id === element.id);
+      if (uniqueProduct) element.amount += 1;
+    });
+    if (!uniqueProduct) products.push(item);
     saveLocalStorage(products);
   },
 };

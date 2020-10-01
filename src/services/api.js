@@ -9,13 +9,12 @@ export async function getCategories() {
   return categoriesPromise;
 }
 
-export async function getProductsFromCategoryAndQuery(categoryId, query) {
+export async function getProductsFromCategoryAndQuery(query, categoryId = undefined) {
   const api = 'https://api.mercadolibre.com/';
-  const endpoint = `sites/MLB/search?category=${categoryId}&q=${query}`;
+  const endpoint = categoryId
+    ? `sites/MLB/search?category=${categoryId}&q=${query}`
+    : `sites/MLB/search?q=${query}`;
   const requestURL = `${api}${endpoint}`;
-
-  const queryPromise = await fetch(requestURL)
-    .then((response) => response.json());
-
-  return queryPromise;
+  const queryPromise = await fetch(requestURL);
+  return queryPromise.json();
 }

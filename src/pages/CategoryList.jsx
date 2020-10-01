@@ -12,8 +12,7 @@ class CategoryList extends React.Component {
   }
 
   handleClick({ target }) {
-    const { categories } = this.props;
-    console.log(categories)
+    console.log(target.id)
   }
 
   render() {

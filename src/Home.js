@@ -28,17 +28,16 @@ class Home extends React.Component {
   handleState({ target }) {
     const { name } = target;
     const value = (target.type === 'checkbox') ? target.checked : target.value;
-    if (name === "filterId") {
+    if (name === 'filterId') {
       this.setState({ [name]: value }, () => {
         this.handleSearch();
-      })
-   } else {
-     this.setState({ [name]: value });
-   }
+      });
+    } else {
+      this.setState({ [name]: value });
+    }
   }
 
   render() {
-    
     const { searchQuery, products, loading } = this.state;
     const initMsg = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     return (
@@ -48,7 +47,7 @@ class Home extends React.Component {
         </div>
         <div className="store-container">
           <div className="categories-container">
-            <CategoryListener handleCategory={ this.handleState }/>
+            <CategoryListener handleCategory={ this.handleState } />
           </div>
           <div className="gallery-container">
             <div>

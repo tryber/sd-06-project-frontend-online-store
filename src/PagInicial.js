@@ -7,10 +7,8 @@ import CardsContainer from './components/CardsContainer';
 class PagInicial extends Component {
   constructor() {
     super();
-
     this.setValue = this.setValue.bind(this);
     this.fetchApi = this.fetchApi.bind(this);
-
     this.state = {
       category: '',
       value: '',
@@ -50,10 +48,10 @@ class PagInicial extends Component {
           <button
             type="button"
             data-testid="query-button"
-            onClick={ (event) => {
+            onClick={ (event)=> {
               this.fetchApi();
-              event.preventDefault();
-            } }
+  event.preventdefault();
+} }
           >
             Pesquisar
           </button>

@@ -21,7 +21,7 @@ class CardsContainer extends Component {
 }
 
 CardsContainer.propTypes = {
-  products: PropTypes.arrayOf().isRequired,
+  products: PropTypes.arrayOf.isRequired,
 };
 
 export default CardsContainer;

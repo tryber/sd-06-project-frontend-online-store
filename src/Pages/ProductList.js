@@ -21,6 +21,7 @@ class ProductList extends Component {
     };
   }
 
+  // add um callback como 2º param que executa um toggle entre check e uncheck em uma box em frente a cada categoria
   async onClickCategory(categoriesId) {
     const { valueInput } = this.state;
     const getAll = await getProductsFromCategoryAndQuery(categoriesId, valueInput);
@@ -57,7 +58,7 @@ class ProductList extends Component {
     return (
       <div>
         <Input onChange={ this.handleInput } />
-        <Button onClick={ () => this.onClickButton(valueInput) } />
+        <Button nameButton="Buscar" onClick={ () => this.onClickButton(valueInput) } />
         { products.map((prod) => <Product product={ prod } key={ prod.id } />) }
         <CategoriesList onClick={ (event) => this.onClickCategory(event.target.name) } />
       </div>

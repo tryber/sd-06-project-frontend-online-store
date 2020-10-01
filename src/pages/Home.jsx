@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import * as api from '../services/api'
-import './Home.css';
+import '../styles/Home.css';
+import cart from './../img/cart.png';
 
 export default class Home extends Component {
   constructor() {
@@ -39,6 +41,9 @@ export default class Home extends Component {
             <input id="search-input" />
             Digite algum termo de pesquisa ou escolha uma categoria.
           </label>
+          <Link to="/cart" data-testid="shopping-cart-button">
+            <img src={ cart } alt="icone do carrinho" className="icon"/>
+          </Link>
         </main>
       </Fragment>
     );

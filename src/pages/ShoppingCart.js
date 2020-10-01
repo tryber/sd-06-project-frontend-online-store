@@ -15,7 +15,7 @@ class ShoppingCart extends React.Component {
                 Produto:
                 {element.title}
               </div>
-              <div> 
+              <div>
                 <p>
                   Preço R$:
                   {element.price}

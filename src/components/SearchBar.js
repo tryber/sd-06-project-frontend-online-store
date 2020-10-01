@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import ProductsList from './ProductsList';
-import ProductList from './productList';
+import CategoriesList from './CategoriesList';
 import ShoppingCartButton from './btn_cart';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
@@ -45,8 +45,7 @@ class SearchBar extends Component {
             </button>
           </form>
 
-          {/* Não faria mais sentido chamar CategoriesList? */}
-          <ProductList />
+          <CategoriesList />
 
           <ShoppingCartButton />
         </div>

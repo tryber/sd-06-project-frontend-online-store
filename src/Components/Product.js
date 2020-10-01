@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 class Product extends Component {
   render() {
-    const { product } = this.props;
-    const { title, thumbnail, price } = product;
+    const { product, search} = this.props;
+    const { title, thumbnail, price, id } = product;
     return (
-      <div>
-        <div data-testid="product">
-          <h5>{ title }</h5>
-          <img src={ thumbnail } alt="fotografia do produto" />
-          <span>{`R$: ${price}`}</span>
+      <Link to={{
+        pathname: `/Teste/${id}`,
+        state: {
+          busca : search
+        }
+      }}>
+        <div data-testid="product-detail-link">
+          <div data-testid="product">
+            <h5>{ title }</h5>
+            <img src={ thumbnail } alt="fotografia do produto" />
+            <span>{`R$: ${price}`}</span>
+          </div>
         </div>
-      </div>
+      </Link>
     );
   }
 }
@@ -22,6 +30,7 @@ Product.propTypes = {
     title: propTypes.string,
     thumbnail: propTypes.string,
     price: propTypes.number,
+    id: propTypes.string,
   }).isRequired,
 };
 

@@ -4,6 +4,7 @@ import Product from '../Components/Product';
 import CategoriesList from './CategoriesList';
 import Input from '../Components/Input';
 import Button from '../Components/Button';
+import Teste from '../Components/Teste';
 
 class ProductList extends Component {
   constructor() {
@@ -58,7 +59,7 @@ class ProductList extends Component {
       <div>
         <Input onChange={ this.handleInput } />
         <Button onClick={ () => this.onClickButton(valueInput) } />
-        { products.map((prod) => <Product product={ prod } key={ prod.id } />) }
+        { products.map((prod) => <Product product={ prod } key={ prod.id } search={ products } />) }
         <CategoriesList onClick={ (event) => this.onClickCategory(event.target.value) } />
       </div>
     );

@@ -1,4 +1,6 @@
 import React from 'react';
+import * as api from '../services/api';
+
 
 class CategoryList extends React.Component {
   constructor() {
@@ -7,16 +9,24 @@ class CategoryList extends React.Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-
+      products: [],
+      categories: [],
     };
   }
 
+  componentDidMount() {
+    api.getCategories().then((category) => {
+      this.setState({ categories: category });
+    });
+  }
+
   handleClick({ target }) {
-    console.log(target.id)
+    const { onFilter } = this.props;
+    onFilter(target.id, undefined);
   }
 
   render() {
-    const { categories } = this.props;
+    const { categories } = this.state;
     return (
       <div className="category-container">
         <h3>Escolha a categoria:</h3>

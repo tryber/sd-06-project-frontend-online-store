@@ -37,15 +37,31 @@
   }
 }
 
-.product-list {
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.category-container {
+  text-align: left;
+  background-color: rgb(170, 170, 170);
+  width: 300px;
+  height: 100%;
+}
+
+.product-list-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  /* text-align: center; */
+  background-color: rgb(204, 196, 196);
+  width: 100vmax;
 }
 
 .product-card {
   border: 1px solid black;
   border-radius: 8px;
   margin: 10px 15px;
-  width: 250px
+  width: 250px;
+  cursor: pointer;
 }

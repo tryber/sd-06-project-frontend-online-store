@@ -7,11 +7,8 @@ class Product extends React.Component {
     return (
       <div data-testid="product" className="div-product">
         <img src={ image } alt="Product" />
-        <h4>{ title }</h4>
-        <p>
-          R$:
-          { price }
-        </p>
+        <h5>{ title }</h5>
+        <p>{ `R$: ${price}` }</p>
       </div>
     );
   }

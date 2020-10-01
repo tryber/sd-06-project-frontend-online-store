@@ -28,7 +28,7 @@ class ProductDetails extends React.Component {
             ))}
           </ul>
         </div>
-        <EvaluationForm productId={ product.id }/>
+        <EvaluationForm productId={ product.id } />
       </div>
     );
   }
@@ -43,6 +43,7 @@ ProductDetails.propTypes = {
         thumbnail: PropTypes.string,
         price: PropTypes.number,
         attributes: PropTypes.array,
+        id: PropTypes.string,
       }),
     }),
   }).isRequired,

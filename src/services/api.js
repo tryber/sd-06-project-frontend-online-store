@@ -18,18 +18,18 @@ export async function getProductsFromQuery(query) {
 
 export async function saveEvaluation(productId, evaluation) {
   const value = localStorage.getItem(productId);
-  let evaluations = []
-  if(value != null) {
+  let evaluations = [];
+  if (value != null) {
     evaluations = JSON.parse(value);
   }
-    evaluations.push(evaluation);
-    localStorage.setItem(productId, JSON.stringify(evaluations));
+  evaluations.push(evaluation);
+  localStorage.setItem(productId, JSON.stringify(evaluations));
 }
 
 export async function getEvaluations(productId) {
   const value = localStorage.getItem(productId);
-  let evaluations = []
-  if(value != null) {
+  let evaluations = [];
+  if (value != null) {
     evaluations = JSON.parse(value);
   }
   return evaluations;

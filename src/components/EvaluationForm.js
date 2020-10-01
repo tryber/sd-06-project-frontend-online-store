@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ContortoEstrelaComponente from './ContornoEstrela';
 import { saveEvaluation, getEvaluations } from '../services/api';
 
@@ -13,6 +14,17 @@ class EvaluationForm extends React.Component {
     this.textChange = this.textChange.bind(this);
     this.clearText = this.clearText.bind(this);
     this.renderClick = this.renderClick.bind(this);
+  }
+
+  componentDidMount() {
+    const { productId } = this.props;
+
+    getEvaluations(productId)
+      .then((result) => {
+        result.forEach((evaluation) => {
+          this.renderText(evaluation.email, evaluation.comentario);
+        });
+      });
   }
 
   textChange({ target }) {
@@ -30,16 +42,14 @@ class EvaluationForm extends React.Component {
   }
 
   renderText(email, texto) {
-    
-
     const user = document.createElement('span');
     user.innerText = email;
     const textsDiv = document.getElementById('texts-div');
     const comment = document.createElement('p');
     comment.innerText = texto;
 
-      textsDiv.appendChild(user)
-      textsDiv.appendChild(comment)
+    textsDiv.appendChild(user);
+    textsDiv.appendChild(comment);
   }
 
   renderClick(productId) {
@@ -48,35 +58,16 @@ class EvaluationForm extends React.Component {
     this.renderText(email, texto);
 
     const evaluation = {
-      'email': email,
-      'nota': 0,
-      'comentario': texto
-    }
-  
-    saveEvaluation(productId, evaluation)
-  } 
-
-  componentDidMount() {
-    const { productId } = this.props;
-    let evaluations = 
-
-    getEvaluations(productId)
-    .then((result) => {
-      result.forEach(evaluation => {
-        this.renderText(evaluation.email, evaluation.comentario)
-      });
-    })
-
-    if(evaluations != null) {
-      
- 
-    }
+      ['email']: email,
+      ['nota']: 0,
+      ['comentario']: texto,
+    };
+    saveEvaluation(productId, evaluation);
   }
 
   render() {
     const { email, texto } = this.state;
     const { productId } = this.props;
-    
     return (
       <div id="main-div">
         <fieldset>
@@ -100,7 +91,12 @@ class EvaluationForm extends React.Component {
               value={ texto }
             />
             <br />
-            <button onClick={ () => { this.renderClick(productId) } } type="button">Avaliar</button>
+            <button
+              onClick={ () => { this.renderClick(productId); } }
+              type="button"
+            >
+              Avaliar
+            </button>
           </form>
         </fieldset>
         <div id="texts-div" />
@@ -108,5 +104,9 @@ class EvaluationForm extends React.Component {
     );
   }
 }
+
+EvaluationForm.propTypes = {
+  productId: PropTypes.string.isRequired,
+};
 
 export default EvaluationForm;

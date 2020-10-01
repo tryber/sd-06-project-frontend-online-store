@@ -22,13 +22,4 @@ class Cards extends Component {
   }
 }
 
-Cards.propTypes = {
-  item: PropTypes.exact({
-    thumbnail: PropTypes.string,
-    title: PropTypes.string,
-    price: PropTypes.number,
-    id: PropTypes.number,
-  }).isRequired,
-};
-
 export default Cards;

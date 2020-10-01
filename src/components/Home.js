@@ -13,7 +13,6 @@ class Home extends React.Component {
     this.returnCategories = this.returnCategories.bind(this);
     this.chooseCategories = this.chooseCategories.bind(this);
 
-
     this.state = {
       search: '',
       products: [],
@@ -21,7 +20,7 @@ class Home extends React.Component {
       selectedCategoryArray: [],
     };
   }
-
+  
   componentDidMount() {
     const categoriesList = [];
     api.getCategories()
@@ -30,7 +29,7 @@ class Home extends React.Component {
         categories: categoriesList,
       }));
   }
-
+  
   handleChanges({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });

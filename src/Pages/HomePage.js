@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CategoriesList from './CategoriesList';
 import ProductList from './ProductList';
 
 class HomePage extends Component {
@@ -20,9 +19,6 @@ class HomePage extends Component {
         <main>
           <ProductList />
         </main>
-        <aside>
-          <CategoriesList />
-        </aside>
       </div>
     );
   }

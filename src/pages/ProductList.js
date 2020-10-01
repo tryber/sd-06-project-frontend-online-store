@@ -9,7 +9,7 @@ class ProductList extends React.Component {
     super();
 
     this.getCategoriesFromApi = this.getCategoriesFromApi.bind(this);
-    this.createRadios = this.createRadios.bind(this);
+    this.renderCategoryNames = this.renderCategoryNames.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getProducts = this.getProducts.bind(this);
 
@@ -43,10 +43,27 @@ class ProductList extends React.Component {
     this.setState({ filter: target.value });
   }
 
-  createRadios() {
+  async showCategoryItems(category) {
+    const { id } = category;
+    console.log(id);
+    const result = await getProductsFromCategoryAndQuery(id, '');
+    console.log(result);
+    this.setState({
+      products: result,
+      hasFilter: true,
+    });
+  }
+
+  renderCategoryNames() {
     const { cat } = this.state;
     return cat.map((item) => (
-      <li key={ item.id } data-testid="category">{ item.name }</li>));
+      <li
+        onClick={ () => this.showCategoryItems(item) }
+        key={ item.id }
+        data-testid="category"
+      >
+        { item.name }
+      </li>));
   }
 
   render() {
@@ -68,7 +85,7 @@ class ProductList extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h2>
         <ul>
-          {this.createRadios()}
+          {this.renderCategoryNames()}
         </ul>
         <div>
           {hasFilter ? <Product products={ products } /> : <p>Vazio</p> }

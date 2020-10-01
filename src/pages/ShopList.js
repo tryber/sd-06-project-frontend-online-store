@@ -57,6 +57,7 @@ class ShopList extends React.Component {
 
   render() {
     const { categories } = this.state;
+    const none = 0;
 
     return (
       <section>

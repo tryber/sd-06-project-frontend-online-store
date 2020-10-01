@@ -8,8 +8,8 @@ function loadLocalStorage() {
 
 export default {
   createStorage: () => {
-    const teste = loadLocalStorage();
-    if (teste.length < 1) saveLocalStorage([]);
+    const arrayProducts = loadLocalStorage();
+    if (arrayProducts.length < 1) saveLocalStorage([]);
   },
 
   getItemsFromLocalStorage: () => loadLocalStorage(),

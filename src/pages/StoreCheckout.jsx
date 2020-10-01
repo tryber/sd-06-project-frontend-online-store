@@ -1,4 +1,5 @@
 import React from 'react';
+import PropType from 'prop-types';
 
 class StoreCheckout extends React.Component {
   constructor() {
@@ -50,7 +51,7 @@ class StoreCheckout extends React.Component {
   handleCheckout(event) {
     event.preventDefault();
 
-    const { push } = this.props.history;
+    const { history: { push } } = this.props;
 
     push('/');
   }
@@ -151,5 +152,11 @@ class StoreCheckout extends React.Component {
     );
   }
 }
+
+StoreCheckout.propTypes = {
+  history: PropType.shape({
+    push: PropType.func,
+  }).isRequired,
+};
 
 export default StoreCheckout;

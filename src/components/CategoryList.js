@@ -2,22 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      selectedCategoryId: '',
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange({ target }) {
-    this.setState({ selectedCategoryId: target.id });
-  }
-
   render() {
-    const { categories } = this.props;
+    const { categories, handleSelect } = this.props;
     const empty = 0;
 
     return (
@@ -31,7 +17,7 @@ class CategoryList extends React.Component {
                   name="category"
                   id={ category.id }
                   data-testid="category"
-                  onChange={ this.handleChange }
+                  onChange={ handleSelect }
                 />
                 {category.name}
               </label>

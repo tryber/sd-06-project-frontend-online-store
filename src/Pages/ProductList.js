@@ -13,12 +13,23 @@ class ProductList extends Component {
     this.handleInput = this.handleInput.bind(this);
     this.onClickCategory = this.onClickCategory.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.onClickCart = this.onClickCart.bind(this);
 
     this.state = {
       valueInput: '',
       categoryId: '',
       products: [],
+      cart: [],
     };
+  }
+
+  onClickCart(prod) {
+    const { cart } = this.state;
+    const prevState = cart;
+    prevState.push(prod);
+    this.setState({
+      cart: prevState,
+    });
   }
 
   async onClickCategory(categoriesId) {
@@ -54,11 +65,12 @@ class ProductList extends Component {
 
   render() {
     const { products, valueInput } = this.state;
+    // const { estado } = this.props;
     return (
       <div>
         <Input onChange={ this.handleInput } />
         <Button nameButton="Buscar" onClick={ () => this.onClickButton(valueInput) } />
-        { products.map((prod) => <Product product={ prod } key={ prod.id } />) }
+        { products.map((prod) => <Product product={ prod } key={ prod.id } onClick={ () => this.onClickCart(prod) } />) }
         <CategoriesList onClick={ (event) => this.onClickCategory(event.target.name) } />
       </div>
     );

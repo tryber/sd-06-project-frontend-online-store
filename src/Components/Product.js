@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
+import Button from './Button';
 
 class Product extends Component {
+
   render() {
-    const { product } = this.props;
+    const { product, onClick } = this.props;
     const { title, thumbnail, price } = product;
     return (
       <div>
         <div data-testid="product">
           <h5>{ title }</h5>
           <img src={ thumbnail } alt="fotografia do produto" />
-          <span>{`R$: ${price}`}</span>
+          <p><span>{`R$: ${price}`}</span></p>
+          <p><Button nameButton="Add to Cart" onClick={ onClick } /></p>
         </div>
       </div>
     );
@@ -18,6 +21,7 @@ class Product extends Component {
 }
 
 Product.propTypes = {
+  onClick: propTypes.func.isRequired,
   product: propTypes.shape({
     title: propTypes.string,
     thumbnail: propTypes.string,

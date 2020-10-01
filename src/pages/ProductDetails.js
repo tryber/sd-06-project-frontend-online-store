@@ -9,7 +9,9 @@ class ProductDetails extends React.Component {
     super(props);
     this.state = {
       loading: true,
+      product: [],
     };
+
     this.fetchProduct = this.fetchProduct.bind(this);
     this.renderDetails = this.renderDetails.bind(this);
   }
@@ -20,10 +22,14 @@ class ProductDetails extends React.Component {
   }
 
   async fetchProduct() {
-    const { match } = this.props;
-    const { id } = match.params;
-    const product = await api.getProduct(id);
-    this.setState({ product, loading: false });
+    try {
+      const { match } = this.props;
+      const { id } = match.params;
+      const product = await api.getProduct(id);
+      this.setState({ product, loading: false });
+    } catch(e) {
+      return (e, 'error fetching product details');
+    }
   }
 
   renderDetails() {
@@ -32,7 +38,7 @@ class ProductDetails extends React.Component {
     return (
       <div>
         <Link to="/">voltar</Link>
-        <div data-testid="product-details-name">{title}</div>
+        <div data-testid="product-detail-name">{title}</div>
         <div>{price}</div>
         <img src={ thumbnail } alt="product" />
       </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { ItemList, Cart } from './pages/index';
+import ItemList from './pages/ItemList';
+import Cart from './pages/Cart';
 
 
 function App() {

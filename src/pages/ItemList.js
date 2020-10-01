@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { ListOfCategories } from './index';
+import ListOfCategories from './ListOfCategories';
 
 
 class ItemList extends Component {

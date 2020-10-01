@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
 
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
     this.state = {
       cartItems,
 
     };
     this.handleProductQuantityAltering = this.handleProductQuantityAltering.bind(this);
+  }
+
+  componentWillUnmount() {
+    const { cartItems } = this.state;
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
   handleProductQuantityAltering({ target }, id) {
@@ -29,11 +36,6 @@ class ShoppingCart extends Component {
     this.setState({
       cartItems: productsUpDateQuantity,
     });
-  }
-
-  componentWillUnmount() {
-    const { cartItems } = this.state;
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }
 
   render() {
@@ -69,7 +71,13 @@ class ShoppingCart extends Component {
             </div>
           ))}
           <button type="button">Limpar carrinho</button>
-          <button type="button">Finalizar compra</button>
+          <Link
+            to="/checkout"
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+
+          </Link>
         </div>
       );
     }

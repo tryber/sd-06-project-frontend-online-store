@@ -7,15 +7,23 @@ class ProductList extends Component {
     super(props);
     console.log(props)
     this.state = {
-      product: {},
+      product: '',
       response: false,
     }
   }
 
+  componentDidMount() {
+    this.setState({ product: this.handleOnclick() })
+  }
+  
+  async handleOnclick() {
+    const response = await Api.getProductsFromCategoryAndQuery(undefined, this.state.userInput);
+    console.log(response);
+  }
+
   render() {
-    const { results } = this.state.product;
     const { response } = this.state;
-    console.log(results);
+    console.log(this.state.product);
   return response ? <p>loading...</p> : <p>ok</p>;
    
   }

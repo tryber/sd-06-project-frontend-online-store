@@ -11,20 +11,26 @@ class Main extends Component {
     super();
 
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
+    this.onCategoriesChange = this.onCategoriesChange.bind(this);
 
     this.state = {
       products: [],
     };
   }
 
-  onSearchTextSubmit(event) {
+  async onSearchTextSubmit(event) {
     event.preventDefault();
     const { value } = document.getElementById('search-input');
-    this.setState(async () => {
-      const data = await getProductsFromCategoryAndQuery(value);
-      const { results } = data;
-      this.setState((prevState) => ({ products: [...results, ...prevState.products] }));
-    });
+    const data = await getProductsFromCategoryAndQuery(value);
+    const { results } = data;
+    this.setState((prevState) => ({ products: [...results, ...prevState.products] }));
+  }
+
+  async onCategoriesChange({ target }) {
+    const { value } = target;
+    const data = await getProductsFromCategoryAndQuery('', value);
+    const { results } = data;
+    this.setState({ products: [...results] });
   }
 
   render() {
@@ -34,7 +40,9 @@ class Main extends Component {
       <div>
         <div>
           <SearchBar onSearchTextSubmit={ this.onSearchTextSubmit } />
-          <CategoriesList />
+          <CategoriesList
+            onCategoriesChange={ this.onCategoriesChange }
+          />
           <ShoppingCartButton />
         </div>
 

@@ -10,9 +10,10 @@ class Home extends React.Component {
     super();
     this.state = {
       products: '',
-      filterId: 'MLB5672',
+      filterId: '',
       searchQuery: '',
       loading: false,
+      productsOnCart: [],
     };
     this.handleSearch = this.handleSearch.bind(this);
     this.handleState = this.handleState.bind(this);
@@ -28,20 +29,29 @@ class Home extends React.Component {
   handleState({ target }) {
     const { name } = target;
     const value = (target.type === 'checkbox') ? target.checked : target.value;
-    this.setState({ [name]: value });
+    if (name === 'productsOnCart') {
+      this.setState((actualState) => ({ [name]: [...actualState.productsOnCart,
+        JSON.parse(value)] }));
+    } else if (name === 'filterId') {
+      this.setState({ [name]: value }, () => {
+        this.handleSearch();
+      });
+    } else {
+      this.setState({ [name]: value });
+    }
   }
 
   render() {
-    const { searchQuery, products, loading } = this.state;
+    const { searchQuery, products, loading, productsOnCart } = this.state;
     const initMsg = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     return (
       <div className="home-container">
         <div className="header-container">
-          <ButtonShoppingCart />
+          { ButtonShoppingCart(productsOnCart) }
         </div>
         <div className="store-container">
           <div className="categories-container">
-            <CategoryListener />
+            <CategoryListener handleCategory={ this.handleState } />
           </div>
           <div className="gallery-container">
             <div>
@@ -63,7 +73,7 @@ class Home extends React.Component {
             </div>
             <div>
               { products === '' ? <p data-testid="home-initial-message">{ initMsg }</p>
-                : ListCards(products) }
+                : ListCards(products, this.handleState) }
               {(loading === true) ? <p>Loading...</p> : ''}
             </div>
           </div>

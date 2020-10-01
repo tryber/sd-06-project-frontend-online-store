@@ -16,6 +16,9 @@ class ProductCard extends React.Component {
         >
           Detalhes do produto
         </Link>
+        <button type="button" data-testid="product-detail-add-to-cart">
+          <Link to="/Cart">Adicionar ao carrinho</Link>
+        </button>
       </div>
     );
   }

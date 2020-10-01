@@ -60,7 +60,8 @@ class ShopList extends React.Component {
   }
 
   addToCart(product) {
-    this.setState({ cartList: [ ...this.state.cartList, product ] });
+    const { cartList } = this.state;
+    this.setState({ cartList: [...cartList, product] });
   }
 
   render() {
@@ -83,7 +84,9 @@ class ShopList extends React.Component {
             <Link
               to={ { pathname: '/cart', state: cartList } }
               data-testid="shopping-cart-button"
-            >Carrinho</Link>
+            >
+              Carrinho
+            </Link>
           </button>
           <div className="productsList">
             <RenderProduct

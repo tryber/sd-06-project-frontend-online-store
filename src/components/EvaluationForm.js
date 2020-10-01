@@ -1,5 +1,6 @@
 import React from 'react';
 import ContortoEstrelaComponente from './ContornoEstrela';
+import { saveEvaluation } from '../services/api';
 
 class EvaluationForm extends React.Component {
   constructor() {
@@ -32,11 +33,20 @@ class EvaluationForm extends React.Component {
     const user = document.createElement('span');
     user.innerText = email;
     const textsDiv = document.getElementById('texts-div');
-    const evaluation = document.createElement('p');
-    evaluation.innerText = texto;
+    const comment = document.createElement('p');
+    comment.innerText = texto;
+    const productId = "qualquercoisa"
+    const evaluation = {
+      'email': email,
+      'nota': 0,
+      'comentario': texto
+    }
+  
+    saveEvaluation(productId, evaluation)
+
     return (
       textsDiv.appendChild(user),
-      textsDiv.appendChild(evaluation),
+      textsDiv.appendChild(comment),
       this.clearText()
     );
   }

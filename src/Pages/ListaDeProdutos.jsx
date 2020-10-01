@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CampoBusca from '../Components/CampoBusca';
-import Produtos from '../Components/Produtos';
+import Produto from '../Components/Produto';
 import * as Api from '../services/api';
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -15,17 +15,18 @@ class ListaDeProdutos extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    this.fetchAPI();
+  handleClick(props) {
+    this.fetchAPI(props);
   }
 
-  async fetchAPI() {
-    const { categoryId, search } = this.state;
+  async fetchAPI(props) {
+    const { categoryId } = this.state;
     const response = await Api.getProductsFromCategoryAndQuery(
       categoryId,
-      search,
+      props.search,
     );
     const { results } = response;
+    console.log(results);
     this.setState({
       produtos: results,
     });
@@ -33,13 +34,15 @@ class ListaDeProdutos extends Component {
 
   render() {
     const { produtos } = this.state;
+    const zero = 0;
     return (
       <div>
         <CampoBusca onClick={ this.handleClick } />
         <ul>
-          {produtos.map((produto) => (
-            <Produtos key={ produto.id } produto={ produto } />
-          ))}
+          { produtos.length === zero ? <p>Nenhum produto foi encontrado</p>
+            : produtos.map((produto) => (
+              <Produto key={ produto.id } produto={ produto } />
+            ))}
         </ul>
       </div>
     );

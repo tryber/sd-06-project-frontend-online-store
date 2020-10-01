@@ -2,21 +2,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Produtos extends Component {
+class Produto extends Component {
   render() {
     const { produto } = this.props;
     const { title, price, thumbnail } = produto;
     return (
       <div data-testid="product">
         <h3>{ title }</h3>
-        <img src={ thumbnail } alt={ title } />
+        <img src={ thumbnail } alt="foto" />
         <p>{ price }</p>
       </div>
     );
   }
 }
 
-Produtos.propTypes = {
+Produto.propTypes = {
   produto: PropTypes.shape({
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -24,4 +24,4 @@ Produtos.propTypes = {
   }).isRequired,
 };
 
-export default Produtos;
+export default Produto;

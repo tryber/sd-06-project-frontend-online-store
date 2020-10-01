@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import Form from '../components/form';
 
 export default class Product extends Component {
   constructor(props) {
@@ -43,6 +44,7 @@ export default class Product extends Component {
           R$:
           {product.price}
         </p>
+        <Form />
       </div>
     );
   }

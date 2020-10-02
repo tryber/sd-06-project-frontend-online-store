@@ -22,10 +22,6 @@
   flex-flow: row wrap;
 }
 
-.red {
-  border: 1px solid red;
-}
-
 .productCard {
   border: 1px solid grey;
   display: flex;
@@ -42,4 +38,8 @@
 
 .checkout-form input {
   margin: 0 10px;
+}
+
+.red {
+  border: 1px solid red;
 }

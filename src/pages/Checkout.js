@@ -6,7 +6,7 @@ class Checkout extends React.Component {
   render() {
     const zero = 0;
     const { location: { state: { cartList } } } = this.props;
-    console.log(cartList);
+
     return (
       <div>
         { Object.values(cartList).map((product) => (

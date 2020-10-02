@@ -20,7 +20,7 @@ class ProductsList extends Component {
     this.fetchProducts();
   }
 
-  fetchProducts =  async (query) => {
+  async fetchProducts(query) {
     const category = await this.props.categoriesId;
     const getProducts = await Api.getProductsFromCategoryAndQuery(query, category)
     if (getProducts !== undefined) {

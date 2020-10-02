@@ -13,7 +13,7 @@ class CartPage extends Component {
           (cartItems.length <= 0 )
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : cartItems.map(cart => (
-            <div>
+            <div key={cart.id}>
               <img src={cart.thumbnail}/>
               <h2 data-testid="shopping-cart-product-name" >{cart.title}</h2>
               <div className="quantidade" >

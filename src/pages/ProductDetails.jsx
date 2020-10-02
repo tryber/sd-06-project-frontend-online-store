@@ -16,12 +16,27 @@ class ProductDetails extends Component {
     this.fetchProducts();
   }
 
+
   async fetchProducts() {
+    const { id, name } = this.props.match.params;
+    const getProducts = await Api.getProductsFromCategoryAndQuery(name)
+      .then(resolve => resolve.results);
+    this.setState({ cards: getProducts }, () => {
+      this.setState({
+        product: this.filterProduct(id),
+      });
+    });
+  }
+  filterProduct(id) {
+    return this.state.cards.find((element) => element.id === id);
+  }
+
+  /*async fetchProducts() {
     const { id } = this.props.match.params;
-    const response = await Api.getProductFromId(id);
+    const response = await Api.getProductFromId(id)
     this.setState({product: response})
     
-  }
+  }*/
 
   render() {
     if (this.state.product !== undefined){

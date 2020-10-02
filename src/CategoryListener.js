@@ -23,6 +23,7 @@ class CategoryListener extends React.Component {
         {apiCategories.map((category) => (
           <div key={ category.id }>
             <input
+              id={ category.id }
               type="radio"
               name="filterId"
               data-testid="category"

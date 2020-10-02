@@ -1,17 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart } from 'react-icons/fa';
+import IconCart from './IconCart';
 
 function ButtonShoppingCart(productsOnCart) {
+  const cartMsg = 'Seu carrinho está vazio';
+  const msgTestId = 'shopping-cart-empty-message';
   return (
     <div>
       <Link
         to={ { pathname: '/cart', state: { productsOnCart } } }
         data-testid="shopping-cart-button"
       >
-        <FaShoppingCart />
+        { IconCart(productsOnCart.length) }
       </Link>
-      <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+      { (productsOnCart.length < 1) ? <p data-testid={ msgTestId }>{cartMsg}</p> : '' }
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api'
 import '../styles/Home.css';
 import cart from './../img/cart.png';
+import ProductList from '../components/ProductList';
 
 export default class Home extends Component {
   constructor() {
@@ -11,7 +12,10 @@ export default class Home extends Component {
     this.state = {
       categories: [],
       products: [],
+      emptyList: true,
     }
+
+    this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
     this.getCategory = this.getCategory.bind(this);
     this.categoryApi = this.categoryApi.bind(this);
   }
@@ -22,9 +26,20 @@ export default class Home extends Component {
     this.setState({ categories });
   }
 
+  async onSearchTextSubmit(event) {
+    event.preventDefault();
+    const { value } = document.querySelector('#search-input');
+    const resp = await api.getProductsFromCategoryAndQuery('', value);
+    this.setState(() => (
+      (resp)
+        ? { products: resp.results, emptyList: false }
+        : { products: [], emptyList: true }
+    ));
+  }
+
   async categoryApi(categoryId) {
     const products = await api.getProductsFromCategoryAndQuery(categoryId, '');
-    this.setState({ products: products.results });
+    this.setState({ products: products.results, emptyList: false });
   }
 
   getCategory(event) {
@@ -33,16 +48,16 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, products, emptyList } = this.state;
     return (
       <Fragment>
         <section>
-          { 
+          {
             categories.map(category => {
               return (
                 <label htmlFor="category" data-testid="category" key={category.name}>
-                  <input type="radio" name="category" value={ category.id } onChange={this.getCategory} />
-                  { category.name }
+                  <input type="radio" name="category" value={category.id} onChange={this.getCategory} />
+                  { category.name}
                 </label>
               );
             })
@@ -51,12 +66,24 @@ export default class Home extends Component {
         <main>
           <div className="contain-main">
             <label htmlFor="search-input" data-testid="home-initial-message">
-              <input id="search-input" />
+              <input
+                id="search-input"
+                type="text"
+                name="search-text-field"
+                data-testid="query-input"
+              />
               Digite algum termo de pesquisa ou escolha uma categoria.
             </label>
+            <button
+              name="search"
+              type="submit"
+              data-testid="query-button"
+              onClick={this.onSearchTextSubmit}
+            >Search</button>
             <Link to="/cart" data-testid="shopping-cart-button">
-              <img src={ cart } alt="icone do carrinho" className="icon"/>
+              <img src={cart} alt="icone do carrinho" className="icon" />
             </Link>
+            <ProductList products={products} emptyList={emptyList} />
           </div>
         </main>
       </Fragment>

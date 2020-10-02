@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import ProductsList from '../components/ProductsList';
 import SearchBar from '../components/SearchBar';
-import { arrayProductList } from '../dados/arrayProductList';
+import { arrayProductList } from '../dados/cart_arrayProductList';
 import * as api from '../services/api';
 
 class HomePage extends Component {
@@ -51,13 +51,8 @@ class HomePage extends Component {
     });
   }
 
-  // async func1() {
-  //   await req = api.getCategories();
-  // }
-
   render() {
     const { cards } = this.state;
-    // console.log();
 
     return (
       <div>

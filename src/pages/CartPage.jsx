@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart } from '../dados/cart';
+import { cart } from '../dados/cart_arrayProductList';
 
 class CartPage extends Component {  
   render() {

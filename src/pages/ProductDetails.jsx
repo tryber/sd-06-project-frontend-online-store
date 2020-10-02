@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { arrayProductList } from '../dados/arrayProductList';
-import { cart } from '../dados/cart';
+import { cart, arrayProductList } from '../dados/cart_arrayProductList';
 
 class ProductDetails extends Component {
   constructor() {

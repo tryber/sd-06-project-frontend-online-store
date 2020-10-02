@@ -2,42 +2,64 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import ProductsList from '../components/ProductsList';
-// import * as Api from '../services/api';
+import SearchBar from '../components/SearchBar';
+import { arrayProductList } from '../dados/cart_arrayProductList';
+import * as api from '../services/api';
 
 class HomePage extends Component {
   constructor() {
     super();
-    this.updateId = this.updateId.bind(this);
+
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
+    this.fetchProducts = this.fetchProducts.bind(this);
+
     this.state = {
-      categoriesId: '',
-      // card: [],
-    }
+      cards: [],
+      query: '',
+      categoryID: '',
+      errorMessage: '',
+    };
   }
 
-  updateId(id) {
+  componentDidUpdate() {
+    arrayProductList.push(...this.state.cards);
+  }
+
+  handleStateChange({ target }) {
+    const { name, value } = target;
+
     this.setState({
-      categoriesId: id,
-    }) 
+      [name]: value,
+    });
   }
 
-  // fetchProducts = async (query) => {
-  //   const categoriesId = this.props.categoriesId
-  //   const getProducts = await Api.getProductsFromCategoryAndQuery(query, categoriesId)
-  //     .then(resolve => resolve.results);
-  //   this.setState({
-  //     card: getProducts,
-  //   });
-  // }
-  
+  handleCategoryClick(id) {
+    this.setState({ categoryID: id }, () => {
+      this.fetchProducts();
+    });
+  }
+
+  async fetchProducts() {
+    const { query, categoryID } = this.state;
+
+    const cards = await api.getProductsFromCategoryAndQuery(categoryID, query)
+      .then(resolve => resolve.results);
+
+    this.setState({
+      cards,
+    });
+  }
+
   render() {
+    const { cards } = this.state;
+
     return (
       <div>
-        {/* <ProductsList fetchProductsList={this.fetchProducts} card={this.state.card}
-        categoriesId={this.state.categoriesId}/> */}
-        <ProductsList categoriesId={this.state.categoriesId} />
         <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
-        <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
-        <Categories updateId={this.updateId} />
+        <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
+        <ProductsList cards={cards} />
+        <Categories handleCategoryClick={this.handleCategoryClick} />
       </div>
     );
   }

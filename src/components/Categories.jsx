@@ -1,50 +1,53 @@
 import React, { Component } from 'react';
-import * as Api from '../services/api'; 
+import * as api from '../services/api';
 
 
 class Categories extends Component {
   constructor() {
     super();
-    this.inputOnClick = this.inputOnClick.bind(this);
+
+    this.handleClick = this.handleClick.bind(this);
+    
     this.state = {
       name: [],
     };
   }
-  
+
   componentDidMount() {
     this.fetchProducts();
   }
 
   fetchProducts = async () => {
-    const getCategories = await Api.getCategories()
+    const getCategories = await api.getCategories()
       .then(resolve => resolve);
     this.setState({
       name: getCategories,
     });
   }
 
-  inputOnClick({ target }) {
-    const updateId = this.props.updateId;
-    updateId(target.id);
+  handleClick({ target }) {
+    const { handleCategoryClick } = this.props;
+    
+    handleCategoryClick(target.id);
   }
 
   render() {
     const { name } = this.state;
+    
     return (
       <nav>
         <ul>
           {name.map(names => (
-              <label htmlFor={names.id}>
-                <input
-                type="radio" id={names.id} 
-                key={names.id} name="category" onClick={this.inputOnClick}
+            <label htmlFor={names.id} key={names.id}>
+              <input
+                type="radio" id={names.id}
+                name="categoryID"
                 data-testid="category"
-                />
-                {names.name}
-              </label>
-          )
-
-          )}
+                onClick={this.handleClick}
+              />
+              {names.name}
+            </label>
+          ))}
         </ul>
       </nav>
     );

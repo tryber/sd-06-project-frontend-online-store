@@ -1,64 +1,51 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as Api from '../services/api';
+import { cart } from '../dados/cart_arrayProductList';
+
 
 class ProductsList extends Component {
   constructor() {
     super();
-    this.inputOnChange = this.inputOnChange.bind(this);
-    this.buttonOnClick = this.buttonOnClick.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
-    this.state = {
-      card: [],
-      value: '',
-    };
+    this.handleAddCart = this.handleAddCart.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchProducts();
-  }
-
-  fetchProducts = async (query) => {
-    const getProducts = await Api.getProductsFromCategoryAndQuery(query)
-      .then(resolve => resolve.results);
-    this.setState({
-      card: getProducts,
-    });
-  }
-  
-  buttonOnClick() {
-    const value = this.state.value;
-    this.fetchProducts(value);
-  }
-  
-  inputOnChange({ target }) {
-    this.setState({
-      value: target.value,
-    });
+  handleAddCart({ target }) {
+    const product = this.props.cards.find(element => element.id === target.id);
+    cart.push(product);
   }
 
   render() {
-    const { card, value } = this.state;
+    const { cards } = this.props;
+
+    if (cards.length === 0) {
+      return (
+        <h1 data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</h1>
+      );
+    }
 
     return (
-      <div>
-        <section >
-          <input type="text" data-testid="query-input" value={value} onChange={this.inputOnChange} />
-          <button onClick={this.buttonOnClick} data-testid="query-button">botao</button>
-        </section>
-        {card.map((product) => {
+      <section>
+        {cards.map((product) => {
           const { title, thumbnail, price, id } = product;
+
           return (
-            <Link to={`/details/${value}/${id}`} data-testid="product-detail-link">
-              <section key={id}>
-                <p>{title}</p>
-                <img src={thumbnail} />
-                <p>{`R$${price}`}</p>
-              </section>
-            </Link>
+            <div key={id} data-testid="product">
+              <Link to={`/details/${id}`} data-testid="product-detail-link" key={id} >
+                <section>
+                  <p>{title}</p>
+                  <img src={thumbnail} alt="" />
+                  <p>{`R$${price}`}</p>
+                </section>
+              </Link>
+              <button
+                type="button"
+                id={id} data-testid="product-add-to-cart"
+                onClick={this.handleAddCart}
+              >Adicionar ao cart</button>
+            </div>
           );
-        })}
-      </div>
+        })};
+      </section>
     );
   }
 }

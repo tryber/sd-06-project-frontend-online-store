@@ -14,8 +14,9 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { items, addedItems } = this.state;
+    const empty = 0;
 
-    if (items.length === 0) {
+    if (items.length === empty) {
       return (
         <div>
           <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>

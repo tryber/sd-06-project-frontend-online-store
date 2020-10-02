@@ -8,7 +8,13 @@ class ProductList extends React.Component {
     return (
       <div>
         {products
-          .map((product) => <ProductItem key={ product.id } handleClick={ addFromList } product={ product } />)}
+          .map((product) => (
+            <ProductItem
+              key={ product.id }
+              handleClick={ addFromList }
+              product={ product }
+            />
+          ))}
       </div>
     );
   }

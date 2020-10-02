@@ -44,7 +44,11 @@ class App extends React.Component {
           <Route
             path="/cart"
             render={ (props) => (
-              <ShoppingCart { ...props } cartItems={ cartItems } addedItems={ addedItems } />
+              <ShoppingCart
+                { ...props }
+                cartItems={ cartItems }
+                addedItems={ addedItems }
+              />
             ) }
           />
         </Switch>

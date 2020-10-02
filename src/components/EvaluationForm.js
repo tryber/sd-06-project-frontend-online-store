@@ -19,9 +19,11 @@ class EvaluationForm extends React.Component {
   componentDidMount() {
     const { productId } = this.props;
     const evaluations = getEvaluations(productId);
-    evaluations.forEach((evaluation) => {
-          this.renderText(evaluation.email, evaluation.texto);
+    if (evaluations != null) {
+      evaluations.forEach((evaluation) => {
+        this.renderText(evaluation.email, evaluation.texto);
       });
+    }
   }
 
   textChange({ target }) {

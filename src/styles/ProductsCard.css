@@ -1,0 +1,7 @@
+.product-card {
+  display: flex;
+}
+
+.title-card {
+  font-size: 22px;
+}

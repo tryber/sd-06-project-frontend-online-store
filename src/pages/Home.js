@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-import ListCategory from '../../components/ListCategory';
-import ProductList from '../../components/ProductList';
+import ListCategory from '../components/ListCategory';
+import ProductList from '../components/ProductList';
+import SearchEngine from '../components/SearchEngine';
 
-import SearchEngine from '../../components/SearchEngine';
+import '../styles/Home.css';
 
-import './styles.css';
-
-import * as api from '../../services/api';
+import * as api from '../services/api';
 
 class Home extends Component {
   constructor() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ContortoEstrelaComponente from './ContornoEstrela';
-import { saveEvaluation } from '../services/api';
+import { saveEvaluation, getEvaluations } from '../services/api';
 
 class EvaluationForm extends React.Component {
   constructor() {
@@ -18,11 +18,9 @@ class EvaluationForm extends React.Component {
 
   componentDidMount() {
     const { productId } = this.props;
-    getEvaluations(productId)
-      .then((result) => {
-        result.forEach((evaluation) => {
+    const evaluations = getEvaluations(productId);
+    evaluations.forEach((evaluation) => {
           this.renderText(evaluation.email, evaluation.texto);
-        });
       });
   }
 

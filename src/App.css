@@ -43,3 +43,11 @@ body {
 .categoryList {
   list-style: none;
 }
+
+.product-details {
+  display: flex;
+}
+
+.product-main {
+  max-width: 300px;
+}

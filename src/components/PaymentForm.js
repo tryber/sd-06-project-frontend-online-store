@@ -15,6 +15,7 @@ class PaymentForm extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange({ target }) {
@@ -36,15 +37,16 @@ class PaymentForm extends React.Component {
 
   render() {
     const { formValidated } = this.state;
-    const cartList = {};
+
     if (formValidated) {
+      const cartList = {};
       return (<Redirect
         to={ { pathname: '/', state: { cartList } } }
       />);
     }
 
     return (
-      <form>
+      <form className="checkout-form">
         <label htmlFor="fullName">
           Nome completo
           <input
@@ -102,6 +104,7 @@ class PaymentForm extends React.Component {
             onChange={ this.handleChange }
           />
         </label>
+        <button type="button" onClick={ this.handleSubmit }>Finalizar compra</button>
       </form>
     );
   }

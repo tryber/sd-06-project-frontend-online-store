@@ -34,3 +34,12 @@
   max-width: 240px;
   padding: 10px;
 }
+
+.checkout-form label {
+  display: block;
+  margin: 18px 0;
+}
+
+.checkout-form input {
+  margin: 0 10px;
+}

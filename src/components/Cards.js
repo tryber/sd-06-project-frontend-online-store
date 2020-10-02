@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../App.css';
 
-
 class Cards extends Component {
   render() {
     const { item, addtoCart } = this.props;

@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Input from '../Components/Input';
 import Product from '../Components/Product';
 
 class ProductDetails extends Component {
   render() {
     const { location } = this.props;
     const { product } = location;
-    const { available_quantity, condition } = product;
+    const { condition } = product;
     return (
       <div>
         <div className="product-detail-container">
           <Product product={ product } />
           <div className="product-detail-body">
             <h5>Especificações</h5>
-            <p>{`Quantidade Disponível: ${available_quantity}`}</p>
             <p>{`Condições do Produto: ${condition}`}</p>
           </div>
           <div>
-            <Link to="/"><Input value="VOLTAR" /></Link>
+            <Link to="/">VOLTAR</Link>
           </div>
         </div>
       </div>

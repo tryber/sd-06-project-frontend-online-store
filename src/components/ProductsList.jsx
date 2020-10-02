@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { cart } from '../dados/cart';
 
 
 class ProductsList extends Component {
+  constructor() {
+    super();
+    this.handleAddCart = this.handleAddCart.bind(this);
+  }
+
+  handleAddCart({ target }) {
+    const product = this.props.cards.find(element => element.id === target.id);
+    cart.push(product);
+  }
+
   render() {
     const { cards, query } = this.props;
-    
-    if (cards.length === 0) {  
+
+    if (cards.length === 0) {
       return (
         <h1 data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</h1>
       );
@@ -18,13 +29,20 @@ class ProductsList extends Component {
           const { title, thumbnail, price, id } = product;
 
           return (
-            <Link to={`/details/${id}`} data-testid="product-detail-link" key={id} >
-              <section key={id} data-testid="product">
-                <p>{title}</p>
-                <img src={thumbnail} alt='' />
-                <p>{`R$${price}`}</p>
-              </section>
-            </Link>
+            <div key={id} data-testid="product">
+              <Link to={`/details/${id}`} data-testid="product-detail-link" key={id} >
+                <section>
+                  <p>{title}</p>
+                  <img src={thumbnail} alt="" />
+                  <p>{`R$${price}`}</p>
+                </section>
+              </Link>
+              <button
+                type="button"
+                id={id} data-testid="product-add-to-cart"
+                onClick={this.handleAddCart}
+              >Adicionar ao cart</button>
+            </div>
           );
         })};
       </section>

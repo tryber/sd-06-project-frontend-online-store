@@ -7,10 +7,10 @@ import * as api from '../services/api';
 
 class HomePage extends Component {
   constructor() {
-    super()
+    super();
 
     this.handleStateChange = this.handleStateChange.bind(this);
-    this.handleCategoryClick = this.handleCategoryClick.bind(this)
+    this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
 
     this.state = {
@@ -46,8 +46,13 @@ class HomePage extends Component {
     });
   }
 
+  // async func1() {
+  //   await req = api.getCategories();
+  // }
+
   render() {
     const { cards, query } = this.state;
+    // console.log();
 
     return (
       <div>

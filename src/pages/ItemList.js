@@ -55,7 +55,7 @@ class ItemList extends Component {
         { clicked ? filterValues
           .map((iten) => <ListCard key={ iten.title } iten={ iten } />) : '' }
         <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
-        <ListOfCategories />  
+        <ListOfCategories />
       </div>
     );
   }

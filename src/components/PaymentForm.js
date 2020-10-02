@@ -1,11 +1,19 @@
 import React from 'react';
 
 class PaymentForm extends React.Component {
+  constructor(props) {
+
+  }
+
+
   render() {
     return (
-      <div>
-        Formulario de pagamento
-      </div>
+      <form>
+        <label htmlFor="nome-completo">
+          Nome completo
+          <input type="text" data-testid="checkout-fullname" id="nome-completo" />
+        </label>
+      </form>
     );
   }
 }

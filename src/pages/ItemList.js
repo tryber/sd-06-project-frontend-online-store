@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ListCard from '../components/ListCard';
+import ListOfCategories from './ListOfCategories';
 
 class ItemList extends Component {
   constructor() {
@@ -54,6 +55,7 @@ class ItemList extends Component {
         { clicked ? filterValues
           .map((iten) => <ListCard key={ iten.title } iten={ iten } />) : '' }
         <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <ListOfCategories />  
       </div>
     );
   }

@@ -17,6 +17,7 @@ class PagInicial extends Component {
       category: '',
       value: '',
       products: [],
+      empty: '',
     };
   }
 

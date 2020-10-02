@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as Api from '../services/api';
+import * as api from '../services/api';
 
 class ProductDetails extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class ProductDetails extends Component {
 
   async fetchProducts() {
     const { id, name } = this.props.match.params;
-    const getProducts = await Api.getProductsFromCategoryAndQuery(name)
+    const getProducts = await api.getProductsFromCategoryAndQuery(name)
       .then(resolve => resolve.results);
     this.setState({ cards: getProducts }, () => {
       this.setState({

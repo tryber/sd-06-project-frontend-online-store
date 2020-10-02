@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as Api from '../services/api';
+import * as api from '../services/api';
 
 
 class Categories extends Component {
@@ -18,20 +18,21 @@ class Categories extends Component {
   }
 
   fetchProducts = async () => {
-    const getCategories = await Api.getCategories()
+    const getCategories = await api.getCategories()
       .then(resolve => resolve);
     this.setState({
       name: getCategories,
     });
   }
 
-  handleClick(callback, query) {
-    callback(query);
+  handleClick({ target }) {
+    const { handleCategoryClick } = this.props;
+    
+    handleCategoryClick(target.id);
   }
 
   render() {
     const { name } = this.state;
-    const { handleRadioClick } = this.props;
     
     return (
       <nav>
@@ -40,9 +41,9 @@ class Categories extends Component {
             <label htmlFor={names.id} key={names.id}>
               <input
                 type="radio" id={names.id}
-                name="category"
+                name="categoryID"
                 data-testid="category"
-                onClick={() => this.handleClick(handleRadioClick, `${names.id}`)}
+                onClick={this.handleClick}
               />
               {names.name}
             </label>

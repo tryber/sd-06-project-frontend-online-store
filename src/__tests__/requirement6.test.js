@@ -13,7 +13,7 @@ api.getProductsFromCategoryAndQuery.mockImplementation(
   () => Promise.resolve(mockedQueryResult),
 );
 
-describe.skip('Selecionar uma categoria e ver somente produtos daquela categoria', () => {
+describe('Selecionar uma categoria e ver somente produtos daquela categoria', () => {
   it(`Filtra corretamente os produtos de uma página para exibir somente os daquela
       categoria`, async () => {
     render(<App />);

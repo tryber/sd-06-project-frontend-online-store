@@ -3,39 +3,57 @@ import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import ProductsList from '../components/ProductsList';
 import SearchBar from '../components/SearchBar';
+import * as api from '../services/api';
 
 class HomePage extends Component {
   constructor() {
     super()
 
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.handleRadioClick = this.handleRadioClick.bind(this);
+    this.handleStateChange = this.handleStateChange.bind(this);
+    this.handleCategoryClick = this.handleCategoryClick.bind(this)
+    this.fetchProducts = this.fetchProducts.bind(this);
 
     this.state = {
-      inputValue: '',
-      radioValue: '',
+      cards: [],
+      query: '',
+      categoryID: '',
     };
   }
 
-  handleButtonClick(query) {
+  handleStateChange({ target }) {
+    const { name, value } = target;
+  
     this.setState({
-      inputValue: query,
+      [name]: value,
     });
   }
 
-  handleRadioClick(query) {
+  handleCategoryClick(id) {
     this.setState({
-      radioValue: query,
+      categoryID: id,
+    });
+  }
+
+  async fetchProducts() {
+    const { query, categoryID } = this.state;
+
+    const cards = await api.getProductsFromCategoryAndQuery(categoryID, query)
+      .then(resolve => resolve.results);
+
+    this.setState({
+      cards,
     });
   }
 
   render() {
+    const { cards, query } = this.state;
+
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
-        <SearchBar handleButtonClick={this.handleButtonClick} />
-        <ProductsList query={this.state.inputValue} />
-        <Categories handleRadioClick={this.handleRadioClick} />
+        <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
+        <ProductsList cards={cards} query={query} />
+        <Categories handleCategoryClick={this.handleCategoryClick} />
       </div>
     );
   }

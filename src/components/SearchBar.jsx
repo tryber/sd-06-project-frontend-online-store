@@ -1,35 +1,13 @@
 import React, { Component } from 'react';
 
 class SearchBar extends Component {
-  constructor(props) {
-    super(props)
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-
-    this.state = {
-      inputValue: '',
-    };
-  }
-
-
-  handleChange({ target }) {
-    this.setState({
-      inputValue: target.value,
-    });
-  }
-
-  handleClick(callback) {
-    callback(this.state.inputValue);
-  }
-
   render() {
-    const { handleButtonClick } = this.props;
+    const { handleStateChange, fetchCards } = this.props;
 
     return (
       <section>
-        <input onChange={this.handleChange} />
-        <button onClick={() => this.handleClick(handleButtonClick)}>Search</button>
+        <input name="query" onChange={handleStateChange} data-testid="query-input" />
+        <button onClick={fetchCards} data-testid="query-button">Search</button>
       </section>
     );
   }

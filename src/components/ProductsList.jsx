@@ -1,32 +1,33 @@
 import React, { Component } from 'react';
-// import * as Api from '../services/api';
+import { Link } from 'react-router-dom';
+
+
 class ProductsList extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-    };
-  }
-
-  // componentDidMount() {
-  //   this.fetchProducts();
-  // }
-  // fetchProducts = async (query) => {
-  //   const getProducts = await Api.getProductsFromCategoryAndQuery(query)
-  //     .then(resolve => resolve.results);
-  //   this.setState({
-  //     card: getProducts,
-  //   });
-  // }
-  
-  // buttonOnClick() {
-  // }
-
   render() {
-    // const {  } = this.state;
+    const { cards, query } = this.props;
+    
+    if (cards.length === 0) {  
+      return (
+        <h1 data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</h1>
+      );
+    }
 
     return (
-      <h1 data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</h1>
+      <section>
+        {cards.map((product) => {
+          const { title, thumbnail, price, id } = product;
+
+          return (
+            <Link to={`/details/${query}/${id}`} data-testid="product-detail-link">
+              <section key={id} data-testid="product">
+                <p>{title}</p>
+                <img src={thumbnail} alt='' />
+                <p>{`R$${price}`}</p>
+              </section>
+            </Link>
+          );
+        })};
+      </section>
     );
   }
 }

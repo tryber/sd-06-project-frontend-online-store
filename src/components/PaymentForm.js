@@ -28,12 +28,13 @@ class PaymentForm extends React.Component {
     Object.keys(this.state).forEach((state) => {
       if (estado[state] === '') {
         document.getElementById(state).className = 'red';
-        console.log(state);
+      } else if (state !== 'formValidated') {
+        document.getElementById(state).className = '';
       }
     });
     const invalidInputs = document.getElementsByClassName('red');
-    console.log(invalidInputs);
-    if (!invalidInputs) {
+    const zero = 0;
+    if (invalidInputs.length === zero) {
       this.setState({ formValidated: true });
     }
   }
@@ -71,7 +72,7 @@ class PaymentForm extends React.Component {
         <label htmlFor="cpf">
           CPF
           <input
-            type="number"
+            type="text"
             data-testid="checkout-cpf"
             id="cpf"
             maxLength="11"
@@ -81,7 +82,7 @@ class PaymentForm extends React.Component {
         <label htmlFor="phone">
           Telefone
           <input
-            type="number"
+            type="text"
             data-testid="checkout-phone"
             id="phone"
             maxLength="11"

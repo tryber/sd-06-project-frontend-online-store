@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Cart from '../images/cart.png';
 import * as api from '../services/api';
 import ProductsList from './productsList';
 
@@ -27,20 +29,29 @@ export default class CategoryList extends Component {
 
   async searchApiProducts(categoryId, query) {
     await api.getProductsFromCategoryAndQuery(categoryId, query).then((res) => {
-      this.setState(
-        {
-          products: res.results,
-        },
-        console.log(res.results),
-      );
+      this.setState({
+        products: res.results,
+      });
     });
   }
 
   render() {
     const { categoryId, products } = this.state;
     const { query, categories } = this.props;
+
     return (
       <div>
+        <Link to="/cart">
+          <button
+            type="button"
+            data-testid="shopping-cart-button"
+            width="50px"
+            src={ Cart }
+            alt="card"
+          >
+            Carrinho
+          </button>
+        </Link>
         <button
           type="button"
           data-testid="query-button"
@@ -63,7 +74,12 @@ export default class CategoryList extends Component {
           ))}
         </ul>
         <ul>
-          <ProductsList products={ products } categoryId={ categoryId } query={ query } />
+          <ProductsList
+            getProductToCart={ this.getProductToCart }
+            products={ products }
+            categoryId={ categoryId }
+            query={ query }
+          />
         </ul>
       </div>
     );

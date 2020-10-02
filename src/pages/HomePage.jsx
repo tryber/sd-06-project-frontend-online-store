@@ -17,20 +17,21 @@ class HomePage extends Component {
       cards: [],
       query: '',
       categoryID: '',
+      errorMessage: '',
     };
   }
 
   handleStateChange({ target }) {
     const { name, value } = target;
-  
+
     this.setState({
       [name]: value,
     });
   }
 
   handleCategoryClick(id) {
-    this.setState({
-      categoryID: id,
+    this.setState({ categoryID: id }, () => {
+      this.fetchProducts();
     });
   }
 

@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/cart" component={ CartPage } />
-        <Route path="/details/:name/:id" component={ ProductDetails } />
+        <Route path="/details/:id" component={ ProductDetails } />
         <Route path="/" component={ HomePage } />
       </Switch>
     </BrowserRouter>

@@ -18,7 +18,7 @@ class ProductsList extends Component {
           const { title, thumbnail, price, id } = product;
 
           return (
-            <Link to={`/details/${query}/${id}`} data-testid="product-detail-link">
+            <Link to={`/details/${id}`} data-testid="product-detail-link" key={id} >
               <section key={id} data-testid="product">
                 <p>{title}</p>
                 <img src={thumbnail} alt='' />

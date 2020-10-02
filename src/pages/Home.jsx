@@ -55,8 +55,8 @@ export default class Home extends Component {
           {
             categories.map(category => {
               return (
-                <label htmlFor="category" data-testid="category" key={category.name}>
-                  <input type="radio" name="category" value={category.id} onChange={this.getCategory} />
+                <label htmlFor="category" key={category.name}>
+                  <input data-testid="category" type="radio" name="category" value={category.id} onClick={this.getCategory} />
                   { category.name}
                 </label>
               );

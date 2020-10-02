@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Cart from '../images/cart.png';
 import * as api from '../services/api';
 import ProductsList from './productsList';
 
@@ -46,7 +45,6 @@ export default class CategoryList extends Component {
             type="button"
             data-testid="shopping-cart-button"
             width="50px"
-            src={ Cart }
             alt="card"
           >
             Carrinho

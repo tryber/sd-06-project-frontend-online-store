@@ -14,17 +14,17 @@ class ShopList extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.addToCart = this.addToCart.bind(this);
     const { location } = this.props;
-    let cartListNull = {};
+    let currentCart = {};
 
     if (location.state) {
       const { location: { state: { cartList } } } = this.props;
-      cartListNull = cartList;
+      currentCart = cartList;
     }
     this.state = {
       categories: [],
       query: '',
       products: [],
-      cartList: cartListNull,
+      cartList: currentCart,
       selectedCategory: '',
       loading: false,
     };

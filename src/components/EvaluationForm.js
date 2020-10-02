@@ -16,16 +16,16 @@ class EvaluationForm extends React.Component {
     this.renderClick = this.renderClick.bind(this);
   }
 
-  componentDidMount() {
-    const { productId } = this.props;
+  // componentDidMount() {
+  //   const { productId } = this.props;
 
-    getEvaluations(productId)
-      .then((result) => {
-        result.forEach((evaluation) => {
-          this.renderText(evaluation.email, evaluation.texto);
-        });
-      });
-  }
+  //   getEvaluations(productId)
+  //     .then((result) => {
+  //       result.forEach((evaluation) => {
+  //         this.renderText(evaluation.email, evaluation.texto);
+  //       });
+  //     });
+  // }
 
   textChange({ target }) {
     const { name, value } = target;

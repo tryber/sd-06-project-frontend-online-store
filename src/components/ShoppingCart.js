@@ -5,12 +5,15 @@ import imgCart from '../img/imgCart.jpg';
 class ShoppingCart extends React.Component {
   constructor(props) {
     super();
-    const { cartItems } = props;
-    this.state = { items: [...cartItems] };
+    const { cartItems, addedItems } = props;
+    this.state = {
+      items: [...cartItems],
+      addedItems,
+    };
   }
 
   render() {
-    const { items } = this.state;
+    const { items, addedItems } = this.state;
 
     if (items.length === 0) {
       return (
@@ -23,12 +26,13 @@ class ShoppingCart extends React.Component {
 
     return (
       items.map((item) => {
-        const { id, title, thumbnail, price } = item;
+        const { id, title, thumbnail } = item;
+
         return (
           <div key={ id }>
-            <h3>{ title }</h3>
+            <h3 data-testid="shopping-cart-product-name">{ title }</h3>
             <img alt="Product in the cart" src={ thumbnail } />
-            <p>{ price }</p>
+            <p data-testid="shopping-cart-product-quantity">{ addedItems[`${id}`] }</p>
           </div>
         );
       })
@@ -36,6 +40,9 @@ class ShoppingCart extends React.Component {
   }
 }
 
-
+ShoppingCart.propTypes = {
+  cartItems: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  addedItems: PropTypes.shape().isRequired,
+};
 
 export default ShoppingCart;

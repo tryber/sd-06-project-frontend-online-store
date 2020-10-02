@@ -9,16 +9,28 @@ class App extends React.Component {
   constructor() {
     super();
     this.handleAddToCart = this.handleAddToCart.bind(this);
-    this.state = { cartItems: [] };
+    this.state = {
+      cartItems: [],
+      addedItems: {},
+    };
   }
 
   handleAddToCart(product) {
-    const { cartItems } = this.state;
-    this.setState({ cartItems: [...cartItems, product] });
+    const { cartItems, addedItems } = this.state;
+    if (Object.keys(addedItems).includes(product.id)) {
+      addedItems[`${product.id}`] += 1;
+      this.setState({ addedItems });
+    } else {
+      addedItems[`${product.id}`] = 1;
+      this.setState({
+        cartItems: [...cartItems, product],
+        addedItems,
+      });
+    }
   }
 
   render() {
-    const { cartItems } = this.state;
+    const { cartItems, addedItems } = this.state;
     return (
       <BrowserRouter>
         <Switch>
@@ -32,7 +44,7 @@ class App extends React.Component {
           <Route
             path="/cart"
             render={ (props) => (
-              <ShoppingCart { ...props } cartItems={ cartItems } />
+              <ShoppingCart { ...props } cartItems={ cartItems } addedItems={ addedItems } />
             ) }
           />
         </Switch>

@@ -14,6 +14,11 @@ class PaymentForm extends React.Component {
     };
   }
 
+  handleChange({ target }) {
+    const { id, value } = target;
+    this.setState({ [id]: value });
+  }
+
   render() {
     return (
       <form>

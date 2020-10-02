@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import '../App.css';
 
@@ -7,31 +8,43 @@ class ListaCategorias extends React.Component {
     super();
 
     this.state = {
-      categoryList: []
-    }
+      categoryList: [],
+    };
   }
 
   componentDidMount() {
-    api.getCategories()
-      .then(categories => {
-        this.setState({
-          categoryList: categories,
-        })
-      })
+    api.getCategories().then((categories) => {
+      this.setState({
+        categoryList: categories,
+      });
+    });
   }
 
   render() {
+    const { categoryList } = this.state;
+    const { categoryFilter } = this.props;
     return (
       <div className="category-list">
         <h3>Categorias:</h3>
-        <ul>
-          {this.state.categoryList.map(category => {
-            return <li key={category.id} data-testid="category">{category.name}</li>
-          })}
-        </ul>
+        {categoryList.map((category) => (
+          <form key={ category.id }>
+            <input
+              data-testid="category"
+              type="checkbox"
+              value={ category.id }
+              name="category"
+              onClick={ (event) => categoryFilter(event) }
+            />
+            <label htmlFor="category">
+              { category.name }
+            </label>
+          </form>
+        ))}
       </div>
-    )
+    );
   }
 }
+
+ListaCategorias.propTypes = { categoryFilter: PropTypes.func.isRequired };
 
 export default ListaCategorias;

@@ -5,6 +5,7 @@ class PaymentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      formValidated: false,
       fullName: '',
       email: '',
       cpf: '',
@@ -27,14 +28,20 @@ class PaymentForm extends React.Component {
         document.getElementById(state).className = 'red';
       }
     });
+    const invalidInputs = document.getElementsByClassName('red');
+    if (invalidInputs) {
+      this.setState({ formValidated: true });
+    }
   }
 
   render() {
-    const handler = this.handleChange;
+    const { formValidated } = this.state;
     const cartList = {};
-    if (formValidated) <Redirect
-      to={ { pathname: '/', state: { cartList } }}
-    />
+    if (formValidated) {
+      return (<Redirect
+        to={ { pathname: '/', state: { cartList } } }
+      />);
+    }
 
     return (
       <form>
@@ -44,7 +51,7 @@ class PaymentForm extends React.Component {
             type="text"
             data-testid="checkout-fullname"
             id="fullName"
-            onChange={ handler }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="email">
@@ -53,7 +60,7 @@ class PaymentForm extends React.Component {
             type="text"
             data-testid="checkout-email"
             id="email"
-            onChange={ handler }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="cpf">
@@ -63,7 +70,7 @@ class PaymentForm extends React.Component {
             data-testid="checkout-cpf"
             id="cpf"
             maxLength="11"
-            onChange={ handler }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="phone">
@@ -73,7 +80,7 @@ class PaymentForm extends React.Component {
             data-testid="checkout-phone"
             id="phone"
             maxLength="11"
-            onChange={ handler }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="cep">
@@ -83,7 +90,7 @@ class PaymentForm extends React.Component {
             data-testid="checkout-cep"
             id="cep"
             maxLength="11"
-            onChange={ handler }
+            onChange={ this.handleChange }
           />
         </label>
         <label htmlFor="address">
@@ -92,7 +99,7 @@ class PaymentForm extends React.Component {
             data-testid="checkout-address"
             id="address"
             maxLength="11"
-            onChange={ handler }
+            onChange={ this.handleChange }
           />
         </label>
       </form>

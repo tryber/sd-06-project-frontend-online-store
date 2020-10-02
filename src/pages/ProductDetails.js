@@ -6,7 +6,7 @@ import CartBtn from '../services/CartBtn';
 class ProductDetails extends React.Component {
   constructor(props) {
     super();
-    const product = props.location.state;
+    const product = props.location.state ? props.location.state.product : null;
     this.state = { product };
   }
 
@@ -27,7 +27,7 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { location: { state: { title, thumbnail, attibutes } } } = this.props;
+    const { product: { title, thumbnail, attibutes } } = this.state;
     return (
       <div>
         <div>

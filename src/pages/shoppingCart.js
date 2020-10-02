@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CreateCart from '../components/createCart';
 
 export default class shoppingCart extends Component {
   constructor() {
@@ -32,29 +33,7 @@ export default class shoppingCart extends Component {
         </h1>
       </div>
     ) : (
-      <div>
-        <div data-testid="shopping-cart-empty-message">
-          {cart.map((element) => (
-            <div key={ element.id }>
-              <img src={ element.thumbnail } alt={ element.title } />
-              <h4 data-testid="shopping-cart-product-name">{element.title}</h4>
-              <p>
-                R$
-                {element.price}
-              </p>
-              <p data-testid="shopping-cart-product-quantity">1</p>
-            </div>
-          ))}
-        </div>
-        <button
-          type="button"
-          onClick={ () => {
-            localStorage.removeItem('cartLocal');
-          } }
-        >
-          Deletar todos
-        </button>
-      </div>
+      <CreateCart localStorageMount={ this.localStorageMount } cart={ cart } />
     );
   }
 }

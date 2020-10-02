@@ -50,7 +50,7 @@ export default class ProductsList extends Component {
               data-testid="product-detail-link"
               to={ `/${categoryId}/${element.id}` }
             >
-              <h2>Vejá Mais</h2>
+              <h2>Veja Mais</h2>
             </Link>
             <button
               type="button"

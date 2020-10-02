@@ -4,22 +4,23 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   render() {
-    const { props, addToCart } = this.props;
-    const { title, price, id } = props;
+    const { product, addToCart, cartList } = this.props;
+    const { title, price, id, thumbnail} = product;
 
     return (
-      <div data-testid="product" className="productCard">
-        <div>{title}</div>
-        <div>{price}</div>
-        <Link to={ { pathname: `productDetails/${id}`, state: props } }>
+      <div className="productCard" data-testid="product">
+        <div className="product-card-item">{title}</div>
+        <div className="product-card-item">{price}</div>
+        <img src={ thumbnail } className="product-img"  alt="product" />
+        <Link to={ { pathname: `productDetails/${id}`, state: { product, cartList } } }>
           <div data-testid="product-detail-link">View Details</div>
         </Link>
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => { addToCart(props); } }
+          onClick={ () => addToCart(product) }
         >
-          Adicionar ao carrinho
+          add to card
         </button>
       </div>
     );

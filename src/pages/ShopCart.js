@@ -2,30 +2,26 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 class ShopCart extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { location } = this.props;
-    const { state } = location;
-    this.state = {
-      cartItems: state,
-    };
-  }
-
   render() {
     const empty = 0;
-    const { cartItems } = this.state;
+    const { location: { state: cartList } } = this.props;
 
-    if (cartItems.length > empty) {
+
+    if (Object.values(cartList).length > empty) {
       return (
         <div>
-          <p data-testid="shopping-cart-product-quantity">
-            {cartItems.length}
-          </p>
-          { cartItems.map((product) => (
-            <p data-testid="shopping-cart-product-name" key={ product.id }>
-              {product.title}
-            </p>
+
+          { Object.values(cartList).map((product) => (
+            <div className="cartItem-container" key={ product.id }>
+              <p data-testid="shopping-cart-product-name">
+                {product.title}
+              </p>
+              <p data-testid="shopping-cart-product-quantity">
+                {product.quantity}
+              </p>
+            </div>
+
+
           ))}
         </div>
       );
@@ -36,7 +32,7 @@ class ShopCart extends React.Component {
 
 ShopCart.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.arrayOf(PropTypes.any).isRequired,
+    state: PropTypes.objectOf(PropTypes.any).isRequired,
   }).isRequired,
 };
 

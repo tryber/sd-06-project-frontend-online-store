@@ -5,7 +5,7 @@ import Loading from './Loading';
 
 class RenderProduct extends React.Component {
   render() {
-    const { loading, products, addToCart } = this.props;
+    const { loading, products, addToCart, cartList } = this.props;
     const empty = 0;
 
     if (loading) {
@@ -14,8 +14,9 @@ class RenderProduct extends React.Component {
       return products.map((product) => (
         <ProductCard
           key={ product.id }
-          props={ product }
+          product={ product }
           addToCart={ addToCart }
+          cartList={ cartList }
         />));
     }
     return <span>Faça uma busca ou selecione uma categoria.</span>;

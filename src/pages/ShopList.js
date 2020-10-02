@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
-import { CategoryList, RenderProduct } from '../components';
+import { CategoryList, RenderProduct, Cart } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -12,12 +13,18 @@ class ShopList extends React.Component {
     this.loadCategories = this.loadCategories.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    const { location } = this.props;
+    let cartListNull = {};
 
+    if (location.state) {
+      const { location: { state: { cartList } } } = this.props;
+      cartListNull = cartList;
+    }
     this.state = {
       categories: [],
-      cartList: [],
       query: '',
       products: [],
+      cartList: cartListNull,
       selectedCategory: '',
       loading: false,
     };
@@ -61,11 +68,21 @@ class ShopList extends React.Component {
 
   addToCart(product) {
     const { cartList } = this.state;
-    this.setState({ cartList: [...cartList, product] });
+
+    const ourProduct = product;
+
+    if (cartList[product.id]) {
+      cartList[product.id].quantity += 1;
+      this.setState({ cartList });
+    } else {
+      this.setState({ cartList: { ...cartList, [product.id]: product } });
+      ourProduct.quantity = 1;
+    }
   }
 
   render() {
     const { categories, loading, products, cartList } = this.state;
+
 
     return (
       <section className="wrapper-category-shoplist">
@@ -80,19 +97,13 @@ class ShopList extends React.Component {
           >
             Pesquisar
           </button>
-          <button type="button">
-            <Link
-              to={ { pathname: '/cart', state: cartList } }
-              data-testid="shopping-cart-button"
-            >
-              Carrinho
-            </Link>
-          </button>
+          <Cart cartList={ cartList } />
           <div className="productsList">
             <RenderProduct
               loading={ loading }
               products={ products }
               addToCart={ this.addToCart }
+              cartList={ cartList }
             />
           </div>
         </div>
@@ -100,5 +111,19 @@ class ShopList extends React.Component {
     );
   }
 }
+ShopList.defaultProps = {
+  location: { state: { cartList: {} } },
+
+};
+
+ShopList.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      cartList: PropTypes.objectOf(PropTypes.any),
+    }),
+
+  }),
+};
+
 
 export default ShopList;

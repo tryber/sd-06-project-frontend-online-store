@@ -22,7 +22,8 @@ class ListOfCategories extends Component {
   }
 
   async handleOnChange({ target }) {
-    await api.getProductsFromCategoryAndQuery(target.value, '');
+    const { handleSelectOption } = this.props;
+    handleSelectOption(target.value);
   }
 
   render() {

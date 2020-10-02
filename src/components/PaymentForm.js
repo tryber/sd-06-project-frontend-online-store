@@ -24,13 +24,16 @@ class PaymentForm extends React.Component {
   }
 
   handleSubmit() {
+    const estado = { ...this.state };
     Object.keys(this.state).forEach((state) => {
-      if (state === '') {
+      if (estado[state] === '') {
         document.getElementById(state).className = 'red';
+        console.log(state);
       }
     });
     const invalidInputs = document.getElementsByClassName('red');
-    if (invalidInputs) {
+    console.log(invalidInputs);
+    if (!invalidInputs) {
       this.setState({ formValidated: true });
     }
   }

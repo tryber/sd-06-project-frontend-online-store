@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 class ProductCard extends React.Component {
   render() {
     const { product, addToCart, cartList } = this.props;
-    const { title, price, id, thumbnail} = product;
+    const { title, price, id, thumbnail } = product;
 
     return (
       <div className="productCard" data-testid="product">
         <div className="product-card-item">{title}</div>
         <div className="product-card-item">{price}</div>
-        <img src={ thumbnail } className="product-img"  alt="product" />
+        <img src={ thumbnail } className="product-img" alt="product" />
         <Link to={ { pathname: `productDetails/${id}`, state: { product, cartList } } }>
           <div data-testid="product-detail-link">View Details</div>
         </Link>

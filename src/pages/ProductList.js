@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Product from '../components/Product';
+import { Product, Loading } from '../components';
+//import Product from '../components/Product';
+//import Loading from '../components/Loading';
 import shoppingCart from '../images/shopping-cart.png';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../App.css';
@@ -10,7 +12,7 @@ class ProductList extends React.Component {
     super();
 
     this.getCategoriesFromApi = this.getCategoriesFromApi.bind(this);
-    this.renderCategoryNames = this.renderCategoryNames.bind(this);
+    this.renderCategoriesNames = this.renderCategoriesNames.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.getProducts = this.getProducts.bind(this);
     this.setSelectedCategory = this.setSelectedCategory.bind(this);
@@ -38,8 +40,6 @@ class ProductList extends React.Component {
         categories: requestReturn,
       });
     });
-    //const result = await getCategories();
-    //this.setState({ categories: result });
   }
 
   async getProducts() {
@@ -68,7 +68,7 @@ class ProductList extends React.Component {
     this.setState({ filterText: target.value });
   }
 
-  renderCategoryNames() {
+  renderCategoriesNames() {
     const { categories } = this.state;
     return categories.map((item, index) => (
       <label htmlFor={ index } key={ item.id }>
@@ -92,7 +92,11 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { hasFilter } = this.state;
+    const { hasFilter, isLoading } = this.state;
+    if (isLoading) {
+      return (<Loading />);
+    }
+    
     return (
       <div>
         <header className="header-container">
@@ -120,7 +124,7 @@ class ProductList extends React.Component {
           </h2>
         </header>
         <form className="categories">
-          {this.renderCategoryNames()}
+          {this.renderCategoriesNames()}
         </form>
         <div>
           {hasFilter ? this.renderProducts() : <p /> }

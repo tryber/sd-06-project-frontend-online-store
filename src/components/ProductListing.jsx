@@ -51,8 +51,7 @@ export default class ProductListing extends Component {
   renderCards() {
     const { products, empty } = this.state;
     const mapCards = products.map((product) => (
-      <ProductCard key={product.id} title={product.title}
-      thumbnail={product.thumbnail} price={product.price}
+      <ProductCard key={product.id} product={product}
     />));
     return empty ? <span>Nenhum produto foi encontrado</span> : mapCards;
   }

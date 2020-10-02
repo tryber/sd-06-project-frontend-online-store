@@ -8,9 +8,11 @@ class ProductsList extends Component {
     this.inputOnChange = this.inputOnChange.bind(this);
     this.buttonOnClick = this.buttonOnClick.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.handleAddCart = this.handleAddCart.bind(this);
     this.state = {
-      card: [],
+      card: undefined,
       value: '',
+      cart: [],
     };
   }
 
@@ -40,6 +42,13 @@ class ProductsList extends Component {
     });
   }
 
+
+  handleAddCart({ target }) {
+    const product = this.state.card.find(element => element.id === target.id);    
+    this.props.cart(product)
+    
+  }
+
   render() {
     const { card, value } = this.state;
     
@@ -53,20 +62,25 @@ class ProductsList extends Component {
           {card.map((product) => {
             const { title, thumbnail, price, id } = product;
             return (
-              <Link to={`/details/${id}`} data-testid="product-detail-link" key={id}>
-                <section data-testid="product">
+              <div key={id} data-testid="product">
+              <Link to={`/details/${id}`} data-testid="product-detail-link">
+                <section >
                   <p>{title}</p>
                   <img src={thumbnail} />
                   <p>{`R$${price}`}</p>
                 </section>
-              </Link>
+                </Link>
+                <button type="button" id={id} data-testid="product-add-to-cart" onClick={this.handleAddCart}>Adicionar ao cart</button>
+                </div>
+              
             );
           })}
         </div>
       );
     } else {
-     return <h1>Aguarde...</h1>
+     return <h1>Digite algum termo de pesquisa ou escolha uma categoria.</h1>
     }
+    
   } 
 }
 

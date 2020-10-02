@@ -7,7 +7,7 @@ class ProductDetails extends Component {
     super();
     this.fetchProducts = this.fetchProducts.bind(this);
     this.state = {
-      product: {},
+      product:  {},
       loading: true
     };
   }
@@ -29,16 +29,20 @@ class ProductDetails extends Component {
       return (
         <section>
           <Link to="/">Voltar</Link>
+          <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
           <section key={id}>
             <h1 data-testid="product-detail-name">{title}</h1>
             <img src={thumbnail} />
             <span>{`R$${price}`}</span>
           </section>
-          <button type="button">Adicionar ao cart</button>
+          <button type="button" id={id} data-testid="product-detail-add-to-cart" onClick={() => {this.props.cartAdd(this.state.product)}}>Adicionar ao cart</button>
         </section>
       );
     } else {
-        return <h1 data-testid="product-detail-name">Pequeno Principe, O</h1>
+      return (
+        <h1>Loading...</h1>
+      );
+        
     }
   } 
 }

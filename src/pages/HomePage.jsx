@@ -10,7 +10,7 @@ class HomePage extends Component {
     this.updateId = this.updateId.bind(this);
     this.state = {
       categoriesId: '',
-      // card: [],
+      cart: [],
     }
   }
 
@@ -19,6 +19,8 @@ class HomePage extends Component {
       categoriesId: id,
     }) 
   }
+
+  
 
   // fetchProducts = async (query) => {
   //   const categoriesId = this.props.categoriesId
@@ -34,10 +36,10 @@ class HomePage extends Component {
       <div>
         {/* <ProductsList fetchProductsList={this.fetchProducts} card={this.state.card}
         categoriesId={this.state.categoriesId}/> */}
-        <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
+        <Link data-testid="shopping-cart-button" to={{pathname: `/cart` , state: {cart: this.state.cart}}}>CART - Itens no carrinho: {this.props.cartAdd}</Link>
         <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
         <Categories updateId={this.updateId} />
-        <ProductsList categoriesId={this.state.categoriesId} />
+        <ProductsList categoriesId={this.state.categoriesId} cart={this.props.cartAdd}/>
       </div>
     );
   }

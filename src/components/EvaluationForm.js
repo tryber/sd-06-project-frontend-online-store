@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ContortoEstrelaComponente from './ContornoEstrela';
-import { saveEvaluation } from '../services/api';
+import { saveEvaluation, getEvaluations } from '../services/api';
 
 class EvaluationForm extends React.Component {
   constructor() {
@@ -16,16 +16,15 @@ class EvaluationForm extends React.Component {
     this.renderClick = this.renderClick.bind(this);
   }
 
-  // componentDidMount() {
-  //   const { productId } = this.props;
-
-  //   getEvaluations(productId)
-  //     .then((result) => {
-  //       result.forEach((evaluation) => {
-  //         this.renderText(evaluation.email, evaluation.texto);
-  //       });
-  //     });
-  // }
+  componentDidMount() {
+    const { productId } = this.props;
+    const evaluations = getEvaluations(productId);
+    if (evaluations != null) {
+      evaluations.forEach((evaluation) => {
+        this.renderText(evaluation.email, evaluation.texto);
+      });
+    }
+  }
 
   textChange({ target }) {
     const { name, value } = target;

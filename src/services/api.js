@@ -26,7 +26,7 @@ export async function saveEvaluation(productId, evaluation) {
   localStorage.setItem(productId, JSON.stringify(evaluations));
 }
 
-export async function getEvaluations(productId) {
+export function getEvaluations(productId) {
   const value = localStorage.getItem(productId);
   let evaluations = [];
   if (value != null) {

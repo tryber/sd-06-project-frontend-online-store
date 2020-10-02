@@ -1,57 +1,38 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FaArrowAltCircleLeft, FaBoxOpen } from 'react-icons/fa';
-import IconCart from './IconCart';
+import { FaArrowAltCircleLeft, FaBoxOpen, FaShoppingCart } from 'react-icons/fa';
 import CartProductCard from './CartProductCard';
 
-class ShoppingCart extends React.Component {
-  constructor(props) {
-    super();
-    const products = (props.location.state.productsOnCart !== undefined)
-      ? props.location.state.productsOnCart : [];
-    this.state = {
-      cartProducts: products,
-    };
-  }
-
-  render() {
-    const { cartProducts } = this.state;
-    const msgEmptyCart = 'Seu carrinho está vazio';
-    return (
+function ShoppingCart(productsOnCart, handleCart) {
+  const msgEmptyCart = 'Seu carrinho está vazio';
+  const idsOnCart = [];
+  productsOnCart.map((product) => {
+    const verifyIfAlreadyExists = idsOnCart.includes(product.id);
+    if (!verifyIfAlreadyExists) idsOnCart.push(product.id);
+    return true;
+  });
+  return (
+    <div>
       <div>
+        <Link to="/"><FaArrowAltCircleLeft /></Link>
         <div>
-          <Link to="/"><FaArrowAltCircleLeft /></Link>
-          <div>
-            { IconCart(cartProducts.length) }
-            <p>Carrinho de Compras</p>
-          </div>
-        </div>
-        <div>
-          { (cartProducts.length < 1) ? <FaBoxOpen /> : ''}
-          { (cartProducts < 1)
-            ? <p data-testid="shopping-cart-empty-message">{msgEmptyCart}</p> : '' }
-
-          { cartProducts.map((product) => {
-            const quantity = cartProducts.filter((prod) => prod.id === product.id).length;
-            return CartProductCard(product, quantity);
-          }) }
+          <FaShoppingCart />
+          <p>Carrinho de Compras</p>
         </div>
       </div>
-    );
-  }
+      <div>
+        { (productsOnCart.length < 1) ? <FaBoxOpen /> : ''}
+        { (productsOnCart < 1)
+          ? <p>{msgEmptyCart}</p> : '' }
+
+        { idsOnCart.map((id) => {
+          const prodInstances = productsOnCart.filter((product) => product.id === id);
+          const quantity = prodInstances.length;
+          return CartProductCard(prodInstances[0], quantity, handleCart);
+        }) }
+      </div>
+    </div>
+  );
 }
 
 export default ShoppingCart;
-
-ShoppingCart.defaultProps = {
-  location: {},
-};
-
-ShoppingCart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      productsOnCart: PropTypes.arrayOf(PropTypes.object),
-    }),
-  }),
-};

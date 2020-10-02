@@ -1,1 +1,2 @@
-export const arrayProductList = [];
+const arrayProductList = [];
+export default arrayProductList;

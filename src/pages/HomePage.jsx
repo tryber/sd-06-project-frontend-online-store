@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import ProductsList from '../components/ProductsList';
 import SearchBar from '../components/SearchBar';
+import { arrayProductList } from '../dados/arrayProductList';
 import * as api from '../services/api';
 
 class HomePage extends Component {
@@ -19,6 +20,10 @@ class HomePage extends Component {
       categoryID: '',
       errorMessage: '',
     };
+  }
+
+  componentDidUpdate() {
+    arrayProductList.push(...this.state.cards);
   }
 
   handleStateChange({ target }) {
@@ -51,14 +56,14 @@ class HomePage extends Component {
   // }
 
   render() {
-    const { cards, query } = this.state;
+    const { cards } = this.state;
     // console.log();
 
     return (
       <div>
         <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
         <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
-        <ProductsList cards={cards} query={query} />
+        <ProductsList cards={cards} />
         <Categories handleCategoryClick={this.handleCategoryClick} />
       </div>
     );

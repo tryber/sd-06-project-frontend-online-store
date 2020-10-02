@@ -15,7 +15,7 @@ class ProductsList extends Component {
   }
 
   render() {
-    const { cards, query } = this.props;
+    const { cards } = this.props;
 
     if (cards.length === 0) {
       return (

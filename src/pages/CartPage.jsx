@@ -14,7 +14,7 @@ class CartPage extends Component {
           (cart <= 0 )
           ? <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           : cart.map(product => (
-            <div>
+            <div key={product.id}>
               <img src={product.thumbnail}/>
               <h2 data-testid="shopping-cart-product-name" >{product.title}</h2>
               <div className="quantidade" >

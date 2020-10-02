@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import StarRow from './starRow';
+import EvaluationList from './evaluationList';
 
 
 class Form extends Component {
@@ -24,29 +26,30 @@ class Form extends Component {
     });
   }
 
-  ratingChange({ target }) {
-    const { name, value } = target;
+  ratingChange(rating) {
     this.setState({
-      [name]: value,
+      rating,
     });
   }
 
   handleAddSubmit() {
-    const { name, email, evaluation, rating } = this.state;
-    const obj = {
+    const { name, email, evaluation, rating, evaluations } = this.state;
+
+    const objNewEvaluation = {
+      id: evaluations.length + 1,
       name,
       email,
       evaluation,
       rating,
     };
-    const { evaluations } = this.state;
-    this.setState({
-      evaluations: evaluations.push(obj),
-    });
-  }
 
-  starButton({ target }) {
-    target.innerHTML = '★';
+    this.setState({
+      rating: 0,
+      evaluation: '',
+      name: '',
+      email: '',
+      evaluations: evaluations.concat([objNewEvaluation]),
+    });
   }
 
   render() {
@@ -89,27 +92,14 @@ class Form extends Component {
                 value={ evaluation }
               />
             </label>
-            <label htmlFor="rating" name="rating">
-              Avaliação:
-              <input
-                id="rating"
-                type="number"
-                onChange={ this.ratingChange }
-                name="rating"
-                value={ rating }
-              />
-            </label>
-            <div>
-              <button type="button" onClick={ this.starButton }>☆</button>
-              <button type="button" onClick={ this.starButton }>☆</button>
-              <button type="button" onClick={ this.starButton }>☆</button>
-              <button type="button" onClick={ this.starButton }>☆</button>
-              <button type="button" onClick={ this.starButton }>☆</button>
-            </div>
+            <StarRow
+              id="rating"
+              ratingChange={ this.ratingChange }
+              rating={ rating }
+            />
             <button type="button" onClick={ this.handleAddSubmit }>Enviar</button>
           </form>
-
-          <p>{ evaluations }</p>
+          <EvaluationList evaluations={ evaluations } />
         </fieldset>
       </div>
     );

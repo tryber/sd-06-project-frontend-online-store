@@ -4,6 +4,7 @@ import ListCards from './ListCards';
 import CategoryListener from './CategoryListener';
 import ButtonShoppingCart from './ButtonShoppingCart';
 import './Home.css';
+import ShoppingCart from './ShoppingCart';
 
 class Home extends React.Component {
   constructor() {
@@ -75,6 +76,11 @@ class Home extends React.Component {
               { products === '' ? <p data-testid="home-initial-message">{ initMsg }</p>
                 : ListCards(products, this.handleState) }
               {(loading === true) ? <p>Loading...</p> : ''}
+            </div>
+            <div>
+              <aside>
+                <ShoppingCart />
+              </aside>
             </div>
           </div>
         </div>

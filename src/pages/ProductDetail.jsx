@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import MyCart from './MyCart';
+import AddToCartButton from './AddToCartButton';
 
 class ProductDetail extends React.Component {
   constructor() {
@@ -22,9 +23,10 @@ class ProductDetail extends React.Component {
         <img alt="Product" src={ thumbnail } />
         <div className="product-card-body">
           <h4 data-testid="product-detail-name">{title}</h4>
-          <p>{`R$ ${price}`}</p>
+          <p>{`R$ ${(price).toFixed(2)}`}</p>
           <p></p>
         </div>
+        <AddToCartButton product={ product } testId="product-detail-add-to-cart" />
       </div>
     )
   }

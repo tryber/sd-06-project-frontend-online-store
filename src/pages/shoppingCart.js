@@ -37,7 +37,7 @@ export default class shoppingCart extends Component {
           {cart.map((element) => (
             <div key={ element.id }>
               <img src={ element.thumbnail } alt={ element.title } />
-              <h3 data-testid="shopping-cart-product-name">{element.title}</h3>
+              <h4 data-testid="shopping-cart-product-name">{element.title}</h4>
               <p>
                 R$
                 {element.price}

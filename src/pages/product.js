@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
-import Form from '../components/form';
+import ProductPage from '../components/productPage';
 
 export default class Product extends Component {
   constructor(props) {
@@ -9,16 +9,28 @@ export default class Product extends Component {
     const { match } = this.props;
     const { id, category } = match.params;
     this.searchApiProducts = this.searchApiProducts.bind(this);
+    this.getProductToCart = this.getProductToCart.bind(this);
     this.state = {
       product: [],
       id,
       category,
-      // attributes: [],
+      shoppingCart: [],
     };
   }
 
   componentDidMount() {
     this.searchApiProducts();
+  }
+
+  getProductToCart(product) {
+    const { shoppingCart } = this.state;
+    const oldArray = shoppingCart;
+    oldArray.push(product);
+    this.setState({
+      shoppingCart: oldArray,
+    });
+    const CartLocal = JSON.stringify(shoppingCart);
+    localStorage.setItem('cartLocal', CartLocal);
   }
 
   async searchApiProducts() {
@@ -29,7 +41,6 @@ export default class Product extends Component {
       .then((res) => {
         this.setState({
           product: res[0],
-          // attributes: res[0].attributes,
         });
       });
   }
@@ -37,15 +48,7 @@ export default class Product extends Component {
   render() {
     const { product } = this.state;
     return (
-      <div>
-        <h1 data-testid="product-detail-name">{ product.title }</h1>
-        <img src={ product.thumbnail } alt={ product.title } />
-        <p>
-          R$:
-          {product.price}
-        </p>
-        <Form />
-      </div>
+      <ProductPage product={ product } getProductToCart={ this.getProductToCart } />
     );
   }
 }

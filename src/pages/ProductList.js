@@ -18,9 +18,10 @@ class ProductList extends React.Component {
 
     this.state = {
       categories: [],
-      filter: '',
+      filterText: '',
       products: [],
       hasFilter: false,
+      isLoading: true,
       // selectedCategory: '',
     };
   }
@@ -30,13 +31,20 @@ class ProductList extends React.Component {
   }
 
   async getCategoriesFromApi() {
-    const result = await getCategories();
-    this.setState({ categories: result });
+    this.setState({ isLoading: true }, async () => {
+      const requestReturn = await getCategories();
+      this.setState({
+        isLoading: false,
+        categories: requestReturn,
+      });
+    });
+    //const result = await getCategories();
+    //this.setState({ categories: result });
   }
 
   async getProducts() {
-    const { filter } = this.state;
-    const result = await getProductsFromCategoryAndQuery('', filter);
+    const { filterText } = this.state;
+    const result = await getProductsFromCategoryAndQuery('', filterText);
     this.setState({
       products: result,
       hasFilter: true,
@@ -57,7 +65,7 @@ class ProductList extends React.Component {
   }
 
   handleChange({ target }) {
-    this.setState({ filter: target.value });
+    this.setState({ filterText: target.value });
   }
 
   renderCategoryNames() {

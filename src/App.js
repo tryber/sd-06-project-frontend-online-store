@@ -7,13 +7,12 @@ import ProductDetail from './Pages/ProductDetail';
 
 import './App.css';
 
-
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route
-          path="/product-detail/:idprod"
+          path="/product-detail/:id"
           render={ (props) => <ProductDetail { ...props } /> }
         />
         <Route path="/shopping-cart" component={ ShoppingCart } />

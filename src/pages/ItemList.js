@@ -24,7 +24,7 @@ class ItemList extends Component {
 
   async handleClick() {
     const { searchValeu } = this.state;
-    const searchedItens = await getProductsFromCategoryAndQuery('', searchValeu);
+    const searchedItens = await getProductsFromCategoryAndQuery(searchValeu);
     console.log(searchedItens.results);
     this.setState({
       clicked: true,

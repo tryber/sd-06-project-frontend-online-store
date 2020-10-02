@@ -5,7 +5,6 @@ class ListOfCategories extends Component {
   constructor() {
     super();
     this.categoriesList = this.categoriesList.bind(this);
-    this.handleOnChange = this.handleOnChange.bind(this);
 
     this.state = {
       categories: [],
@@ -21,27 +20,17 @@ class ListOfCategories extends Component {
     this.setState({ categories: response });
   }
 
-  async handleOnChange({ target }) {
-    await api.getProductsFromCategoryAndQuery(target.value, '');
-  }
-
   render() {
     const { categories } = this.state;
 
     return (
       <div>
         <h4> Categorias:</h4>
-        <select onChange={ this.handleOnChange }>
+        <ul>
           {categories.map((category) => (
-            <option
-              key={ category.id }
-              value={ category.id }
-              data-testid="category"
-            >
-              { category.name}
-            </option>
+            <li key={ category.id } data-testid="category">{ category.name }</li>
           ))}
-        </select>
+        </ul>
       </div>
     );
   }

@@ -4,9 +4,14 @@ import { Link } from 'react-router-dom';
 
 class ShoppingCartButton extends React.Component {
   render() {
+    const { addtoCart } = this.props;
+
     return (
       <section>
-        <Link data-testid="shopping-cart-button" to="/shoppingcart">Carrinho de compras</Link>
+        <Link data-testid="shopping-cart-button" to={{
+          pathname: "/shoppingcart",
+          cartItems: addtoCart,
+        }}>Carrinho de compras</Link>
       </section>
     )
   }

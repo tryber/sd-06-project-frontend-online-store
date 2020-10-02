@@ -2,6 +2,7 @@ import React from 'react';
 import { Component } from 'react';
 import * as Api from '../services/api';
 import ProductList from './ProductList';
+import ShoppingCartButton from './ShoppingCartButton';
 
 class CategoryDisplay extends Component {
     constructor() {
@@ -10,10 +11,12 @@ class CategoryDisplay extends Component {
             categories: [],
             categoryID: '',
             items: [],
+            cartItems: [],
         };
 
         this.handleSelect = this.handleSelect.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.addtoCart = this.addtoCart.bind(this);
     }
 
     componentDidMount() {
@@ -40,11 +43,19 @@ class CategoryDisplay extends Component {
         })
     }
 
+    addtoCart(item) {
+        const { cartItems } = this.state;
+        this.setState({ cartItems: [...cartItems, item]});
+    }
+
     render() {
-        const { categories, items, categoryID } = this.state;
+        const { categories, items, categoryID, cartItems } = this.state;
         const { query } = this.props;
         return (
             <div className="category-field">
+                <section className="shopping-car-button">
+                    <ShoppingCartButton addtoCart= { cartItems } />
+                </section>
                 <p>Categorias</p>
                 <ul>
                 {categories.map(element => (
@@ -62,7 +73,7 @@ class CategoryDisplay extends Component {
                     Buscar
                 </button>
                 <section className="product-list">
-                    <ProductList items={ items } query={ query } />
+                    <ProductList items={ items } query={ query } addtoCart= { this.addtoCart } />
                 </section>
             </div>
         )

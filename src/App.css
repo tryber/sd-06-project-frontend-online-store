@@ -1,4 +1,4 @@
-/* body {
+body {
   background-color: silver;
   box-sizing: border-box;
   font-size: 16px;
@@ -45,7 +45,7 @@ a {
   border-radius: 3px;
   cursor: pointer;
   flex-direction: column;
-  height: 250px;
+  height: 300px;
   margin: 5px;
   overflow: hidden;
   width: 180px;
@@ -71,4 +71,4 @@ a {
   font-size: 12px;
   font-weight: 700;
   margin: 0 0 12px;
-} */
+}

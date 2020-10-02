@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FaShoppingCart, FaArrowAltCircleLeft, FaBoxOpen } from 'react-icons/fa';
+import { FaArrowAltCircleLeft, FaBoxOpen } from 'react-icons/fa';
+import IconCart from './IconCart';
 import CartProductCard from './CartProductCard';
 
 class ShoppingCart extends React.Component {
@@ -21,10 +22,10 @@ class ShoppingCart extends React.Component {
       <div>
         <div>
           <Link to="/"><FaArrowAltCircleLeft /></Link>
-          <Link to="/cart" data-testid="shopping-cart-button">
-            <FaShoppingCart />
-            Carrinho de Compras
-          </Link>
+          <div>
+            { IconCart(cartProducts.length) }
+            <p>Carrinho de Compras</p>
+          </div>
         </div>
         <div>
           { (cartProducts.length < 1) ? <FaBoxOpen /> : ''}

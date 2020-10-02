@@ -2,7 +2,7 @@ import React from 'react';
 import './StoreProductCard.css';
 import { Link } from 'react-router-dom';
 
-function StoreProductCard(product, handleState, quantityOnCart) {
+function StoreProductCard(product, handleCart) {
   const { price, title, thumbnail, id } = product;
   return (
     <div className="card" key={ id } data-testid="product">
@@ -13,7 +13,7 @@ function StoreProductCard(product, handleState, quantityOnCart) {
         <div data-testid="product-detail-name">
           <Link
             to={ { pathname: `/product-details/${id}`,
-              state: { product, quantityOnCart },
+              state: { product },
             } }
             data-testid="product-detail-link"
           >
@@ -27,7 +27,7 @@ function StoreProductCard(product, handleState, quantityOnCart) {
           name="productsOnCart"
           data-testid="product-add-to-cart"
           value={ JSON.stringify(product) }
-          onClick={ handleState }
+          onClick={ handleCart }
         >
           Adicionar ao carrinho
         </button>

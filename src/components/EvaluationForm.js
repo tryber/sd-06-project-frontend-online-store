@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ContortoEstrelaComponente from './ContornoEstrela';
-import { saveEvaluation, getEvaluations } from '../services/api';
+import { saveEvaluation } from '../services/api';
 
 class EvaluationForm extends React.Component {
   constructor() {

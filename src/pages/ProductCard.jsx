@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import AddToCartButton from './AddToCartButton';
 
 class ProductCard extends React.Component {
   constructor() {
@@ -29,8 +30,11 @@ class ProductCard extends React.Component {
           <img alt="Product" src={ thumbnail } />
           <div className="product-card-body">
             <p>{title}</p>
-            <p>{`R$ ${price}`}</p>
+            <p>{`R$ ${(price).toFixed(2)}`}</p>
           </div>
+        </div>
+        <div>
+          <AddToCartButton product={ product } testId="product-add-to-cart" />
         </div>
       </div>
     );

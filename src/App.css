@@ -59,3 +59,18 @@ h2 {
 .div-product img {
   width: 50%;
 }
+
+.main-productdetails {
+  display: flex;
+}
+
+.left-details {
+  margin-right: 50px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 25px;
+  margin-top: 10px;
+}

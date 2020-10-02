@@ -11,6 +11,7 @@ class PaymentForm extends React.Component {
       phone: '',
       cep: '',
       address: '',
+      formValidated: false,
     };
   }
 
@@ -21,13 +22,19 @@ class PaymentForm extends React.Component {
 
   render() {
     const handler = this.handleChange;
-    const cartList = {};
-    if (formValidated) <Redirect
-      to={ { pathname: '/', state: { cartList } }}
-    />
+    const { formValidated } = this.state;
+
+    if (formValidated) {
+      const cartList = {};
+      return (
+        <Redirect
+          to={ { pathname: '/', state: { cartList } } }
+        />
+      );
+    }
 
     return (
-      <form>
+      <form className="checkout-form">
         <label htmlFor="fullName">
           Nome completo
           <input
@@ -85,6 +92,7 @@ class PaymentForm extends React.Component {
             onChange={ handler }
           />
         </label>
+        <button type="button">Finalizar compra</button>
       </form>
     );
   }

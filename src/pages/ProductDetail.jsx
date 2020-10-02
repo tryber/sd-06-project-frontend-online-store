@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 export default class ProductDetail extends Component {
   render() {
-    console.log(this.props)
     const { title, price, thumbnail, available_quantity } = this.props.location.product;
     return (
       <div>

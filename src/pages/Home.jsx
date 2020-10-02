@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api'
+import * as api from '../services/api';
 import '../styles/Home.css';
-import cart from './../img/cart.png';
+import cart from '../img/cart.png';
 import ProductList from '../components/ProductList';
 
 export default class Home extends Component {
@@ -13,7 +13,7 @@ export default class Home extends Component {
       categories: [],
       products: [],
       emptyList: true,
-    }
+    };
 
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
     this.getCategory = this.getCategory.bind(this);
@@ -37,26 +37,31 @@ export default class Home extends Component {
     ));
   }
 
-  async categoryApi(categoryId) {
-    const products = await api.getProductsFromCategoryAndQuery(categoryId, '');
-    this.setState({ products: products.results, emptyList: false });
-  }
-
   getCategory(event) {
     const categoryId = event.target.value;
     this.categoryApi(categoryId);
   }
 
+  async categoryApi(categoryId) {
+    const products = await api.getProductsFromCategoryAndQuery(categoryId, '');
+    this.setState({ products: products.results, emptyList: false });
+  }
+
   render() {
     const { categories, products, emptyList } = this.state;
     return (
-      <Fragment>
+      <>
         <section>
           {
             categories.map(category => {
               return (
                 <label htmlFor="category" key={category.name}>
-                  <input data-testid="category" type="radio" name="category" value={category.id} onClick={this.getCategory} />
+                  <input
+                    data-testid="category"
+                    type="radio"
+                    name="category"
+                    value={category.id}
+                    onClick={this.getCategory} />
                   { category.name}
                 </label>
               );
@@ -79,14 +84,16 @@ export default class Home extends Component {
               type="submit"
               data-testid="query-button"
               onClick={this.onSearchTextSubmit}
-            >Search</button>
+            >
+              Search
+            </button>
             <Link to="/cart" data-testid="shopping-cart-button">
               <img src={cart} alt="icone do carrinho" className="icon" />
             </Link>
             <ProductList products={products} emptyList={emptyList} />
           </div>
         </main>
-      </Fragment>
+      </>
     );
   }
 }

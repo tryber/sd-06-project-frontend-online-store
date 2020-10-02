@@ -74,7 +74,12 @@ class ShopCart extends React.Component {
 
 
           ))}
-          <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
+          <Link
+            to={ { pathname: '/checkout', state: { cartList } } }
+            data-testid="checkout-products"
+          >
+            Finalizar Compra
+          </Link>
         </div>
       );
     }

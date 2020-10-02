@@ -4,25 +4,21 @@ import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
   render() {
-    const { product, addToCart } = this.props;
+    const { product } = this.props;
     return (
       <div data-testid="product">
         <h1>{product.title}</h1>
         <img src={ product.thumbnail } alt="Foto do produto" />
         <p>{product.price}</p>
         <Link
-          to={ { pathname: `/ProductDetails/${product.id}`, state: product } }
+          to={ {
+            pathname: `/ProductDetails/${product.id}`, 
+            state: { product },
+          } }
           data-testid="product-detail-link"
         >
           Detalhes do produto
         </Link>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => addToCart(product) }
-        >
-          Adicionar ao carrinho
-        </button>
       </div>
     );
   }

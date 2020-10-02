@@ -20,10 +20,6 @@ class Home extends React.Component {
     this.filterCategory = this.filterCategory.bind(this);
   }
 
-  addToCart() {
-    console.log('click');
-  }
-
   filterCategory(event) {
     this.setState({ categoryId: event.target.value }, () => this.fetchApi());
   }
@@ -71,7 +67,7 @@ class Home extends React.Component {
           >
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <ProductList products={ products } addToCart={ this.addToCart } />
+          <ProductList products={ products } />
 
         </div>
         <CartBtn />

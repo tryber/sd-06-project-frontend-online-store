@@ -22,6 +22,10 @@
   flex-flow: row wrap;
 }
 
+.red {
+  border: 1px solid red;
+}
+
 .productCard {
   border: 1px solid grey;
   display: flex;

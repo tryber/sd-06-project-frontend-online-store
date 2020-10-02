@@ -34,10 +34,10 @@ class HomePage extends Component {
       <div>
         {/* <ProductsList fetchProductsList={this.fetchProducts} card={this.state.card}
         categoriesId={this.state.categoriesId}/> */}
-        <ProductsList categoriesId={this.state.categoriesId} />
         <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
         <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
         <Categories updateId={this.updateId} />
+        <ProductsList categoriesId={this.state.categoriesId} />
       </div>
     );
   }

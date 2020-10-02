@@ -18,12 +18,15 @@ class ProductsList extends Component {
     this.fetchProducts();
   }
 
-  fetchProducts = async (query) => {
-    const getProducts = await Api.getProductsFromCategoryAndQuery(query)
-      .then(resolve => resolve.results);
-    this.setState({
-      card: getProducts,
-    });
+  fetchProducts =  async (query) => {
+    const category = await this.props.categoriesId;
+    const getProducts = await Api.getProductsFromCategoryAndQuery(query, category)
+    if (getProducts !== undefined) {
+      this.setState({
+        card: getProducts.results,
+      });
+    }
+    
   }
   
   buttonOnClick() {
@@ -39,28 +42,32 @@ class ProductsList extends Component {
 
   render() {
     const { card, value } = this.state;
-
-    return (
-      <div>
-        <section >
-          <input type="text" data-testid="query-input" value={value} onChange={this.inputOnChange} />
-          <button onClick={this.buttonOnClick} data-testid="query-button">botao</button>
-        </section>
-        {card.map((product) => {
-          const { title, thumbnail, price, id } = product;
-          return (
-            <Link to={`/details/${value}/${id}`} data-testid="product-detail-link">
-              <section key={id}>
-                <p>{title}</p>
-                <img src={thumbnail} />
-                <p>{`R$${price}`}</p>
-              </section>
-            </Link>
-          );
-        })}
-      </div>
-    );
-  }
+    
+    if (card !== undefined) {
+      return (
+        <div>
+          <section >
+            <input type="text" data-testid="query-input" value={value} onChange={this.inputOnChange} />
+            <button onClick={this.buttonOnClick} data-testid="query-button">botao</button>
+          </section>
+          {card.map((product) => {
+            const { title, thumbnail, price, id } = product;
+            return (
+              <Link to={`/details/${id}`} data-testid="product-detail-link" key={id}>
+                <section data-testid="product">
+                  <p>{title}</p>
+                  <img src={thumbnail} />
+                  <p>{`R$${price}`}</p>
+                </section>
+              </Link>
+            );
+          })}
+        </div>
+      );
+    } else {
+     return <h1>Aguarde...</h1>
+    }
+  } 
 }
 
 export default ProductsList;

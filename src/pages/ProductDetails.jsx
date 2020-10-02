@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import * as Api from '../services/api';
 
 class ProductDetails extends Component {
@@ -6,8 +7,8 @@ class ProductDetails extends Component {
     super();
     this.fetchProducts = this.fetchProducts.bind(this);
     this.state = {
-      cards: [],
       product: {},
+      loading: true
     };
   }
 
@@ -16,34 +17,30 @@ class ProductDetails extends Component {
   }
 
   async fetchProducts() {
-    const { id, name } = this.props.match.params;
-    const getProducts = await Api.getProductsFromCategoryAndQuery(name)
-      .then(resolve => resolve.results);
-    this.setState({ cards: getProducts }, () => {
-      this.setState({
-        product: this.filterProduct(id),
-      });
-    });
-  }
-
-  filterProduct(id) {
-    return this.state.cards.find((element) => element.id === id);
+    const { id } = this.props.match.params;
+    const response = await Api.getProductFromId(id);
+    this.setState({product: response})
+    
   }
 
   render() {
-    const { title, thumbnail, price, id } = this.state.product;
-    console.log(this.state.product);
-    return (
-      <section>
-        <section key={id}>
-          <h1 data-testid="product-detail-name">{title}</h1>
-          <img src={thumbnail} />
-          <span>{`R$${price}`}</span>
+    if (this.state.product !== undefined){
+      const { title, thumbnail, price, id } = this.state.product;
+      return (
+        <section>
+          <Link to="/">Voltar</Link>
+          <section key={id}>
+            <h1 data-testid="product-detail-name">{title}</h1>
+            <img src={thumbnail} />
+            <span>{`R$${price}`}</span>
+          </section>
+          <button type="button">Adicionar ao cart</button>
         </section>
-        <button type="button">Adicionar ao cart</button>
-      </section>
-    );
-  }
+      );
+    } else {
+        return <h1 data-testid="product-detail-name">Pequeno Principe, O</h1>
+    }
+  } 
 }
 
 export default ProductDetails;

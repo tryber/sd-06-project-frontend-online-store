@@ -16,8 +16,7 @@ class Categories extends Component {
   }
 
   fetchProducts = async () => {
-    const getCategories = await Api.getCategories()
-      .then(resolve => resolve);
+    const getCategories = await Api.getCategories();
     this.setState({
       name: getCategories,
     });
@@ -34,11 +33,11 @@ class Categories extends Component {
       <nav>
         <ul>
           {name.map(names => (
-              <label htmlFor={names.id}>
+              <label data-testid="category"  htmlFor={names.id} key={names.id} >
                 <input
                 type="radio" id={names.id} 
-                key={names.id} name="category" onClick={this.inputOnClick}
-                data-testid="category"
+                name="category" onClick={this.inputOnClick}
+                
                 />
                 {names.name}
               </label>

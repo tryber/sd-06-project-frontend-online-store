@@ -1,4 +1,6 @@
 import React from 'react';
+import AddCartButton from './AddCartButton';
+import CartButton from './CartButton';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -24,6 +26,7 @@ class ProductDetails extends React.Component {
         <div data-testid="product">
           <h4 className="product-title" data-testid="product-detail-name">{data.title}</h4>
           <div>R$ {data.price}</div>
+          <AddCartButton bt="home" data={data} />
         </div>
       </div>
     );
@@ -32,7 +35,10 @@ class ProductDetails extends React.Component {
   render() {
     const { data } = this.state;
     return (
-      (data) ? this.dataOK(data) : 'Loading...'
+      <div>
+        <CartButton />
+        {(data) ? this.dataOK(data) : 'Loading...'}
+      </div>
     );
   }
 }

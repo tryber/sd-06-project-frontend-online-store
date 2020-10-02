@@ -42,7 +42,7 @@ class AddCartButton extends React.Component {
   btHome() {
     return (
       <div id="cart-button">
-        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
+        <button data-testid="product-add-to-cart" data-testid="product-detail-add-to-cart" type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
       </div>
     );
   }

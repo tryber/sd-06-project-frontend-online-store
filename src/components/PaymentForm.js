@@ -10,7 +10,7 @@ class PaymentForm extends React.Component {
       email: '',
       phone: '',
       cep: '',
-      adress: '',
+      address: '',
     };
   }
 

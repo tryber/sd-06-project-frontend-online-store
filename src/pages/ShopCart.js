@@ -2,10 +2,44 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 class ShopCart extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { location: { state: cartList } } = this.props;
+    this.state = {
+      cartList,
+    };
+    this.addCartItem = this.addCartItem.bind(this);
+    this.reduceCartItem = this.reduceCartItem.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+
+  addCartItem(id) {
+    const { cartList } = this.state;
+    const copyCartList = { ...cartList };
+
+    copyCartList[id].quantity += 1;
+    return copyCartList;
+  }
+
+  reduceCartItem(id) {
+    const { cartList } = this.state;
+    const copyCartList = { ...cartList };
+    const zero = 0;
+    if (copyCartList[id].quantity > zero) copyCartList[id].quantity -= 1;
+    return copyCartList;
+  }
+
+  handleChange(id, action) {
+    const cartList = action(id);
+    this.setState({ cartList });
+  }
+
   render() {
     const empty = 0;
-    const { location: { state: cartList } } = this.props;
 
+    const { cartList } = this.state;
 
     if (Object.values(cartList).length > empty) {
       return (
@@ -17,7 +51,23 @@ class ShopCart extends React.Component {
                 {product.title}
               </p>
               <p data-testid="shopping-cart-product-quantity">
+                <button
+                  data-testid="product-decrease-quantity"
+                  type="button"
+                  onClick={ () => this.handleChange(product.id, this.reduceCartItem) }
+                >
+                  {' '}
+                  remover
+                </button>
                 {product.quantity}
+                <button
+                  data-testid="product-increase-quantity"
+                  type="button"
+                  onClick={ () => this.handleChange(product.id, this.addCartItem) }
+                >
+                  {' '}
+                  adicionar
+                </button>
               </p>
             </div>
 

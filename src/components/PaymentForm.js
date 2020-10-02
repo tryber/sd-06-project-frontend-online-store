@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 class PaymentForm extends React.Component {
   constructor(props) {
@@ -20,6 +21,11 @@ class PaymentForm extends React.Component {
 
   render() {
     const handler = this.handleChange;
+    const cartList = {};
+    if (formValidated) <Redirect
+      to={ { pathname: '/', state: { cartList } }}
+    />
+
     return (
       <form>
         <label htmlFor="fullName">

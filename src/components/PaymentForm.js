@@ -10,13 +10,23 @@ class PaymentForm extends React.Component {
       email: '',
       phone: '',
       cep: '',
-      adress: '',
+      address: '',
     };
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange({ target }) {
     const { id, value } = target;
     this.setState({ [id]: value });
+  }
+
+  handleSubmit() {
+    Object.values(this.state).forEach((state) => {
+      if (state === '') {
+        document.getElementById(state).className = 'red';
+      }
+    });
   }
 
   render() {

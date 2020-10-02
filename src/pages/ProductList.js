@@ -17,7 +17,7 @@ class ProductList extends React.Component {
     this.renderProducts = this.renderProducts.bind(this);
 
     this.state = {
-      cat: [],
+      categories: [],
       filter: '',
       products: [],
       hasFilter: false,
@@ -31,7 +31,7 @@ class ProductList extends React.Component {
 
   async getCategoriesFromApi() {
     const result = await getCategories();
-    this.setState({ cat: result });
+    this.setState({ categories: result });
   }
 
   async getProducts() {
@@ -61,8 +61,8 @@ class ProductList extends React.Component {
   }
 
   renderCategoryNames() {
-    const { cat } = this.state;
-    return cat.map((item, index) => (
+    const { categories } = this.state;
+    return categories.map((item, index) => (
       <label htmlFor={ index } key={ item.id }>
         <input
           id={ index }

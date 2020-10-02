@@ -24,7 +24,7 @@ class PaymentForm extends React.Component {
   }
 
   handleSubmit() {
-    Object.values(this.state).forEach((state) => {
+    Object.keys(this.state).forEach((state) => {
       if (state === '') {
         document.getElementById(state).className = 'red';
       }

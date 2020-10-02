@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ListCard from '../components/ListCard';
-import ListOfCategories from './ListOfCategories';
+import ListOfCategories from '../components/ListOfCategories';
 
 class ItemList extends Component {
   constructor() {

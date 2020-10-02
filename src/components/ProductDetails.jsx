@@ -26,7 +26,7 @@ class ProductDetails extends React.Component {
         <div data-testid="product">
           <h4 className="product-title" data-testid="product-detail-name">{data.title}</h4>
           <div>R$ {data.price}</div>
-          <AddCartButton bt="home" data={data} />
+          <AddCartButton bt="productDetails" data={data} />
         </div>
       </div>
     );

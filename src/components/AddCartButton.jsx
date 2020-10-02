@@ -40,12 +40,18 @@ class AddCartButton extends React.Component {
   }
 
   btHome() {
+    const { bt } = this.props;
+    let testid;
+    if (bt === 'home') testid = 'product-add-to-cart';
+    if (bt === 'productDetails') testid = 'product-detail-add-to-cart';
+    
     return (
       <div id="cart-button">
-        <button data-testid="product-add-to-cart" data-testid="product-detail-add-to-cart" type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
+        <button data-testid={testid} type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
       </div>
     );
   }
+   
 
   btRemove() {
     const { data } = this.props;
@@ -63,9 +69,8 @@ class AddCartButton extends React.Component {
     const { bt } = this.props;
     return (
       <div>
-        {(bt === 'home') ? this.btHome() : this.btRemove()}
+        {(bt === 'cart') ? this.btRemove() : this.btHome()}
       </div>
-
     );
   }
 };

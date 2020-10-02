@@ -36,7 +36,7 @@ class ListaDeProdutos extends Component {
       search,
     );
     const { results } = response;
-    console.log(results);
+    // console.log(results);
     this.setState({
       produtos: results,
     });
@@ -50,18 +50,23 @@ class ListaDeProdutos extends Component {
         <ListaCategorias categoryFilter={ this.categoryFilter } />
         <CampoBusca onClick={ this.handleClick } />
         <ul>
-          {produtos.length === zero ? (
+          { produtos.length === zero ? (
             <p>Nenhum produto foi encontrado</p>
           ) : (
-            produtos.map((produto) => (
-              <Produto key={ produto.id } produto={ produto } />
-            ))
-          )}
+              produtos.map((produto) => (
+                <Link data-testid="product-detail-link" to={ {
+                  pathname: "/DetalhesDoProduto",
+                  state: { produto: produto },
+                } }>
+                  <Produto key={ produto.id } produto={ produto } />
+                </Link>
+              ))
+            ) }
         </ul>
         <Link to="/CarrinhoDeCompras" data-testid="shopping-cart-button">
           <img src={ carrinho } className="cart-img" alt="ícone carrinho" />
         </Link>
-      </div>
+      </div >
     );
   }
 }

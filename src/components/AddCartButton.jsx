@@ -10,12 +10,29 @@ class AddCartButton extends React.Component {
     return JSON.parse(localStorage.getItem('cart'));
   }
 
+  countLocalStorage(cartLocalStorage, id) {
+    const newLocalStorage = cartLocalStorage.map((item) => {
+      if (item.id === id) item.qtd += 1;
+      return item;
+    });
+    return newLocalStorage;
+  }
+
   localStorageSave() {
-    const cartLocalStorage = this.getLocalStorageProduct();
     const { data } = this.props;
-    const newLocalStorage = (cartLocalStorage) ? [ ...cartLocalStorage, data] : [data];
+    data.qtd = 1;
+    const cartLocalStorage = this.getLocalStorageProduct();
+    let newLocalStorage;
+    if (cartLocalStorage) {
+      (cartLocalStorage.some((item) => item.id === data.id ))
+        ? newLocalStorage = this.countLocalStorage(cartLocalStorage, data.id)
+        : newLocalStorage = [ ...cartLocalStorage, data];
+    } else {
+      newLocalStorage = [data];
+    }
     const stringData = JSON.stringify(newLocalStorage);
     localStorage.setItem('cart', stringData);
+    console.log('Produto adicionado ao carrinho com sucesso!')
   }
 
   localStorageRemove() {
@@ -23,16 +40,26 @@ class AddCartButton extends React.Component {
   }
 
   btHome() {
+    const { bt } = this.props;
+    let testid;
+    if (bt === 'home') testid = 'product-add-to-cart';
+    if (bt === 'productDetails') testid = 'product-detail-add-to-cart';
+    
     return (
       <div id="cart-button">
-        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
+        <button data-testid={testid} type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
       </div>
     );
   }
+   
 
   btRemove() {
+    const { data } = this.props;
     return (
       <div id="cart-button">
+        <div data-testid="shopping-cart-product-quantity">Quantidade: {data.qtd}</div>
+        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageRemove}>+</button>
+        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageRemove}>-</button>
         <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageRemove}>Remover</button>
       </div>
     );
@@ -42,9 +69,8 @@ class AddCartButton extends React.Component {
     const { bt } = this.props;
     return (
       <div>
-        {(bt === 'home') ? this.btHome() : this.btRemove()}
+        {(bt === 'cart') ? this.btRemove() : this.btHome()}
       </div>
-
     );
   }
 };

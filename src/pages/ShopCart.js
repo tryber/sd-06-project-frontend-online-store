@@ -62,7 +62,7 @@ class ShopCart extends React.Component {
     if (Object.values(cartList).length > empty) {
       return (
         <div>
-
+          <Link to={ { pathname: '/', state: { cartList } } }>voltar</Link>
           { Object.values(cartList).map((product) => (
             <div className="cartItem-container" key={ product.id }>
               <p data-testid="shopping-cart-product-name">

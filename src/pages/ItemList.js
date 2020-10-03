@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ListCard from '../components/ListCard';
 import ListOfCategories from '../components/ListOfCategories';
@@ -35,7 +35,6 @@ class ItemList extends Component {
 
   async handleClick() {
     const { categoria, searchValeu } = this.state;
-    console.log(categoria, searchValeu);
     const searchedItens = await getProductsFromCategoryAndQuery(categoria, searchValeu);
     this.setState({
       clicked: true,

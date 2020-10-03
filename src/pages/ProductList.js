@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Product, Loading } from '../components';
-//import Product from '../components/Product';
-//import Loading from '../components/Loading';
+import { Product } from '../components';
 import shoppingCart from '../images/shopping-cart.png';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../App.css';
@@ -13,24 +11,25 @@ class ProductList extends React.Component {
 
     this.getCategoriesFromApi = this.getCategoriesFromApi.bind(this);
     this.renderCategoriesNames = this.renderCategoriesNames.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.getProducts = this.getProducts.bind(this);
-    this.setSelectedCategory = this.setSelectedCategory.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
-    this.filterProducts = this.filterProducts.bind(this);
+    this.handleQuery = this.handleQuery.bind(this);
 
     this.state = {
       categories: [],
-      selectedCategory: '',
-      filterText: '',
+      selectedCategoryId: '',
+      searchText: '',
       products: [],
-      hasFilter: false,
-      isLoading: true,
     };
   }
 
   componentDidMount() {
     this.getCategoriesFromApi();
+  }
+
+  onSearchTextChange({ target }) {
+    this.setState({ searchText: target.value });
   }
 
   async getCategoriesFromApi() {
@@ -39,36 +38,17 @@ class ProductList extends React.Component {
   }
 
   async getProducts() {
-    const { filterText } = this.state;
-    const result = await getProductsFromCategoryAndQuery('', filterText);
-    this.setState({
-      products: result,
-      hasFilter: true,
-    });
+    const { selectedCategoryId, searchText } = this.state;
+    const requestReturn = await getProductsFromCategoryAndQuery(
+      selectedCategoryId, searchText,
+    );
+    this.setState({ products: requestReturn.results });
   }
 
-  setSelectedCategory(id) {
-    // this.setState({ selectedCategory: id });
-    this.showCategoryItems(id);
-  }
-
-  filterProducts() {
-    
-  }
-
-  async handleQuery(event) {
-    const { value, name } = event.target;
-    console.log(event.target);
-    console.log(value, name);
-
-    this.setState({ [name]: value });
-    console.log(this.state);
-
-    this.filterProducts();
-  }
-
-  handleChange({ target }) {
-    this.setState({ filterText: target.value });
+  async handleQuery({ target }) {
+    const { name, value } = target;
+    await this.setState({ [name]: value });
+    this.getProducts();
   }
 
   renderCategoriesNames() {
@@ -82,32 +62,17 @@ class ProductList extends React.Component {
           >
             <input
               id={ index }
-              name="selectedCategory"
+              name="selectedCategoryId"
               type="radio"
-              value={category.id}
+              value={ category.id }
               data-testid="category"
-              onClick={(event) => this.handleQuery(event)}
+              onClick={ this.handleQuery }
             />
-              { category.name }
+            { category.name }
           </label>
         ))}
       </div>
     );
-    /*return categories.map((item, index) => (
-      <label htmlFor={ index } key={ item.id }>
-        <input
-          id={ index }
-          name="category"
-          type="radio"
-          value={ item.id }
-          onChange={ () => this.setSelectedCategory(item.id) }
-          // onClick={ () => this.showCategoryItems(item) }
-          // key={ item.id }
-          data-testid="category"
-        />
-        { item.name }
-      </label>));
-      */
   }
 
   renderProducts() {
@@ -116,8 +81,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { hasFilter, isLoading, products } = this.state;
-    
+    const { products } = this.state;
     return (
       <div>
         <header className="header-container">
@@ -126,13 +90,13 @@ class ProductList extends React.Component {
               className="filter-input"
               type="text"
               data-testid="query-input"
-              onChange={ this.handleChange }
+              onChange={ this.onSearchTextChange }
             />
             <button
               className="search-button"
               type="button"
               data-testid="query-button"
-              onClick={ this.getProducts }
+              onClick={ this.handleQuery }
             >
               Busca
             </button>
@@ -148,7 +112,7 @@ class ProductList extends React.Component {
           {this.renderCategoriesNames()}
         </form>
         <div>
-          {/*{this.renderProducts()}*/}
+          {products ? this.renderProducts() : <p />}
         </div>
       </div>
     );

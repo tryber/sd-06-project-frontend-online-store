@@ -1,21 +1,14 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ProductCard from './ProductCard';
 
 class Product extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { ...this.props };
-  }
-
   render() {
-    const { products } = this.state;
-    const productsList = [];
-    productsList.push(...products.results);
+    const { products } = this.props;
 
     return (
       <div>
-        {productsList.map((product) => (
+        {products.map((product) => (
           <ProductCard
             key={ product.id }
             title={ product.title }
@@ -27,5 +20,7 @@ class Product extends React.Component {
     );
   }
 }
+
+Product.propTypes = { products: PropTypes.arrayOf(PropTypes.object).isRequired };
 
 export default Product;

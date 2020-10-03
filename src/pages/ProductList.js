@@ -57,10 +57,12 @@ class ProductList extends React.Component {
   }
 
   async showCategoryItems(id) {
-    const result = await getProductsFromCategoryAndQuery(id, '');
-    this.setState({
-      products: result,
-      hasFilter: true,
+    this.setState({ isLoading: true }, async () => {
+      const requestResult = await getProductsFromCategoryAndQuery(id, '');
+      this.setState({
+        isLoading: false,
+        products: requestResult,
+      });
     });
   }
 
@@ -70,7 +72,27 @@ class ProductList extends React.Component {
 
   renderCategoriesNames() {
     const { categories } = this.state;
-    return categories.map((item, index) => (
+    return (
+      <div>
+        {categories.map((category, index) => (
+          <label
+            htmlFor={ index }
+            key={ category.id }
+          >
+            <input
+              id={ index }
+              name="category"
+              type="radio"
+              value={category.id}
+              data-testid="category"
+              onClick={() => this.showCategoryItems(category.id)}
+            />
+              { category.name }
+          </label>
+        ))};
+      </div>
+    );
+    /*return categories.map((item, index) => (
       <label htmlFor={ index } key={ item.id }>
         <input
           id={ index }
@@ -84,6 +106,7 @@ class ProductList extends React.Component {
         />
         { item.name }
       </label>));
+      */
   }
 
   renderProducts() {
@@ -92,7 +115,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { hasFilter, isLoading } = this.state;
+    const { hasFilter, isLoading, products } = this.state;
     if (isLoading) {
       return (<Loading />);
     }

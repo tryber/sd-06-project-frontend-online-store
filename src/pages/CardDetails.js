@@ -43,9 +43,8 @@ class CardDetails extends React.Component {
           <p>{ price }</p>
         </div>
 
-        <section>
-          <ProductReviewForm />
-        </section>
+        <ProductReviewForm />
+
       </main>
     );
   }

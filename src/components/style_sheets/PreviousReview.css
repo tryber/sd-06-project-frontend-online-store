@@ -1,0 +1,20 @@
+.rating-history {
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid black;
+  margin: 10px 10px;
+  padding: 10px;
+}
+
+.rating-column {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 60%;
+  margin-bottom: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  margin: auto;
+}

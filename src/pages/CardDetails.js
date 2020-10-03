@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
+import CartAddButtons from '../components/CartAddButton';
 
 class CardDetails extends React.Component {
   constructor() {
@@ -39,6 +40,7 @@ class CardDetails extends React.Component {
         <img src={ thumbnail } alt="product thumbnail" />
         <p>{ title }</p>
         <p>{ price }</p>
+        <CartAddButtons></CartAddButtons>
       </div>
     );
   }

@@ -4,10 +4,15 @@ import * as api from '../services/api';
 import CartAddButtons from '../components/CartAddButton';
 
 class CardDetails extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
+
+    this.handleAddToCartButton = this.handleAddToCartButton.bind(this);
+
     this.state = {
       product: {},
+      productName: '',
+      quantityToBuy: 0,
     };
   }
 
@@ -27,10 +32,25 @@ class CardDetails extends React.Component {
 
         this.setState({
           product: itemSearched,
+          productName: itemSearched.title,
         });
       },
     );
   }
+
+  handleAddToCartButton() {
+
+    const { addProductToCart } = this.props;
+
+    this.setState ((currentState) => ({
+      quantityToBuy: currentState.quantityToBuy + 1
+      }), () => {
+        const { productName, quantityToBuy } = this.state;
+        addProductToCart( productName, quantityToBuy)
+      })
+  
+  }
+
 
   render() {
     const { product: { thumbnail, title, price } } = this.state;
@@ -40,7 +60,7 @@ class CardDetails extends React.Component {
         <img src={ thumbnail } alt="product thumbnail" />
         <p>{ title }</p>
         <p>{ price }</p>
-        <CartAddButtons></CartAddButtons>
+        <CartAddButtons handleAddToCartButton={this.handleAddToCartButton}/>
       </div>
     );
   }

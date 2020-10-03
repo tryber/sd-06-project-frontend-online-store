@@ -89,14 +89,14 @@ class ShoppingCart extends React.Component {
                   <button
                     type="button"
                     data-testid="product-increase-quantity"
-                    onClick={ () => { this.addProduct(element); this.forceUpdate(); }}
+                    onClick={ () => { this.addProduct(element); this.forceUpdate(); } }
                   >
                     +
                   </button>
                   <button
                     type="button"
                     data-testid="product-decrease-quantity"
-                    onClick={ () => { this.removeProduct(element); this.forceUpdate(); }}
+                    onClick={ () => { this.removeProduct(element); this.forceUpdate(); } }
                   >
                     -
                   </button>

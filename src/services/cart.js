@@ -23,14 +23,11 @@ export default {
       thumbnail: product.thumbnail,
       amount: 1,
     };
-    let uniqueProduct = false;
+    let uniqueProduct;
     products.forEach((element) => {
-      uniqueProduct = (uniqueProduct || (item.id === element.id));
-      console.log(item.id);
-      console.log(element.id);
-      console.log(uniqueProduct);
-      if (uniqueProduct) {
+      if (item.id === element.id) {
         element.amount += 1;
+        uniqueProduct = true;
       }
     });
     if (!uniqueProduct) products.push(item);

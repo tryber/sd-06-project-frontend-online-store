@@ -17,6 +17,7 @@ class ProductList extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.setSelectedCategory = this.setSelectedCategory.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
+    this.filterProducts = this.filterProducts.bind(this);
 
     this.state = {
       categories: [],
@@ -51,6 +52,10 @@ class ProductList extends React.Component {
     this.showCategoryItems(id);
   }
 
+  filterProducts() {
+    
+  }
+
   async handleQuery(event) {
     const { value, name } = event.target;
     console.log(event.target);
@@ -58,6 +63,8 @@ class ProductList extends React.Component {
 
     this.setState({ [name]: value });
     console.log(this.state);
+
+    this.filterProducts();
   }
 
   handleChange({ target }) {

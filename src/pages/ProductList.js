@@ -51,14 +51,23 @@ class ProductList extends React.Component {
     this.showCategoryItems(id);
   }
 
-  async showCategoryItems(id) {
-    this.setState({ isLoading: true }, async () => {
+  async handleQuery(event) {
+    const { value, name } = event.target;
+    console.log(event.target);
+    console.log(value, name);
+
+    this.setState({ [name]: value });
+    console.log(this.state);
+
+
+    
+    /*this.setState({ isLoading: true }, async () => {
       const requestResult = await getProductsFromCategoryAndQuery(id, '');
       this.setState({
         isLoading: false,
         products: requestResult,
       });
-    });
+    });*/
   }
 
   handleChange({ target }) {
@@ -76,11 +85,11 @@ class ProductList extends React.Component {
           >
             <input
               id={ index }
-              name="category"
+              name="selectedCategory"
               type="radio"
               value={category.id}
               data-testid="category"
-              onClick={() => this.showCategoryItems(category.id)}
+              onClick={(event) => this.handleQuery(event)}
             />
               { category.name }
           </label>

@@ -108,11 +108,13 @@ class ProductList extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </h2>
         </header>
-        <form className="categories">
-          {this.renderCategoriesNames()}
-        </form>
-        <div>
-          {products ? this.renderProducts() : <p />}
+        <div className="display-container">
+          <form className="categories">
+            {this.renderCategoriesNames()}
+          </form>
+          <div className="products-container">
+            {products ? this.renderProducts() : <p />}
+          </div>
         </div>
       </div>
     );

@@ -31,4 +31,25 @@ export default {
     if (!uniqueProduct) products.push(item);
     saveLocalStorage(products);
   },
+
+  removeItem: (id, quantity = 1) => {
+    const arrayProducts = loadLocalStorage();
+    arrayProducts
+      .forEach((element) => {
+        if (element.id === id && element.amount >= 1) {
+          element.amount -= quantity;
+        }
+      });
+    saveLocalStorage(arrayProducts);
+  },
+
+  deleteItem: (id) => {
+    const arrayProducts = loadLocalStorage();
+    const newArrayProducts = arrayProducts.filter(({ id: unique }) => (unique !== id));
+    saveLocalStorage(newArrayProducts);
+  },
+
+  removeAll: () => {
+    saveLocalStorage([]);
+  },
 };

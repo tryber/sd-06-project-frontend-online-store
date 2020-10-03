@@ -13,7 +13,6 @@ class ItemList extends Component {
     this.state = {
       clicked: false,
       searchValeu: '',
-      categoria: '',
       filterValues: [],
     };
   }
@@ -25,12 +24,18 @@ class ItemList extends Component {
   }
 
   async handleSelectOption(categorySelected) {
-    this.setState(({ categoria: categorySelected }));
-    this.handleClick();
+    const searchedItens = await getProductsFromCategoryAndQuery(
+      categorySelected, '',
+    );
+    this.setState({
+      clicked: true,
+      filterValues: searchedItens.results,
+    });
   }
 
   async handleClick() {
     const { categoria, searchValeu } = this.state;
+    console.log(categoria, searchValeu);
     const searchedItens = await getProductsFromCategoryAndQuery(categoria, searchValeu);
     this.setState({
       clicked: true,

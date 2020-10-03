@@ -25,8 +25,13 @@ export default {
     };
     let uniqueProduct = false;
     products.forEach((element) => {
-      uniqueProduct = (uniqueProduct || item.id === element.id);
-      if (uniqueProduct) element.amount += 1;
+      uniqueProduct = (uniqueProduct || (item.id === element.id));
+      console.log(item.id);
+      console.log(element.id);
+      console.log(uniqueProduct);
+      if (uniqueProduct) {
+        element.amount += 1;
+      }
     });
     if (!uniqueProduct) products.push(item);
     saveLocalStorage(products);
@@ -45,7 +50,7 @@ export default {
 
   deleteItem: (id) => {
     const arrayProducts = loadLocalStorage();
-    const newArrayProducts = arrayProducts.filter(({ id: unique }) => (unique !== id));
+    const newArrayProducts = arrayProducts.filter(({ id: itemId }) => (itemId !== id));
     saveLocalStorage(newArrayProducts);
   },
 

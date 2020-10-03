@@ -20,11 +20,11 @@ class ProductList extends React.Component {
 
     this.state = {
       categories: [],
+      selectedCategory: '',
       filterText: '',
       products: [],
       hasFilter: false,
       isLoading: true,
-      // selectedCategory: '',
     };
   }
 
@@ -33,13 +33,8 @@ class ProductList extends React.Component {
   }
 
   async getCategoriesFromApi() {
-    this.setState({ isLoading: true }, async () => {
-      const requestReturn = await getCategories();
-      this.setState({
-        isLoading: false,
-        categories: requestReturn,
-      });
-    });
+    const requestReturn = await getCategories();
+    this.setState({ categories: requestReturn });
   }
 
   async getProducts() {
@@ -89,7 +84,7 @@ class ProductList extends React.Component {
             />
               { category.name }
           </label>
-        ))};
+        ))}
       </div>
     );
     /*return categories.map((item, index) => (
@@ -116,9 +111,6 @@ class ProductList extends React.Component {
 
   render() {
     const { hasFilter, isLoading, products } = this.state;
-    if (isLoading) {
-      return (<Loading />);
-    }
     
     return (
       <div>
@@ -150,7 +142,7 @@ class ProductList extends React.Component {
           {this.renderCategoriesNames()}
         </form>
         <div>
-          {hasFilter ? this.renderProducts() : <p /> }
+          {/*{this.renderProducts()}*/}
         </div>
       </div>
     );

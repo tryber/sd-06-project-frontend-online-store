@@ -15,6 +15,23 @@ class ShopCart extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { cartList } = this.state;
+    const { cartList: prevCartList } = prevState;
+
+    const prevQuantity = this.sumAllCartItemsQuantity(prevCartList);
+    const currentQuantity = this.sumAllCartItemsQuantity(cartList);
+    if (prevQuantity !== currentQuantity) {
+      localStorage.setItem('cartlist', JSON.stringify(cartList));
+    }
+  }
+
+  sumAllCartItemsQuantity(cartList) {
+    const zero = 0;
+    return Object.values(cartList)
+      .reduce((prev, product) => product.quantity + prev, zero);
+  }
+
 
   addCartItem(id) {
     const { cartList } = this.state;
@@ -89,7 +106,8 @@ class ShopCart extends React.Component {
 
 ShopCart.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.objectOf(PropTypes.any).isRequired,
+    state: PropTypes.shape({ cartList: PropTypes.objectOf(PropTypes.any).isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

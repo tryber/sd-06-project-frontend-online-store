@@ -92,7 +92,7 @@ class PaymentForm extends React.Component {
         <label htmlFor="cep">
           CEP
           <input
-            type="number"
+            type="text"
             data-testid="checkout-cep"
             id="cep"
             maxLength="11"

@@ -58,7 +58,7 @@ class ShoppingCart extends React.Component {
       return this.checkoutFields();
     }
     const produtos = Cart.getItemsFromLocalStorage();
-    return ((
+    return (
       produtos.length < 1
         ? (
           <div>
@@ -68,53 +68,60 @@ class ShoppingCart extends React.Component {
         )
         : (
           <div>
-            <h1>Carrinho de Compras</h1>
-            {produtos.map((element) => (
-              <div key={ element.id }>
-                <div data-testid="shopping-cart-product-name">
-                  Produto:
-                  {element.title}
-                </div>
-                <div>
-                  <p>
-                    Preço R$:
-                    {element.price}
-                  </p>
-                  <div data-testid="shopping-cart-product-quantity">
-                    <p>
-                      {element.amount}
-                    </p>
+            <div>
+              <h1>Carrinho de Compras</h1>
+              <button
+                onClick={ () => this.setState({ checkout: true }) }
+                data-testid="checkout-products"
+                type="button"
+              >
+                Finalizar Compra
+              </button>
+              {produtos.map((element) => (
+                <div key={ element.id }>
+                  <div data-testid="shopping-cart-product-name">
+                    Produto:
+                    {element.title}
                   </div>
-                  <img src={ element.thumbnail } alt="product" />
-                  <button
-                    type="button"
-                    data-testid="product-increase-quantity"
-                    onClick={ () => { this.addProduct(element); this.forceUpdate(); } }
-                  >
-                    +
-                  </button>
-                  <button
-                    type="button"
-                    data-testid="product-decrease-quantity"
-                    onClick={ () => { this.removeProduct(element); this.forceUpdate(); } }
-                  >
-                    -
-                  </button>
-                  <button
-                    onClick={ () => this.setState({ checkout: true }) }
-                    data-testid="checkout-products"
-                    type="button"
-                  >
-                    Comprar
-                  </button>
-                  <button type="button" onClick={ () => { Cart.removeAll(); } }>
-                    Limpar carrinho
-                  </button>
+                  <div>
+                    <p>
+                      Preço R$
+                      {element.price}
+                    </p>
+                    <div data-testid="shopping-cart-product-quantity">
+                      <p>
+                        {element.amount}
+                      </p>
+                    </div>
+                    <img src={ element.thumbnail } alt="product" />
+                    <button
+                      type="button"
+                      data-testid="product-increase-quantity"
+                      onClick={ () => { this.addProduct(element); this.forceUpdate(); } }
+                    >
+                      +
+                    </button>
+                    <button
+                      type="button"
+                      data-testid="product-decrease-quantity"
+                      onClick={ () => {
+                        this.removeProduct(element); this.forceUpdate();
+                      } }
+                    >
+                      -
+                    </button>
+                    <button
+                      type="button"
+                      onClick={ () => { Cart.removeAll(); this.forceUpdate(); } }
+                    >
+                      Limpar carrinho
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>)
-    ));
+              ))}
+            </div>
+          </div>
+        ));
   }
 }
 

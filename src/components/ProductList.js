@@ -4,11 +4,17 @@ import ProductItem from './ProductItem';
 
 class ProductList extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, addFromList } = this.props;
     return (
       <div>
         {products
-          .map((product) => <ProductItem key={ product.id } product={ product } />)}
+          .map((product) => (
+            <ProductItem
+              key={ product.id }
+              handleClick={ addFromList }
+              product={ product }
+            />
+          ))}
       </div>
     );
   }
@@ -16,6 +22,7 @@ class ProductList extends React.Component {
 
 ProductList.propTypes = {
   products: PropTypes.arrayOf(Object).isRequired,
+  addFromList: PropTypes.func.isRequired,
 };
 
 export default ProductList;

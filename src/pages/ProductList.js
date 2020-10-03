@@ -58,16 +58,6 @@ class ProductList extends React.Component {
 
     this.setState({ [name]: value });
     console.log(this.state);
-
-
-    
-    /*this.setState({ isLoading: true }, async () => {
-      const requestResult = await getProductsFromCategoryAndQuery(id, '');
-      this.setState({
-        isLoading: false,
-        products: requestResult,
-      });
-    });*/
   }
 
   handleChange({ target }) {

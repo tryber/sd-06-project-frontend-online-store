@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
+import PropTypes from 'prop-types';
 
 class ListOfCategories extends Component {
   constructor() {
@@ -47,5 +48,9 @@ class ListOfCategories extends Component {
     );
   }
 }
+
+ListOfCategories.propTypes = {
+  handleSelectOption: PropTypes.func.isRequired,
+};
 
 export default ListOfCategories;

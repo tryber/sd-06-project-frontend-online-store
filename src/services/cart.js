@@ -23,7 +23,7 @@ export default {
       thumbnail: product.thumbnail,
       amount: 1,
     };
-    let uniqueProduct;
+    let uniqueProduct = false;
     products.forEach((element) => {
       if (item.id === element.id) {
         element.amount += 1;

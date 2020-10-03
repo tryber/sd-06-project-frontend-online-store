@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ListCard from '../components/ListCard';
-import ListOfCategories from './ListOfCategories';
+import ListOfCategories from '../components/ListOfCategories';
 
 class ItemList extends Component {
   constructor() {
     super();
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleSelectOption = this.handleSelectOption.bind(this);
     this.state = {
       clicked: false,
       searchValeu: '',
@@ -22,10 +23,20 @@ class ItemList extends Component {
     });
   }
 
+  async handleSelectOption(categorySelected) {
+    const searchedItens = await getProductsFromCategoryAndQuery(
+      categorySelected, '',
+    );
+    this.setState({
+      clicked: true,
+      filterValues: searchedItens.results,
+    });
+  }
+
   async handleClick() {
-    const { searchValeu } = this.state;
-    const searchedItens = await getProductsFromCategoryAndQuery(searchValeu);
-    console.log(searchedItens.results);
+    const { categoria, searchValeu } = this.state;
+    console.log(categoria, searchValeu);
+    const searchedItens = await getProductsFromCategoryAndQuery(categoria, searchValeu);
     this.setState({
       clicked: true,
       filterValues: searchedItens.results,
@@ -55,7 +66,7 @@ class ItemList extends Component {
         { clicked ? filterValues
           .map((iten) => <ListCard key={ iten.title } iten={ iten } />) : '' }
         <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
-        <ListOfCategories />
+        <ListOfCategories handleSelectOption={ this.handleSelectOption } />
       </div>
     );
   }

@@ -30,6 +30,7 @@ export default {
         uniqueProduct = true;
       }
     });
+
     if (!uniqueProduct) products.push(item);
     saveLocalStorage(products);
   },

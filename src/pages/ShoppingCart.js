@@ -77,6 +77,12 @@ class ShoppingCart extends React.Component {
               >
                 Finalizar Compra
               </button>
+              <button
+                type="button"
+                onClick={ () => { Cart.removeAll(); this.forceUpdate(); } }
+              >
+                Limpar carrinho
+              </button>
               {produtos.map((element) => (
                 <div key={ element.id }>
                   <div data-testid="shopping-cart-product-name">
@@ -109,12 +115,6 @@ class ShoppingCart extends React.Component {
                       } }
                     >
                       -
-                    </button>
-                    <button
-                      type="button"
-                      onClick={ () => { Cart.removeAll(); this.forceUpdate(); } }
-                    >
-                      Limpar carrinho
                     </button>
                   </div>
                 </div>

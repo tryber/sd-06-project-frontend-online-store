@@ -2,7 +2,6 @@ import React from 'react';
 import Cart from '../services/cart';
 
 class ShoppingCart extends React.Component {
-
   addProduct(product) {
     Cart.addItem(product);
   }

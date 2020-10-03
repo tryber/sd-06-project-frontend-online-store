@@ -29,6 +29,7 @@ class ItemList extends Component {
       categorySelected, '',
     );
     this.setState({
+      categoria: categorySelected,
       filterValues: searchedItens.results,
       clicked: true,
     });

@@ -11,7 +11,11 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Search } />
         <Route exact path="/ShoppingCart" component={ ShoppingCart } />
-        <Route exact path="/ProductDetails/:id" component={ ProductDetails } />
+        <Route
+          exact
+          path="/ProductDetails/:id"
+          render={ (props) => <ProductDetails { ...props } /> }
+        />
       </Switch>
     </BrowserRouter>
   );

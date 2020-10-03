@@ -2,6 +2,11 @@ import React from 'react';
 import Cart from '../services/cart';
 
 class ShoppingCart extends React.Component {
+  constructor() {
+    super();
+    this.state = { checkout: false };
+  }
+
   addProduct(product) {
     Cart.addItem(product);
   }
@@ -14,7 +19,44 @@ class ShoppingCart extends React.Component {
     }
   }
 
+  checkoutFields() {
+    return (
+      <div>
+        <ShoppingCart />
+        <div>
+          <form>
+            <input
+              type="text"
+              data-testid="checkout-fullname"
+              placeholder="Nome Completo"
+            />
+            <input
+              type="text"
+              data-testid="
+              checkout-email"
+              placeholder="Email:
+              exemplo@exem.com"
+            />
+            <input type="text" data-testid="checkout-cpf" placeholder="CPF" />
+            <input
+              type="text"
+              data-testid="checkout-phone"
+              placeholder="Telefone (XX) XXXX-XXXX"
+            />
+            <input type="text" data-testid="checkout-cep" placeholder="CEP" />
+            <input type="text" data-testid="checkout-address" placeholder="Endereço" />
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+
   render() {
+    const { checkout } = this.state;
+    if (checkout) {
+      return this.checkoutFields();
+    }
     const produtos = Cart.getItemsFromLocalStorage();
     return ((
       produtos.length < 1
@@ -47,16 +89,26 @@ class ShoppingCart extends React.Component {
                   <button
                     type="button"
                     data-testid="product-increase-quantity"
-                    onClick={ () => { this.addProduct(element); this.forceUpdate(); } }
+                    onClick={ () => { this.addProduct(element); this.forceUpdate(); }}
                   >
                     +
                   </button>
                   <button
                     type="button"
                     data-testid="product-decrease-quantity"
-                    onClick={ () => { this.removeProduct(element); this.forceUpdate(); } }
+                    onClick={ () => { this.removeProduct(element); this.forceUpdate(); }}
                   >
                     -
+                  </button>
+                  <button
+                    onClick={ () => this.setState({ checkout: true }) }
+                    data-testid="checkout-products"
+                    type="button"
+                  >
+                    Comprar
+                  </button>
+                  <button type="button" onClick={ () => { Cart.removeAll(); } }>
+                    Limpar carrinho
                   </button>
                 </div>
               </div>

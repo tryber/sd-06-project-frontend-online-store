@@ -8,12 +8,31 @@ import CardDetails from './pages/CardDetails';
 
 
 class App extends Component {
+  constructor() {
+    super()
+
+    this.addProductToCart = this.addProductToCart.bind(this);
+
+    this.state = {
+      addedProducts: 0,
+    }
+  }
+
+  addProductToCart(product, quantityBrought) {
+    this.setState((currentState) => ({
+      addedProducts: [
+        {...currentState.addedProducts},
+        {[product]: quantityBrought},
+      ]
+    }))
+  }
+
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={ Home } />
-          <Route path="/card/:id" component={ CardDetails } />
+          <Route path="/card/:id" render={(props) => <CardDetails {...props} addProductToCart = {this.addProductToCart} />} />
           <Route path="/cart" component={ Cart } />
           <Route component={ NotFound } />
         </Switch>

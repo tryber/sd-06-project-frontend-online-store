@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import * as api from '../services/api';
 import PropTypes from 'prop-types';
+import * as api from '../services/api';
 
 class ListOfCategories extends Component {
   constructor() {

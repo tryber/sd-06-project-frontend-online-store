@@ -9,11 +9,11 @@ import Header from './Header';
 class App extends React.Component {
   constructor() {
     super();
-    if (localStorage.getItem('productsOnCart') !== null) {
+    if (localStorage.getItem('productsOnCart') != null) {
       sessionStorage.productsOnCart = localStorage.getItem('productsOnCart');
       localStorage.removeItem('productsOnCart');
     }
-    const vfyStorageCart = sessionStorage.getItem('productsOnCart') !== null;
+    const vfyStorageCart = sessionStorage.getItem('productsOnCart') != null;
     this.state = {
       productsOnCart: (vfyStorageCart) ? JSON.parse(sessionStorage.productsOnCart) : [],
     };
@@ -40,16 +40,41 @@ class App extends React.Component {
 
   saveCart() {
     const { productsOnCart } = this.state;
-    localStorage.productsOnCart = JSON.stringify(productsOnCart);
+    if (productsOnCart.length >= 1 && sessionStorage.productsOnCart != null) {
+      const productsToSave = sessionStorage.productsOnCart;
+      localStorage.productsOnCart = productsToSave;
+    }
+    return true;
   }
 
   handleState({ target }) {
-    const { name } = target;
+    const { name: nameAndOperation, value: valueUntreated } = target;
     const { productsOnCart } = this.state;
-    const value = (target.type === 'checkbox') ? target.checked : target.value;
-    this.setState((actualState) => ({ [name]: [...actualState.productsOnCart,
-      JSON.parse(value)] }), () => {
-      sessionStorage.productsOnCart = JSON.stringify(productsOnCart);
+    const [name, operation] = nameAndOperation.split('/');
+    const value = JSON.parse(valueUntreated);
+    const productExist = productsOnCart.find((product) => product.id === value.id);
+    let newOnCartState = [];
+    if (productExist === undefined) {
+      const uniqueProduct = { ...value, quantityOnCart: 1 };
+      newOnCartState = [...productsOnCart, uniqueProduct];
+    } else {
+      if (operation === 'add') {
+        productExist.quantityOnCart += 1;
+      } else {
+        productExist.quantityOnCart -= 1;
+      }
+      const productExistIndex = productsOnCart.findIndex((prod) => prod.id
+        === productExist.id);
+      newOnCartState = productsOnCart;
+      if (productExist.quantityOnCart < 1) {
+        newOnCartState.splice(productExistIndex, 1);
+      } else {
+        newOnCartState[productExistIndex] = productExist;
+      }
+    }
+    this.setState({ [name]: newOnCartState }, () => {
+      const { productsOnCart: releasedCart } = this.state;
+      sessionStorage.productsOnCart = JSON.stringify(releasedCart);
       return true;
     });
   }
@@ -58,9 +83,12 @@ class App extends React.Component {
     const handle = this.handleState;
     const { productsOnCart } = this.state;
     const pathDetails = '/product-details/:product';
+    const init = 0;
+    const totalQuantity = (productsOnCart.length >= 1) ? productsOnCart.reduce((sumQty,
+      product) => sumQty + product.quantityOnCart, init) : init;
     return (
       <BrowserRouter>
-        { Header(productsOnCart.length) }
+        { Header(totalQuantity) }
         <Switch>
           <Route
             path={ pathDetails }

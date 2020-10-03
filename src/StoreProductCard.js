@@ -24,7 +24,7 @@ function StoreProductCard(product, handleCart) {
       <div>
         <button
           type="button"
-          name="productsOnCart"
+          name="productsOnCart/add"
           data-testid="product-add-to-cart"
           value={ JSON.stringify(product) }
           onClick={ handleCart }

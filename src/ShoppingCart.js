@@ -5,12 +5,6 @@ import CartProductCard from './CartProductCard';
 
 function ShoppingCart(productsOnCart, handleCart) {
   const msgEmptyCart = 'Seu carrinho está vazio';
-  const idsOnCart = [];
-  productsOnCart.map((product) => {
-    const verifyIfAlreadyExists = idsOnCart.includes(product.id);
-    if (!verifyIfAlreadyExists) idsOnCart.push(product.id);
-    return true;
-  });
   return (
     <div>
       <div>
@@ -24,12 +18,7 @@ function ShoppingCart(productsOnCart, handleCart) {
         { (productsOnCart.length < 1) ? <FaBoxOpen /> : ''}
         { (productsOnCart < 1)
           ? <p>{msgEmptyCart}</p> : '' }
-
-        { idsOnCart.map((id) => {
-          const prodInstances = productsOnCart.filter((product) => product.id === id);
-          const quantity = prodInstances.length;
-          return CartProductCard(prodInstances[0], quantity, handleCart);
-        }) }
+        { productsOnCart.map((product) => CartProductCard(product, handleCart)) }
       </div>
     </div>
   );

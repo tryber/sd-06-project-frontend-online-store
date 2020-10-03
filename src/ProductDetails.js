@@ -9,10 +9,11 @@ function ProductDetails(props, handleCart) {
       <p>{product.price}</p>
       <button
         type="button"
-        name="productsOnCart"
+        name="productsOnCart/add"
         data-testid="product-detail-add-to-cart"
         value={ JSON.stringify(product) }
         onClick={ handleCart }
+        operation="add"
       >
         Adicionar ao carrinho
       </button>

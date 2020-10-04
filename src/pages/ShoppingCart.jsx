@@ -17,11 +17,17 @@ class ShoppingCart extends Component {
 
   render() {
     const { cartProducts: products } = this.state.products;
-    
+
     return (
       <div>
         <div className="icon-box">
-          <Link to="/">
+          <Link 
+            to={
+              {
+                pathname: '/',
+                state: { products },
+              }
+            }>
             <img src={ goHome } alt="imagem voltar para home" />
           </Link>
           <Link to="/cart">

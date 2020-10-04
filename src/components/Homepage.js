@@ -1,5 +1,4 @@
 import React from 'react';
-import ShoppingCartButton from './ShoppingCartButton';
 import CategoryDisplay from './CategoryDisplay';
 
 class Homepage extends React.Component {
@@ -40,9 +39,6 @@ class Homepage extends React.Component {
             className="search-input"
             id="query-input"
           />
-        </section>
-        <section className="shopping-car-button">
-          <ShoppingCartButton />
         </section>
         <section className="category-display">
           <CategoryDisplay query={ searchbar } />

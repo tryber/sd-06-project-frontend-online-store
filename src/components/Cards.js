@@ -4,7 +4,7 @@ import '../App.css';
 
 class Cards extends Component {
   render() {
-    const { item } = this.props;
+    const { item, addtoCart } = this.props;
     return (
       <div className="card" data-testid="product">
         <div className="image-box">
@@ -16,6 +16,13 @@ class Cards extends Component {
             R$
             {item.price}
           </h4>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => { addtoCart(item); } }
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     );
@@ -29,6 +36,7 @@ Cards.propTypes = {
     price: PropTypes.number,
     id: PropTypes.number,
   }).isRequired,
+  addtoCart: PropTypes.func.isRequired,
 };
 
 export default Cards;

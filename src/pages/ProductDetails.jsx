@@ -4,7 +4,6 @@ import * as api from '../services/api';
 export default class ProductDetails extends React.Component {
   constructor(props) {
     super(props);
-    const { id: productId } = props;
 
     this.state = {
       title: '',
@@ -12,7 +11,7 @@ export default class ProductDetails extends React.Component {
       thumbnail: '',
       attributes: '',
       loading: true,
-      id: productId,
+      id: props.id,
     }
 
     this.detailedProduct = this.detailedProduct.bind(this);
@@ -20,10 +19,6 @@ export default class ProductDetails extends React.Component {
 
   async componentDidMount() {
     const { productId } = this.props.match.params;
-    /* const noSense = api.getCategories();
-    console.log(noSense);
-    const productList = api.getProductsFromCategoryAndQuery(id.productId);attributes
-    console.log(productList); */
     const product = await api.getProductsFromId(productId);
     const { title, price, thumbnail, attributes } = product;
     console.log(product)
@@ -44,10 +39,12 @@ export default class ProductDetails extends React.Component {
       <div data-testid="product-detail-link">
         <div data-testid="product-detail-name">{title}</div>
         <div>{price}</div>
-        <img src={thumbnail} alt={`image ${title}`} />
-        {attributes.map(({ name, value_name, id }) => {
-          return (<p key={`${id}`}>{`${name}: ${value_name}`}</p>);
-        })}
+        <img src={thumbnail} alt={`${title}`} />
+        {
+          attributes.map(({ name, value_name, id }) => {
+            return (<p key={`${id}`}>{`${name}: ${value_name}`}</p>);
+          })
+        }
       </div>
     )
   }

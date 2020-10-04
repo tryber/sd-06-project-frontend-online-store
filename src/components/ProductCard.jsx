@@ -54,8 +54,3 @@ export default class ProductCard extends React.Component {
     )
   }
 }
-
-{/* <Redirect to={{
-      pathname: `/productDetails/${id}`,
-      state: { id },
-    }} /> */}

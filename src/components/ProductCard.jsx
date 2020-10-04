@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export default class ProductCard extends React.Component {
+export default class ProductCard extends Component {
   constructor(props) {
     super(props);
 

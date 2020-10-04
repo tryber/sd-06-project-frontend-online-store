@@ -21,5 +21,5 @@ export async function getProductsFromId(productId) {
   const endpoint = `items/${productId}`;
 
   const fromIdPromise = await fetch(`${api}${endpoint}`);
-  return fromIdPromise.json(); // https://api.mercadolibre.com/items/MLB1402879386
+  return fromIdPromise.json();
 }

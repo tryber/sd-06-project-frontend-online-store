@@ -19,6 +19,7 @@ class ListaDeProdutos extends Component {
     this.fetchAPI = this.fetchAPI.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.categoryFilter = this.categoryFilter.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   categoryFilter({ target }) {
@@ -42,30 +43,47 @@ class ListaDeProdutos extends Component {
       produtos: results,
     });
   }
-  
+
   addToCart(produto) {
-    console.log(produto);
+    this.state.produtosNoCarrinho.push(produto);
   }
 
   render() {
     const { produtos } = this.state;
     const zero = 0;
     return (
-      <div>
-        <ListaCategorias categoryFilter={this.categoryFilter} />
-        <CampoBusca onClick={this.handleClick} />
-        <ul>
-          {produtos.length === zero ? (
-            <p>Nenhum produto foi encontrado</p>
-          ) : (
-            produtos.map((produto) => (
-              <Produto key={produto.id} produto={produto} onClick={this.addToCart} />
-            ))
-          )}
-        </ul>
-        <Link to="/CarrinhoDeCompras" data-testid="shopping-cart-button">
-          <img src={carrinho} className="cart-img" alt="ícone carrinho" />
-        </Link>
+      <div className='wrapper'>
+        <aside>
+          <ListaCategorias categoryFilter={ this.categoryFilter } />
+        </aside>
+        <main>
+          <div>
+            <CampoBusca onClick={ this.handleClick } />
+          </div>
+          <div>
+            <Link data-testid="shopping-cart-button" to={ {
+              pathname: "/CarrinhoDeCompras",
+              state: {
+                produtosNoCarrinho: this.state.produtosNoCarrinho,
+              }
+            } } >
+              <img src={ carrinho } className="cart-img" alt="ícone carrinho" />
+            </Link>
+          </div>
+          <ul>
+            { produtos.length === zero ? (
+              <p>Nenhum produto foi encontrado</p>
+            ) : (
+                produtos.map((produto) => (
+                  <Produto
+                    key={ produto.id }
+                    produto={ produto }
+                    addToCart={ this.addToCart }
+                  />
+                ))
+              ) }
+          </ul>
+        </main>
       </div>
     );
   }

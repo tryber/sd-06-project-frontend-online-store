@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { FaShoppingCart } from 'react-icons/fa';
 
 export default () => {
   return (
-    <div id="cart-button">
-      <button type="button"><Link data-testid="shopping-cart-button" to="/cart">Ir para o Carrinho de Compras</Link></button>
+    <div className="cart-button-container">
+      <button id="cart-button" type="button"><Link data-testid="shopping-cart-button" to="/cart"><FaShoppingCart /></Link></button>
     </div>
   );
 };

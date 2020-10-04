@@ -1,7 +1,13 @@
+body {
+  width: 100%;
+}
 
 .categories {
-  border: 1px solid black;
+  background-color: rgb(255, 245, 203);
+  border-radius: 20px;
   width: 25%;
+  font-family: ubuntu;
+  margin: 10px;
 }
 
 .radio {
@@ -9,7 +15,6 @@
 }
 
 .products-list {
-  border: 1px solid rgb(255, 0, 0);
   width: 70%;
 }
 
@@ -23,11 +28,104 @@
 }
 
 .product-group {
-  border: 1px solid rgb(0, 255, 0);
+  border: 1px solid rgb(232, 232, 232);
+  border-top: 0;
   padding: 10px;
   width: 190px;
 }
 
 .cart-product {
   display: flex;
+}
+
+.header {
+  background-color: #ffffff;
+  background-image: linear-gradient(45deg, #ffffff 0%, #F7CE68 100%);
+  display: flex;
+  height: 120px;
+  width: 100%;
+  position: relative;
+  justify-content: space-between;
+  margin: 0;
+}
+
+#box-search {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-left: 50%;
+  width: 660px;
+  position: relative;
+  border-radius: 12px;
+  height: 25px;
+  border: 1px solid grey;
+}
+
+#button-search {
+  height: 20px;
+  align-self: center;
+  position: absolute;
+  margin-left: 50%;
+}
+
+#button-search, button {
+  height: 19px;
+  align-self: center;
+  background-color: white ;
+  border: 0;
+}
+
+#box {
+  display: flex;
+  margin-left: 12%;
+}
+
+#cart-button {
+  display: flex;
+  height: 21px;
+  align-self: center;
+  font-size: 50px;
+  color: #000;
+}
+
+#home-initial-message {
+  display: flex;
+  top: 15px;
+}
+
+#box h3 {
+  display: flex;
+  margin-top: 100px;
+  align-self: center;
+  position: absolute;
+  margin-left: 20%;
+}
+
+.cart-button-container {
+  height: 50px;
+  align-self: center;
+}
+
+.cart-button-container button {
+  background-color: #F7CE68;
+  border: 0;
+}
+
+#logo-ml-container {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 70px;
+  font-size: 9pt;
+}
+
+#logo-ml {
+  width: 70px;
+}
+
+#subtitle-ml: p {
+  font-family: ubuntu;
+  display: inline;
+  flex-direction: row;
 }

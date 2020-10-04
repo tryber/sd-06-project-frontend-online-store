@@ -20,12 +20,22 @@ export default class Home extends Component {
     this.getCategory = this.getCategory.bind(this);
     this.categoryApi = this.categoryApi.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getProductsFromCart = this.getProductsFromCart.bind(this);
   }
 
   async componentDidMount() {
     const categoriesObjects = await api.getCategories();
     const categories = categoriesObjects.map(category => category);
     this.setState({ categories });
+    this.getProductsFromCart();
+  }
+
+  getProductsFromCart() {
+    const productsFromCart = this.props.location.state.products
+      ? this.props.location.state.products
+      : [];
+
+    this.setState({ cartProducts: productsFromCart });
   }
 
   async onSearchTextSubmit(event) {
@@ -53,7 +63,7 @@ export default class Home extends Component {
     const productsFromState = this.state.products;
     const productToCart = productsFromState.filter(product => product.id === productId);
 
-    this.setState({ cartProducts: [...this.state.cartProducts, productToCart] });
+    this.setState({ cartProducts: [...this.state.cartProducts, ...productToCart] });
   }
 
   render() {

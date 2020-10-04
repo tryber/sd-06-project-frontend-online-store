@@ -9,7 +9,10 @@ import ShoppingCart from './pages/ShoppingCart';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cartProducts: [] };
+    this.state = {
+      cartProducts: [],
+      cartQuantity: 0,
+    };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
   }

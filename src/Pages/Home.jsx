@@ -11,6 +11,12 @@ class Home extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({
+
+    });
+  }
+
   render() {
     console.log(this.state.allCategories);
     return (

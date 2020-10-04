@@ -25,11 +25,15 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/EmptyCart" component={ EmptyCart } />
-          <Route exact path="/" component={ Home } addToCart={ this.handleAddProduct } />
+          <Route
+            exact
+            path="/"
+            component={ Home }
+            addToCart={ this.handleAddProduct }
+          />
           <Route
             path="/ProductDetails/:id"
             component={ ProductDetails }
-            addToCart={ this.handleAddProduct }
             cartProducts={ cartProducts }
           />
           <Route

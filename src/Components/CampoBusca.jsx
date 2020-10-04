@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import carrinho from '../img/shopping-cart.png';
 
 class CampoBusca extends Component {
   constructor(props) {
@@ -21,8 +19,11 @@ class CampoBusca extends Component {
     const { search } = this.state;
     const { onClick } = this.props;
     return (
-      <div class="campo-busca">
-        <input class="query-input"
+      <div>
+        <p data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
+        <input
           data-testid="query-input"
           type="text"
           value={ search }
@@ -35,10 +36,6 @@ class CampoBusca extends Component {
         >
           Pesquisar
         </button>
-        <Link to="/CarrinhoDeCompras" data-testid="shopping-cart-button"><img src={ carrinho } class="cart-img" /></Link>
-        <p class="home-initial-message" data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
       </div>
     );
   }

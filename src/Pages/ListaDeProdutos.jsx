@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CampoBusca from '../Components/CampoBusca';
 import ListaCategorias from '../Components/ListaCategorias';
 import Produto from '../Components/Produto';
 import * as Api from '../services/api';
 import carrinho from '../img/shopping-cart.png';
 import '../App.css';
-
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ListaDeProdutos extends Component {
@@ -36,6 +36,7 @@ class ListaDeProdutos extends Component {
       search,
     );
     const { results } = response;
+    // console.log(results);
     this.setState({
       produtos: results,
     });
@@ -45,9 +46,8 @@ class ListaDeProdutos extends Component {
     const { produtos } = this.state;
     const zero = 0;
     return (
-      <div class="wrapper">
+      <div>
         <ListaCategorias categoryFilter={ this.categoryFilter } />
-        <main>
         <CampoBusca onClick={ this.handleClick } />
         <ul>
           { produtos.length === zero ? (
@@ -66,7 +66,6 @@ class ListaDeProdutos extends Component {
         <Link to="/CarrinhoDeCompras" data-testid="shopping-cart-button">
           <img src={ carrinho } className="cart-img" alt="ícone carrinho" />
         </Link>
-        </main>
       </div >
     );
   }

@@ -47,10 +47,9 @@ class ShopList extends React.Component {
     const zero = 0;
     const { cartList } = this.state;
     const storageCartList = JSON.parse(localStorage.getItem('cartlist'));
-    console.log('updated local storage', storageCartList);
+
     if (storageCartList && Object.values(cartList).length === zero) {
       this.setState({ cartList: storageCartList });
-      console.log('dentro do if');
     }
   }
 

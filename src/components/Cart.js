@@ -7,8 +7,6 @@ class Cart extends React.Component {
     const { cartList } = this.props;
     const zero = 0;
     const cartVolume = this.sumAllCartItemsQuantity(cartList);
-
-
     if (cartVolume > zero) {
       this.updateCartListInLocalStorage(cartVolume);
     }
@@ -16,10 +14,7 @@ class Cart extends React.Component {
 
   updateCartListInLocalStorage() {
     const { cartList } = this.props;
-
-    console.log(cartList);
     localStorage.setItem('cartlist', JSON.stringify(cartList));
-    console.log('localstorage');
   }
 
   sumAllCartItemsQuantity(cartList) {
@@ -31,8 +26,6 @@ class Cart extends React.Component {
 
   render() {
     const { cartList } = this.props;
-    const zero = 0;
-
 
     return (
       <div>
@@ -44,8 +37,7 @@ class Cart extends React.Component {
         </Link>
         <span data-testid="shopping-cart-size">
           {
-            Object.values(cartList)
-              .reduce((prev, product) => product.quantity + prev, zero)
+            this.sumAllCartItemsQuantity(cartList)
           }
         </span>
       </div>

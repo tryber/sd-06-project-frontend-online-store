@@ -6,19 +6,28 @@ class Home extends React.Component {
     super();
 
     this.state = {
-      allProducts: api.getProductsFromCategoryAndQuery(),
-      allCategories: api.getCategories(),
+      allProducts: [],
+      allCategories: [],
     }
   }
 
-  componentDidMount() {
-    this.setState({
+  async componentDidMount() {
+    await api.getCategories()
+      .then(response => {
+        this.setState({
+          allCategories: response,
+        });
+      });
 
-    });
+    await api.getProductsFromCategoryAndQuery()
+      .then(response => {
+        this.setState({
+          allProducts: response,
+        });
+      })
   }
 
   render() {
-    console.log(this.state.allCategories);
     return (
       <h2>no</h2>
     )

@@ -12,7 +12,6 @@ class ShoppingCart extends React.Component {
     let totalValue = 1 - 1;
     productArray.forEach((product) => {
       totalValue += product.price;
-      console.log(product.price);
     });
     return totalValue;
   }

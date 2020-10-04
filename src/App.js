@@ -10,6 +10,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = { cartProducts: [] };
+
+    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 
   handleAddProduct() {
@@ -23,14 +25,19 @@ class App extends React.Component {
       <BrowserRouter>
         <Switch>
           <Route path="/EmptyCart" component={ EmptyCart } />
-          <Route exact path="/" component={ Home } />
+          <Route exact path="/" component={ Home } addToCart={ this.handleAddProduct } />
           <Route
             path="/ProductDetails/:id"
             component={ ProductDetails }
             addToCart={ this.handleAddProduct }
             cartProducts={ cartProducts }
           />
-          <Route path="/ShoppingCart/:id" component={ ShoppingCart } />
+          <Route
+            path="/ShoppingCart"
+            component={ ShoppingCart }
+            addToCart={ this.handleAddProduct }
+            cartProducts={ cartProducts }
+          />
         </Switch>
       </BrowserRouter>
     );

@@ -42,6 +42,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const { addToCart } = this.props;
     const { products } = this.state;
     return (
       <div className="container">
@@ -67,7 +68,7 @@ class Home extends React.Component {
           >
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <ProductList products={ products } />
+          <ProductList products={ products } addToCart={ addToCart } />
 
         </div>
         <CartBtn />

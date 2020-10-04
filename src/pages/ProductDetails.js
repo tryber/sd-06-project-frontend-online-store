@@ -4,28 +4,6 @@ import { Link } from 'react-router-dom';
 import CartBtn from '../services/CartBtn';
 
 class ProductDetails extends React.Component {
-  constructor(props) {
-    super();
-    const product = props.location.state ? props.location.state.product : null;
-    this.state = { product };
-  }
-
-  renderButtons() {
-    const { addToCart } = this.props;
-    const { product } = this.state;
-    return (
-      <div>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => addToCart(product) }
-        >
-          Adicionar ao Carrinho
-        </button>
-      </div>
-    );
-  }
-
   render() {
     const { product: { title, thumbnail, attibutes } } = this.state;
     return (
@@ -40,7 +18,6 @@ class ProductDetails extends React.Component {
           </div>
           <div>
             <p>{ attibutes }</p>
-            {this.renderButtons()}
           </div>
         </div>
         <div>

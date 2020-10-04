@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-export default class ProductCard extends React.Component {
+export default class ProductCard extends Component {
   constructor(props) {
     super();
 

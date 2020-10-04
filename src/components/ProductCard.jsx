@@ -22,7 +22,7 @@ export default class ProductCard extends React.Component {
         <Link to={`/productDetails/${id}`} data-testid="product-detail-link">DETALHES</Link>
         {
           attributes.map(({ name, value_name, id }) => {
-            return (<p key={`${id}`}>{`${name}: ${value_name}`}</p>);
+            return (<p key={id}>{`${name}: ${value_name}`}</p>);
           })
         }
       </div >

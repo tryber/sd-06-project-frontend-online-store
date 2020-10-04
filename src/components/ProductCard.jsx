@@ -22,8 +22,9 @@ export default class ProductCard extends React.Component {
 
     return (
       <article data-testid="product">
-        <div>{title}</div>
+        <div data-testid="shopping-cart-product-name">{title}</div>
         <div>{price}</div>
+        {/* <div data-testid="shopping-cart-product-quantity">{quantity}</div> */}
         <img src={thumbnail} alt={title}/>
         <button
           type="submit"

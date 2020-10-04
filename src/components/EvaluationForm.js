@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContortoEstrelaComponente from './ContornoEstrela';
+import ContornoEstrelaComponente from './ContornoEstrela';
 import { saveEvaluation, getEvaluations } from '../services/api';
 
 class EvaluationForm extends React.Component {
@@ -70,7 +70,7 @@ class EvaluationForm extends React.Component {
       <div id="main-div">
         <fieldset>
           <form>
-            <ContortoEstrelaComponente />
+            <ContornoEstrelaComponente />
             <br />
             <input
               type="email"

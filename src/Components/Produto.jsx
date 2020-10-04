@@ -7,10 +7,10 @@ class Produto extends Component {
     const { produto } = this.props;
     const { title, price, thumbnail } = produto;
     return (
-      <div data-testid="product">
+      <div class="product" data-testid="product">
         <h3>{ title }</h3>
         <img src={ thumbnail } alt="foto" />
-        <p>{ price }</p>
+        <p>R$ { price }</p>
       </div>
     );
   }

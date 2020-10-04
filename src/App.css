@@ -6,7 +6,7 @@ a {
 .App {
   text-align: center;
 }
-
+/* 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -40,17 +40,74 @@ a {
   to {
     transform: rotate(360deg);
   }
+} */
+
+.wrapper {
+  /* border: 1px solid; */
+  display: flex;
+  margin: 10px;
 }
 
 .category-list {
   border: 1px solid;
   border-radius: 5px;
   padding: 5px;
-  width: 250px;
+  width: 300px;
+  padding-right: 20px;
+}
+
+main {
+  /* border: 1px solid; */
+  margin: 10px;
+  margin-top: 0;
+}
+
+main ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+main ul p {
+  /* border: 1px solid; */
+  width: 100%;
+  text-align: center;
+}
+
+.product {
+  border: 1px solid;
+  border-radius: 10px;
+  width: 200px;
+  text-align: center;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.product h3 {
+  /* border: 1px solid; */
+  font-size: 15px;
+  margin: 0;
+  background-color: lightsteelblue;
+  padding-bottom: 5px;
+}
+
+.campo-busca {
+  /* border: 1px solid; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cart-img {
   width: 30px;
+  margin-left: 10px;
+}
+
+.query-input {
+  border:1px solid;
+  border-radius: 15px;
+  width: 800px;
+  font-size: 17px;
+  margin-right: 5px;
 }
 
 .detalhe-produto {

@@ -3,6 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ProductCard extends React.Component {
+  constructor() {
+    super();
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { addItem, details } = this.props;
+    addItem(details);
+  }
+
   render() {
     const { title, thumbnail, price, details } = this.props;
     return (
@@ -19,6 +30,14 @@ class ProductCard extends React.Component {
         >
           Detalhes do Produto
         </Link>
+        <button
+          type="button"
+          className="add-to-cart-button"
+          data-testid="product-add-to-cart"
+          onClick={ () => this.handleClick() }
+        >
+          Adicionar ao carrinho
+        </button>
       </div>
     );
   }
@@ -29,6 +48,7 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string,
   price: PropTypes.number,
   details: PropTypes.shape(),
+  addItem: PropTypes.func,
 };
 
 ProductCard.defaultProps = {
@@ -36,6 +56,7 @@ ProductCard.defaultProps = {
   thumbnail: '',
   price: 0,
   details: {},
+  addItem: () => 1,
 };
 
 export default ProductCard;

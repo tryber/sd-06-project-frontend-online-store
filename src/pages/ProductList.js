@@ -15,12 +15,15 @@ class ProductList extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleQuery = this.handleQuery.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.getState = this.getState.bind(this);
 
     this.state = {
       categories: [],
       selectedCategoryId: '',
       searchText: '',
       products: [],
+      cartItems: [],
     };
   }
 
@@ -43,6 +46,17 @@ class ProductList extends React.Component {
       selectedCategoryId, searchText,
     );
     this.setState({ products: requestReturn.results });
+  }
+
+  getState() {
+    const { cartItems } = this.state;
+    return cartItems;
+  }
+
+  async addToCart(item) {
+    await this.setState((previousState) => ({
+      cartItems: previousState.cartItems.concat(item),
+    }));
   }
 
   async handleQuery({ target }) {
@@ -77,11 +91,11 @@ class ProductList extends React.Component {
 
   renderProducts() {
     const { products } = this.state;
-    return <Product products={ products } />;
+    return <Product products={ products } addToCart={ this.addToCart } />;
   }
 
   render() {
-    const { products } = this.state;
+    const { products, cartItems: items } = this.state;
     return (
       <div>
         <header className="header-container">
@@ -100,7 +114,14 @@ class ProductList extends React.Component {
             >
               Busca
             </button>
-            <Link to="/cart" data-testid="shopping-cart-button">
+            <Link
+              to={ {
+                pathname: '/cart',
+                cartItems: items,
+                getItems: this.getState,
+              } }
+              data-testid="shopping-cart-button"
+            >
               <img src={ shoppingCart } height="50" alt="carrinho de compras" />
             </Link>
           </nav>

@@ -3,9 +3,19 @@ import React from 'react';
 import ProductCard from './ProductCard';
 
 class Product extends React.Component {
+  constructor() {
+    super();
+
+    this.addItemToCart = this.addItemToCart.bind(this);
+  }
+
+  addItemToCart(item) {
+    const { addToCart } = this.props;
+    addToCart(item);
+  }
+
   render() {
     const { products } = this.props;
-
     return (
       <div className="product-container">
         {products.map((product) => (
@@ -15,6 +25,7 @@ class Product extends React.Component {
             thumbnail={ product.thumbnail }
             price={ product.price }
             details={ product }
+            addItem={ this.addItemToCart }
           />
         ))}
       </div>
@@ -22,6 +33,13 @@ class Product extends React.Component {
   }
 }
 
-Product.propTypes = { products: PropTypes.arrayOf(PropTypes.object).isRequired };
+Product.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addToCart: PropTypes.func,
+};
+
+Product.defaultProps = {
+  addToCart: () => 1,
+};
 
 export default Product;

@@ -18,23 +18,23 @@ export default class ProductDetails extends React.Component {
   }
 
   async componentDidMount() {
-    const { productId } = this.props.match.params;
-    const product = await api.getProductsFromId(productId);
-    const { title, price, thumbnail, attributes } = product;
-    console.log(product)
+    const { productId, category, title } = this.props.match.params;
+    const productFromId = await api.getProductsFromId(productId);
+    const productList = await api.getProductsFromCategoryAndQuery(category, title);
+    const productFilter = productList.results.filter(product => product.id === productId)[0];
+    const product = productFilter ? productFilter : productFromId;
+    const { price, thumbnail, attributes } = product;
     this.setState({
-      title,
+      title: product.title,
       price,
       thumbnail,
       attributes,
       loading: false,
     });
-    console.log(product);
   }
 
   detailedProduct() {
     const { title, price, thumbnail, attributes } = this.state;
-    console.log(this.state);
     return (
       <div data-testid="product-detail-link">
         <div data-testid="product-detail-name">{title}</div>

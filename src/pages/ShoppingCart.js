@@ -7,8 +7,14 @@ class ShoppingCart extends React.Component {
     this.state = { checkout: false };
   }
 
-  addProduct(product) {
-    Cart.addItem(product);
+  getTotalValue() {
+    const productArray = Cart.getItemsFromLocalStorage();
+    let totalValue = 1 - 1;
+    productArray.forEach((product) => {
+      totalValue += product.price;
+      console.log(product.price);
+    });
+    return totalValue;
   }
 
   removeProduct(product) {
@@ -19,10 +25,18 @@ class ShoppingCart extends React.Component {
     }
   }
 
+  addProduct(product) {
+    Cart.addItem(product);
+  }
+
   checkoutFields() {
     return (
       <div>
         <ShoppingCart />
+        <div>
+          <span>Total a pagar: R$ </span>
+          {this.getTotalValue()}
+        </div>
         <div>
           <form>
             <input

@@ -1,20 +1,26 @@
 body {
+  height: 100%;
   width: 100%;
 }
 
 .categories {
-  background-color: rgb(255, 245, 203);
+  background-color: #ffd578;
+  background-image: linear-gradient(40deg, #ffe26f,  #ffd578);
   border-radius: 20px;
-  width: 25%;
   font-family: ubuntu;
-  margin: 10px;
+  margin: 30px 20px 0 10px;
+  padding: 0 10px 30px 10px;
+  width: 25%;
 }
+
+
 
 .radio {
   padding: 5px 0;
 }
 
 .products-list {
+  margin-top: 10px;
   width: 70%;
 }
 
@@ -28,10 +34,21 @@ body {
 }
 
 .product-group {
-  border: 1px solid rgb(232, 232, 232);
   border-top: 0;
+  border: 1px solid rgb(232, 232, 232);
   padding: 10px;
   width: 190px;
+  max-height: 100%;
+}
+
+button.product-group {
+  align-self: baseline;
+  background-color: aqua;
+}
+
+.cart-button-product {
+  display: flex;
+  align-content: flex-end;
 }
 
 .cart-product {
@@ -39,53 +56,69 @@ body {
 }
 
 .header {
-  background-color: #ffffff;
-  background-image: linear-gradient(45deg, #ffffff 0%, #F7CE68 100%);
+  background-color: #ffcc70;
+  background-image: linear-gradient(43deg, white 0%, yellow 46%, #ffcc70 100%);
   display: flex;
   height: 120px;
-  width: 100%;
-  position: relative;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0;
+  width: 100%;
 }
 
 #box-search {
-  display: flex;
-  justify-content: center;
   align-self: center;
-  margin-left: 50%;
-  width: 660px;
-  position: relative;
   border-radius: 12px;
-  height: 25px;
   border: 1px solid grey;
+  display: flex;
+  height: 25px;
+  width: 516px;
 }
 
 #button-search {
-  height: 20px;
   align-self: center;
-  position: absolute;
-  margin-left: 50%;
-}
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid grey;
+  font-size: 18pt;
+  height: 29px;
+  position: relative;
 
-#button-search, button {
-  height: 19px;
-  align-self: center;
-  background-color: white ;
-  border: 0;
 }
 
 #box {
   display: flex;
-  margin-left: 12%;
+  justify-content: space-between;
 }
 
-#cart-button {
+.cart-button {
+  align-self: center;
+  border: 0;
   display: flex;
   height: 21px;
-  align-self: center;
-  font-size: 50px;
-  color: #000;
+}
+
+button.cart-button {
+  background-color: #ffd578;
+  background-image: linear-gradient(40deg, #ffe26f,  #ffd578);
+  border-radius: 12px;
+  font-size: 50pt;
+  height: 70px;
+}
+
+h6 {
+  align-items: baseline;
+  display: flex;
+  font-family: ubuntu;
+  font-size: 10pt;
+  margin-block-end: 0;
+  margin-block-start: 10pt;
+  margin-inline-end: 0;
+  margin-inline-start: 5pt;
+  text-align: left;
+}
+
+svg {
+  color: black;
 }
 
 #home-initial-message {
@@ -93,39 +126,64 @@ body {
   top: 15px;
 }
 
-#box h3 {
+#message-header {
+  align-self: center;
   display: flex;
   margin-top: 100px;
-  align-self: center;
   position: absolute;
-  margin-left: 20%;
 }
 
 .cart-button-container {
-  height: 50px;
   align-self: center;
-}
-
-.cart-button-container button {
-  background-color: #F7CE68;
-  border: 0;
+  height: 50px;
 }
 
 #logo-ml-container {
-  display: flex;
   align-self: center;
+  display: flex;
   flex-direction: column;
+  font-size: 9pt;
   justify-content: center;
   width: 70px;
-  font-size: 9pt;
 }
 
 #logo-ml {
   width: 70px;
 }
 
-#subtitle-ml: p {
+#subtitle-ml {
   font-family: ubuntu;
-  display: inline;
-  flex-direction: row;
+  text-align: center;
+}
+
+#logo-quindim-header {
+  align-self: center;
+  display: flex;
+  height: 65px;
+  margin-left: 0;
+  width: 300px;
+}
+
+#header-bar-grey {
+  background-color:grey;
+  height: 5px;
+  margin-top: 120px;
+  min-width: 100%;
+  position: absolute;
+}
+
+#header-bar-black {
+  background-color:black;
+  height: 10px;
+  margin-top: 125px;
+  min-width: 100%;
+  position: absolute;
+}
+
+#header-bar-yellow {
+  background-color:gold;
+  height: 10px;
+  margin-top: 135px;
+  min-width: 100%;
+  position: absolute;
 }

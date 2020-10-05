@@ -21,21 +21,19 @@ class Cart extends React.Component {
   }
 
   renderCart() {
-    const { location } = this.props;
-    const { getItems } = location;
-    const cart = getItems();
-    if (cart.length < 1) {
+    const { cartItems } = this.props;
+    if (cartItems.length < 1) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
     }
     return (
       <div>
-        {cart.map((item) => (
+        {cartItems.map((item) => (
           <div key={ item.id }>
             {this.renderProduct(item)}
           </div>
         ))}
         <p data-testid="shopping-cart-product-quantity">
-          {`Quantidade: ${cart.length}`}
+          {`Quantidade: ${cartItems.length}`}
         </p>
       </div>
     );
@@ -54,11 +52,17 @@ class Cart extends React.Component {
 }
 
 Cart.propTypes = {
-  location: PropTypes.shape(),
+  cartItems: PropTypes.shape({
+    length: PropTypes.number,
+    map: PropTypes.func,
+  }),
 };
 
 Cart.defaultProps = {
-  location: {},
+  cartItems: PropTypes.shape({
+    length: 1,
+    map: () => 1,
+  }),
 };
 
 export default Cart;

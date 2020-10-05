@@ -15,7 +15,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { title, thumbnail, price, details } = this.props;
+    const { title, thumbnail, price, details, addItem: add } = this.props;
     return (
       <div data-testid="product" className="product-card">
         <h3>{title}</h3>
@@ -25,6 +25,7 @@ class ProductCard extends React.Component {
           to={ {
             pathname: './product-details',
             product: details,
+            addItem: add,
           } }
           data-testid="product-detail-link"
         >

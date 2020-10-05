@@ -4,13 +4,14 @@ import ProductList from './ProductList';
 import * as api from '../services/api';
 import imgCart from '../img/imgCart.jpg';
 import CategoryList from './CategoryList';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
     this.state = {
       ProductArray: [],
@@ -19,10 +20,10 @@ class Home extends React.Component {
     };
   }
 
-  handleClick() {
-    const { history } = this.props;
-    history.push('/cart');
-  }
+  // handleClick() {
+  //   const { history } = this.props;
+  //   history.push('/cart');
+  // }
 
   async handleSearch() {
     const { inputQuery, idCategory } = this.state;
@@ -67,13 +68,15 @@ class Home extends React.Component {
           addFromList={ addToCart }
           query={ inputQuery }
         />
-        <button
-          data-testid="shopping-cart-button"
-          type="button"
-          onClick={ this.handleClick }
-        >
-          <img src={ imgCart } alt="shopping-cart-button" width="25" />
-        </button>
+        <Link to="/cart">
+          <button
+            data-testid="shopping-cart-button"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            <img src={ imgCart } alt="shopping-cart-button" width="25" />
+          </button>
+        </Link>
       </div>
     );
   }

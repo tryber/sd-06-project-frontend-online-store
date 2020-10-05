@@ -6,7 +6,7 @@ export const reviews = [];
 
 export function countQuantity() {
   return cart.reduce((total, product) => {
-    const quantity = product.quantity;
+    const { quantity } = product;
     return total + quantity;
-  }, 0);
+  }, (1 - 1));
 }

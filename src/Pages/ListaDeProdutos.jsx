@@ -98,3 +98,4 @@ class ListaDeProdutos extends Component {
 }
 
 export default ListaDeProdutos;
+// Iniciar requsito 10

@@ -53,7 +53,7 @@ class ProductDetails extends React.Component {
         <div className="product-details">
           <img alt="Product" src={ thumbnail } className="product-image" />
           <div className="product-info">
-            <h1 data-testid="product-detail-name">{title}</h1>
+            {/* <h1 data-testid="product-detail-name">{title}</h1> */}
             <p>{price}</p>
           </div>
         </div>

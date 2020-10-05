@@ -49,7 +49,7 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { products, totalCart } = this.state;
-    console.log(totalCart);
+    // console.log(totalCart);
     return (
       <div>
         <div>

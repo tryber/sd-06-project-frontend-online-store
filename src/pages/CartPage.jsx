@@ -6,9 +6,7 @@ class CartPage extends Component {
   constructor() {
     super();
     this.handleClayton = this.handleClayton.bind(this);
-    this.state = {
-      quantity: 1,
-    };
+    this.state = {};
   }
 
   handleClayton({ target }) {
@@ -18,12 +16,26 @@ class CartPage extends Component {
     // console.log(target.value);
     if (!this.state[id]) {
       this.setState({ [id]: 1 + value });
-    } else {
+      this.catQuantity(value, id);
+    } else if (this.state[id] !== 1) {
       this.setState((stateAntigo) => ({ [id]: stateAntigo[id] + value }));
+      this.catQuantity(value, id);
+    }
+    console.log(cart);
+  }
+
+  catQuantity(value, id) {
+    if (value === -1) {
+      if (cart.find((product) => product.id === id).quantity > 1) {
+        cart.find((product) => product.id === id).quantity += value;
+      }
+    } else {
+      cart.find((product) => product.id === id).quantity += value;
     }
   }
 
   render() {
+    // console.log(cart);
 
     return (
       <div>

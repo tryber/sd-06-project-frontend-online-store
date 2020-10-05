@@ -9,6 +9,12 @@ function ShoppingCart(productsOnCart, handleCart) {
     <div>
       <div>
         <Link to="/"><FaArrowAltCircleLeft /></Link>
+        <Link
+          data-testid="checkout-products"
+          to={ { pathname: '/checkout', state: { productsOnCart } } }
+        >
+          Ir para checkout
+        </Link>
         <div>
           <FaShoppingCart />
           <p>Carrinho de Compras</p>

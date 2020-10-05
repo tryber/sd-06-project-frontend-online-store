@@ -10,6 +10,8 @@ class ListaCategorias extends React.Component {
     this.state = {
       categoryList: [],
     };
+
+    this.changeCategory = this.changeCategory.bind(this);
   }
 
   componentDidMount() {
@@ -18,6 +20,13 @@ class ListaCategorias extends React.Component {
         categoryList: categories,
       });
     });
+  }
+
+  changeCategory(e) {
+    // console.log(e.target.value)
+    this.state.categoryList.push(e.target.value)
+    this.props.changeSearch(this.state.categoryList)
+    console.log(this.state.categoryList)
   }
 
   render() {
@@ -29,17 +38,18 @@ class ListaCategorias extends React.Component {
         {categoryList.map((category) => (
           <form key={ category.id }>
             <input
+              id={ category.id }
               data-testid="category"
               type="checkbox"
               value={ category.id }
               name="category"
-              onClick={ (event) => categoryFilter(event) }
+              onClick={ this.changeCategory }
             />
-            <label htmlFor="category">
+            <label htmlFor={ category.id }>
               { category.name }
             </label>
           </form>
-        ))}
+        )) }
       </div>
     );
   }

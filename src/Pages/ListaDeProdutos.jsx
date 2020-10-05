@@ -12,14 +12,15 @@ class ListaDeProdutos extends Component {
   constructor() {
     super();
     this.state = {
-      produtos: [],
+      produtos: '',
       categoryId: "",
       produtosNoCarrinho: [],
+      search: '',
     };
     this.fetchAPI = this.fetchAPI.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.categoryFilter = this.categoryFilter.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.changeSearch = this.changeSearch.bind(this);
   }
 
   categoryFilter({ target }) {
@@ -27,8 +28,11 @@ class ListaDeProdutos extends Component {
     this.setState({ categoryId: value }, () => this.fetchAPI());
   }
 
-  handleClick(props) {
-    this.fetchAPI(props);
+  async changeSearch(prop) {
+    await this.setState({
+      search: prop,
+    })
+    await this.fetchAPI();
   }
 
   async fetchAPI() {
@@ -37,9 +41,8 @@ class ListaDeProdutos extends Component {
       categoryId,
       search
     );
-    const { results } = response;
-    // console.log(results);
-    this.setState({
+    const { results } = await response;
+    await this.setState({
       produtos: results,
     });
   }
@@ -49,18 +52,17 @@ class ListaDeProdutos extends Component {
   }
 
   render() {
-    const { produtos } = this.state;
+    const { produtos, search } = this.state;
     const zero = 0;
+    // console.log(search === '')
     return (
       <div className='wrapper'>
         <aside>
-          <ListaCategorias categoryFilter={ this.categoryFilter } />
+          <ListaCategorias changeSearch={ this.changeSearch } />
         </aside>
         <main>
-          <div>
-            <CampoBusca onClick={ this.handleClick } />
-          </div>
-          <div>
+          <CampoBusca changeSearch={ this.changeSearch } />
+          <div class="cart-img-div">
             <Link data-testid="shopping-cart-button" to={ {
               pathname: "/CarrinhoDeCompras",
               state: {
@@ -70,17 +72,21 @@ class ListaDeProdutos extends Component {
               <img src={ carrinho } className="cart-img" alt="ícone carrinho" />
             </Link>
           </div>
-          <ul>
-            { produtos.length === zero ? (
-              <p>Nenhum produto foi encontrado</p>
+          <ul class="listagem">
+            { search === '' ? (
+              <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>
             ) : (
-                produtos.map((produto) => (
-                  <Produto
-                    key={ produto.id }
-                    produto={ produto }
-                    addToCart={ this.addToCart }
-                  />
-                ))
+                (produtos.length === zero ? (
+                  <p>Nenhum produto foi encontrado</p>
+                ) : (
+                    produtos.map((produto) => (
+                      <Produto
+                        key={ produto.id }
+                        produto={ produto }
+                        addToCart={ this.addToCart }
+                      />
+                    ))
+                  ))
               ) }
           </ul>
         </main>

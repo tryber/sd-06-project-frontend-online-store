@@ -1,12 +1,33 @@
-.App {
-  text-align: center;
-}
-
 .category-list {
   border: 1px solid;
   border-radius: 5px;
   padding: 5px;
   width: 250px;
+}
+
+.campo-busca {
+  width: max-content;
+  float: left;
+}
+
+.campo-busca input {
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.campo-busca button {
+  font-size: 15px;
+  padding: 5px;
+}
+
+.cart-img-div {
+  /* border: 1px solid; */
+  width: 80px;
+  float: right;
+  text-align: center;
 }
 
 .cart-img {
@@ -18,12 +39,17 @@
 }
 
 main {
-  border: 1px solid;
+  /* border: 1px solid; */
   width: 900px;
   text-align: center;
-  
+  padding: 10px 25px;
 }
 
 main input {
-  width: 600px;
+  width: 700px;
+}
+
+.listagem {
+  margin-top: 30px;
+  border: 1px solid white;
 }

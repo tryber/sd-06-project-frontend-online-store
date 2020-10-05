@@ -1,6 +1,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Produto extends Component {
   constructor() {
@@ -19,7 +20,14 @@ class Produto extends Component {
     return (
       <div data-testid="product">
         <h3>{ title }</h3>
-        <img src={ thumbnail } alt="foto" />
+        <Link data-testid="product-detail-link" to={ {
+          pathname: "/DetalhesDoProduto",
+          state: {
+            produto: this.props.produto,
+          }
+        } } >
+          <img src={ thumbnail } alt="foto" />
+        </Link>
         <p>{ price }</p>
         <button data-testid="product-add-to-cart" onClick={ this.onClick }>Adicionar ao Carrinho</button>
 

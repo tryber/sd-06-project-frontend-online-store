@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class CampoBusca extends Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class CampoBusca extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange({ target }) {
@@ -20,11 +21,15 @@ class CampoBusca extends Component {
     });
   }
 
+  handleClick() {
+    this.props.changeSearch(this.state.search)
+  }
+
   render() {
+    // console.log(this.props)
     const { search } = this.state;
-    const { onClick } = this.props;
     return (
-      <div>
+      <div class="campo-busca">
         <input
           data-testid="query-input"
           type="text"
@@ -34,20 +39,17 @@ class CampoBusca extends Component {
         <button
           data-testid="query-button"
           type="button"
-          onClick={ () => onClick({ search }) }
+          onClick={ this.handleClick }
         >
           Pesquisar
         </button>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
       </div>
     );
   }
 }
 
-CampoBusca.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
+// CampoBusca.propTypes = {
+//   onClick: PropTypes.func.isRequired,
+// };
 
 export default CampoBusca;

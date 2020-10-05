@@ -1,14 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 class Checkout extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      cartItems: props.cartItems,
-      addedItems: props.addedItems,
-    };
-  }
+  // constructor(props) {
+  //   super();
+  //   this.state = {
+  //     cartItems: props.cartItems,
+  //     addedItems: props.addedItems,
+  //   };
+  // }
 
   render() {
     return (
@@ -44,9 +44,9 @@ class Checkout extends React.Component {
   }
 }
 
-Checkout.propTypes = {
-  cartItems: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  addedItems: PropTypes.shape().isRequired,
-};
+// Checkout.propTypes = {
+//   cartItems: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+//   addedItems: PropTypes.shape().isRequired,
+// };
 
 export default Checkout;

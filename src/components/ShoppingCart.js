@@ -115,7 +115,7 @@ class ShoppingCart extends React.Component {
           );
         })}
         <span>Valor Total da Compra R$:</span>
-        <Link to="/checkout" >
+        <Link to="/checkout">
           <button type="button" data-testid="checkout-products">
             Finalizar Compra
           </button>

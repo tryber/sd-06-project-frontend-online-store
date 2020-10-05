@@ -21,6 +21,7 @@ class HomePage extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.teste = this.teste.bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +54,13 @@ class HomePage extends React.Component {
     }
   }
 
+
+  teste(items) {
+    console.log(items);
+  }
+
   render() {
+    // if () return <Redirect to="/" />;
     const { products, categories } = this.state;
     return (
       <div>
@@ -78,6 +85,7 @@ class HomePage extends React.Component {
           {products.map((items) => (<ProductList
             key={ items.id }
             items={ items }
+            teste={ this.teste }
           />))}
         </div>
         <div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Formulario from '../Components/Formulario';
 
 class DetalhesDoProduto extends Component {
@@ -9,18 +10,19 @@ class DetalhesDoProduto extends Component {
   }
 
   render() {
-    // console.log(this.props.location.state);
-    const { title, thumbnail, price } = this.props.location.state.produto;
+    const { produto } = this.props.location.state;
+    // console.log(produto);
     return (
-      <div className="detalhe-produto">
-        <h4 data-testid="product-detail-name">{ title }</h4>
-        <img src={ thumbnail } alt="produto" />
-        <p>R$ { price }</p>
+      <div>
+        <h1 data-testid="product-detail-name" className="detalhe-produto">{ produto.title }</h1>
+        <img src={ produto.thumbnail } alt="produto" />
+        <p>R$ { produto.price }</p>
         <div>
           <Formulario />
         </div>
+        <Link to="/">Voltar</Link>
       </div>
-    );
+    )
   }
 }
 

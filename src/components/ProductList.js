@@ -39,6 +39,7 @@ ProductList.defaultProps = {
 
 ProductList.propTypes = {
   queryInput: PropTypes.string.isRequired,
+  categoryInput: PropTypes.string.isRequired,
   foundItems: PropTypes.bool,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

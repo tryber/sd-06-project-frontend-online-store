@@ -1,19 +1,31 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import ShoppingCartPage from '../pages/ShoppingCartPage';
+import { Link } from 'react-router-dom';
 
 class AddToCartButton extends Component {
   render() {
     const { product } = this.props;
+    console.log(product)
     return (
       <div>
-        <Link to={ { pathname: `/shopping-cart`, state: product } } >
-          <button data-testid="product-add-to-cart">Adicionar ao carrinho</button>
+        <Link
+          to={ { pathname: '/shopping-cart', state: product } }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao carrinho
         </Link>
       </div>
     );
   }
 }
+
+AddToCartButton.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    price: PropTypes.number,
+  }).isRequired,
+};
 
 export default AddToCartButton;

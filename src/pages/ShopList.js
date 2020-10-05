@@ -33,8 +33,6 @@ class ShopList extends React.Component {
   componentDidMount() {
     this.loadCategories();
     this.updateCartListFromLocalStorage();
-    const { cartList } = this.state;
-    console.log(cartList);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -85,9 +83,9 @@ class ShopList extends React.Component {
     const { cartList } = this.state;
 
     const ourProduct = product;
-
-    if (cartList[product.id]) {
-      cartList[product.id].quantity += 1;
+    const item = cartList[product.id];
+    if (item && item.available_quantity > item.quantity) {
+      item.quantity += 1;
       this.setState({ cartList });
     } else {
       this.setState({ cartList: { ...cartList, [product.id]: product } });

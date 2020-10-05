@@ -22,6 +22,7 @@ class Cart extends React.Component {
   render() {
     const { cartList } = this.props;
 
+
     return (
       <div>
         <Link

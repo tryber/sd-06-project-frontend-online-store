@@ -36,8 +36,8 @@ class ShopCart extends React.Component {
   addCartItem(id) {
     const { cartList } = this.state;
     const copyCartList = { ...cartList };
-
-    copyCartList[id].quantity += 1;
+    const item = copyCartList[id];
+    if (item.available_quantity > item.quantity) item.quantity += 1;
     return copyCartList;
   }
 
@@ -106,7 +106,7 @@ class ShopCart extends React.Component {
 
 ShopCart.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.shape({ cartList: PropTypes.objectOf(PropTypes.any).isRequired,
+    state: PropTypes.shape({ cartList: PropTypes.objectOf(PropTypes.any),
     }).isRequired,
   }).isRequired,
 };

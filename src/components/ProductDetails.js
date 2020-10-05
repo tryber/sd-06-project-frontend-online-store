@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import imgCart from '../img/imgCart.jpg';
 
 class ProductDetails extends React.Component {
   constructor() {
     super();
     this.fetchItem = this.fetchItem.bind(this);
     this.handleReviewChange = this.handleReviewChange.bind(this);
+    this.addToCartDetail = this.addToCartDetail.bind(this);
     this.state = {
       product: '',
       writtenReview: '',
@@ -24,6 +27,12 @@ class ProductDetails extends React.Component {
     this.setState({ product: result });
   }
 
+  addToCartDetail() {
+    const { product } = this.state;
+    const { addToCart } = this.props;
+    addToCart(product);
+  }
+
   handleReviewChange({ target }) {
     const { value } = target;
     this.setState({ writtenReview: value });
@@ -40,9 +49,27 @@ class ProductDetails extends React.Component {
           <img alt="Product" src={ thumbnail } />
         </div>
         <div>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ this.addToCartDetail }
+          >
+            Adicionar ao carrinho
+          </button>
+        </div>
+        <Link to="/cart">
+          <button
+            data-testid="shopping-cart-button"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            <img src={ imgCart } alt="shopping-cart-button" width="25" />
+          </button>
+        </Link>
+        <div>
           <form className="review-form">
             <label htmlFor="review-stars">
-              Dê uma avaliação enter 1 e 5 estrelas
+              Dê uma avaliação entre 1 e 5 estrelas
               <input id="review-stars" type="number" min="1" max="5" />
             </label>
             <label htmlFor="written-review">
@@ -65,7 +92,8 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.propTypes = {
-  match: PropTypes.number.isRequired,
+  match: PropTypes.shape().isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

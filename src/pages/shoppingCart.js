@@ -14,7 +14,7 @@ export default class shoppingCart extends Component {
   componentDidMount() {
     this.localStorageMount();
   }
-
+  
   async localStorageMount() {
     const cartLocalStorage = await JSON.parse(
       localStorage.getItem('cartLocal'),
@@ -23,6 +23,16 @@ export default class shoppingCart extends Component {
       cart: cartLocalStorage,
     });
   }
+
+// func to sum products price 
+//  async cartTotalValue(target) {
+//     const items = document.getElementsByTagName('li');
+//     let itemPrice = 0;
+  
+//     for (let i = 0; i < items.length; i += 1) {
+//       itemPrice += parseFloat(items[i].innerHTML.split('$')[1]);
+//     }
+// };
 
   render() {
     const { cart } = this.state;
@@ -33,7 +43,10 @@ export default class shoppingCart extends Component {
         </h1>
       </div>
     ) : (
-      <CreateCart localStorageMount={ this.localStorageMount } cart={ cart } />
+      <div>
+        {/* <p>Price: {this.cartTotalValue}</p> */}
+        <CreateCart localStorageMount={ this.localStorageMount } cart={ cart } />
+      </div>
     );
   }
 }

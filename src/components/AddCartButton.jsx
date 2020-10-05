@@ -4,6 +4,8 @@ class AddCartButton extends React.Component {
   constructor() {
     super();
     this.localStorageSave = this.localStorageSave.bind(this);
+    this.changeItem = this.changeItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
   }
 
   getLocalStorageProduct() {
@@ -53,26 +55,52 @@ class AddCartButton extends React.Component {
       </div>
     );
   }
-   
-
+  changeItem(id , event, op) {
+    const cartItems = this.getLocalStorageProduct();
+    const newCartItems = cartItems.map(item => {
+     if (item.id === id) {
+      if (op === "plus") {
+        item.qtd += 1
+      } else {
+        if (item.qtd > 1) {item.qtd -= 1}
+      }       
+      (op === "plus") 
+        ? event.target.previousSibling.lastChild.innerText = item.qtd
+        : event.target.previousSibling.previousSibling.lastChild.innerText = item.qtd;
+      return item;
+     }
+     return item;
+  })
+   localStorage.cart = JSON.stringify(newCartItems);
+  }
+  
+  removeItem(id, event) {
+    const cartItems = this.getLocalStorageProduct();
+    const newCartItems = cartItems.filter(item => item.id !== id);
+    const item = event.target.parentNode.parentNode.parentNode;
+    item.parentNode.removeChild(item);
+    localStorage.cart = JSON.stringify(newCartItems);
+  }
 
   btRemove() {
     const { data } = this.props;
     return (
       <div id="cart-button">
 
-        <div data-testid="shopping-cart-product-quantity">
+        <div>
           Quantidade:
-          {' '}
-          {data.qtd}
+          <div data-testid="shopping-cart-product-quantity"> 
+            {data.qtd}
+          </div>
+         
         </div>
-        <button data-testid="product-add-to-cart" type="button" onClick={ this.localStorageRemove }>
+        <button data-testid="product-increase-quantity" type="button" onClick={ (event) => this.changeItem(data.id, event, "plus") }>
           +
         </button>
-        <button data-testid="product-add-to-cart" type="button" onClick={ this.localStorageRemove }>
+        <button data-testid="product-decrease-quantity" type="button" onClick={ (event) => this.changeItem(data.id, event, "test") }>
           -
         </button>
-        <button data-testid="product-add-to-cart" type="button" onClick={ this.localStorageRemove }>
+        <button data-testid="product-add-to-cart" type="button" onClick={ (event) => this.removeItem(data.id, event) }>
           Remover
         </button>
       </div>

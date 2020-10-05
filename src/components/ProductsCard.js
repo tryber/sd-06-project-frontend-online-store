@@ -11,7 +11,11 @@ export default class ProductsCard extends Component {
     return (
       <div data-testid="product" className="product-card">
         <h1 className="title-card">{title}</h1>
-        <img src={ thumbnail } alt={ `Produto: ${title}` } />
+        <img
+          src={ thumbnail }
+          alt={ `Produto: ${title}` }
+          className="product-card-image"
+        />
         <p>{`R$ ${price}`}</p>
         <Link
           data-testid="product-detail-link"

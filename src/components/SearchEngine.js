@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import ShoppingCartButton from './ShoppingCartButton';
 
+import '../styles/SearchEngine.css';
+
 class SearchEngine extends React.Component {
   constructor() {
     super();
@@ -22,25 +24,29 @@ class SearchEngine extends React.Component {
     const { onClick, sendQueryInputToHome } = this.props;
     const { queryInput } = this.state;
     return (
-      <div>
-        <input
-          data-testid="query-input"
-          type="text"
-          name="queryInput"
-          value={ queryInput }
-          onChange={ (event) => {
-            this.handleChange(event);
-            sendQueryInputToHome(queryInput);
-          } }
-        />
+      <div className="search-engine-container">
+        <div className="search-engine-top">
+          <input
+            data-testid="query-input"
+            type="text"
+            name="queryInput"
+            value={ queryInput }
+            onChange={ (event) => {
+              this.handleChange(event);
+              sendQueryInputToHome(queryInput);
+            } }
+          />
+          <ShoppingCartButton />
+        </div>
+
         <button
           data-testid="query-button"
           type="button"
           onClick={ () => onClick(this.state) }
+          className="search-button"
         >
           Pesquisar
         </button>
-        <ShoppingCartButton />
       </div>
     );
   }

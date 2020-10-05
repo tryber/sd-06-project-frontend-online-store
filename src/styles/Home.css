@@ -1,3 +1,16 @@
+
+
 .home-page {
-  display: flex;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-gap: 10px;
+}
+
+.product-list-container {
+  grid-column: 2;
+}
+
+.right-column-container {
+
 }

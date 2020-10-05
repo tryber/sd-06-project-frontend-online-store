@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import * as api from '../services/api';
 
+import '../styles/ListCategories.css';
+
 class ListCategory extends Component {
   constructor() {
     super();
@@ -36,7 +38,7 @@ class ListCategory extends Component {
   render() {
     const { categoriesList } = this.state;
     return (
-      <div>
+      <div className="list-categories">
         Categorias:
         {categoriesList.map(({ id, name }) => (
           <div key={ id }>

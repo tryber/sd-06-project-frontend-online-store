@@ -53,12 +53,14 @@ class AddCartButton extends React.Component {
       </div>
     );
   }
+   
 
 
   btRemove() {
     const { data } = this.props;
     return (
       <div id="cart-button">
+
         <div data-testid="shopping-cart-product-quantity">
           Quantidade:
           {' '}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Cards from './Cards'
 import '../App.css';
+import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   
@@ -9,7 +10,7 @@ class ProductList extends Component {
 
     return (
       <div>
-        {items.map((item) => <Cards key={item.id} item={item} addtoCart={ addtoCart } />)}
+          {items.map((item) =><Link to={ { pathname: `/carddetail`, state: item } } className="card-detail" data-testid="product-detail-link"><Cards key={item.id} item={item} addtoCart={ addtoCart } /></Link>)}
       </div>
     );
   }

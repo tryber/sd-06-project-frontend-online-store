@@ -5,8 +5,10 @@ class ProductDetails extends React.Component {
   constructor() {
     super();
     this.fetchItem = this.fetchItem.bind(this);
+    this.handleReviewChange = this.handleReviewChange.bind(this);
     this.state = {
       product: '',
+      writtenReview: '',
     };
   }
 
@@ -22,14 +24,38 @@ class ProductDetails extends React.Component {
     this.setState({ product: result });
   }
 
+  handleReviewChange({ target }) {
+    const { value } = target;
+    this.setState({ writtenReview: value });
+  }
+
   render() {
-    const { product } = this.state;
+    const { product, writtenReview } = this.state;
     const { title, price, thumbnail } = product;
     return (
       <div>
-        <p data-testid="product-detail-name">{title}</p>
-        <p>{price}</p>
-        <img alt="Product" src={ thumbnail } />
+        <div>
+          <p data-testid="product-detail-name">{title}</p>
+          <p>{price}</p>
+          <img alt="Product" src={ thumbnail } />
+        </div>
+        <div>
+          <form className="review-form">
+            <label htmlFor="review-stars">
+              Dê uma avaliação enter 1 e 5 estrelas
+              <input id="review-stars" type="number" min="1" max="5" />
+            </label>
+            <label htmlFor="written-review">
+              <textarea
+                id="written-review"
+                data-testid="product-detail-evaluation"
+                name="written-review"
+                value={ writtenReview }
+                onChange={ this.handleReviewChange }
+              />
+            </label>
+          </form>
+        </div>
       </div>
     );
   }

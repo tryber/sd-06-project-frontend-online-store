@@ -1,24 +1,15 @@
 import React, { Component } from 'react';
+import ProductInCart from './ProductInCart';
 
 export default class ShoppingCart extends Component {
-  
   render() {
     const { cartList, cartQuantity } = this.props;
     if (cartQuantity > 0) {
       return (
         <div>
-          <p data-testid="shopping-cart-product-quantity">
-            {cartQuantity}
-          </p>
-          { cartList.map((product) => (<div key={ product.id }>
-              <p data-testid="shopping-cart-product-name">
-                {product.title}
-              </p>
-              <p>
-                {product.quantityInCart}
-              </p>
-            </div>
-          ))}
+          { cartList.map((product) => (
+            <ProductInCart product={product} key={ product.id } />
+          )) }
         </div>
       );
     }

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import addItem from '../components/addItem';
 
 class ProductDetails extends React.Component {
+  
   render() {
     const { location } = this.props;
     const { state } = location;
@@ -14,6 +17,9 @@ class ProductDetails extends React.Component {
           {price}
         </p>
         <img src={ thumbnail } alt={ title } />
+        <div>
+          <Link onClick={addItem(title, price)} to="/">ADICIONAR AO CARRINHO</Link>
+        </div>
       </div>
     );
   }

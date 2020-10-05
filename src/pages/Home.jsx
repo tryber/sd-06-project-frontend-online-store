@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 
-import SearchBar from './SearchBar';
-import ProductList from './ProductList';
+import SearchBar from '../components/SearchBar';
+import ProductList from '../components/ProductList';
 import * as api from '../services/api';
-import ShoppingCartButton from './ShoppingCartButton';
+import ShoppingCartButton from '../components/ShoppingCartButton';
 
 export default class Home extends Component {
   constructor() {
     super();
 
     this.onClickSearch = this.onClickSearch.bind(this);
+    this.updateCart = this.updateCart.bind(this);
+    this.isProductFromDetail = this.isProductFromDetail.bind(this);
 
     this.state = {
       products: [],
       categoryId: '',
       categories: [],
       searchText: '',
+      cartProductList: [],
+      cartTotalItens: 0,
     };
   }
 
@@ -26,6 +30,7 @@ export default class Home extends Component {
           categories,
         });
       });
+    this.isProductFromDetail();
   }
 
   async onClickSearch(searchText) {
@@ -39,12 +44,28 @@ export default class Home extends Component {
 
   async onClickCategory(categoryId) {
     this.setState({
-        categoryId,
-      },);
-    const products = await api.getProductsFromCategoryAndQuery(categoryId, this.state.searchText);
-    this.setState({
-        products: products.results,
+      categoryId,
     });
+    const { searchText } = this.state;
+    const products = await api.getProductsFromCategoryAndQuery(categoryId,
+      searchText);
+    this.setState({
+      products: products.results,
+    });
+  }
+
+  updateCart(productObject) {
+    this.setState({
+      cartProductList: [...this.state.cartProductList, productObject],
+      cartTotalItens: this.state.cartTotalItens + 1,
+    });
+  }
+
+  isProductFromDetail() {
+    if (this.props.location.product) {
+      const { product } = this.props.location
+      this.updateCart(product);
+    }
   }
 
   render() {
@@ -54,7 +75,10 @@ export default class Home extends Component {
       <div>
         <header className="search-bar">
           <SearchBar onClickSearch={ this.onClickSearch } />
-          <ShoppingCartButton />
+          <ShoppingCartButton
+            cartTotalItens={ this.state.cartTotalItens }
+            cartProductList={ this.state.cartProductList }
+          />
         </header>
         <main className="main-page">
           <nav className="categories">
@@ -74,7 +98,7 @@ export default class Home extends Component {
             ))}
           </nav>
           <div>
-            <ProductList products={ products } />
+            <ProductList products={ products } updateCart={ this.updateCart } />
           </div>
         </main>
       </div>

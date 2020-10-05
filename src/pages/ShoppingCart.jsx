@@ -1,15 +1,23 @@
 import React from 'react';
-import { Link } from "react-router-dom";
-
-import QuantifyProducts from "../components/QuantifyProducts";
 
 class ShoppingCart extends React.Component {
   render() {
+    if (this.props.location.cartTotalItens === 0) {
+      return (
+        <div>
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        </div >
+      )
+    }
+    const { cartProductList } = this.props.location;
     return (
       <div>
-        <QuantifyProducts />
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        <Link to="/">Voltar</Link>
+        {cartProductList.map((element) => (
+          <div key={element.id}>
+            <p data-testid="shopping-cart-product-name">{ element.title }</p>
+            <p data-testid="shopping-cart-product-quantity">{ this.props.location.cartTotalItens }</p>
+          </div>
+        )) }
       </div>
     )
   }

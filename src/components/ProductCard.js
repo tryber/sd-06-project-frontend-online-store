@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import AddCartButton from './AddCartButton';
 
 
 class ProductCard extends Component {
   render() {
-    const { products, isFail } = this.props;
+    const { products, isFail, handleAddCart } = this.props;
+
 
     if (isFail) {
       return <span>Nenhum produto foi encontrado</span>;
@@ -28,6 +30,7 @@ class ProductCard extends Component {
             >
               Ver Detalhes
             </Link>
+            <AddCartButton handleAddCart={ handleAddCart } element={ element } />
           </div>
         ))}
       </div>

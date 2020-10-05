@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ProductDetails extends Component {
   render() {
-    const { title, thumbnail, price } = this.props.location.state.product;
+    const { location } = this.props;
+    const { state } = location;
+    const { product } = state;
+    const { title, thumbnail, price } = product;
     return (
       <div>
         <h2 data-testid="product-detail-name">{ `${title} - ${price}$` }</h2>
@@ -19,5 +22,18 @@ class ProductDetails extends Component {
     );
   }
 }
+
+ProductDetails.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      product: PropTypes.shape({
+        title: PropTypes.string,
+        price: PropTypes.number,
+        thumbnail: PropTypes.string,
+        id: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
 
 export default ProductDetails;

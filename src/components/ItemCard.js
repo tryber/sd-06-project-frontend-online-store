@@ -10,7 +10,7 @@ class ItemCard extends React.Component {
         <h2>{ product.title }</h2>
         <img src={ product.thumbnail } alt="foto do produto" />
         <p>{ product.price }</p>
-        <Link data-testid="product-detail-link" to="/product-details">
+        <Link data-testid="product-detail-link" to={ `/product-details/${product.id}` }>
           <button type="button">DETALHES</button>
         </Link>
       </div>
@@ -20,6 +20,7 @@ class ItemCard extends React.Component {
 
 ItemCard.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,

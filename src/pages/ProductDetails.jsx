@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart, arrayProductList } from '../dados/cart_arrayProductList';
+import { cart, arrayProductList, reviews } from '../dados/cart_arrayProductList';
 
 class ProductDetails extends Component {
   constructor() {
@@ -11,10 +11,15 @@ class ProductDetails extends Component {
       email: '',
       stars: 0,
       message: '',
-      reviews: [],
-    }
+      reviewsState: [],
+    };
   }
 
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    const reviewFilter = reviews.filter(el => el.id === id);
+    this.setState({reviewsState: reviewFilter});
+  }
 
   filterProduct() {
     const { id } = this.props.match.params;
@@ -27,10 +32,13 @@ class ProductDetails extends Component {
 
 
   reviewSubmit() {
-    const { email, message, reviews } = this.state;
-    const reviewObj = { email: email, message: message };
-    this.setState({ reviews: [...reviews, reviewObj] })
-    this.setState({ email: '', message: '' })
+    const { id } = this.props.match.params;
+    const { email, message, reviewsState} = this.state;
+    const reviewObj = { email, message, id };
+    this.setState({ email: '', message: '' });
+    reviews.push(reviewObj);
+    const reviewFilter = reviews.filter(el => el.id === id);
+    this.setState({reviewsState: reviewFilter});
   }
 
   render() {
@@ -48,20 +56,25 @@ class ProductDetails extends Component {
           type="button"
           onClick={() => this.AddCart(product)}
           data-testid="product-detail-add-to-cart"
-          >Adicionar ao cart</button>
+        >Adicionar ao cart</button>
         <form className="review">
           <input type="text"  onChange={({ target }) => {this.setState({email: target.value})}} value={this.state.email} placeholder="Email" />
-          <textarea data-testid="product-detail-evaluation" onChange={({ target }) => {this.setState({message: target.value})}} value={this.state.message}  placeholder="Mensagem(opcional)" />
+          <textarea
+            data-testid="product-detail-evaluation"
+            onChange={({ target }) => {this.setState({message: target.value})}}
+            value={this.state.message}
+            placeholder="Mensagem(opcional)" 
+          />
           <button type="button" onClick={this.reviewSubmit}>Avaliar</button>
         </form>
         {
-          (this.state.reviews.length !== 0)
-          ? this.state.reviews.map((review, index )=> (
+          (this.state.reviewsState.length !== 0)
+          ? this.state.reviewsState.map((review, index) => (
             <div key={index}>
               <p>{review.email}</p>
               <p>{review.message}</p>
             </div>
-          ) )
+          ))
           : <h1>Produto sem avaliações...</h1>
         }
       </section>

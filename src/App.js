@@ -5,6 +5,8 @@ import Home from './Home';
 import ShoppingCart from './ShoppingCart';
 import ProductDetails from './ProductDetails';
 import Header from './Header';
+// eslint-disable-next-line import/no-named-as-default-member
+import Checkout from './Checkout';
 
 class App extends React.Component {
   constructor() {
@@ -95,6 +97,7 @@ class App extends React.Component {
             render={ (props) => ProductDetails(props, handle) }
           />
           <Route path="/cart" render={ () => ShoppingCart(productsOnCart, handle) } />
+          <Route path="/checkout" component={ Checkout } />
           <Route exact path="/" render={ () => <Home handleCart={ handle } /> } />
         </Switch>
       </BrowserRouter>

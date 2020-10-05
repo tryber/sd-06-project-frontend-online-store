@@ -14,22 +14,41 @@ class SearchProduct extends Component {
     this.handleSearchProduct = this.handleSearchProduct.bind(this);
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.loadCart = this.loadCart.bind(this);
 
     this.state = {
       categories: [],
       categoryId: '',
       inputValue: '',
       products: [],
+      cartProducts: [],
+      cartProductsQuantity: 0,
     };
   }
 
   componentDidMount() {
     this.fetchCategories();
+    this.loadCart();
+  }
+
+  componentWillUnmount() {
+    const { cartProducts } = this.state;
+    localStorage.setItem('cartItems', JSON.stringify(cartProducts));
   }
 
   async fetchCategories() {
     const categories = await getCategories();
     this.setState({ categories });
+  }
+
+  loadCart() {
+    const cartProducts = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    const initialQuantity = 0;
+
+    const cartProductsQuantity = cartProducts.reduce((accumulator, { quantity }) => accumulator += quantity, initialQuantity);
+
+    this.setState({ cartProducts, cartProductsQuantity });
   }
 
   saveInputValue(inputValue) {
@@ -70,8 +89,8 @@ class SearchProduct extends Component {
   }
 
   addItemToCart(id) {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-    const { products } = this.state;
+    const { products, cartProducts, cartProductsQuantity } = this.state;
+    const cartItems = [...cartProducts];
     const cartItem = products.find((product) => product.id === id);
     const itemAlreadyInCart = cartItems.findIndex(({ product }) => product.id === id);
     if (cartItems[itemAlreadyInCart]) {
@@ -79,14 +98,19 @@ class SearchProduct extends Component {
     } else {
       cartItems.push({ product: cartItem, quantity: 1 });
     }
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    const newCartProductsQuantity = cartProductsQuantity + 1;
+    this.setState({ cartProducts: cartItems, cartProductsQuantity: newCartProductsQuantity });
   }
 
   render() {
-    const { categories, inputValue, products } = this.state;
+    const { categories, inputValue, products, cartProductsQuantity } = this.state;
     return (
       <>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">cart</Link>
+        <Link to="/shopping-cart" data-testid="shopping-cart-button" className="fa fa-shopping-cart cart-icon">
+          {(cartProductsQuantity > 0) && (
+            <span data-testid="shopping-cart-size" className="cart-quantity">{cartProductsQuantity}</span>
+          )}
+        </Link>
         <div className="search-product-content">
           <div>
             <h2>Categorias</h2>

@@ -7,18 +7,18 @@ import ProductDetails from './pages/ProductDetails';
 import ShoppingCart from './pages/ShoppingCart';
 
 class App extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
-    this.state = {
-      cartProducts: [],
-      cartQuantity: 0,
-    };
+    this.state = { cartProducts: [] };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 
-  handleAddProduct() {
-    console.log('click');
+  handleAddProduct(newProduct) {
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.concat(newProduct),
+    }
+    ));
   }
 
   render() {
@@ -31,19 +31,15 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            component={ Home }
-            addToCart={ this.handleAddProduct }
+            render={ (props) => <Home { ...props } addToCart={ this.handleAddProduct } /> }
           />
           <Route
             path="/ProductDetails/:id"
-            component={ ProductDetails }
-            cartProducts={ cartProducts }
+            render={ (props) => <ProductDetails { ...props } cartProducts={ cartProducts } /> }
           />
           <Route
             path="/ShoppingCart"
-            component={ ShoppingCart }
-            addToCart={ this.handleAddProduct }
-            cartProducts={ cartProducts }
+            render={ (props) => <ShoppingCart { ...props } addToCart={ this.handleAddProduct } cartProducts={ cartProducts } /> }
           />
         </Switch>
       </BrowserRouter>

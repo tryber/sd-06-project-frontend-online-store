@@ -5,7 +5,7 @@ class Input extends React.Component {
   render() {
     const { value, onClick, onChange } = this.props;
     return (
-      <div>
+      <div className="input-container">
         <input
           type="text"
           data-testid="query-input"
@@ -16,6 +16,7 @@ class Input extends React.Component {
         <button
           type="button"
           data-testid="query-button"
+          className="home-button"
           onClick={ onClick }
         >
           Search

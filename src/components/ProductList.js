@@ -23,8 +23,8 @@ export default class ProductList extends Component {
         )}
         {/* if there are products, render this block */}
         {Object.keys(products).length !== zero
-          && products.results.map((prod) => (
-            <FoundProducts key={ prod.title } product={ prod } />
+          && products.results.map((product) => (
+            <FoundProducts key={ product.title } product={ product } />
           ))}
       </div>
     );

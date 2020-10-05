@@ -26,9 +26,9 @@ class EvaluationList extends React.Component {
               <h3>{email}</h3>
               <p>
                 Estrelas:
-                {email[0]}
+                {evaluations[productId][email][0]}
               </p>
-              <p>{email[1]}</p>
+              <p>{evaluations[productId][email][1]}</p>
             </div>
           ))}
         </div>

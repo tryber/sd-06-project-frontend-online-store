@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Cart } from '../components';
+import { Cart, ProductEvaluation, EvaluationList } from '../components';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class ProductDetails extends React.Component {
 
   renderDetails() {
     const { product, cartList } = this.state;
-    const { title, quantity, thumbnail, price } = product;
+    const { title, quantity, thumbnail, price, id } = product;
 
 
     return (
@@ -54,9 +54,10 @@ class ProductDetails extends React.Component {
           {quantity}
           <span className="increase-quantity"> + </span>
         </div>
-        <textarea data-testid="product-detail-evaluation" />
         <div>{price}</div>
         <img src={ thumbnail } alt="product" />
+        <ProductEvaluation productId={ id } />
+        <EvaluationList productId={ id } />
       </div>
     );
   }
@@ -74,6 +75,7 @@ ProductDetails.propTypes = {
         title: PropTypes.string.isRequired,
         thumbnail: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
       }),
     }).isRequired,
   }).isRequired,

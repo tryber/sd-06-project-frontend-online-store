@@ -10,10 +10,12 @@ class CardsContainer extends Component {
         { products.map((product) => (
           <ProductCard
             setProductCart={ setProductCart }
-            key={ product.id }
-            title={ product.title }
             price={ product.price }
             thumbnail={ product.thumbnail }
+            title={ product.title }
+            id={ product.id }
+            key={ product.id }
+            product={ product }
           />
         ))}
       </div>
@@ -22,7 +24,7 @@ class CardsContainer extends Component {
 }
 
 CardsContainer.propTypes = {
-  products: PropTypes.arrayOf().isRequired,
+  products: PropTypes.arrayOf.isRequired,
   setProductCart: PropTypes.func.isRequired,
 };
 

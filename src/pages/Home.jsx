@@ -15,6 +15,7 @@ export default class Home extends Component {
       products: [],
       categoryId: '',
       categories: [],
+      searchText: '',
     };
   }
 
@@ -27,20 +28,23 @@ export default class Home extends Component {
       });
   }
 
-  async onClickSearch(event) {
+  async onClickSearch(searchText) {
     const { categoryId } = this.state;
-    const products = await api.getProductsFromCategoryAndQuery(categoryId, event);
+    const products = await api.getProductsFromCategoryAndQuery(categoryId, searchText);
     this.setState({
       products: products.results,
+      searchText,
     });
   }
 
-  onClickCategory(categoryId) {
-    this.setState(
-      {
+  async onClickCategory(categoryId) {
+    this.setState({
         categoryId,
-      },
-    );
+      },);
+    const products = await api.getProductsFromCategoryAndQuery(categoryId, this.state.searchText);
+    this.setState({
+        products: products.results,
+    });
   }
 
   render() {
@@ -54,21 +58,20 @@ export default class Home extends Component {
         </header>
         <main className="main-page">
           <nav className="categories">
-            <ul className="categoryList">
-              {categories.map((category) => (
-                <li data-testid="category" key={ category.id }>
-                  <label htmlFor="category">
-                    {category.name}
-                    <input
-                      type="radio"
-                      name="category"
-                      id="category"
-                      onClick={ () => this.onClickCategory(category.id) }
-                    />
-                  </label>
-                </li>
-              ))}
-            </ul>
+            {categories.map((category) => (
+              <div key={ category.id }>
+                <label htmlFor={ category.id }>
+                  <input
+                    data-testid="category"
+                    type="radio"
+                    name="category"
+                    id={ category.id }
+                    onClick={ () => this.onClickCategory(category.id) }
+                  />
+                  {category.name}
+                </label>
+              </div>
+            ))}
           </nav>
           <div>
             <ProductList products={ products } />

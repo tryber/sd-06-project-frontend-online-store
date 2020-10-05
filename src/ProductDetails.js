@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ProductEvaluator from './ProductEvaluator';
 
 function isFreeShipping(freeShipping) {
   if (freeShipping) {
@@ -20,6 +21,7 @@ function ProductDetails(props, handleCart, productsOnCart) {
   }
   return (
     <div>
+      <ProductEvaluator />
       <p data-testid="product-detail-name">{title}</p>
       <p>{price}</p>
       {isFreeShipping(product.shipping.free_shipping)}

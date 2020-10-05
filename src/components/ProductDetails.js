@@ -54,6 +54,9 @@ class ProductDetails extends React.Component {
                 onChange={ this.handleReviewChange }
               />
             </label>
+            <button type="submit">
+              Enviar avaliação
+            </button>
           </form>
         </div>
       </div>

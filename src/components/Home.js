@@ -11,7 +11,6 @@ class Home extends React.Component {
     super(props);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
     this.handleCategory = this.handleCategory.bind(this);
     this.state = {
       ProductArray: [],
@@ -19,11 +18,6 @@ class Home extends React.Component {
       idCategory: '',
     };
   }
-
-  // handleClick() {
-  //   const { history } = this.props;
-  //   history.push('/cart');
-  // }
 
   async handleSearch() {
     const { inputQuery, idCategory } = this.state;

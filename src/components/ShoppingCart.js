@@ -27,20 +27,23 @@ class ShoppingCart extends Component {
 
   renderCart() {
     const { shoppingCart } = this.props;
-    console.log(shoppingCart[0])
+    const bla = shoppingCart.map((item) => item.product);
     if (shoppingCart.length === 0 ) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
     return (
       shoppingCart.map((item) => (
         <span key={ this.id } data-testid="shopping-cart-product-name">
-          {item.title}
+          {item.product.title}
           <img
-            src={item.thumbnail}
-            alt={ `Imagem do produto ${item.title}` }
+            src={item.product.thumbnail}
+            alt={ `Imagem do produto ${item.product.title}` }
           />
           <span>
-            {item.price}
+            {item.product.price}
+          </span>
+          <span data-testid="shopping-cart-product-quantity">
+            {item.product.quantity}
           </span>
         </span>
       ))

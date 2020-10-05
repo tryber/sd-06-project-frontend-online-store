@@ -8,7 +8,7 @@ class ProductCard extends Component {
 
     this.addItemsToCart = this.addItemsToCart.bind(this);
     this.state = {
-
+      quantity: 1
     };
   }
 
@@ -16,7 +16,11 @@ class ProductCard extends Component {
   addItemsToCart() {
     const { product, addItemCart } = this.props;
     const { title, thumbnail, price, id } = product;
-    addItemCart({product: { title, thumbnail, price, id }})
+    const { quantity } = this.state;
+    this.setState({
+      quantity: quantity,
+    })
+    addItemCart({product: { title, thumbnail, price, id, quantity}})
   }
 
   render() {
@@ -39,7 +43,8 @@ class ProductCard extends Component {
         <div className="addToCart">
           <button
             type="button"
-            data-testid="shopping-cart-button"
+            // data-testid="shopping-cart-button"
+            data-testid="product-add-to-cart"
             onClick={ this.addItemsToCart }
           >
             Adicionar ao Carrinho

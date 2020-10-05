@@ -95,3 +95,39 @@
   display: inline-block;
   font-size: 16px;
 }
+
+.evaluator-container {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  /* width: 30%; */
+}
+
+.email-container {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 30%;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  width: 30%;
+}
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 30%;
+}
+
+.evaluator-button {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 10%;
+  text-align: center;
+}

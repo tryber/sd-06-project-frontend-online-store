@@ -14,7 +14,7 @@ class Header extends Component {
         <div id="box">
           <input id="box-search" onChange={ handleEvent } value={ inputValue } data-testid="query-input" type="text" placeholder="Buscar produtos, marcas e muito mais..." />
           <button id="button-search" onClick={ onClick } data-testid="query-button" type="button">
-            <FaSearch />
+             <FaSearch />
           </button>
           <h3 id="message-header" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.

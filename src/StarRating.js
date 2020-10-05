@@ -12,7 +12,7 @@ const StarsRating = () => {
 
         return (
           <label
-            key={ `${star.id + 1}` }
+            key={ `${star}` }
             htmlFor="rating"
           >
             <input

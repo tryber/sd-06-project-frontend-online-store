@@ -12,8 +12,7 @@ class CartPage extends Component {
   handleClayton({ target }) {
     const id = target.name;
     const value = target.value === '+' ? 1 : -1;
-    // console.log(value);
-    // console.log(target.value);
+
     if (!this.state[id]) {
       this.setState({ [id]: 1 + value });
       this.catQuantity(value, id);
@@ -21,7 +20,6 @@ class CartPage extends Component {
       this.setState((stateAntigo) => ({ [id]: stateAntigo[id] + value }));
       this.catQuantity(value, id);
     }
-    console.log(cart);
   }
 
   catQuantity(value, id) {
@@ -35,8 +33,6 @@ class CartPage extends Component {
   }
 
   render() {
-    // console.log(cart);
-
     return (
       <div>
         <Link to="/">Back</Link>
@@ -72,6 +68,7 @@ class CartPage extends Component {
               );
             })
         }
+        <Link to="/checkout" data-testid="checkout-products"><button>Finalizar Compra</button></Link>
       </div>
     );
   }

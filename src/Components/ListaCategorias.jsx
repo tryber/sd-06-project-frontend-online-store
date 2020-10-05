@@ -24,14 +24,13 @@ class ListaCategorias extends React.Component {
 
   changeCategory(e) {
     // console.log(e.target.value)
-    this.state.categoryList.push(e.target.value)
-    this.props.changeSearch(this.state.categoryList)
-    console.log(this.state.categoryList)
+    this.state.categoryList.push(e.target.value);
+    this.props.changeSearch(this.state.categoryList);
+    console.log(this.state.categoryList);
   }
 
   render() {
     const { categoryList } = this.state;
-    const { categoryFilter } = this.props;
     return (
       <div className="category-list">
         <h3>Categorias:</h3>
@@ -45,16 +44,16 @@ class ListaCategorias extends React.Component {
               name="category"
               onClick={ this.changeCategory }
             />
-            <label htmlFor={ category.id }>
-              { category.name }
-            </label>
+            <label htmlFor={ category.id }>{ category.name }</label>
           </form>
-        )) }
+        ))}
       </div>
     );
   }
 }
 
-ListaCategorias.propTypes = { categoryFilter: PropTypes.func.isRequired };
+ListaCategorias.propTypes = {
+  changeSearch: PropTypes.string.isRequired,
+};
 
 export default ListaCategorias;

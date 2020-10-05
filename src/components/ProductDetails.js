@@ -7,8 +7,6 @@ class ProductDetails extends React.Component {
     const { state } = location;
     const { items } = state;
     const { title, price, thumbnail } = items;
- 
-
     return (
       <div data-testid="shopping-cart-button">
         <h2 data-testid="shopping-cart-product-name">{ title }</h2>
@@ -18,7 +16,7 @@ class ProductDetails extends React.Component {
           R$
           { price }
         </p>
-    <p data-testid="shopping-cart-product-quantity">Quantidade:</p>
+        <p data-testid="shopping-cart-product-quantity">Quantidade:</p>
       </div>
     );
   }

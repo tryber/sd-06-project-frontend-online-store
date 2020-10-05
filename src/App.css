@@ -39,6 +39,12 @@ a {
   text-decoration: none;
 }
 
+.card-detail {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
 .card {
   background-color: white;
   border: 5px groove lightgray;
@@ -71,4 +77,16 @@ a {
   font-size: 12px;
   font-weight: 700;
   margin: 0 0 12px;
+}
+
+.item-image {
+  width: 200px;
+}
+
+.item-description {
+  display: flex;
+}
+
+.description {
+  margin: 30px;
 }

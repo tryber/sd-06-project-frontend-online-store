@@ -73,7 +73,7 @@ class CategoryDisplay extends Component {
                     Buscar
                 </button>
                 <section className="product-list">
-                    <ProductList items={ items } query={ query } addtoCart= { this.addtoCart } />
+                    <ProductList items={ items } cartItems={ cartItems } query={ query } addtoCart= { this.addtoCart } />
                 </section>
             </div>
         )

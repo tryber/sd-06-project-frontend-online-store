@@ -8,9 +8,14 @@ class Cart extends React.Component {
     this.state = {
       loadMessage: true,
     };
+    this.changeState = this.changeState.bind(this);
   }
 
   componentDidMount() {
+    this.changeState();
+  }
+
+  changeState() {
     const { location: { state: { data } } } = this.props;
     if (data !== undefined) {
       this.setState({

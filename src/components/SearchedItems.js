@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Cart from '../pages/Cart';
 
 class SearchedItems extends Component {
   constructor() {
-    super()
+    super();
     this.handleclick = this.handleclick.bind(this);
   }
 
@@ -15,7 +14,7 @@ class SearchedItems extends Component {
   }
 
   render() {
-    const { item: { id, title, thumbnail, price }, query, addTocart } = this.props;
+    const { item: { id, title, thumbnail, price }, query } = this.props;
 
     return (
       <div data-testid="product">

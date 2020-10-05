@@ -33,10 +33,11 @@ class Home extends Component {
   }
 
   addTocart(productName) {
+    const zero = 0;
     this.setState((currentState) => ({
       productsAddToCart: {
         ...currentState.productsAddToCart,
-        [productName]: (currentState.productsAddToCart[productName] || 0) + 1,
+        [productName]: (currentState.productsAddToCart[productName] || zero) + 1,
       },
     }));
   }

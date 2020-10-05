@@ -7,7 +7,7 @@ class CarrinhoDeCompras extends Component {
     return (
       <div>
         {produtosNoCarrinho.length === 0 ? (
-          <p data-testid="shopping-cart-empty-message">
+          <p data-testid= "shopping-cart-empty-message">
             Seu carrinho está vazio
           </p>
         ) : (

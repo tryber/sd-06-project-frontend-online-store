@@ -12,20 +12,32 @@ class InfoComprador extends Component {
       cep: '',
       address: '',
     };
+    this.updateState = this.updateState.bind(this);
   }
-Você pode 
+
   updateState(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   }
 
-  renderFullName() {
-    const { fullName } = this.state;
+  confirmBuy() {
+    this.setState({
+      fullName: '',
+      email: '',
+      cpf: '',
+      phone: '',
+      cep: '',
+      address: '',
+    });
+  }
+
+  render() {
+    const { fullName, email, cep, address, phone, cpf } = this.state;
     return (
       <div>
-        <label>
+        <label htmlFor="checkout-fullname">
           Nome completo:
-        <input
+          <input
             data-testid="checkout-fullname"
             type="text"
             name="fullName"
@@ -33,50 +45,60 @@ Você pode
             onChange={ this.updateState }
           />
         </label>
-      <label>
-        Email:
-      <input
-        data-testid="checkout-email"
-        type="email"
-        name="email"
-        value={ email }
-        onChange={ this.updateState }
-        />
-      </label>
-      <label>CPF:</label>
-      <input
-        data-testid="checkout-cpf"
-        type="text"
-        value={ cpf }
-        name="cpf"
-        onChange={ this.updateState }
-      />
-      <label>Telefone:</label>
-      <input
-        data-testid="checkout-phone"
-        type="text"
-        name="phone"
-        value={ phone }
-        onChange={ this.updateState }
-      />
-      <label>CEP:</label>
-      <input
-        data-testid="checkout-cep"
-        type="text"
-        value={ cep }
-        name="cep"
-        onChange={ this.updateState }
-      />
-      <label>Endereço:</label>
-      <input
-        data-testid="checkout-address"
-        type="text"
-        name="address"
-        value={ address }
-        onChange={ this.updateState }
-      />
-    </div>
-  )
+        <label htmlFor="checkout-email">
+          Email:
+          <input
+            data-testid="checkout-email"
+            type="email"
+            name="email"
+            value={ email }
+            onChange={ this.updateState }
+          />
+        </label>
+        <label htmlFor="checkout-cpf">
+          CPF:
+          <input
+            data-testid="checkout-cpf"
+            type="text"
+            value={ cpf }
+            name="cpf"
+            onChange={ this.updateState }
+          />
+        </label>
+        <label htmlFor="checkout-phone">
+          Telefone:
+          <input
+            data-testid="checkout-phone"
+            type="text"
+            name="phone"
+            value={ phone }
+            onChange={ this.updateState }
+          />
+        </label>
+        <label htmlFor="checkout-cep">
+          CEP:
+          <input
+            data-testid="checkout-cep"
+            type="text"
+            value={ cep }
+            name="cep"
+            onChange={ this.updateState }
+          />
+        </label>
+        <label htmlFor="checkout-address">
+          Endereço:
+          <input
+            data-testid="checkout-address"
+            type="text"
+            name="address"
+            value={ address }
+            onChange={ this.updateState }
+          />
+        </label>
+        <button type="submit" onClick={ this.confirmBuy }>Confirmar</button>
+      </div>
+    );
+  }
 }
 
 export default InfoComprador;

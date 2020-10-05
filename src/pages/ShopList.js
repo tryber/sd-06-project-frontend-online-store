@@ -1,7 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
-import { ProductCard, CategoryList } from '../components';
+import { CategoryList, RenderProduct, Cart } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -9,15 +10,23 @@ class ShopList extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.renderProduct = this.renderProduct.bind(this);
     this.loadCategories = this.loadCategories.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    const { location } = this.props;
+    let currentCart = {};
 
+    if (location.state) {
+      const { location: { state: { cartList } } } = this.props;
+      currentCart = cartList;
+    }
     this.state = {
       categories: [],
       query: '',
       products: [],
+      cartList: currentCart,
       selectedCategory: '',
+      loading: false,
     };
   }
 
@@ -48,31 +57,35 @@ class ShopList extends React.Component {
   }
 
   async handleClick() {
+    this.setState({ loading: true });
     const { query, selectedCategory } = this.state;
     const products = await api.getProductsFromCategoryAndQuery(selectedCategory, query);
     this.setState({
       products: products.results,
+      loading: false,
     });
   }
 
-  renderProduct() {
-    const { products } = this.state;
-    const empty = 0;
-    if (products.length > empty) {
-      return products.map((product) => (
-        <ProductCard
-          key={ product.id }
-          props={ product }
-        />));
+  addToCart(product) {
+    const { cartList } = this.state;
+
+    const ourProduct = product;
+
+    if (cartList[product.id]) {
+      cartList[product.id].quantity += 1;
+      this.setState({ cartList });
+    } else {
+      this.setState({ cartList: { ...cartList, [product.id]: product } });
+      ourProduct.quantity = 1;
     }
-    return <span>Sem Items</span>;
   }
 
   render() {
-    const { categories } = this.state;
+    const { categories, loading, products, cartList } = this.state;
+
 
     return (
-      <section>
+      <section className="wrapper-category-shoplist">
         <CategoryList categories={ categories } handleSelect={ this.handleSelect } />
         <div data-testid="home-initial-message">
           <input data-testid="query-input" type="text" onChange={ this.handleChange } />
@@ -84,16 +97,33 @@ class ShopList extends React.Component {
           >
             Pesquisar
           </button>
-          <button type="button">
-            <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
-          </button>
+          <Cart cartList={ cartList } />
           <div className="productsList">
-            { this.renderProduct() }
+            <RenderProduct
+              loading={ loading }
+              products={ products }
+              addToCart={ this.addToCart }
+              cartList={ cartList }
+            />
           </div>
         </div>
       </section>
     );
   }
 }
+ShopList.defaultProps = {
+  location: { state: { cartList: {} } },
+
+};
+
+ShopList.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      cartList: PropTypes.objectOf(PropTypes.any),
+    }),
+
+  }),
+};
+
 
 export default ShopList;

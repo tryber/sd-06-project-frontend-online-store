@@ -7,7 +7,7 @@ class CategoryList extends React.Component {
     const empty = 0;
 
     return (
-      <section>
+      <section className="category-list">
         {(categories.length > empty)
           ? categories
             .map((category) => (

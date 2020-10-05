@@ -10,11 +10,11 @@
 }
 
 .title-card {
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .product-card-image {
-  align-content: center;
+  align-self: center;
   display: block;
   max-width: 100%;
 }

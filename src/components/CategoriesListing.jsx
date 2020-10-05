@@ -42,7 +42,7 @@ export default class CategoriesListing extends Component {
     const { renderCategories } = this;
 
     return (
-      <div>
+      <div className="menu-Categories">
         {loading ? <span>Loading...</span> : renderCategories()}
       </div>
     )

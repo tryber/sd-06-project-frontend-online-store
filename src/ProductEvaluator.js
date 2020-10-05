@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import StarRating from './StarRating';
 
 class ProductEvaluator extends Component {
   constructor() {
@@ -49,6 +50,7 @@ class ProductEvaluator extends Component {
                 key={ index }
               />;
             })} */}
+            <StarRating />
             <input
               type="email"
               placeholder="Email"

@@ -7,15 +7,15 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { products, emptyList, callback } = this.props;
+    const { products, emptyList } = this.props;
 
     return (
       <div>
         { 
           emptyList
             ? this.noProducts()
-            : products.map((product) => {
-              return <ProductCard key={product.id} product={product} callback={callback} />;
+            : products.map((product, index) => {
+              return <ProductCard key={index} product={product} />;
             })
         }
       </div>

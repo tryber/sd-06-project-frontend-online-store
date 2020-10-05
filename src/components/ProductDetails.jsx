@@ -17,7 +17,6 @@ export default class ProductDetails extends Component {
     };
   }
 
-
   componentDidMount() {
     this.fetchProduct()
   }
@@ -68,7 +67,6 @@ export default class ProductDetails extends Component {
         <div></div>
       </div>
     )
-
   }
 
   renderForm() {
@@ -85,7 +83,7 @@ export default class ProductDetails extends Component {
           </select>
         </label>
         <label>
-          Comentario:
+          Comentário:
           <textarea
             onChange={ this.handleChange }
             name="comments"
@@ -99,16 +97,19 @@ export default class ProductDetails extends Component {
   }
 
   render() {
+    const { handleAddToCart } = this.props;
+    const { product } = this.state;
     return (
       <div>
         <Link to="/" >Voltar</Link>
         {this.state.loading ? <span>Loading</span> : this.renderDetails() }
-        <Link to="/ShoppingCart" >Carrinho</Link>
+        <Link to="/ShoppingCart" data-testid="shopping-cart-button">Carrinho</Link>
+        <button data-testid="product-detail-add-to-cart" onClick={ () => handleAddToCart(product) }>Adicionar Produto</button>
         {this.renderForm() }
         {this.state.reviews.map((review) => (
           <div key={ review.comments }>
             <p>{ `Nota: ${review.grade}` }</p>
-            <p>{ `Comentario: ${review.comments}` }</p>
+            <p>{ `Comentário: ${review.comments}` }</p>
           </div>
         )) }
       </div>

@@ -16,11 +16,29 @@ export default class App extends Component {
     };
   }
 
-  handleAddToCart(product) {
-    const { title } = product;
+  handleAddToCart(currentProduct) {
     const { cartQuantity, cartList } = this.state;
     this.setState({ cartQuantity: cartQuantity + 1 });
-    this.setState({ cartList: [...cartList, title] });
+    const zero = 0;
+    if (cartList.length > zero) {
+      const couldFindIt = cartList.find((product) => currentProduct.id === product.id);
+      if (couldFindIt) {
+        const quantityUpdated = cartList.map((product) => {
+          if (product.id === currentProduct.id) {
+            product.quantityInCart += 1;
+            return product;
+          }
+          return product;
+        });
+        this.setState({ cartList: quantityUpdated });
+      } else {
+        currentProduct.quantityInCart = 1;
+        this.setState({ cartList: [...cartList, currentProduct] });
+      }
+    } else {
+      currentProduct.quantityInCart = 1;
+      this.setState({ cartList: [currentProduct] });
+    }
   }
 
   render() {
@@ -54,7 +72,11 @@ export default class App extends Component {
           <Route
             exact
             path="/products/:category_id/:id"
-            render={ (props) => <ProductDetails { ...props } /> }
+            render={ (props) => (
+              <ProductDetails
+                { ...props }
+                handleAddToCart={ this.handleAddToCart }
+              />) }
           />
         </Switch>
       </BrowserRouter>

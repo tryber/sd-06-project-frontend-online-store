@@ -6,7 +6,7 @@ class Header extends React.Component {
       <header>
         <h1>Corn Express</h1>
       </header>
-    )
+    );
   }
 }
 

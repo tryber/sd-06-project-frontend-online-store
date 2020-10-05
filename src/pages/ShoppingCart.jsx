@@ -1,4 +1,5 @@
 import React from 'react';
+import QuantifyProducts from "../components/QuantifyProducts";
 
 class ShoppingCart extends React.Component {
   render() {
@@ -13,9 +14,11 @@ class ShoppingCart extends React.Component {
     return (
       <div>
         {cartProductList.map((element) => (
-          <div key={element.id}>
+          <div key={ element.id }>
             <p data-testid="shopping-cart-product-name">{ element.title }</p>
-            <p data-testid="shopping-cart-product-quantity">{ this.props.location.cartTotalItens }</p>
+            <div data-testid="shopping-cart-product-quantity">
+              <QuantifyProducts />
+            </div>
           </div>
         )) }
       </div>

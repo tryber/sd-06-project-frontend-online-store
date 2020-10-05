@@ -13,6 +13,7 @@ class InfoComprador extends Component {
       address: '',
     };
     this.updateState = this.updateState.bind(this);
+    this.confirmBuy = this.confirmBuy.bind(this);
   }
 
   updateState(event) {
@@ -64,6 +65,7 @@ class InfoComprador extends Component {
             name="cpf"
             onChange={ this.updateState }
           />
+          <br />
         </label>
         <label htmlFor="checkout-phone">
           Telefone:
@@ -95,7 +97,6 @@ class InfoComprador extends Component {
             onChange={ this.updateState }
           />
         </label>
-        <button type="submit" onClick={ this.confirmBuy }>Confirmar</button>
       </div>
     );
   }

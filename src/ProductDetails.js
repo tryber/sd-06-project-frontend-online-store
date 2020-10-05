@@ -1,12 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function ProductDetails(props, handleCart) {
+function ProductDetails(props, handleCart, productsOnCart) {
   const { location: { state: { product } } } = props;
+  const { id, title, price } = product;
+  const productIsOnCart = productsOnCart.find((cartProduct) => cartProduct.id === id);
+  let disabledOption;
+  if (productIsOnCart === undefined) {
+    disabledOption = (product.available_quantity < 1);
+  } else {
+    disabledOption = (productIsOnCart.available_quantity
+      < productIsOnCart.quantityOnCart);
+  }
   return (
     <div>
-      <p data-testid="product-detail-name">{product.title}</p>
-      <p>{product.price}</p>
+      <p data-testid="product-detail-name">{title}</p>
+      <p>{price}</p>
       <button
         type="button"
         name="productsOnCart/add"
@@ -14,6 +23,7 @@ function ProductDetails(props, handleCart) {
         value={ JSON.stringify(product) }
         onClick={ handleCart }
         operation="add"
+        disabled={ disabledOption }
       >
         Adicionar ao carrinho
       </button>

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import * as api from './services/api';
 import './App.css';
 import Home from './Home';
 import ShoppingCart from './ShoppingCart';
 import ProductDetails from './ProductDetails';
 import Header from './Header';
-// eslint-disable-next-line import/no-named-as-default-member
 import Checkout from './Checkout';
 
 class App extends React.Component {
@@ -60,8 +60,11 @@ class App extends React.Component {
       const uniqueProduct = { ...value, quantityOnCart: 1 };
       newOnCartState = [...productsOnCart, uniqueProduct];
     } else {
+      // api.getDetailProduct(productExist.id).then(r => productExist.available_quantity = r.available_quantity).catch();
       if (operation === 'add') {
-        productExist.quantityOnCart += 1;
+        const zero = 0;
+        productExist.quantityOnCart += (productExist.available_quantity
+          > productExist.quantityOnCart) ? 1 : zero;
       } else {
         productExist.quantityOnCart -= 1;
       }
@@ -94,11 +97,18 @@ class App extends React.Component {
         <Switch>
           <Route
             path={ pathDetails }
-            render={ (props) => ProductDetails(props, handle) }
+            render={ (props) => ProductDetails(props, handle, productsOnCart) }
           />
           <Route path="/cart" render={ () => ShoppingCart(productsOnCart, handle) } />
           <Route path="/checkout" component={ Checkout } />
-          <Route exact path="/" render={ () => <Home handleCart={ handle } /> } />
+          <Route
+            exact
+            path="/"
+            render={ () => (<Home
+              handleCart={ handle }
+              productsOnCart={ productsOnCart }
+            />) }
+          />
         </Switch>
       </BrowserRouter>
     );

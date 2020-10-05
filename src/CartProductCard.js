@@ -1,11 +1,20 @@
 import React from 'react';
 
-function CartProductCard(product, handleCart) {
+function CartProductCard(product, handleCart, productsOnCart) {
+  const { id, title, quantityOnCart, price } = product;
+  const productIsOnCart = productsOnCart.find((cartProduct) => cartProduct.id === id);
+  let disabledOption;
+  if (productIsOnCart === undefined) {
+    disabledOption = (product.available_quantity < 1);
+  } else {
+    disabledOption = (productIsOnCart.available_quantity
+      < productIsOnCart.quantityOnCart);
+  }
   return (
-    <div key={ product.id }>
-      <p data-testid="shopping-cart-product-name">{product.title}</p>
-      <p>{product.price}</p>
-      <p data-testid="shopping-cart-product-quantity">{product.quantityOnCart}</p>
+    <div key={ id }>
+      <p data-testid="shopping-cart-product-name">{title}</p>
+      <p>{price}</p>
+      <p data-testid="shopping-cart-product-quantity">{quantityOnCart}</p>
       <button
         type="button"
         name="productsOnCart/add"
@@ -13,6 +22,7 @@ function CartProductCard(product, handleCart) {
         value={ JSON.stringify(product) }
         onClick={ handleCart }
         operation="add"
+        disabled={ disabledOption }
       >
         Add
       </button>

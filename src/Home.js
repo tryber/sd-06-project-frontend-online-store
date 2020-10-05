@@ -51,10 +51,10 @@ class Home extends React.Component {
 
   render() {
     const { searchQuery, products, loading } = this.state;
-    const { handleCart } = this.props;
+    const { handleCart, productsOnCart } = this.props;
     const initMsg = 'Digite algum termo de pesquisa ou escolha uma categoria.';
     const msgId = 'home-initial-message';
-    const gallery = ListCards(products, handleCart);
+    const gallery = ListCards(products, handleCart, productsOnCart);
     return (
       <div className="home-container">
         <div className="store-container">
@@ -101,4 +101,7 @@ class Home extends React.Component {
 
 export default Home;
 
-Home.propTypes = { handleCart: PropTypes.func.isRequired };
+Home.propTypes = {
+  handleCart: PropTypes.func.isRequired,
+  productsOnCart: PropTypes.arrayOf(PropTypes.object).isRequired,
+};

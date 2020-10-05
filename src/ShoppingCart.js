@@ -24,7 +24,8 @@ function ShoppingCart(productsOnCart, handleCart) {
         { (productsOnCart.length < 1) ? <FaBoxOpen /> : ''}
         { (productsOnCart < 1)
           ? <p>{msgEmptyCart}</p> : '' }
-        { productsOnCart.map((product) => CartProductCard(product, handleCart)) }
+        { productsOnCart.map((product) => CartProductCard(product,
+          handleCart, productsOnCart)) }
       </div>
     </div>
   );

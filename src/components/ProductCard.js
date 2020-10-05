@@ -6,11 +6,12 @@ class ProductCard extends React.Component {
   render() {
     const { product, addToCart, cartList } = this.props;
     const { title, price, id, thumbnail } = product;
+    const valueType = 2;
 
     return (
       <div className="productCard" data-testid="product">
         <div className="product-card-item">{title}</div>
-        <div className="product-card-item">{price}</div>
+        <div className="product-card-item">{`R$${price.toFixed(valueType)}`}</div>
         <img src={ thumbnail } className="product-img" alt="product" />
         <Link to={ { pathname: `productDetails/${id}`, state: { product, cartList } } }>
           <div data-testid="product-detail-link">View Details</div>
@@ -20,7 +21,7 @@ class ProductCard extends React.Component {
           data-testid="product-add-to-cart"
           onClick={ () => addToCart(product) }
         >
-          add to card
+          add to cart
         </button>
       </div>
     );

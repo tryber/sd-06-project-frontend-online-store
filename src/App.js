@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import { ShopList, ShopCart, ProductDetails } from './pages';
+import { ShopList, ShopCart, ProductDetails, Checkout } from './pages';
 import './App.css';
 
 class App extends React.Component {
@@ -14,6 +14,7 @@ class App extends React.Component {
           path="/productDetails/:id"
           component={ ProductDetails }
         />
+        <Route exact path="/checkout" component={ Checkout } />
       </BrowserRouter>
     );
   }

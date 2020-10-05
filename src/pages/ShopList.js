@@ -32,12 +32,27 @@ class ShopList extends React.Component {
 
   componentDidMount() {
     this.loadCategories();
+    this.updateCartListFromLocalStorage();
+    const { cartList } = this.state;
+    console.log(cartList);
   }
 
   componentDidUpdate(prevProps, prevState) {
     const { selectedCategory } = this.state;
     if (selectedCategory !== prevState.selectedCategory) this.handleClick();
   }
+
+
+  updateCartListFromLocalStorage() {
+    const zero = 0;
+    const { cartList } = this.state;
+    const storageCartList = JSON.parse(localStorage.getItem('cartlist'));
+
+    if (storageCartList && Object.values(cartList).length === zero) {
+      this.setState({ cartList: storageCartList });
+    }
+  }
+
 
   async loadCategories() {
     const categories = await api.getCategories();

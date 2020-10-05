@@ -8,28 +8,30 @@ class Product extends Component {
     const { product, search, onClick } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
-      <Link
-        to={ {
-          pathname: `/product-detail/${id}`,
-          state: {
-            busca: search,
-          },
-        } }
-      >
-        <div data-testid="product-detail-link">
-          <div data-testid="product">
-            <h5>{ title }</h5>
-            <img src={ thumbnail } alt="fotografia do produto" />
-            <p><span>{`R$: ${price}`}</span></p>
-            <p data-testid="product-add-to-cart">
-              <Button
-                nameButton="Add to Cart"
-                onClick={ onClick }
-              />
-            </p>
+      <div>
+        <Link
+          to={ {
+            pathname: `/product-detail/${id}`,
+            state: {
+              busca: search,
+            },
+          } }
+        >
+          <div data-testid="product-detail-link">
+            <div data-testid="product">
+              <h5>{ title }</h5>
+              <img src={ thumbnail } alt="fotografia do produto" />
+              <p><span>{`R$: ${price}`}</span></p>
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+        <p data-testid="product-add-to-cart">
+          <Button
+            nameButton="Add to Cart"
+            onClick={ onClick }
+          />
+        </p>
+      </div>
     );
   }
 }

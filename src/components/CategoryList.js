@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as API from '../services/api';
-import '../styles/CategoryList.css';
 
 class CategoryList extends Component {
   constructor() {

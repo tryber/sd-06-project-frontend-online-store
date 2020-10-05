@@ -8,8 +8,16 @@ function isFreeShipping(freeShipping) {
   }
 }
 
-function StoreProductCard(product, handleCart) {
+function StoreProductCard(product, handleCart, productsOnCart) {
   const { price, title, thumbnail, id } = product;
+  const productIsOnCart = productsOnCart.find((cartProduct) => cartProduct.id === id);
+  let disabledOption;
+  if (productIsOnCart === undefined) {
+    disabledOption = (product.available_quantity < 1);
+  } else {
+    disabledOption = (productIsOnCart.available_quantity
+      < productIsOnCart.quantityOnCart);
+  }
   return (
     <div className="card" key={ id } data-testid="product">
       <img src={ thumbnail } alt={ title } />
@@ -35,6 +43,7 @@ function StoreProductCard(product, handleCart) {
           data-testid="product-add-to-cart"
           value={ JSON.stringify(product) }
           onClick={ handleCart }
+          disabled={ disabledOption }
         >
           Adicionar ao carrinho
         </button>

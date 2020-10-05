@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 function ProductCard(props) {
   const { product: { title, thumbnail, price } } = props;
-
+  
   return (
     <div className="product-card" data-testid="product">
       <h3>{ title }</h3>
@@ -12,6 +13,7 @@ function ProductCard(props) {
         R$
         { price }
       </div>
+
     </div>
   );
 }

@@ -93,11 +93,15 @@ class SearchProduct extends Component {
     const cartItems = [...cartProducts];
     const cartItem = products.find((product) => product.id === id);
     const itemAlreadyInCart = cartItems.findIndex(({ product }) => product.id === id);
+
     if (cartItems[itemAlreadyInCart]) {
+      if (cartItems[itemAlreadyInCart].quantity === cartItem.available_quantity) return;
+
       cartItems[itemAlreadyInCart].quantity += 1;
     } else {
       cartItems.push({ product: cartItem, quantity: 1 });
     }
+
     const newCartProductsQuantity = cartProductsQuantity + 1;
     this.setState({ cartProducts: cartItems, cartProductsQuantity: newCartProductsQuantity });
   }

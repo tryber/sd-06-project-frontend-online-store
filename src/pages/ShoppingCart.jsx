@@ -5,18 +5,27 @@ class ShoppingCart extends Component {
   constructor() {
     super();
 
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    this.loadCart = this.loadCart.bind(this);
 
     this.state = {
-      cartItems,
+      cartItems: [],
 
     };
     this.handleProductQuantityAltering = this.handleProductQuantityAltering.bind(this);
   }
 
+  componentDidMount() {
+    this.loadCart();
+  }
+
   componentWillUnmount() {
     const { cartItems } = this.state;
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }
+
+  loadCart() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    this.setState({ cartItems });
   }
 
   handleProductQuantityAltering({ target }, id) {
@@ -63,6 +72,7 @@ class ShoppingCart extends Component {
                 type="button"
                 onClick={ (event) => this.handleProductQuantityAltering(event, product.id) }
                 name="plus"
+                disabled={ quantity === product.available_quantity }
               >
                 +
 

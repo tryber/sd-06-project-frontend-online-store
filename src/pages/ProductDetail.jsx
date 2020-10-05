@@ -109,14 +109,22 @@ class ProductDetail extends Component {
   }
 
   addItemToCart(product, id, quantity) {
+    const availableQuantity = product.available_quantity;
+
+    if (quantity > availableQuantity) return;
+
     const { cartProducts, cartProductsQuantity } = this.state;
     const cartItems = [...cartProducts];
     const itemAlreadyInCart = cartItems.findIndex(({ product: item }) => item.id === id);
+
     if (cartItems[itemAlreadyInCart]) {
+      if ((quantity + cartItems[itemAlreadyInCart].quantity) > availableQuantity) return;
+
       cartItems[itemAlreadyInCart].quantity += quantity;
     } else {
       cartItems.push({ product, quantity });
     }
+
     const newCartProductsQuantity = cartProductsQuantity + quantity;
     this.setState({ cartProducts: cartItems, cartProductsQuantity: newCartProductsQuantity });
   }
@@ -182,11 +190,19 @@ class ProductDetail extends Component {
                   -
 
                 </button>
-                <input type="number" min={ 1 } step={ 1 } value={ quantity } readOnly />
+                <input
+                  type="number"
+                  min={ 1 }
+                  max={ product.available_quantity }
+                  step={ 1 }
+                  value={ quantity }
+                  readOnly
+                />
                 <button
                   type="button"
                   onClick={ this.handleProductQuantityAltering }
                   name="plus"
+                  disabled={ quantity === product.available_quantity }
                 >
                   +
 

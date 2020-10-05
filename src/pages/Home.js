@@ -79,15 +79,19 @@ class Home extends Component {
     return (
       <div className="home-page">
         <ListCategory onClick={ this.handleClickCategories } />
-        <SearchEngine
-          sendQueryInputToHome={ this.handleChangeInput }
-          onClick={ this.handleClickButton }
-        />
-        <ProductList
-          queryInput={ queryInput }
-          foundItems={ foundItems }
-          products={ products }
-        />
+        <div className="right-column-container">
+          <SearchEngine
+            sendQueryInputToHome={ this.handleChangeInput }
+            onClick={ this.handleClickButton }
+          />
+          <div className="product-list-container">
+            <ProductList
+              queryInput={ queryInput }
+              foundItems={ foundItems }
+              products={ products }
+            />
+          </div>
+        </div>
       </div>
     );
   }

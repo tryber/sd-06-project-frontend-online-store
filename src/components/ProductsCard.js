@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import '../styles/ProductsCard.css';
 
-export default class FoundProducts extends Component {
+export default class ProductsCard extends Component {
   render() {
     const { product } = this.props;
     const { title, id, thumbnail, price } = product;
@@ -25,7 +25,7 @@ export default class FoundProducts extends Component {
 }
 
 // add more fields here if you want
-FoundProducts.propTypes = {
+ProductsCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
     id: PropTypes.number,

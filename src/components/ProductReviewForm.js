@@ -16,7 +16,7 @@ class ProductReviewForm extends React.Component {
       email: '',
       message: '',
       rating: 0,
-      storedMessages: [],
+      storedMessages: JSON.parse(localStorage.getItem('previousReviews')) !== null ? JSON.parse(localStorage.getItem('previousReviews')) : [],
       messageDisplayStyle: 'none',
     };
   }
@@ -60,19 +60,19 @@ class ProductReviewForm extends React.Component {
   }
 
   render() {
-    const displayTimeoutReset = 5000;
-    setTimeout(() => {
-      this.setState({ messageDisplayStyle: 'none' });
-    }, displayTimeoutReset);
+    // const displayTimeoutReset = 5000;
+    // setTimeout(() => {
+    //   this.setState({ messageDisplayStyle: 'none' });
+    // }, displayTimeoutReset);
 
-    const { rating, message, email, messageDisplayStyle } = this.state;
-    let treatedReviews = [];
+    // if (localStorage.getItem('previousReviews') !== null) {
+    //   const retrieveReviews = localStorage.getItem('previousReviews');
+    //   treatedReviews = JSON.parse(retrieveReviews);
 
-    if (localStorage.getItem('previousReviews') !== null) {
-      const retrieveReviews = localStorage.getItem('previousReviews');
-      treatedReviews = JSON.parse(retrieveReviews);
-      console.log(treatedReviews);
-    }
+    //   this.setState({ treatedMessages: treatedReviews });
+    // }
+
+    const { rating, message, email, messageDisplayStyle, storedMessages } = this.state;
 
     return (
       <section>
@@ -113,7 +113,7 @@ class ProductReviewForm extends React.Component {
           </fieldset>
         </form>
 
-        {treatedReviews.map((review) => (<PreviousReview
+        {storedMessages.map((review) => (<PreviousReview
           key={ review.email }
           email={ review.email }
           message={ review.message }

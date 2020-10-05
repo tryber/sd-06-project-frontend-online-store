@@ -4,28 +4,24 @@ import PropTypes from 'prop-types';
 class PreviousReviewStar extends React.Component {
   render() {
     const { rating } = this.props;
-    const indexStart = 0;
+    const ratingNumber = parseInt(rating, 10);
+    const totalStars = 5;
     const ratingArray = [];
-    for (let index = indexStart; index < rating; index += 1) {
-      console.log(ratingArray);
+    const checked = 'fa fa-star checked';
+    const unChecked = 'fa fa-star';
+
+
+    for (let index = 1; index <= totalStars; index += 1) {
+      if (index <= ratingNumber) {
+        ratingArray.push(checked);
+      } else {
+        ratingArray.push(unChecked);
+      }
     }
+
     return (
       <section className="star-rating">
-        <div
-          className="fa fa-star"
-        />
-        <div
-          className="fa fa-star"
-        />
-        <div
-          className="fa fa-star"
-        />
-        <div
-          className="fa fa-star"
-        />
-        <div
-          className="fa fa-star"
-        />
+        {ratingArray.map((check, index) => <div key={ index } className={ check } />)}
       </section>
     );
   }

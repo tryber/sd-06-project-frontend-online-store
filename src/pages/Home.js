@@ -15,6 +15,7 @@ class Home extends Component {
     this.fetchSearchedItem = this.fetchSearchedItem.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.saveSelectedCategory = this.saveSelectedCategory.bind(this);
+    this.addTocart = this.addTocart.bind(this);
 
 
     this.state = {
@@ -22,12 +23,23 @@ class Home extends Component {
       spanMessage: 'Digite algum termo de pesquisa ou escolha uma categoria.',
       searchedItems: undefined,
       selectedCategory: '',
+      productsAddToCart: {},
     };
   }
 
   onSearchTextChange({ target }) {
     const { name, value } = target;
     this.setState({ [name]: value });
+  }
+
+  addTocart(productName) {
+    const zero = 0;
+    this.setState((currentState) => ({
+      productsAddToCart: {
+        ...currentState.productsAddToCart,
+        [productName]: (currentState.productsAddToCart[productName] || zero) + 1,
+      },
+    }));
   }
 
   saveSelectedCategory(id) {
@@ -55,7 +67,7 @@ class Home extends Component {
   }
 
   render() {
-    const { searchedItems, spanMessage, searchInput } = this.state;
+    const { searchedItems, spanMessage, searchInput, productsAddToCart } = this.state;
 
     return (
       <div className="home-page">
@@ -71,12 +83,19 @@ class Home extends Component {
           {searchedItems === undefined
             ? <span data-testid="home-initial-message">{ spanMessage }</span>
             : searchedItems.map((item) => (
-              <SearchedItems key={ item.id } item={ item } query={ searchInput } />
+              <SearchedItems
+                addTocart={ this.addTocart }
+                key={ item.id }
+                item={ item }
+                query={ searchInput }
+              />
             ))}
-
         </div>
         <div>
-          <Link data-testid="shopping-cart-button" to="/Cart">
+          <Link
+            data-testid="shopping-cart-button"
+            to={ { pathname: '/cart', state: { data: productsAddToCart } } }
+          >
             <img src={ addCart } alt="button car shopping" />
           </Link>
         </div>

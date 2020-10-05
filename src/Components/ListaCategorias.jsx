@@ -16,9 +16,7 @@ class ListaCategorias extends React.Component {
 
   componentDidMount() {
     api.getCategories().then((categories) => {
-      this.setState({
-        categoryList: categories,
-      });
+      console.log(categories)
     });
   }
 

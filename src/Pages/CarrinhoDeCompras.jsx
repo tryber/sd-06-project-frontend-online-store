@@ -19,6 +19,8 @@ class CarrinhoDeCompras extends Component {
             })
           ) }
         <Link to='/'>Voltar</Link>
+        <button type='button' data-test='product-increase-quantity'>+</button>
+        <button type='button' data-test='poduct-decreate-quantity'></button>
       </div>
     )
   }

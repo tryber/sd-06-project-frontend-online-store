@@ -57,7 +57,6 @@ class ListaDeProdutos extends Component {
     const zero = 0;
     // console.log(search === '')
     return (
-
       <div className='wrapper'>
         <aside>
           <ListaCategorias changeSearch={ this.changeSearch } />
@@ -98,4 +97,4 @@ class ListaDeProdutos extends Component {
 }
 
 export default ListaDeProdutos;
-// Iniciar requsito 10
+// Iniciar requsito 10  

@@ -8,13 +8,36 @@ import CardDetails from './pages/CardDetails';
 
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.addTocart = this.addTocart.bind(this);
+
+    this.state = {
+      productsAddToCart: {},
+    };
+  }
+
+
+  addTocart(productName) {
+    console.log('função sendo chamada');
+    const zero = 0;
+    this.setState((currentState) => ({
+      productsAddToCart: {
+        ...currentState.productsAddToCart,
+        [productName]: (currentState.productsAddToCart[productName] || zero) + 1,
+      },
+    }));
+  }
+
   render() {
+    const { productsAddToCart } = this.state;
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={ Home } />
+          <Route exact path="/" render={ (props) => <Home { ...props } addToCart={ this.addTocart } /> } />
           <Route path="/card/:id" component={ CardDetails } />
-          <Route path="/cart" component={ Cart } />
+          <Route exact path="/cart" render={ (props) => <Cart { ...props } productsAddToCart={ productsAddToCart } /> } />
           <Route component={ NotFound } />
         </Switch>
       </Router>

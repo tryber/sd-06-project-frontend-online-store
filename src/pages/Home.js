@@ -33,6 +33,7 @@ class Home extends Component {
   }
 
   addTocart(productName) {
+    console.log('função sendo chamada');
     const zero = 0;
     this.setState((currentState) => ({
       productsAddToCart: {
@@ -69,6 +70,8 @@ class Home extends Component {
   render() {
     const { searchedItems, spanMessage, searchInput, productsAddToCart } = this.state;
 
+    const { addToCart } = this.props;
+
     return (
       <div className="home-page">
         <CategoriesSideBar saveSelectedCategory={ this.saveSelectedCategory } />
@@ -84,7 +87,7 @@ class Home extends Component {
             ? <span data-testid="home-initial-message">{ spanMessage }</span>
             : searchedItems.map((item) => (
               <SearchedItems
-                addTocart={ this.addTocart }
+                addTocart={ addToCart }
                 key={ item.id }
                 item={ item }
                 query={ searchInput }
@@ -94,7 +97,7 @@ class Home extends Component {
         <div>
           <Link
             data-testid="shopping-cart-button"
-            to={ { pathname: '/cart', state: { data: productsAddToCart } } }
+            to={ { pathname: '/cart' } }
           >
             <img src={ addCart } alt="button car shopping" />
           </Link>

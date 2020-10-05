@@ -16,8 +16,8 @@ class Cart extends React.Component {
   }
 
   changeState() {
-    const { location: { state: { data } } } = this.props;
-    if (Object.keys(data).length >= 1) {
+    const { productsAddToCart } = this.props;
+    if (Object.keys(productsAddToCart).length >= 1) {
       this.setState({
         loadMessage: false,
       });
@@ -26,8 +26,8 @@ class Cart extends React.Component {
 
   render() {
     const { loadMessage } = this.state;
-    const { location: { state: { data } } } = this.props;
-    const treatedData = Object.entries(data);
+    const { productsAddToCart } = this.props;
+    const treatedData = Object.entries(productsAddToCart);
     console.log(treatedData);
     return (
       <div>

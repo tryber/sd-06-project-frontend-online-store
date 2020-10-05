@@ -5,7 +5,7 @@ import CartBtn from '../services/CartBtn';
 
 class ProductDetails extends React.Component {
   render() {
-    const { location: { state: { title, thumbnail, attibutes } } } = this.state;
+    const { location: { state: { title, thumbnail, attibutes } } } = this.product;
     return (
       <div>
         <div>

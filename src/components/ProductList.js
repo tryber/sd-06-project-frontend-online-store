@@ -6,7 +6,6 @@ import ProductCard from './ProductCard';
 class ProductList extends React.Component {
   render() {
     const { products, addToCart } = this.props;
-
     return (
       <div>
         { products.map((product) => (<ProductCard

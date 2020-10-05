@@ -7,7 +7,7 @@ import ProductDetails from './pages/ProductDetails';
 import ShoppingCart from './pages/ShoppingCart';
 
 class App extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.state = { cartProducts: [] };
 

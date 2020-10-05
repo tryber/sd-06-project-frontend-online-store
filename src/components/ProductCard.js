@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 class ProductCard extends React.Component {
   render() {
     const { product, addToCart } = this.props;
+    console.log("productcard", addToCart);
     return (
       <div data-testid="product">
         <h1>{product.title}</h1>

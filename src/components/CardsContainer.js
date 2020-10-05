@@ -10,10 +10,9 @@ class CardsContainer extends Component {
         { products.map((product) => (
           <ProductCard
             setProductCart={ setProductCart }
+            id={ product.id }
             key={ product.id }
-            title={ product.title }
-            price={ product.price }
-            thumbnail={ product.thumbnail }
+            product={ product }
           />
         ))}
       </div>

@@ -6,47 +6,51 @@ class ShoppingCart extends Component {
     super();
     this.state = {
       empty: true,
-      productTitle: '',
-      productThumbnail: '',
-      productPrice: 0,
-      products: '',
-      cart: [],
+      product: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    this.addItemsToCart();
+    this.handleClick();
   }
 
   handleClick() {
     const { location: { state: {
       title, thumbnail, price, id,
     } } } = this.props;
+    const obj = {
+      title: title,
+      thumbnail: thumbnail,
+      price: price,
+    };
+    const array = [];
+    array.push(obj);
+    console.log(obj);
     this.setState({
       empty: false,
-      productTitle: title,
-      productThumbnail: thumbnail,
-      productPrice: price,
+      product: array,
     });
   }
 
-  addItemsToCart() {
-    if (!localStorage.cart) localStorage.cart = JSON.stringify([]);
-    const cart = JSON.parse(localStorage.cart);
-    this.setState({ cart });
-  }
-
   renderCart() {
-    const { cart } = this.state;
-    if (cart.length === 0 ) {
+    const { product } = this.state;
+    console.log(product);
+    if (product.length === 0 ) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
     return (
-      cart.map((item) => (
+      product.map((item) => (
         <span key={ this.id } data-testid="shopping-cart-product-name">
           {item.title}
+          <img
+            src={item.thumbnail}
+            alt={ `Imagem do produto ${item.title}` }
+          />
+          <span>
+            {item.price}
+          </span>
         </span>
       ))
     );
@@ -54,13 +58,7 @@ class ShoppingCart extends Component {
 
   render() {
     return (
-      <div data-testid="product-detail-add-to-cart">
-        <h1>{ this.state.productTitle }</h1>
-        <img
-          src={ this.state.productThumbnail }
-          alt={ `Imagem do produto ${this.state.productTitle}` }
-        />
-        <h2>{this.state.productPrice}</h2>
+      <div>
         {this.renderCart()}
       </div>
     );

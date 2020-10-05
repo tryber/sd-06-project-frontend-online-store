@@ -27,7 +27,10 @@ class CategoryFilter extends Component{
     const { categories } = this.state
     return (
       <div>
-        {categories.map(category => <li data-testid="category" key={category.id}>{category.name}</li>)}
+        {categories.map(category => 
+        <label for="chosen">{category.name}
+          <input name="chosen" type="radio" data-testid="category" key={category.id} />
+          </label>)}
       </div>
     )
   }

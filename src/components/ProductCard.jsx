@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default class ProductCard extends Component {
+  handleClick(productObject) {
+    this.props.updateCart(productObject);
+  }
+
   render() {
     const { id, title, price, thumbnail } = this.props.product;
     return (
@@ -14,6 +18,10 @@ export default class ProductCard extends Component {
           data-testid="product-detail-link"
         >
         Detalhes</Link>
+
+        <button data-testid="product-add-to-cart" onClick={ () => this.handleClick(this.props.product) } >
+          add to cart
+        </button>
       </div>
     );
   }

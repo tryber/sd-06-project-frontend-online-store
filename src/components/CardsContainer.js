@@ -4,11 +4,12 @@ import ProductCard from './ProductCard';
 
 class CardsContainer extends Component {
   render() {
-    const { products } = this.props;
+    const { setProductCart, products } = this.props;
     return (
       <div>
         { products.map((product) => (
           <ProductCard
+            setProductCart={ setProductCart }
             key={ product.id }
             title={ product.title }
             price={ product.price }
@@ -22,6 +23,7 @@ class CardsContainer extends Component {
 
 CardsContainer.propTypes = {
   products: PropTypes.arrayOf().isRequired,
+  setProductCart: PropTypes.func.isRequired,
 };
 
 export default CardsContainer;

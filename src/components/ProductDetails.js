@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
+import './ProductDetails.css';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -29,7 +30,6 @@ class ProductDetails extends React.Component {
   render() {
     const { product } = this.state;
     const { title, price, thumbnail } = product;
-
     return (
       <div>
         <h1 data-testid="product-detail-name">{title}</h1>
@@ -49,6 +49,13 @@ class ProductDetails extends React.Component {
             <br />
             <button type="button">Avaliar</button>
           </form>
+        </div>
+        <div className="product-details">
+          <img alt="Product" src={ thumbnail } className="product-image" />
+          <div className="product-info">
+            <h1 data-testid="product-detail-name">{title}</h1>
+            <p>{price}</p>
+          </div>
         </div>
       </div>
     );

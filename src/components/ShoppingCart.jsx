@@ -10,10 +10,14 @@ export default class ShoppingCart extends Component {
           <p data-testid="shopping-cart-product-quantity">
             {cartQuantity}
           </p>
-          { cartList.map((product) => (
-            <p data-testid="shopping-cart-product-name" key={ product }>
-              {product}
-            </p>
+          { cartList.map((product) => (<div key={ product.id }>
+              <p data-testid="shopping-cart-product-name">
+                {product.title}
+              </p>
+              <p data-testid="shopping-cart-product-quantity">
+                {product.quantityInCart}
+              </p>
+            </div>
           ))}
         </div>
       );

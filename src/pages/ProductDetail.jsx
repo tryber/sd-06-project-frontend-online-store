@@ -10,6 +10,7 @@ class ProductDetail extends Component {
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
     this.handleStartRating = this.handleStartRating.bind(this);
     this.handleComment = this.handleComment.bind(this);
+    this.loadCart = this.loadCart.bind(this);
 
     const { id } = this.props.match.params;
 
@@ -32,11 +33,17 @@ class ProductDetail extends Component {
       rating: 0,
       comments: oldComments,
       id,
+      cartProducts: [],
+      cartProductsQuantity: 0,
     };
   }
 
+  componentDidMount() {
+    this.loadCart();
+  }
+
   componentWillUnmount() {
-    const { id, comments } = this.state;
+    const { id, comments, cartProducts } = this.state;
 
     if (comments.length) {
       const storeComments = JSON.parse(localStorage.getItem('storeComments')) || [];
@@ -56,6 +63,18 @@ class ProductDetail extends Component {
 
       localStorage.setItem('storeComments', JSON.stringify(storeComments));
     }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartProducts));
+  }
+
+  loadCart() {
+    const cartProducts = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    const initialQuantity = 0;
+
+    const cartProductsQuantity = cartProducts.reduce((accumulator, { quantity }) => accumulator += quantity, initialQuantity);
+
+    this.setState({ cartProducts, cartProductsQuantity });
   }
 
   handleInputValueChange({ name, value }) {
@@ -90,14 +109,16 @@ class ProductDetail extends Component {
   }
 
   addItemToCart(product, id, quantity) {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const { cartProducts, cartProductsQuantity } = this.state;
+    const cartItems = [...cartProducts];
     const itemAlreadyInCart = cartItems.findIndex(({ product: item }) => item.id === id);
     if (cartItems[itemAlreadyInCart]) {
       cartItems[itemAlreadyInCart].quantity += quantity;
     } else {
       cartItems.push({ product, quantity });
     }
-    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    const newCartProductsQuantity = cartProductsQuantity + quantity;
+    this.setState({ cartProducts: cartItems, cartProductsQuantity: newCartProductsQuantity });
   }
 
   handleProductQuantityAltering({ target }) {
@@ -131,11 +152,15 @@ class ProductDetail extends Component {
 
   render() {
     const { products } = this.props.location.state;
-    const { quantity, comments, id } = this.state;
+    const { quantity, comments, id, cartProductsQuantity } = this.state;
     const product = products.find((productItem) => id === productItem.id);
     return (
       <>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">cart</Link>
+        <Link to="/shopping-cart" data-testid="shopping-cart-button" className="fa fa-shopping-cart cart-icon">
+          {(cartProductsQuantity > 0) && (
+            <span data-testid="shopping-cart-size" className="cart-quantity">{cartProductsQuantity}</span>
+          )}
+        </Link>
         <Link to="/">home</Link>
         <div className="product-detail-content">
           <div data-testid="product-detail-name">

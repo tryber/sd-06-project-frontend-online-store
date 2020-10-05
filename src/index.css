@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  text-decoration: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -56,4 +60,20 @@ code {
 
 .comment-no-rating {
   color: grey;
+}
+
+.cart-icon {
+  font-size: 3rem;
+  position: relative;
+}
+.cart-quantity {
+  position: absolute;
+  border-radius: 100%;
+  background-color: yellow;
+  font-size: 15px;
+  padding: 3px;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  right: -25%;
 }

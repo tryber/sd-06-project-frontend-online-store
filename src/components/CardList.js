@@ -3,6 +3,7 @@ import { getProductsFromCategoryAndQuery } from '../services/api';
 import Card from './Card';
 import CategoriesList from './CategoriesList';
 import Cart from '../services/cart';
+import NoSearching from './NoSearching';
 
 class CardList extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class CardList extends React.Component {
       value: '',
       products: [],
       categoryId: '',
+      empty: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.fetchCard = this.fetchCard.bind(this);
@@ -25,7 +27,7 @@ class CardList extends React.Component {
 
   handleClick() {
     const { value } = this.state;
-    if (value !== '') {
+    if (value !== '' || value != null) {
       this.fetchCard('');
     }
   }
@@ -47,13 +49,15 @@ class CardList extends React.Component {
     const { value } = this.state;
     const card = await getProductsFromCategoryAndQuery(id, value);
     const { results } = card;
+    const noResults = 0;
     this.setState({
       products: results,
+      empty: (results.length === noResults),
     });
   }
 
   render() {
-    const { products, value } = this.state;
+    const { products, value, empty } = this.state;
     return (
       <div>
         <div>
@@ -72,7 +76,8 @@ class CardList extends React.Component {
         </div>
         <CategoriesList handleID={ this.handleClickID } />
         <div>
-          { products.map((product) => <Card product={ product } key={ product.id } />)}
+          { products.map((product) => <Card product={ product } key={ product.id } />) }
+          { (empty != null && empty) ? <NoSearching /> : false }
         </div>
       </div>
     );

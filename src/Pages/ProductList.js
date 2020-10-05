@@ -73,7 +73,11 @@ class ProductList extends Component {
     return (
       <div>
         <Input onChange={ this.handleInput } />
-        <Button testId="query-button" nameButton="Buscar" onClick={ () => this.onClickButton(valueInput) } />
+        <Button
+          testId="query-button"
+          nameButton="Buscar"
+          onClick={ () => this.onClickButton(valueInput) }
+        />
         { products.map((prod) => (<Product
           product={ prod }
           key={ prod.id }

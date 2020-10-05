@@ -8,6 +8,7 @@ class AddToCartButton extends React.Component {
 
 
   saveShoppingCart() {
+    // Recupera array a partir do LocalStorage "ou" cria um array vazia
     const cartProducts = JSON.parse(localStorage.getItem('myCartList') || '[]');
     const { id, title, thumbnail, price } = this.props.product;
     const quantity = 1;
@@ -31,7 +32,7 @@ class AddToCartButton extends React.Component {
         <button
           type="button"
           data-testid={ testId }
-          onClick={ this.saveShoppingCart } 
+          onClick={ this.saveShoppingCart }
         >
           Add to Cart!
         </button>

@@ -51,7 +51,7 @@ export default class ProductListing extends Component {
   renderCards() {
     const { products, empty } = this.state;
     const mapCards = products.map((product) => (
-      <ProductCard key={product.id} product={product}
+      <ProductCard key={product.id} product={product} handleAddToCart={this.props.handleAddToCart}
     />));
     return empty ? <span>Nenhum produto foi encontrado</span> : mapCards;
   }
@@ -82,18 +82,25 @@ export default class ProductListing extends Component {
 
     return (
       <div>
-        <input type="text" data-testid="query-input" onChange={this.handleChangeTxt} />
-        <button type="button" data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
-        <div>
-          <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
+        <div className="header">
+          <input type="text" data-testid="query-input" onChange={this.handleChangeTxt} />
+          <button type="button" data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
           <Link to="/ShoppingCart"><img
             src={shoppingCartImage} alt="Shopping cart button." width="30px"
-            data-testid="shopping-cart-button"
-          /></Link>
+            data-testid="shopping-cart-button" className="icon-cart"
+          /><span datatest-id="shopping-cart-product-quantity">{this.props.cartQuantity}</span></Link>
         </div>
-          <CategoriesListing onClick={handleClickCategory} />
-        <div>
-          {loading ? <span>Loading</span> : this.renderCards()}
+        <div className="message">
+          <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
+          
+        </div>
+        <div className="main">
+          <div>
+            <CategoriesListing onClick={handleClickCategory} />
+          </div>
+          <div className="main-card">
+            {loading ? <span>Loading</span> : this.renderCards()}
+          </div>
         </div>
       </div>
     );

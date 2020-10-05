@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 
-class ShoppingCart extends Component {
-
-
+export default class ShoppingCart extends Component {
+  
   render() {
-    return (
-      <div>
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-      </div>
-    );
+    const { cartList, cartQuantity } = this.props;
+    if (cartQuantity > 0) {
+      return (
+        <div>
+          <p data-testid="shopping-cart-product-quantity">
+            {cartQuantity}
+          </p>
+          { cartList.map((product) => (
+            <p data-testid="shopping-cart-product-name" key={ product }>
+              {product}
+            </p>
+          ))}
+        </div>
+      );
+    }
+    return <div data-testid="shopping-cart-empty-message">Seu carrinho está vazio</div>;
   }
 }
-
-export default ShoppingCart

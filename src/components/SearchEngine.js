@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ShoppingCartButton from './ShoppingCartButton';
 
-import '../styles/SearchEngine.css'
+import '../styles/SearchEngine.css';
 
 class SearchEngine extends React.Component {
   constructor() {

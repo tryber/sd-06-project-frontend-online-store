@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ProductsCard from './ProductsCard';
 
-import '../styles/ProductList.css'
+import '../styles/ProductList.css';
 
 export default class ProductList extends Component {
   render() {

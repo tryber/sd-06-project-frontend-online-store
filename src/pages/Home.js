@@ -14,10 +14,12 @@ class Home extends Component {
       products: [],
       isFail: false,
       categoryId: '',
+      productCart: [],
     };
     this.handleInputSearchChange = this.handleInputSearchChange.bind(this);
     this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
     this.handleListCategories = this.handleListCategories.bind(this);
+    this.handleAddCart = this.handleAddCart.bind(this);
   }
 
   async handleClickSearchButton() {
@@ -49,9 +51,12 @@ class Home extends Component {
     });
   }
 
+  handleAddCart(product) {
+    this.setState((prevState) => ({ productCart: [...prevState.productCart, product] }));
+  }
 
   render() {
-    const { products, isFail } = this.state;
+    const { products, isFail, productCart } = this.state;
     return (
       <main>
         <label
@@ -70,13 +75,17 @@ class Home extends Component {
           data-testid="query-button"
           onClick={ this.handleClickSearchButton }
         >
-          SEARCH
+          BUSCAR
         </button>
         <div>
           <ListCategories handleListCategories={ this.handleListCategories } />
         </div>
-        <ShoppingCartButton />
-        <ProductCard products={ products } isFail={ isFail } />
+        <ShoppingCartButton productCart={ productCart } />
+        <ProductCard
+          products={ products }
+          isFail={ isFail }
+          handleAddCart={ this.handleAddCart }
+        />
       </main>
     );
   }

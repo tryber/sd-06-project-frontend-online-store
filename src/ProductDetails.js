@@ -2,15 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ProductEvaluator from './ProductEvaluator';
 
-function ProductDetails(props) {
+function ProductDetails(props, handleCart) {
   const { location: { state: { product } } } = props;
   return (
     <div>
       <p data-testid="product-detail-name">{product.title}</p>
-      <br />
-      {product.price}
-      <ProductEvaluator />
-    </div>);
+      <p>{product.price}</p>
+      <button
+        type="button"
+        name="productsOnCart/add"
+        data-testid="product-detail-add-to-cart"
+        value={ JSON.stringify(product) }
+        onClick={ handleCart }
+        operation="add"
+      >
+        Adicionar ao carrinho
+      </button>
+    </div>
+  );
 }
 
 

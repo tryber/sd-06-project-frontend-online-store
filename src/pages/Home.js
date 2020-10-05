@@ -39,8 +39,7 @@ class Home extends React.Component {
     const { filter } = this.state;
     API
       .getProductsFromCategoryAndQuery(filter, undefined)
-      .then((result) => this.setState({ items: result.results, loadProducts: true })
-      );
+      .then((result) => this.setState({ items: result.results, loadProducts: true }));
   }
 
   filterCategory({ target }) {

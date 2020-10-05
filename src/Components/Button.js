@@ -3,10 +3,10 @@ import propTypes from 'prop-types';
 
 export default class Button extends Component {
   render() {
-    const { onClick, nameButton } = this.props;
+    const { onClick, nameButton, testId } = this.props;
     return (
       <button
-        data-testid="query-button"
+        data-testid={ testId }
         type="button"
         onClick={ onClick }
       >
@@ -19,4 +19,5 @@ export default class Button extends Component {
 Button.propTypes = {
   onClick: propTypes.func.isRequired,
   nameButton: propTypes.string.isRequired,
+  testId: propTypes.string.isRequired,
 };

@@ -25,7 +25,7 @@ class ShoppingCart extends Component {
     if (cart) {
       itens = cart.map((prod) => (
         <div data-testid="product" key={ prod.id }>
-          <h5 data-testid="shopping-cart-product-name">{ prod.title }</h5>
+          <h4 data-testid="shopping-cart-product-name">{ prod.title }</h4>
           <img src={ prod.thumbnail } alt="fotografia do produto" />
           <p><span>{`R$: ${prod.price}`}</span></p>
           <p data-testid="shopping-cart-product-quantity">1</p>

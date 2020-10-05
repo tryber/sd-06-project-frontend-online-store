@@ -25,8 +25,9 @@ class Product extends Component {
             </div>
           </div>
         </Link>
-        <p data-testid="product-add-to-cart">
+        <p>
           <Button
+            testId="product-add-to-cart"
             nameButton="Add to Cart"
             onClick={ onClick }
           />

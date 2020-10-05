@@ -41,7 +41,7 @@ class SearchedItems extends Component {
     );
   }
 }
-
+// Remover
 SearchedItems.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,

@@ -17,9 +17,11 @@ class ProductList extends React.Component {
           { price }
         </p>
         <BrowserRouter>
-          <Route path="/productdetails/:id" render={(id) => <ProductDetails id={id} />} />
+          <Route path="/productdetails/:id" render={ () => <ProductDetails id={id} /> } />
         </BrowserRouter>
-        <Link to={`/productdetails/${id}`}><button data-testid="product-detail-link">Detalhes</button></Link>
+        <Link to={ `/productdetails/${id}` }>
+          <button type="button" data-testid="product-detail-link">Detalhes</button>
+        </Link>
       </div>
     );
   }
@@ -30,6 +32,7 @@ ProductList.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
   }).isRequired,
 };
 

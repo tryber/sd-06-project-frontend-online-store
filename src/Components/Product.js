@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import Button from './Button';
 
 class Product extends Component {
   render() {
-    const { product, search } = this.props;
+    const { product, search, onClick } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
       <Link
@@ -19,7 +20,13 @@ class Product extends Component {
           <div data-testid="product">
             <h5>{ title }</h5>
             <img src={ thumbnail } alt="fotografia do produto" />
-            <span>{`R$: ${price}`}</span>
+            <p><span>{`R$: ${price}`}</span></p>
+            <p data-testid="product-add-to-cart">
+              <Button
+                nameButton="Add to Cart"
+                onClick={ onClick }
+              />
+            </p>
           </div>
         </div>
       </Link>
@@ -28,6 +35,7 @@ class Product extends Component {
 }
 
 Product.propTypes = {
+  onClick: propTypes.func.isRequired,
   search: propTypes.instanceOf(Array).isRequired,
   product: propTypes.shape({
     title: propTypes.string,
@@ -35,7 +43,6 @@ Product.propTypes = {
     price: propTypes.number,
     id: propTypes.string,
   }).isRequired,
-
 };
 
 export default Product;

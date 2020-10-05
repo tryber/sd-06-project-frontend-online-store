@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom';
 import ProductList from './ProductList';
 
 class HomePage extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      cart: [],
+    };
+
+    this.addToCart = this.addToCart.bind(this);
+  }
+
+  addToCart(prod) {
+    const { cart } = this.state;
+    this.setState({ cart: [...cart, prod] });
+  }
+
   render() {
     return (
       <div>
@@ -17,7 +32,7 @@ class HomePage extends Component {
           </Link>
         </header>
         <main>
-          <ProductList />
+          <ProductList onClick={ this.addToCart } />
         </main>
       </div>
     );

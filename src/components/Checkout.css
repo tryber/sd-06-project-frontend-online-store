@@ -1,0 +1,21 @@
+.checkout-review {
+    border: 1px solid black;
+    margin: 30px;
+    padding: 20px;
+}
+
+.checkout-info {
+    border: 1px solid black;
+    margin: 30px;
+    padding: 20px;
+}
+
+.checkout-payment {
+    border: 1px solid black;
+    margin: 30px;
+    padding: 20px;
+}
+
+label{
+    font-weight: 900;
+}

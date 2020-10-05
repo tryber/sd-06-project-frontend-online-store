@@ -100,6 +100,7 @@ class Home extends React.Component {
           {selectedCategoryArray
             .map((product) => <ItemCard key={ product.id } product={ product } />)}
         </div>
+        <Link data-testid="checkout-products" to="/checkout">Finalizar a compra</Link>
       </div>
     );
   }

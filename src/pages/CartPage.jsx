@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart } from '../dados/cart_arrayProductList';
+import { cart, countQuantity } from '../dados/cart_arrayProductList';
 
 class CartPage extends Component {
   constructor() {
@@ -12,6 +12,7 @@ class CartPage extends Component {
   handleClayton({ target }) {
     const id = target.name;
     const value = target.value === '+' ? 1 : -1;
+    console.log(countQuantity());
 
     if (!this.state[id]) {
       this.setState({ [id]: 1 + value });
@@ -33,6 +34,8 @@ class CartPage extends Component {
   }
 
   render() {
+    console.log(countQuantity());
+
     return (
       <div>
         <Link to="/">Back</Link>

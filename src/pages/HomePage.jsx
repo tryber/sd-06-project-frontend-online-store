@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Categories from '../components/Categories';
 import ProductsList from '../components/ProductsList';
 import SearchBar from '../components/SearchBar';
-import { arrayProductList } from '../dados/cart_arrayProductList';
+import { arrayProductList, countQuantity } from '../dados/cart_arrayProductList';
 import * as api from '../services/api';
 
 class HomePage extends Component {
@@ -13,12 +13,13 @@ class HomePage extends Component {
     this.handleStateChange = this.handleStateChange.bind(this);
     this.handleCategoryClick = this.handleCategoryClick.bind(this);
     this.fetchProducts = this.fetchProducts.bind(this);
+    this.counterQuantity = this.counterQuantity.bind(this);
 
     this.state = {
       cards: [],
       query: '',
       categoryID: '',
-      errorMessage: '',
+      countQuantity: countQuantity(),
     };
   }
 
@@ -51,14 +52,21 @@ class HomePage extends Component {
     });
   }
 
+  counterQuantity() {
+    this.setState({ countQuantity: countQuantity() });
+  }
+
   render() {
     const { cards } = this.state;
 
     return (
       <div>
-        <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
+        <div>
+          <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
+          <span data-testid="shopping-cart-size">{countQuantity()}</span>
+        </div>
         <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
-        <ProductsList cards={cards} />
+        <ProductsList cards={cards} counterQuantity={this.counterQuantity} />
         <Categories handleCategoryClick={this.handleCategoryClick} />
       </div>
     );

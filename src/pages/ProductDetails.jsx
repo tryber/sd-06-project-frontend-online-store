@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart, arrayProductList, reviews } from '../dados/cart_arrayProductList';
+import { cart, arrayProductList, reviews, countQuantity } from '../dados/cart_arrayProductList';
 
 class ProductDetails extends Component {
   constructor() {
@@ -12,6 +12,7 @@ class ProductDetails extends Component {
       stars: 0,
       message: '',
       reviewsState: [],
+      countQuantity: countQuantity(),
     };
   }
 
@@ -28,6 +29,7 @@ class ProductDetails extends Component {
 
   AddCart(product) {
     cart.push({...product, quantity: 1});
+    this.setState({ countQuantity: countQuantity() });
   }
 
 
@@ -46,7 +48,10 @@ class ProductDetails extends Component {
     const { title, thumbnail, price, id } = product;
     return (
       <section>
-        <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
+        <div>
+          <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
+          <span data-testid="shopping-cart-size">{this.state.countQuantity}</span>
+        </div>
         <section key={id}>
           <h1 data-testid="product-detail-name">{title}</h1>
           <img src={thumbnail} />

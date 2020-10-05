@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart } from '../dados/cart_arrayProductList';
+import { cart, countQuantity } from '../dados/cart_arrayProductList';
 
 
 class ProductsList extends Component {
@@ -12,6 +12,7 @@ class ProductsList extends Component {
   handleAddCart({ target }) {
     const product = this.props.cards.find(element => element.id === target.id);
     cart.push({...product, quantity: 1});
+    this.props.counterQuantity();
   }
 
   render() {
@@ -22,6 +23,8 @@ class ProductsList extends Component {
         <h1 data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</h1>
       );
     }
+
+    console.log(countQuantity());
 
     return (
       <section>
@@ -44,7 +47,7 @@ class ProductsList extends Component {
               >Adicionar ao cart</button>
             </div>
           );
-        })};
+        })}
       </section>
     );
   }

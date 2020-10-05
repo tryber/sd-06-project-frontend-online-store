@@ -54,6 +54,7 @@ class ProductDetails extends React.Component {
           {quantity}
           <span className="increase-quantity"> + </span>
         </div>
+        <textarea data-testid="product-detail-evaluation" />
         <div>{price}</div>
         <img src={ thumbnail } alt="product" />
       </div>

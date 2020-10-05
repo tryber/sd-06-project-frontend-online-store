@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Cart from '../services/cart';
 
 class ShoppingCart extends React.Component {
@@ -75,6 +76,9 @@ class ShoppingCart extends React.Component {
       produtos.length < 1
         ? (
           <div>
+            <Link to="/">
+              <button type="button">Página Inicial</button>
+            </Link>
             <h1>Carrinho de Compras</h1>
             <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           </div>
@@ -82,6 +86,9 @@ class ShoppingCart extends React.Component {
         : (
           <div>
             <div>
+              <Link to="/">
+                <button type="button">Página Inicial</button>
+              </Link>
               <h1>Carrinho de Compras</h1>
               <button
                 onClick={ () => this.setState({ checkout: true }) }

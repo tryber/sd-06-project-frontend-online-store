@@ -8,13 +8,8 @@ class Cart extends React.Component {
     const zero = 0;
     const cartVolume = this.sumAllCartItemsQuantity(cartList);
     if (cartVolume > zero) {
-      this.updateCartListInLocalStorage(cartVolume);
+      localStorage.setItem('cartlist', JSON.stringify(cartList));
     }
-  }
-
-  updateCartListInLocalStorage() {
-    const { cartList } = this.props;
-    localStorage.setItem('cartlist', JSON.stringify(cartList));
   }
 
   sumAllCartItemsQuantity(cartList) {

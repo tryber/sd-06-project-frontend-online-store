@@ -10,6 +10,9 @@ class ProductDetails extends React.Component {
     const { location: { state: { product } } } = this.props;
     return (
       <div>
+        <Link to="/">
+          <button type="button">Página Inicial</button>
+        </Link>
         <Link to="/carrinho">
           <CartButton />
         </Link>

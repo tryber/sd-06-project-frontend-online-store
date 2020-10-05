@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart, countQuantity } from '../dados/cart_arrayProductList';
+import { cart } from '../dados/cart_arrayProductList';
 
 class CartPage extends Component {
   constructor() {
@@ -12,14 +12,16 @@ class CartPage extends Component {
   handleClayton({ target }) {
     const id = target.name;
     const value = target.value === '+' ? 1 : -1;
-    console.log(countQuantity());
+    const product = cart.find((product) => product.id === id);
 
-    if (!this.state[id]) {
-      this.setState({ [id]: 1 + value });
-      this.catQuantity(value, id);
-    } else if (this.state[id] !== 1) {
-      this.setState((stateAntigo) => ({ [id]: stateAntigo[id] + value }));
-      this.catQuantity(value, id);
+    if (product.quantity < product.available_quantity) {
+      if (!this.state[id]) {
+        this.setState({ [id]: 1 + value });
+        this.catQuantity(value, id);
+      } else if (this.state[id] !== 1) {
+        this.setState((stateAntigo) => ({ [id]: stateAntigo[id] + value }));
+        this.catQuantity(value, id);
+      }
     }
   }
 
@@ -34,7 +36,7 @@ class CartPage extends Component {
   }
 
   render() {
-    console.log(countQuantity());
+    console.log(cart);
 
     return (
       <div>

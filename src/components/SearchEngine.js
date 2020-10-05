@@ -1,56 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import FoundProducts from './FoundProducts';
 import ShoppingCartButton from './ShoppingCartButton';
-
-import * as api from '../services/api';
 
 class SearchEngine extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      foundItems: false,
-      categoryInput: '',
       queryInput: '',
-      products: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange({ target }) {
-    this.setState({ queryInput: target.value });
-  }
-
-  async handleClick() {
-    const { categoryInput, queryInput } = this.state;
-    this.setState({ foundItems: true }, async () => {
-      // Fetch products from API
-      const productsFound = await api.getProductsFromCategoryAndQuery(
-        categoryInput,
-        queryInput,
-      );
-
-      // set foundItems to false, if there are no products found
-      if (Object.keys(productsFound).length < 1) {
-        this.setState({
-          foundItems: false,
-          products: {},
-        });
-      } else {
-        this.setState({
-          products: productsFound,
-        });
-      }
-    });
+    this.setState({ [target.name]: target.value });
   }
 
   render() {
-    const { foundItems, queryInput, products } = this.state;
-    // had to do this to bypass lint rule (no-magic-number).. go figure..
-    const zero = 0;
+    const { onClick, sendQueryInputToHome } = this.props;
+    const { queryInput } = this.state;
     return (
       <div>
         <input
@@ -58,37 +28,27 @@ class SearchEngine extends React.Component {
           type="text"
           name="queryInput"
           value={ queryInput }
-          onChange={ this.handleChange }
+          onChange={ (event) => {
+            this.handleChange(event);
+            sendQueryInputToHome(queryInput);
+          } }
         />
-        <ShoppingCartButton />
         <button
           data-testid="query-button"
           type="button"
-          onClick={ this.handleClick }
+          onClick={ () => onClick(this.state) }
         >
           Pesquisar
         </button>
-        {/* if there is not anything in query input, render this block */}
-        {queryInput === '' && (
-          <p data-testid="home-initial-message">
-            Digite algum termo de pesquisa ou escolha uma categoria.
-          </p>
-        )}
-        {/* if there are no product found from API, render this block */}
-        {queryInput !== '' && !foundItems && (
-          <p data-testid="home-initial-message">
-            Nenhum produto foi encontrado
-          </p>
-        )}
-        {/* if there are products, render this block */}
-        {Object.keys(products).length !== zero && (
-          products.results.map((prod) => (
-            <FoundProducts key={ prod.title } product={ prod } />
-          ))
-        )}
+        <ShoppingCartButton />
       </div>
     );
   }
 }
+
+SearchEngine.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  sendQueryInputToHome: PropTypes.func.isRequired,
+};
 
 export default SearchEngine;

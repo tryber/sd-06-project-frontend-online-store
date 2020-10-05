@@ -23,7 +23,6 @@ class SearchEngine extends React.Component {
   render() {
     const { onClick, sendQueryInputToHome } = this.props;
     const { queryInput } = this.state;
-    // had to do this to bypass lint rule (no-magic-number).. go figure..
     return (
       <div className="search-engine-container">
         <div className="search-engine-top">
@@ -36,9 +35,10 @@ class SearchEngine extends React.Component {
               this.handleChange(event);
               sendQueryInputToHome(queryInput);
             } }
-          />
+           />
           <ShoppingCartButton />
         </div>
+
         <button
           data-testid="query-button"
           type="button"
@@ -47,6 +47,7 @@ class SearchEngine extends React.Component {
         >
           Pesquisar
         </button>
+        <ShoppingCartButton />
       </div>
     );
   }

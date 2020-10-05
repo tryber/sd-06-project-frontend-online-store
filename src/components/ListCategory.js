@@ -28,9 +28,9 @@ class ListCategory extends Component {
   handleClick({ target }) {
     const { value } = target;
     const { onClick } = this.props;
-    const { categorySelected } = this.state;
 
     this.setState({ categorySelected: value }, () => {
+      const { categorySelected } = this.state;
       onClick(categorySelected);
     });
   }

@@ -62,7 +62,11 @@ class Home extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
         <CategoryList handleCategory={ this.handleCategory } />
-        <ProductList products={ ProductArray } addFromList={ addToCart } query={ inputQuery } />
+        <ProductList
+          products={ ProductArray }
+          addFromList={ addToCart }
+          query={ inputQuery }
+        />
         <button
           data-testid="shopping-cart-button"
           type="button"

@@ -1,79 +1,149 @@
 import React from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import './Checkout.css'
+import { Link } from 'react-router-dom';
+import './Checkout.css';
 
 class Checkout extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      fullname: '',
+      cpf: '',
+      email: '',
+      phone: '',
+      cep: '',
+      address: '',
+      complement: '',
+      number: '',
+      city: '',
+    };
+
+    this.handleChanges = this.handleChanges.bind(this);
+  }
+
+
+  handleChanges({ target }) {
+    const { name, value } = target;
+    this.setState({ [name]: value });
+  }
 
   render() {
+    const {
+      fullname,
+      cpf,
+      email,
+      phone,
+      cep,
+      address,
+      complement,
+      number,
+      city } = this.state;
 
     return (
       <div>
         <Link to="/">Voltar</Link>
         <div className="checkout-review">
-          <label>Revise seus produtos</label>
           <section>
+            Revise seus produtos
             <li>Produto 1</li>
             <li>Produto 2</li>
             <li>Produto 3</li>
           </section>
-          <label>Total: </label>
+          <span>Total: </span>
         </div>
         <div className="checkout-info">
-          <label>Informações do comprador</label>
+          Informações do comprador
           <form>
             <input
+              onChange={ this.handleChanges }
+              name="fullname"
+              value={ fullname }
               data-testid="checkout-fullname"
               type="text"
-              placeholder="Nome Completo" />
+              placeholder="Nome Completo"
+            />
             <input
+              onChange={ this.handleChanges }
+              name="cpf"
+              value={ cpf }
               data-testid="checkout-cpf"
-              type="number"
-              placeholder="CPF" />
+              type="text"
+              placeholder="CPF"
+            />
             <input
+              onChange={ this.handleChanges }
+              name="email"
+              value={ email }
               data-testid="checkout-email"
               type="text"
-              placeholder="Email" />
+              placeholder="Email"
+            />
             <input
+              onChange={ this.handleChanges }
+              name="phone"
+              value={ phone }
               data-testid="checkout-phone"
-              type="number"
-              placeholder="Telefone" />
+              type="text"
+              placeholder="Telefone"
+            />
             <input
+              onChange={ this.handleChanges }
+              name="cep"
+              value={ cep }
               data-testid="checkout-cep"
-              type="number"
-              placeholder="CEP" />
+              type="text"
+              placeholder="CEP"
+            />
             <input
+              onChange={ this.handleChanges }
+              name="address"
+              value={ address }
               data-testid="checkout-address"
               type="text"
-              placeholder="Endereço" />
+              placeholder="Endereço"
+            />
             <input
+              onChange={ this.handleChanges }
+              name="complement"
+              value={ complement }
               type="text"
-              placeholder="Complemento" />
+              placeholder="Complemento"
+            />
             <input
-              type="number"
-              placeholder="Número" />
-            <input
+              onChange={ this.handleChanges }
+              name="number"
+              value={ number }
               type="text"
-              placeholder="Cidade" />
+              placeholder="Número"
+            />
+            <input
+              onChange={ this.handleChanges }
+              name="city"
+              value={ city }
+              type="text"
+              placeholder="Cidade"
+            />
             <select
-              placeholder="Estado">
+              placeholder="Estado"
+            >
               <option>Estado</option>
             </select>
           </form>
         </div>
         <div className="checkout-payment">
-          <label>Método de pagamento</label>
+          Método de pagamento
           <section>
-            <label>Boleto</label>
             <input type="radio" />
-            <br /><br />
-            <label>Cartão de Crédito</label>
-            <br />
-            <input type="radio" />Visa
-            <input type="radio" />MasterCard
-            <input type="radio" />Elo
-        </section>
+            Boleto
+            <input type="radio" />
+            Visa
+            <input type="radio" />
+            MasterCard
+            <input type="radio" />
+            Elo
+          </section>
         </div>
-        <button type="button" onClick={<Redirect to="/" />}>Comprar</button>
+        <button type="button">Comprar</button>
       </div>
     );
   }

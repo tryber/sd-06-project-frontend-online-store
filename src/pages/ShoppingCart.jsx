@@ -4,10 +4,12 @@ import ItemShoppingCart from './ItemShoppingCart'
 
 
 class ShoppingCart extends React.Component {
-  constructor(){
+  constructor() {
     super();
 
     this.removeItem = this.removeItem.bind(this);
+    this.showCart = this.showCart.bind(this);
+    this.emptyCart = this.emptyCart.bind(this);
 
     this.state = {
       products: [],
@@ -17,31 +19,41 @@ class ShoppingCart extends React.Component {
 
   componentDidMount() {
     const cartProducts = JSON.parse(localStorage.getItem('myCartList') || '[]');
-    const total = cartProducts.map((item) => (item.quantity * item.price))
-      .reduce((result, item) => result + item);
-
-    this.setState({ products: cartProducts, totalCart: total })
+    if (cartProducts.length > 0) {
+      const total = cartProducts.map((item) => (item.quantity * item.price))
+        .reduce((result, item) => result + item);
+      this.setState({ products: cartProducts, totalCart: total })
+    }
   }
-  
-  removeItem(id){
+
+  removeItem(id) {
     const cartProducts = JSON.parse(localStorage.getItem('myCartList'));
     const cartProductsFiltered = cartProducts.filter((item) => item.id !== id);
     localStorage.setItem('myCartList', JSON.stringify(cartProductsFiltered));
     this.setState({ products: cartProductsFiltered })
   }
 
-  render () {
+  showCart(item) {
+    return (
+      <ItemShoppingCart key={item.id} product={item} remove={this.removeItem} />
+    )
+  }
+
+  emptyCart() {
+    return (
+      <h1 data-testid="shopping-cart-empty-message">
+        Seu carrinho está vazio
+      </h1>
+    )
+  }
+
+  render() {
     const { products, totalCart } = this.state;
     console.log(totalCart);
     return (
       <div>
-        <h1 data-testid="shopping-cart-empty-message">
-            Seu carrinho está vazio
-        </h1>
         <div>
-          {products.length > 0 ?
-            products.map((item) =>
-              <ItemShoppingCart key={item.id} product={item} remove={this.removeItem} />) : null}
+          {products.length > 0 ? products.map((item) => this.showCart(item)) : this.emptyCart() }
         </div>
         <div>
           <h3>{`Total R$ ${(totalCart).toFixed(2)}`}</h3>

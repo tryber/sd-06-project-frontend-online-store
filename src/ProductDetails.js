@@ -28,6 +28,16 @@ class ProductDetails extends React.Component {
             </ul>
           </div>
         </div>
+        <div>
+          <form>
+            <input placeholder="Email" />
+            <input type="number" min={ 0 } max={ 5 } step={ 1 } />
+            <br />
+            <input placeholder="Mensagem (opcional)" />
+            <br />
+            <button type="button">Avaliar</button>
+          </form>
+        </div>
       </div>
     );
   }

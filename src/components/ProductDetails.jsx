@@ -6,9 +6,14 @@ export default class ProductDetails extends Component {
   constructor() {
     super();
     this.fetchProduct = this.fetchProduct.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       loading: false,
       product: {},
+      grade: 1,
+      comments: '',
+      reviews: [],
     };
   }
 
@@ -34,6 +39,20 @@ export default class ProductDetails extends Component {
     )
   }
 
+  handleChange(e) {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    })
+  }
+
+  onSubmit(e) {
+    const { grade, comments } = this.state;
+    this.setState((state, props) => ({
+      reviews: [...state.reviews, { grade, comments }]
+    }))
+  }
+
   renderDetails() {
     const { id, title, price, thumbnail } = this.state.product;
     return (
@@ -52,6 +71,32 @@ export default class ProductDetails extends Component {
 
   }
 
+  renderForm() {
+    return (
+      <div>
+        <label>
+          Nota:
+          <select name="grade" onChange={ this.handleChange }>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </label>
+        <label>
+          Comentario:
+          <textarea
+            onChange={ this.handleChange }
+            name="comments"
+            placeholder="Opcional"
+            data-testid="product-detail-evaluation"
+          />
+        </label>
+        <button onClick={ this.onSubmit }>Enviar</button>
+      </div>
+    )
+  }
 
   render() {
     return (
@@ -59,6 +104,13 @@ export default class ProductDetails extends Component {
         <Link to="/" >Voltar</Link>
         {this.state.loading ? <span>Loading</span> : this.renderDetails() }
         <Link to="/ShoppingCart" >Carrinho</Link>
+        {this.renderForm() }
+        {this.state.reviews.map((review) => (
+          <div key={ review.comments }>
+            <p>{ `Nota: ${review.grade}` }</p>
+            <p>{ `Comentario: ${review.comments}` }</p>
+          </div>
+        )) }
       </div>
     )
   }

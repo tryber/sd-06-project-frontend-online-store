@@ -21,7 +21,7 @@ class ShoppingCart extends React.Component {
   increaseButton() {
     return (
       <button type="button" data-testid="product-increase-quantity">
-        +
+        +++
       </button>
     );
   }
@@ -29,7 +29,7 @@ class ShoppingCart extends React.Component {
   decreaseButton() {
     return (
       <button type="button" data-testid="product-decreate-quantity">
-        -
+        ---
       </button>
     );
   }

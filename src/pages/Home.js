@@ -5,7 +5,7 @@ import ProductList from '../components/ProductList';
 
 import SearchEngine from '../components/SearchEngine';
 
-import './styles/Home.css';
+import '../styles/Home.css';
 
 import * as api from '../services/api';
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import FoundProducts from './FoundProducts';
+import ProductsCard from './ProductsCard';
 
 export default class ProductList extends Component {
   render() {
@@ -23,8 +23,8 @@ export default class ProductList extends Component {
         )}
         {/* if there are products, render this block */}
         {Object.keys(products).length !== zero
-          && products.results.map((product) => (
-            <FoundProducts key={ product.title } product={ product } />
+          && products.results.map((prod) => (
+            <ProductsCard key={ prod.title } product={ prod } />
           ))}
       </div>
     );

@@ -7,12 +7,12 @@ import '../styles/ProductList.css';
 
 export default class ProductList extends Component {
   render() {
-    const { queryInput, foundItems, products } = this.props;
+    const { queryInput, foundItems, products, categoryInput } = this.props;
     const zero = 0;
     return (
       <div className="product-list">
         {/* if there is not anything in query input, render this block */}
-        {queryInput === '' && (
+        {queryInput === '' && categoryInput === '' && (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>

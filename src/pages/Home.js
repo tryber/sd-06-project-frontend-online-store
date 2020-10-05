@@ -68,7 +68,7 @@ class Home extends Component {
   }
 
   render() {
-    const { queryInput, foundItems, products } = this.state;
+    const { queryInput, foundItems, products, categoryInput } = this.state;
     return (
       <div className="home-page">
         <ListCategory onClick={ this.handleClickCategories } />
@@ -82,6 +82,7 @@ class Home extends Component {
               queryInput={ queryInput }
               foundItems={ foundItems }
               products={ products }
+              categoryInput={ categoryInput }
             />
           </div>
         </div>

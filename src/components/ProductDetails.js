@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Rater from 'react-rater'
-import 'react-rater/lib/react-rater.css'
+import Rater from 'react-rater';
+import 'react-rater/lib/react-rater.css';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -39,21 +39,15 @@ class ProductDetails extends React.Component {
           <hr />
           <h2>Avaliações</h2>
           <form>
-            <Rater total={5} rating={0} />
+            <Rater total={ 5 } rating={ 0 } />
             <br />
-            <input 
-              type="text" 
-              placeholder="Email" 
-              required>
-            </input>
+            <textarea
+              data-testid="product-detail-evaluation"
+              type="text"
+              placeholder="Mensagem (opcional)"
+            />
             <br />
-            <textarea 
-              data-testid="product-detail-evaluation" 
-              type="text" 
-              placeholder="Mensagem (opcional)">
-            </textarea>
-            <br />
-            <button>Avaliar</button>
+            <button type="button">Avaliar</button>
           </form>
         </div>
       </div>

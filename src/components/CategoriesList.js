@@ -50,7 +50,6 @@ class CategoriesList extends React.Component {
               <button
                 type="button"
                 onClick={ this.handleClick }
-                onKeyDown={ this.handleClick }
                 key={ category.id }
                 id={ category.id }
                 data-testid="category"

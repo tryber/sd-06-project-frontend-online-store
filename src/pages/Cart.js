@@ -17,7 +17,7 @@ class Cart extends React.Component {
 
   changeState() {
     const { location: { state: { data } } } = this.props;
-    if (data !== undefined) {
+    if (Object.keys(data).length >= 1) {
       this.setState({
         loadMessage: false,
       });

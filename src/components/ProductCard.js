@@ -10,15 +10,28 @@ class ProductCard extends Component {
     return (
       <Link
         data-testid="product-detail-link"
-        to={ { pathname: `/ProductDetails/${id}`, state: product } }
+        to={{ pathname: `/ProductDetails/${id}`, state: product }}
       >
-        <section key={ title } data-testid="product" className="product-content">
+        <section key={title} data-testid="product" className="product-content">
           <div className="img-div">
-            <img className="img" src={ thumbnail } alt={ title } />
+            <img className="img" src={thumbnail} alt={title} />
           </div>
           <div className="product-details-div">
-            <p>{ title }</p>
+            <p>{title}</p>
             <p className="price">{`R$ ${price}`}</p>
+          </div>
+          <div className="addToCart">
+            <Link
+              data-testid="product-add-to-cart"
+              to={ { pathname: '/ShoppingCart', state: product } }
+            >
+              <button
+                type="button"
+                data-testid="shopping-cart-button"
+              >
+                Adicionar ao Carrinho
+              </button>
+            </Link>
           </div>
         </section>
       </Link>

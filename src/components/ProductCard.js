@@ -21,7 +21,7 @@ class ProductCard extends React.Component {
           data-testid="product-add-to-cart"
           onClick={ () => addToCart(product) }
         >
-          add to card
+          add to cart
         </button>
       </div>
     );

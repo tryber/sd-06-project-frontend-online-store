@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CartAddButtons from './CartAddButton';
 class SearchedItems extends Component {
   render() {
     const { item: { id, title, thumbnail, price }, query } = this.props;

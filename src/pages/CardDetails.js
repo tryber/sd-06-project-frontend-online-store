@@ -60,7 +60,7 @@ class CardDetails extends React.Component {
         <img src={ thumbnail } alt="product thumbnail" />
         <p>{ title }</p>
         <p>{ price }</p>
-        <CartAddButtons handleAddToCartButton={this.handleAddToCartButton}/>
+        <CartAddButtons handleAddToCartButton={this.handleAddToCartButton} />
       </div>
     );
   }

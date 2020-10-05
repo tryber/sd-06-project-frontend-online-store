@@ -8,7 +8,10 @@ class ListCard extends Component {
     const { title, thumbnail, price, id } = iten;
     return (
       <div data-testid="product">
-        <Link to={ { pathname: `/ProductDetails/${id}`, state: { product: iten } } } data-testid="product-detail-link">
+        <Link
+          to={ { pathname: `/ProductDetails/${id}`, state: { product: iten } } }
+          data-testid="product-detail-link"
+        >
           <h1>{title}</h1>
           <span>{price}</span>
           <img src={ thumbnail } alt=" Product" />

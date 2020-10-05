@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import imgCart from '../img/imgCart.jpg';
 
 class ShoppingCart extends React.Component {
@@ -66,52 +67,60 @@ class ShoppingCart extends React.Component {
     }
 
     return (
-      items.map((item) => {
-        const { id, title, thumbnail, price } = item;
+      <div>
+        {items.map((item) => {
+          const { id, title, thumbnail, price } = item;
 
-        return (
-          <div key={ id }>
-            <h3 data-testid="shopping-cart-product-name">{ title }</h3>
-            <img alt="Product in the cart" src={ thumbnail } />
-            <div>
+          return (
+            <div key={ id }>
+              <h3 data-testid="shopping-cart-product-name">{ title }</h3>
+              <img alt="Product in the cart" src={ thumbnail } />
+              <div>
+                <button
+                  data-testid="product-increase-quantity"
+                  type="button"
+                  onClick={ () => this.handleIncreaseQuantity(id) }
+                >
+                  {' '}
+                  +
+                </button>
+                <p
+                  data-testid="shopping-cart-product-quantity"
+                >
+                  { addedItems[`${id}`] }
+                </p>
+
+                <button
+                  data-testid="product-decrease-quantity"
+                  type="button"
+                  onClick={ () => this.handleDecreaseQuantity(id) }
+                >
+                  {' '}
+                  -
+                </button>
+              </div>
+              <div>
+                R$:
+                {' '}
+                { price * addedItems[`${id}`] }
+              </div>
               <button
-                data-testid="product-increase-quantity"
                 type="button"
-                onClick={ () => this.handleIncreaseQuantity(id) }
+                onClick={ () => this.removeItem(id) }
               >
                 {' '}
-                +
-              </button>
-              <p data-testid="shopping-cart-product-quantity">{ addedItems[`${id}`] }</p>
-
-              <button
-                data-testid="product-decrease-quantity"
-                type="button"
-                onClick={ () => this.handleDecreaseQuantity(id) }
-              >
-                {' '}
-                -
+                X
               </button>
             </div>
-            <div>
-              R$:
-              {' '}
-              { price * addedItems[`${id}`] }
-            </div>
-            <button
-              type="button"
-              onClick={ () => this.removeItem(id) }
-            >
-              {' '}
-              X
-            </button>
-            <span>
-              Valor Total da Compra R$:
-            </span>
-            <button type="button">Finalizar Compra</button>
-          </div>
-        );
-      })
+          );
+        })}
+        <span>Valor Total da Compra R$:</span>
+        <Link to="/checkout">
+          <button type="button" data-testid="checkout-products">
+            Finalizar Compra
+          </button>
+        </Link>
+      </div>
     );
   }
 }

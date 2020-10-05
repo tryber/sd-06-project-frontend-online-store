@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CartBtn from '../services/CartBtn';
 import ShoppingList from '../components/ShoppingList';
 
 
 class ShoppingCart extends React.Component {
   render() {
-    const { addToCart, cartProducts } = this.props;
+    const { addToCart, cartProducts, cartQuantity } = this.props;
 
     return (
       <div>
@@ -14,10 +15,17 @@ class ShoppingCart extends React.Component {
         <ShoppingList
           addToCart={ addToCart }
           cartProducts={ cartProducts }
+          cartQuantity={ cartQuantity }
         />
       </div>
     );
   }
 }
+
+ShoppingCart.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+  cartProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cartQuantity: PropTypes.number.isRequired,
+};
 
 export default ShoppingCart;

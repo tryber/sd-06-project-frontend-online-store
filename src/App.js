@@ -9,7 +9,7 @@ import ShoppingCart from './pages/ShoppingCart';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cartProducts: [] };
+    this.state = { cartProducts: [], cartQuantity: 0 };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
   }
@@ -17,12 +17,13 @@ class App extends React.Component {
   handleAddProduct(newProduct) {
     this.setState((state) => ({
       cartProducts: state.cartProducts.concat(newProduct),
+      cartQuantity: state.cartQuantity + 1,
     }
     ));
   }
 
   render() {
-    const { cartProducts } = this.state;
+    const { cartProducts, cartQuantity } = this.state;
 
     return (
       <BrowserRouter>
@@ -31,15 +32,26 @@ class App extends React.Component {
           <Route
             exact
             path="/"
-            render={ (props) => <Home { ...props } addToCart={ this.handleAddProduct } /> }
+            render={ (props) => (<Home
+              { ...props }
+              addToCart={ this.handleAddProduct }
+            />) }
           />
           <Route
             path="/ProductDetails/:id"
-            render={ (props) => <ProductDetails { ...props } cartProducts={ cartProducts } /> }
+            render={ (props) => (<ProductDetails
+              { ...props }
+              cartProducts={ cartProducts }
+            />) }
           />
           <Route
             path="/ShoppingCart"
-            render={ (props) => <ShoppingCart { ...props } addToCart={ this.handleAddProduct } cartProducts={ cartProducts } /> }
+            render={ (props) => (<ShoppingCart
+              { ...props }
+              addToCart={ this.handleAddProduct }
+              cartProducts={ cartProducts }
+              cartQuantity={ cartQuantity }
+            />) }
           />
         </Switch>
       </BrowserRouter>

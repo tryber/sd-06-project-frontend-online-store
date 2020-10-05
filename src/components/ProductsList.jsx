@@ -11,7 +11,7 @@ class ProductsList extends Component {
 
   handleAddCart({ target }) {
     const product = this.props.cards.find(element => element.id === target.id);
-    cart.push(product);
+    cart.push({...product, quantity: 1});
   }
 
   render() {

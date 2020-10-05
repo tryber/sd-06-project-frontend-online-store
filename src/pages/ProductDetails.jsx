@@ -27,7 +27,7 @@ class ProductDetails extends Component {
   }
 
   AddCart(product) {
-    cart.push(product);
+    cart.push({...product, quantity: 1});
   }
 
 

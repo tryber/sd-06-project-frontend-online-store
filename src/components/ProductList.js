@@ -20,7 +20,7 @@ class ProductList extends React.Component {
             to={ { pathname: `/products/${items.id}`, state: { items } } }
             details={ items }
           >
-            <button type="button">oi</button>
+            <button data-testid="product-add-to-cart" type="button">Add to card</button>
           </Link>
         </Route>
       </div>

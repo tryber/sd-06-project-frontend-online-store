@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CartBtn from '../services/CartBtn';
+import Evaluations from '../components/Evaluations';
 
 class ProductDetails extends React.Component {
   render() {
-    const { location: { state: { title, thumbnail, attibutes } } } = this.product;
+    const { location: { state: { title, thumbnail, attibutes, id } } } = this.props;
     return (
       <div>
         <div>
@@ -22,6 +23,7 @@ class ProductDetails extends React.Component {
         </div>
         <div>
           <CartBtn />
+          <Evaluations productId={ id } />
         </div>
       </div>
     );
@@ -34,6 +36,7 @@ ProductDetails.propTypes = {
       title: PropTypes.string.isRequired,
       thumbnail: PropTypes.string.isRequired,
       attibutes: PropTypes.arrayOf(PropTypes.object).isRequired,
+      id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+
 class ProductList extends React.Component {
   render() {
     const { list } = this.props;

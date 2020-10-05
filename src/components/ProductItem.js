@@ -3,17 +3,35 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ProductItem extends React.Component {
+  constructor() {
+    super();
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    const { product, handleClick } = this.props;
+    const cartInfo = product;
+    handleClick(cartInfo);
+  }
+
   render() {
-    const { product, query } = this.props;
+    const { product } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
       <div data-testid="product">
         <p>{title}</p>
         <img alt="Product" src={ thumbnail } />
         <p>{price}</p>
-        <Link to={ `productdetails/${query}/${id}` } data-testid="product-detail-link">
+        <Link to={ `productdetails/${id}` } data-testid="product-detail-link">
           Ver Detalhes
         </Link>
+        <button
+          type="button"
+          data-testid="product-add-to-cart"
+          onClick={ this.onClick }
+        >
+          Add to cart
+        </button>
       </div>
     );
   }
@@ -26,6 +44,7 @@ ProductItem.propTypes = {
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
   }).isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default ProductItem;

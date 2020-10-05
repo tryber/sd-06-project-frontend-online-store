@@ -11,9 +11,11 @@ class Home extends React.Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handleCategory = this.handleCategory.bind(this);
     this.state = {
       ProductArray: [],
-      inputQuery: 'query',
+      inputQuery: '',
+      idCategory: '',
     };
   }
 
@@ -23,8 +25,8 @@ class Home extends React.Component {
   }
 
   async handleSearch() {
-    const { inputQuery } = this.state;
-    const resultApi = await api.getProductsFromCategoryAndQuery('categoryId', inputQuery);
+    const { inputQuery, idCategory } = this.state;
+    const resultApi = await api.getProductsFromCategoryAndQuery(idCategory, inputQuery);
     this.setState({ ProductArray: resultApi.results });
   }
 
@@ -32,8 +34,15 @@ class Home extends React.Component {
     this.setState({ inputQuery: target.value });
   }
 
+  async handleCategory({ target }) {
+    const IdTarget = target.id;
+    await this.setState({ idCategory: IdTarget });
+    await this.handleSearch();
+  }
+
   render() {
     const { ProductArray, inputQuery } = this.state;
+    const { addToCart } = this.props;
     return (
       <div>
         <input
@@ -52,8 +61,8 @@ class Home extends React.Component {
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
-        <CategoryList />
-        <ProductList products={ ProductArray } query={ inputQuery } />
+        <CategoryList handleCategory={ this.handleCategory } />
+        <ProductList products={ ProductArray } addFromList={ addToCart } query={ inputQuery } />
         <button
           data-testid="shopping-cart-button"
           type="button"
@@ -66,8 +75,11 @@ class Home extends React.Component {
   }
 }
 
-Home.propTypes = { history: PropTypes.shape({
-  push: PropTypes.func.isRequired,
-}).isRequired };
+Home.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Home;

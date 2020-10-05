@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+function isFreeShipping(freeShipping) {
+  if (freeShipping) {
+    return (<p data-testid="free-shipping">Frete Gratis</p>);
+  }
+}
+
 function ProductDetails(props, handleCart, productsOnCart) {
   const { location: { state: { product } } } = props;
   const { id, title, price } = product;
@@ -16,6 +22,7 @@ function ProductDetails(props, handleCart, productsOnCart) {
     <div>
       <p data-testid="product-detail-name">{title}</p>
       <p>{price}</p>
+      {isFreeShipping(product.shipping.free_shipping)}
       <button
         type="button"
         name="productsOnCart/add"

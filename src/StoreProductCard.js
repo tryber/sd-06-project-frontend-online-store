@@ -2,6 +2,12 @@ import React from 'react';
 import './StoreProductCard.css';
 import { Link } from 'react-router-dom';
 
+function isFreeShipping(freeShipping) {
+  if (freeShipping) {
+    return (<p data-testid="free-shipping">Frete Gratis</p>);
+  }
+}
+
 function StoreProductCard(product, handleCart, productsOnCart) {
   const { price, title, thumbnail, id } = product;
   const productIsOnCart = productsOnCart.find((cartProduct) => cartProduct.id === id);
@@ -18,6 +24,7 @@ function StoreProductCard(product, handleCart, productsOnCart) {
       <div className="product-data">
         <p className="title">{title}</p>
         <p className="price">{`R$: ${price}`}</p>
+        {isFreeShipping(product.shipping.free_shipping)}
         <div data-testid="product-detail-name">
           <Link
             to={ { pathname: `/product-details/${id}`,

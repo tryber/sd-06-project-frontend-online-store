@@ -17,7 +17,7 @@ class ProductList extends React.Component {
           { price }
         </p>
         <BrowserRouter>
-          <Route path="/productdetails/:id" render={ () => <ProductDetails id={id} /> } />
+          <Route path="/productdetails/:id" render={ () => <ProductDetails id={ id } /> } />
         </BrowserRouter>
         <Link to={ `/productdetails/${id}` }>
           <button type="button" data-testid="product-detail-link">Detalhes</button>

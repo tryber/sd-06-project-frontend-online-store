@@ -7,27 +7,34 @@ import goHome from '../img/back.png';
 import empytCart from '../img/empty-cart.png';
 
 class ShoppingCart extends Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
-      products: props.location.state,
+      products: [],
     }
+
+    this.buildCartFromStorage = this.buildCartFromStorage.bind(this);
   }
 
+  buildCartFromStorage() {
+    if (localStorage.getItem('cart')) {
+      const save = JSON.parse(localStorage.getItem('cart'));
+      this.setState({ products: save });
+    } 
+  }
+    
+  componentDidMount() {
+    this.buildCartFromStorage()
+  }
+    
   render() {
-    const { cartProducts: products } = this.state.products;
+    const { products } = this.state;
 
     return (
       <div>
         <div className="icon-box">
-          <Link 
-            to={
-              {
-                pathname: '/',
-                state: { products },
-              }
-            }>
+          <Link to="/">
             <img src={ goHome } alt="imagem voltar para home" />
           </Link>
           <Link to="/cart">

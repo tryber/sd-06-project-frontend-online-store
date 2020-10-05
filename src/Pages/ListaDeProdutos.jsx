@@ -41,6 +41,7 @@ class ListaDeProdutos extends Component {
       categoryId,
       search
     );
+    
     const { results } = await response;
     await this.setState({
       produtos: results,
@@ -56,6 +57,7 @@ class ListaDeProdutos extends Component {
     const zero = 0;
     // console.log(search === '')
     return (
+
       <div className='wrapper'>
         <aside>
           <ListaCategorias changeSearch={ this.changeSearch } />

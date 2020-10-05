@@ -13,6 +13,7 @@ class DetalhesDoProduto extends React.Component {
         <Link to="/">Voltar</Link>
       </div>
     )
+
   }
 }
 

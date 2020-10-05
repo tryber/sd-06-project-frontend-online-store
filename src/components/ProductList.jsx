@@ -8,10 +8,10 @@ export default class ProductList extends Component {
       <div className="product-list">
         {products.map((element) => (
           <ProductCard product={element} key={element.id}
-            updateCart={updateCart}
-          />
+          updateCart={updateCart}
+        />
         ))}
-      </div >
+      </div>
     );
   }
 }

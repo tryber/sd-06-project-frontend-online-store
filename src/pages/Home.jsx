@@ -11,6 +11,7 @@ export default class Home extends Component {
 
     this.onClickSearch = this.onClickSearch.bind(this);
     this.updateCart = this.updateCart.bind(this);
+    this.isProductFromDetail = this.isProductFromDetail.bind(this);
 
     this.state = {
       products: [],
@@ -29,6 +30,7 @@ export default class Home extends Component {
           categories,
         });
       });
+    this.isProductFromDetail();
   }
 
   async onClickSearch(searchText) {
@@ -42,11 +44,13 @@ export default class Home extends Component {
 
   async onClickCategory(categoryId) {
     this.setState({
-        categoryId,
-      },);
-    const products = await api.getProductsFromCategoryAndQuery(categoryId, this.state.searchText);
+      categoryId,
+    });
+    const { searchText } = this.state;
+    const products = await api.getProductsFromCategoryAndQuery(categoryId,
+      searchText);
     this.setState({
-        products: products.results,
+      products: products.results,
     });
   }
 
@@ -55,6 +59,13 @@ export default class Home extends Component {
       cartProductList: [...this.state.cartProductList, productObject],
       cartTotalItens: this.state.cartTotalItens + 1,
     });
+  }
+
+  isProductFromDetail() {
+    if (this.props.location.product) {
+      const { product } = this.props.location
+      this.updateCart(product);
+    }
   }
 
   render() {
@@ -87,7 +98,7 @@ export default class Home extends Component {
             ))}
           </nav>
           <div>
-            <ProductList products={ products } updateCart={this.updateCart} />
+            <ProductList products={ products } updateCart={ this.updateCart } />
           </div>
         </main>
       </div>

@@ -15,6 +15,7 @@ class Home extends React.Component {
     this.handleProduct = this.handleProduct.bind(this);
     this.filterCategory = this.filterCategory.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
+    this.handleFilter = this.handleFilter.bind(this);
     this.state = {
       search: '',
       items: '',
@@ -23,17 +24,10 @@ class Home extends React.Component {
     };
   }
 
-  componentDidUpdate() {
-    const { filter } = this.state;
-    API
-      .getProductsFromCategoryAndQuery(filter)
-      .then((result) => this.setState({ items: result.results }));
-  }
-
   handleProduct() {
     const { search } = this.state;
     API
-      .getProductsFromCategoryAndQuery(undefined, search)
+      .getProductsFromCategoryAndQuery('all', search)
       .then((result) => this.setState({ items: result.results, loadProducts: true }));
   }
 
@@ -41,14 +35,23 @@ class Home extends React.Component {
     this.setState({ search: event.target.value });
   }
 
+  handleFilter() {
+    const { filter } = this.state;
+    API
+      .getProductsFromCategoryAndQuery(filter, undefined)
+      .then((result) => this.setState({ items: result.results, loadProducts: true })
+      );
+  }
+
   filterCategory({ target }) {
     this.setState({ filter: target.id });
+    this.handleFilter();
   }
 
   renderProducts() {
-    const { loadProducts, search, items } = this.state;
+    const { loadProducts, search, items, filter } = this.state;
     if (loadProducts) {
-      if (search === '') {
+      if (search === '' && filter === '') {
         return <span>Nenhum produto foi encontrado</span>;
       }
       return <ProductList items={ items } />;

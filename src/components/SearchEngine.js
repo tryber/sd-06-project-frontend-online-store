@@ -47,7 +47,6 @@ class SearchEngine extends React.Component {
         >
           Pesquisar
         </button>
-        <ShoppingCartButton />
       </div>
     );
   }

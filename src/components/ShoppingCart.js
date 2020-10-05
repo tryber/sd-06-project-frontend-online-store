@@ -6,7 +6,6 @@ class ShoppingCart extends Component {
     super();
     this.state = {
       empty: true,
-      product: [],
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -17,17 +16,9 @@ class ShoppingCart extends Component {
   }
 
   handleClick() {
-    const { location: { state: {
-      title, thumbnail, price, id,
-    } } } = this.props;
     const obj = {
-      title: title,
-      thumbnail: thumbnail,
-      price: price,
     };
     const array = [];
-    array.push(obj);
-    console.log(obj);
     this.setState({
       empty: false,
       product: array,
@@ -35,13 +26,13 @@ class ShoppingCart extends Component {
   }
 
   renderCart() {
-    const { product } = this.state;
-    console.log(product);
-    if (product.length === 0 ) {
+    const { shoppingCart } = this.props;
+    console.log(shoppingCart[0])
+    if (shoppingCart.length === 0 ) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
     return (
-      product.map((item) => (
+      shoppingCart.map((item) => (
         <span key={ this.id } data-testid="shopping-cart-product-name">
           {item.title}
           <img

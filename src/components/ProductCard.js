@@ -5,51 +5,47 @@ import { Link } from 'react-router-dom';
 class ProductCard extends Component {
   constructor() {
     super();
+
+    this.addItemsToCart = this.addItemsToCart.bind(this);
     this.state = {
-      product: {},
+
     };
   }
 
 
-  addItemsToCart({ target }) {
-    console.log(target);
-    const parent = target.parentElement;
-    console.log(parent);
+  addItemsToCart() {
+    const { product, addItemCart } = this.props;
+    const { title, thumbnail, price, id } = product;
+    addItemCart({product: { title, thumbnail, price, id }})
   }
 
   render() {
     const { product } = this.props;
-    // console.log(product);
     const { title, thumbnail, price, id } = product;
     return (
-      <Link
-        data-testid="product-detail-link"
-        to={{ pathname: `/ProductDetails/${id}`, state: product }}
-      >
-        <section key={title} data-testid="product" className="product-content">
+      <section key={ title } data-testid="product" className="product-content">
+        <Link
+          data-testid="product-detail-link"
+          to={{ pathname: `/ProductDetails/${id}`, state: product }}
+        >
           <div className="img-div">
-            <img className="img" src={thumbnail} alt={title} />
+            <img className="img" src={ thumbnail } alt={ title } />
           </div>
-          <div className="product-details-div">
-            <p>{title}</p>
-            <p className="price">{`R$ ${price}`}</p>
-          </div>
-          <div className="addToCart">
-            {/* <Link
-              data-testid="product-add-to-cart"
-              to={ { pathname: '/ShoppingCart', state: product } }
-            > */}
-            <button
-              type="button"
-              data-testid="shopping-cart-button"
-              onClick={ this.addItemsToCart }
-            >
-              Adicionar ao Carrinho
-            </button>
-            {/* </Link> */}
-          </div>
-        </section>
-      </Link>
+        </Link>
+        <div className="product-details-div">
+          <p>{title}</p>
+          <p className="price">{`R$ ${price}`}</p>
+        </div>
+        <div className="addToCart">
+          <button
+            type="button"
+            data-testid="shopping-cart-button"
+            onClick={ this.addItemsToCart }
+          >
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </section>
     );
   }
 }

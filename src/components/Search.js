@@ -18,6 +18,7 @@ class Search extends Component {
       categoryInput: '',
       products: {},
       seachDone: false,
+      shoppingCart: [],
     };
   }
 
@@ -53,7 +54,8 @@ class Search extends Component {
 
   render() {
     const { searchInput, products, seachDone } = this.state;
-    const zero = 0;
+    const { addItemCart } = this.props;
+    const zero = 0; 
     return (
       <div className="main-container">
         <Category
@@ -100,7 +102,7 @@ class Search extends Component {
             )}
             { Object.keys(products).length !== zero && (seachDone) && (
               products.results
-                .map((item) => <ProductCard product={ item } key={ item.title } />)
+                .map((item) => <ProductCard addItemCart={addItemCart} product={ item } key={ item.title } />)
             )}
           </div>
         </div>

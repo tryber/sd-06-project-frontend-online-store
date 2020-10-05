@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Shipping from './Shipping';
 
 class ProductCard extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class ProductCard extends React.Component {
       <div className="productCard" data-testid="product">
         <div className="product-card-item">{title}</div>
         <div className="product-card-item">{`R$${price.toFixed(valueType)}`}</div>
+        <Shipping shipping={ product.shipping } />
         <img src={ thumbnail } className="product-img" alt="product" />
         <Link to={ { pathname: `productDetails/${id}`, state: { product, cartList } } }>
           <div data-testid="product-detail-link">View Details</div>

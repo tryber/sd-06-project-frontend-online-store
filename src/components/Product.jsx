@@ -1,15 +1,25 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import '../css/Product.css';
 
 class Product extends Component {
+
   render() {
-    const { title, price, thumbnail } = this.props.item;
+    const { title, price, thumbnail, id } = this.props.item;
     return (
       <div className="card-container" data-testid="product">
-        <h4>{title}</h4>
+        <h4 data-testid="product-detail-name">{title}</h4>
         <img className="image-item" src={thumbnail} alt={`imagem ${title}`} />
         <p><strong>{`R$ ${price}`}</strong></p>
+        <Link 
+          data-testid="product-detail-link"
+          to={{
+            pathname:`/product-details/${id}`,
+            state: this.props.item
+          }}
+          >detalhes
+        </Link>
       </div>
     );
   }

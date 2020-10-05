@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ShoppingCartPage extends Component {
   constructor() {
@@ -12,12 +13,12 @@ class ShoppingCartPage extends Component {
     this.getAllProductsFromCart = this.getAllProductsFromCart.bind(this);
     this.updateCart = this.updateCart.bind(this);
     this.getOldCartFromLocalStorage = this.getOldCartFromLocalStorage.bind(
-      this
+      this,
     );
   }
 
   componentDidMount() {
-    const { state } = this.props.location;
+    const { location: { state } } = this.props;
 
     this.getAllProductsFromCart(state);
 
@@ -39,7 +40,8 @@ class ShoppingCartPage extends Component {
       },
       () => {
         if (state) {
-          const oldProduct = this.state.cart.find(
+          const { cart } = this.state;
+          const oldProduct = cart.find(
             (product) => product.id === state.id,
           );
           let quantity;
@@ -77,7 +79,7 @@ class ShoppingCartPage extends Component {
         this.setState((prevState) => ({
           cart: [...prevState.cart, item],
         }));
-      }
+      },
     );
   }
 
@@ -96,17 +98,27 @@ class ShoppingCartPage extends Component {
     return (
       <div>
         {cart.map((item) => (
-          <div data-testid="shopping-cart-product-name" key={item.title}>
+          <div data-testid="shopping-cart-product-name" key={ item.title }>
             <p>{item.title}</p>
             <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
             <p data-testid="shopping-cart-product-price">{item.price}</p>
           </div>
         ))}
 
-        <button data-testid="shopping-cart-button">Finalizar compra</button>
+        <button data-testid="shopping-cart-button" type="button">Finalizar compra</button>
       </div>
     );
   }
 }
+
+ShoppingCartPage.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      id: PropTypes.string,
+      title: PropTypes.string,
+      price: PropTypes.number,
+    }),
+  }).isRequired,
+};
 
 export default ShoppingCartPage;

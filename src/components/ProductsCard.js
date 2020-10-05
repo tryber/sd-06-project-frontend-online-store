@@ -25,7 +25,7 @@ export default class ProductsCard extends Component {
         >
           Detalhes do Produto
         </Link>
-        <AddToCartButton product={product}/>
+        <AddToCartButton product={ product } />
       </div>
     );
   }

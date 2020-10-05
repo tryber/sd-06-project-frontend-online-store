@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 class AddToCartButton extends Component {
   render() {
     const { product } = this.props;
-    console.log(product)
     return (
       <div>
         <Link

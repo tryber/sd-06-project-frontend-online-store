@@ -43,7 +43,6 @@ class ProductCard extends Component {
         <div className="addToCart">
           <button
             type="button"
-            // data-testid="shopping-cart-button"
             data-testid="product-add-to-cart"
             onClick={ this.addItemsToCart }
           >

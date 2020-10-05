@@ -14,7 +14,7 @@ export default class ShoppingCart extends Component {
               <p data-testid="shopping-cart-product-name">
                 {product.title}
               </p>
-              <p data-testid="shopping-cart-product-quantity">
+              <p>
                 {product.quantityInCart}
               </p>
             </div>

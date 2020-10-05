@@ -19,23 +19,12 @@ export default class Home extends Component {
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
     this.getCategory = this.getCategory.bind(this);
     this.categoryApi = this.categoryApi.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-    this.getProductsFromCart = this.getProductsFromCart.bind(this);
   }
 
   async componentDidMount() {
     const categoriesObjects = await api.getCategories();
     const categories = categoriesObjects.map(category => category);
     this.setState({ categories });
-    this.getProductsFromCart();
-  }
-
-  getProductsFromCart() {
-    const productsFromCart = this.props.location.state.products
-      ? this.props.location.state.products
-      : [];
-
-    this.setState({ cartProducts: productsFromCart });
   }
 
   async onSearchTextSubmit(event) {
@@ -59,15 +48,8 @@ export default class Home extends Component {
     this.setState({ products: products.results, emptyList: false });
   }
 
-  async addToCart(productId) {
-    const productsFromState = this.state.products;
-    const productToCart = productsFromState.filter(product => product.id === productId);
-
-    this.setState({ cartProducts: [...this.state.cartProducts, ...productToCart] });
-  }
-
   render() {
-    const { categories, products, emptyList, cartProducts } = this.state;
+    const { categories, products, emptyList } = this.state;
 
     return (
       <>
@@ -108,12 +90,7 @@ export default class Home extends Component {
               Search
             </button>
             <Link
-              to={
-                {
-                  pathname: '/cart',
-                  state: { cartProducts },
-                }
-              }
+              to="/cart"
               data-testid="shopping-cart-button"
             >
               <img src={cart} alt="icone do carrinho" className="icon" />
@@ -121,7 +98,6 @@ export default class Home extends Component {
             <ProductList
               products={products}
               emptyList={emptyList}
-              callback={this.addToCart}
             />
           </div>
         </main>

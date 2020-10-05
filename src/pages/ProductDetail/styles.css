@@ -1,0 +1,16 @@
+.cart-icon {
+  font-size: 3rem;
+  position: relative;
+}
+
+.cart-quantity {
+  background-color: yellow;
+  border-radius: 100%;
+  font-size: 15px;
+  height: 18px;
+  padding: 3px;
+  position: absolute;
+  right: -25%;
+  text-align: center;
+  width: 18px;
+}

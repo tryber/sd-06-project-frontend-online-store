@@ -2,36 +2,29 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import StarReviewForm from '../../components/StarReviewForm';
+
+import './styles.css';
+
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.handleProductQuantityAltering = this.handleProductQuantityAltering.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
     this.handleInputValueChange = this.handleInputValueChange.bind(this);
-    this.handleStartRating = this.handleStartRating.bind(this);
+    this.handleStarRating = this.handleStarRating.bind(this);
     this.handleComment = this.handleComment.bind(this);
     this.loadCart = this.loadCart.bind(this);
+    this.loadComments = this.loadComments.bind(this);
 
     const { id } = this.props.match.params;
-
-    const storeComments = JSON.parse(localStorage.getItem('storeComments')) || [];
-
-    const productComments = storeComments.find((comments) => comments.id === id);
-
-    let oldComments;
-
-    if (!productComments) {
-      oldComments = [];
-    } else {
-      oldComments = productComments.comments;
-    }
 
     this.state = {
       quantity: 1,
       email: '',
       message: '',
       rating: 0,
-      comments: oldComments,
+      comments: [],
       id,
       cartProducts: [],
       cartProductsQuantity: 0,
@@ -40,6 +33,7 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     this.loadCart();
+    this.loadComments();
   }
 
   componentWillUnmount() {
@@ -77,13 +71,27 @@ class ProductDetail extends Component {
     this.setState({ cartProducts, cartProductsQuantity });
   }
 
+  loadComments() {
+    const { id } = this.state;
+
+    const storeComments = JSON.parse(localStorage.getItem('storeComments')) || [];
+
+    const oldComments = storeComments.find((savedComments) => savedComments.id === id);
+
+    if (oldComments) {
+      this.setState({
+        comments: oldComments.comment,
+      });
+    }
+  }
+
   handleInputValueChange({ name, value }) {
     this.setState({
       [name]: value,
     });
   }
 
-  handleStartRating({ target }) {
+  handleStarRating({ target }) {
     let rating;
     switch (target.id) {
     case 'rate-5':
@@ -109,23 +117,19 @@ class ProductDetail extends Component {
   }
 
   addItemToCart(product, id, quantity) {
-    const availableQuantity = product.available_quantity;
-
-    if (quantity > availableQuantity) return;
-
     const { cartProducts, cartProductsQuantity } = this.state;
     const cartItems = [...cartProducts];
+
     const itemAlreadyInCart = cartItems.findIndex(({ product: item }) => item.id === id);
 
     if (cartItems[itemAlreadyInCart]) {
-      if ((quantity + cartItems[itemAlreadyInCart].quantity) > availableQuantity) return;
-
       cartItems[itemAlreadyInCart].quantity += quantity;
     } else {
       cartItems.push({ product, quantity });
     }
 
     const newCartProductsQuantity = cartProductsQuantity + quantity;
+
     this.setState({ cartProducts: cartItems, cartProductsQuantity: newCartProductsQuantity });
   }
 
@@ -161,31 +165,60 @@ class ProductDetail extends Component {
   render() {
     const { products } = this.props.location.state;
     const { quantity, comments, id, cartProductsQuantity } = this.state;
+
     const product = products.find((productItem) => id === productItem.id);
+
+    const { shipping: { free_shipping: freeShipping }, attributes } = product;
+
+    const filteredAttributes = attributes.filter(({ name, value_name: value }) => name && value);
+
     return (
       <>
         <Link to="/shopping-cart" data-testid="shopping-cart-button" className="fa fa-shopping-cart cart-icon">
-          {(cartProductsQuantity > 0) && (
-            <span data-testid="shopping-cart-size" className="cart-quantity">{cartProductsQuantity}</span>
+          {(!!cartProductsQuantity) && (
+            <span
+              data-testid="shopping-cart-size"
+              className="cart-quantity"
+            >
+              {cartProductsQuantity}
+            </span>
           )}
         </Link>
         <Link to="/">home</Link>
         <div className="product-detail-content">
-          <div data-testid="product-detail-name">
-            <h2>{product.title}</h2>
-            <span>
+          <div className="product-detail-container" data-testid="product-detail-name">
+            <h2 className="product-detail-title">{product.title}</h2>
+            <img src={ product.thumbnail } alt="imagem do produto" className="product-detail-img" />
+            <span className="product-detail-price">
               R$
               {' '}
               {product.price}
             </span>
-            <img src={ product.thumbnail } alt="imagem do produto" />
+            {freeShipping && (
+              <p className="product-detail-free-shipping" data-testid="free-shipping">
+                Frete Gratis!
+              </p>
+            )}
+
+            <div className="product-detail-more-info">
+              {filteredAttributes.map((attribute) => (
+                <div key={ attribute.name } className="product-detail-attribute-container">
+                  <span>
+                    {attribute.name}
+                    :
+                  </span>
+                  <span>{attribute.value_name}</span>
+                </div>
+              ))}
+            </div>
             <div>
-              <p>Adicionar ao carrinho</p>
+              <p className="product-detail-add-cart">Adicionar ao carrinho</p>
               <div>
                 <button
                   type="button"
-                  onClick={ this.handleProductQuantityAltering }
                   name="minus"
+                  className="product-detail-minus"
+                  onClick={ this.handleProductQuantityAltering }
                 >
                   -
 
@@ -200,8 +233,9 @@ class ProductDetail extends Component {
                 />
                 <button
                   type="button"
-                  onClick={ this.handleProductQuantityAltering }
+                  className="product-detail-plus"
                   name="plus"
+                  onClick={ this.handleProductQuantityAltering }
                   disabled={ quantity === product.available_quantity }
                 >
                   +
@@ -210,6 +244,7 @@ class ProductDetail extends Component {
                 <button
                   type="button"
                   data-testid="product-detail-add-to-cart"
+                  className="product-detail-button-add-cart"
                   onClick={ () => this.addItemToCart(product, id, quantity) }
                 >
                   Adicionar
@@ -219,38 +254,12 @@ class ProductDetail extends Component {
           </div>
           <section className="product-reviews">
             <h3>Avaliações</h3>
-            <form onSubmit={ this.handleComment }>
-              <div className="form-email-rating">
-                <input
-                  type="text"
-                  name="email"
-                  placeholder="E-mail"
-                  onChange={ ({ target }) => this.handleInputValueChange(target) }
-                  required
-                />
-                <div className="star-rating-container">
-                  <input required type="radio" name="rate" id="rate-5" onChange={ this.handleStartRating } />
-                  <label className="fa fa-star" htmlFor="rate-5" />
-                  <input required type="radio" name="rate" id="rate-4" onChange={ this.handleStartRating } />
-                  <label className="fa fa-star" htmlFor="rate-4" />
-                  <input required type="radio" name="rate" id="rate-3" onChange={ this.handleStartRating } />
-                  <label className="fa fa-star" htmlFor="rate-3" />
-                  <input required type="radio" name="rate" id="rate-2" onChange={ this.handleStartRating } />
-                  <label className="fa fa-star" htmlFor="rate-2" />
-                  <input required type="radio" name="rate" id="rate-1" onChange={ this.handleStartRating } />
-                  <label className="fa fa-star" htmlFor="rate-1" />
-                </div>
-              </div>
-              <textarea
-                name="message"
-                placeholder="mensagem (opcional)"
-                id="message"
-                data-testid="product-detail-evaluation"
-                onChange={ ({ target }) => this.handleInputValueChange(target) }
-              />
-
-              <button type="submit">Comentar!</button>
-            </form>
+            <StarReviewForm
+              handleComment={ this.handleComment }
+              handleInputValueChange={ this.handleInputValueChange }
+              handleStarRating={ this.handleStarRating }
+              maxRating={ 5 }
+            />
 
             <div className="user-reviews">
               {!comments.length
@@ -292,6 +301,11 @@ ProductDetail.propTypes = {
       title: PropTypes.string.isRequired,
       thumbnail: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
+      attributes: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string.isRequired,
+        value_name: PropTypes.string,
+        value_id: PropTypes.string,
+      })),
     })) }) }).isRequired,
 };
 

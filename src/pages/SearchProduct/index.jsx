@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
+
+import './styles.css';
 
 class SearchProduct extends Component {
   constructor() {
@@ -103,6 +105,7 @@ class SearchProduct extends Component {
     }
 
     const newCartProductsQuantity = cartProductsQuantity + 1;
+
     this.setState({ cartProducts: cartItems, cartProductsQuantity: newCartProductsQuantity });
   }
 
@@ -111,8 +114,13 @@ class SearchProduct extends Component {
     return (
       <>
         <Link to="/shopping-cart" data-testid="shopping-cart-button" className="fa fa-shopping-cart cart-icon">
-          {(cartProductsQuantity > 0) && (
-            <span data-testid="shopping-cart-size" className="cart-quantity">{cartProductsQuantity}</span>
+          {(!!cartProductsQuantity) && (
+            <span
+              data-testid="shopping-cart-size"
+              className="cart-quantity"
+            >
+              {cartProductsQuantity}
+            </span>
           )}
         </Link>
         <div className="search-product-content">
@@ -149,12 +157,13 @@ class SearchProduct extends Component {
             </form>
             <div className="product-list">
               {products[0]
-                ? products.map(({ title, thumbnail, price, id }) => (
+                ? products.map(({ title, thumbnail, price, id, shipping }) => (
                   <ProductCard
                     key={ id }
                     title={ title }
                     price={ price }
                     thumbnail={ thumbnail }
+                    freeShipping={ shipping.free_shipping }
                   >
                     <Link
                       data-testid="product-detail-link"

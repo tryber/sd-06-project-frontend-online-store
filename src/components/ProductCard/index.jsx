@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
-    const { title, thumbnail, price, children } = this.props;
+    const { title, thumbnail, price, children, freeShipping } = this.props;
 
     return (
       <div className="card" data-testid="product">
@@ -14,6 +14,11 @@ class ProductCard extends React.Component {
           {' '}
           {price}
         </p>
+        {freeShipping && (
+          <p className="product-free-shipping" data-testid="free-shipping">
+            Frete Gratis!
+          </p>
+        )}
         { children }
       </div>
     );
@@ -25,6 +30,7 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };
 
 export default ProductCard;

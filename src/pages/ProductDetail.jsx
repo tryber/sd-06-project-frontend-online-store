@@ -11,27 +11,16 @@ class ProductDetail extends Component {
     this.handleStartRating = this.handleStartRating.bind(this);
     this.handleComment = this.handleComment.bind(this);
     this.loadCart = this.loadCart.bind(this);
+    this.loadComments = this.loadComments.bind(this);
 
     const { id } = this.props.match.params;
-
-    const storeComments = JSON.parse(localStorage.getItem('storeComments')) || [];
-
-    const productComments = storeComments.find((comments) => comments.id === id);
-
-    let oldComments;
-
-    if (!productComments) {
-      oldComments = [];
-    } else {
-      oldComments = productComments.comments;
-    }
 
     this.state = {
       quantity: 1,
       email: '',
       message: '',
       rating: 0,
-      comments: oldComments,
+      comments: [],
       id,
       cartProducts: [],
       cartProductsQuantity: 0,
@@ -40,6 +29,7 @@ class ProductDetail extends Component {
 
   componentDidMount() {
     this.loadCart();
+    this.loadComments();
   }
 
   componentWillUnmount() {
@@ -75,6 +65,20 @@ class ProductDetail extends Component {
     const cartProductsQuantity = cartProducts.reduce((accumulator, { quantity }) => accumulator += quantity, initialQuantity);
 
     this.setState({ cartProducts, cartProductsQuantity });
+  }
+
+  loadComments() {
+    const { id } = this.state;
+
+    const storeComments = JSON.parse(localStorage.getItem('storeComments')) || [];
+
+    const oldComments = storeComments.find((savedComments) => savedComments.id === id);
+
+    if (oldComments) {
+      this.setState({
+        comments: oldComments.comment,
+      });
+    }
   }
 
   handleInputValueChange({ name, value }) {
@@ -162,23 +166,34 @@ class ProductDetail extends Component {
     const { products } = this.props.location.state;
     const { quantity, comments, id, cartProductsQuantity } = this.state;
     const product = products.find((productItem) => id === productItem.id);
+    const { shipping: { free_shipping: freeShipping } } = product;
     return (
       <>
         <Link to="/shopping-cart" data-testid="shopping-cart-button" className="fa fa-shopping-cart cart-icon">
-          {(cartProductsQuantity > 0) && (
-            <span data-testid="shopping-cart-size" className="cart-quantity">{cartProductsQuantity}</span>
+          {(!!cartProductsQuantity) && (
+            <span
+              data-testid="shopping-cart-size"
+              className="cart-quantity"
+            >
+              {cartProductsQuantity}
+            </span>
           )}
         </Link>
         <Link to="/">home</Link>
         <div className="product-detail-content">
           <div data-testid="product-detail-name">
             <h2>{product.title}</h2>
+            <img src={ product.thumbnail } alt="imagem do produto" />
             <span>
               R$
               {' '}
               {product.price}
             </span>
-            <img src={ product.thumbnail } alt="imagem do produto" />
+            {freeShipping && (
+              <p className="product-free-shipping" data-testid="free-shipping">
+                Frete Gratis!
+              </p>
+            )}
             <div>
               <p>Adicionar ao carrinho</p>
               <div>

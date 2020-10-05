@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import ProductCard from '../components/ProductCard';
+import ProductCard from '../../components/ProductCard';
 
-import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../../services/api';
+
+import './styles.css';
 
 class SearchProduct extends Component {
   constructor() {

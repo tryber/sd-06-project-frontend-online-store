@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import propTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Product from '../Components/Product';
 import CategoriesList from './CategoriesList';
@@ -24,12 +25,16 @@ class ProductList extends Component {
   }
 
   onClickCart(prod) {
+    const { onClick } = this.props;
+    onClick(this.state);
     const { cart } = this.state;
     const prevState = cart;
     prevState.push(prod);
     this.setState({
       cart: prevState,
     });
+
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   async onClickCategory(categoriesId) {
@@ -65,7 +70,6 @@ class ProductList extends Component {
 
   render() {
     const { products, valueInput } = this.state;
-    // const { estado } = this.props;
     return (
       <div>
         <Input onChange={ this.handleInput } />
@@ -76,5 +80,9 @@ class ProductList extends Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  onClick: propTypes.func.isRequired,
+};
 
 export default ProductList;

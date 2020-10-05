@@ -23,7 +23,7 @@ class EmptyProductList extends React.Component {
     const value = target.value;
     this.setState({
       query: value,
-    })
+    });
   }
 
   async handleClick() {
@@ -31,8 +31,8 @@ class EmptyProductList extends React.Component {
     const fetch = await api.getProductsFromCategoryAndQuery(categoryID, query);
     this.setState({
       product: fetch.results,
-    })
-    console.log(fetch.results)
+    });
+    console.log(fetch.results);
   }
 
   render() {

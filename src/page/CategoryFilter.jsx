@@ -25,12 +25,15 @@ class CategoryFilter extends Component{
 
   render() {
     const { categories } = this.state
+
     return (
       <div>
         {categories.map(category => 
-        <label for="chosen">{category.name}
-          <input name="chosen" type="radio" data-testid="category" key={category.id} />
-          </label>)}
+        <label key={category.id} htmlFor={category.id}>
+          {category.name}
+          <input id={category.id} name="chosen" type="radio" data-testid="category" />
+          <br />
+        </label>)}
       </div>
     )
   }

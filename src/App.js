@@ -12,13 +12,14 @@ class App extends React.Component {
     this.addItemCart = this.addItemCart.bind(this);
     this.state = {
       shoppingCart: [],
-    }
+    };
   }
 
   addItemCart(product) {
+    const { shoppingCart } = this.state;
     this.setState({
-      shoppingCart: this.state.shoppingCart.concat(product),
-    })
+      shoppingCart: shoppingCart.concat(product),
+    });
   }
 
   render() {
@@ -26,14 +27,17 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact
+          <Route
+            exact
             path="/"
-            render= {(props) => <Search addItemCart={this.addItemCart} {...props } /> }
+            render={ (props) => <Search addItemCart={ this.addItemCart } { ...props } /> }
           />
           <Route
             exact
             path="/ShoppingCart"
-            render={ (props) => <ShoppingCart shoppingCart={ shoppingCart } { ...props } /> }
+            render={
+              (props) => <ShoppingCart shoppingCart={ shoppingCart } { ...props } />
+            }
           />
           <Route
             exact

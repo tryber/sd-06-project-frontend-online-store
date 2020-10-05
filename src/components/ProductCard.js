@@ -8,7 +8,7 @@ class ProductCard extends Component {
 
     this.addItemsToCart = this.addItemsToCart.bind(this);
     this.state = {
-      quantity: 1
+      quantity: 1,
     };
   }
 
@@ -18,9 +18,9 @@ class ProductCard extends Component {
     const { title, thumbnail, price, id } = product;
     const { quantity } = this.state;
     this.setState({
-      quantity: quantity,
-    })
-    addItemCart({product: { title, thumbnail, price, id, quantity}})
+      quantity,
+    });
+    addItemCart({ product: { title, thumbnail, price, id, quantity } });
   }
 
   render() {
@@ -30,7 +30,7 @@ class ProductCard extends Component {
       <section key={ title } data-testid="product" className="product-content">
         <Link
           data-testid="product-detail-link"
-          to={{ pathname: `/ProductDetails/${id}`, state: product }}
+          to={ { pathname: `/ProductDetails/${id}`, state: product } }
         >
           <div className="img-div">
             <img className="img" src={ thumbnail } alt={ title } />
@@ -62,5 +62,6 @@ ProductCard.propTypes = {
     price: PropTypes.number,
     id: PropTypes.string,
   }).isRequired,
+  addItemCart: PropTypes.string.isRequired,
 };
 export default ProductCard;

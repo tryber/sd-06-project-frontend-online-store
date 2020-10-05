@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import ProductCard from './ProductCard';
 import Category from '../Category';
@@ -18,7 +19,6 @@ class Search extends Component {
       categoryInput: '',
       products: {},
       seachDone: false,
-      shoppingCart: [],
     };
   }
 
@@ -30,8 +30,8 @@ class Search extends Component {
     const { searchInput, categoryInput } = this.state;
 
     this.setState({ seachDone: true }, async () => {
-      const productsList = await api
-        .getProductsFromCategoryAndQuery(categoryInput, searchInput);
+      const productsList = await
+      api.getProductsFromCategoryAndQuery(categoryInput, searchInput);
       this.setState({ products: productsList });
     });
   }
@@ -51,11 +51,10 @@ class Search extends Component {
     });
   }
 
-
   render() {
     const { searchInput, products, seachDone } = this.state;
     const { addItemCart } = this.props;
-    const zero = 0; 
+    const zero = 0;
     return (
       <div className="main-container">
         <Category
@@ -95,15 +94,20 @@ class Search extends Component {
             </div>
           </div>
           <div className="product-container">
-            { !seachDone && (
+            {!seachDone && (
               <p data-testid="home-initial-message">
                 Digite algum termo de pesquisa ou escolha uma categoria.
               </p>
             )}
-            { Object.keys(products).length !== zero && (seachDone) && (
-              products.results
-                .map((item) => <ProductCard addItemCart={addItemCart} product={ item } key={ item.title } />)
-            )}
+            {Object.keys(products).length !== zero
+            && seachDone
+            && products.results.map((item) => (
+              <ProductCard
+                addItemCart={ addItemCart }
+                product={ item }
+                key={ item.title }
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -111,4 +115,5 @@ class Search extends Component {
   }
 }
 
+Search.propTypes = { addItemCart: PropTypes.string.isRequired };
 export default Search;

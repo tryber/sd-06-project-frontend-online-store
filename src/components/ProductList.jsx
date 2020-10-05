@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import Cards from './Cards'
 import '../App.css';
-import { Link } from 'react-router-dom';
 
 class ProductList extends Component {
   
   render() {
-    const { items, addtoCart } = this.props;
+    const { items, addtoCart, cartItems } = this.props;
 
     return (
       <div>
-          {items.map((item) =><Link to={ { pathname: `/carddetail`, state: item } } className="card-detail" data-testid="product-detail-link"><Cards key={item.id} item={item} addtoCart={ addtoCart } /></Link>)}
+          {items.map((item) =><Cards key={item.id} item={item} addtoCart={ addtoCart }  cartItems={ cartItems }/>)}
       </div>
     );
   }

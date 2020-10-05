@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ItemCard from './ItemCard';
 import Cart from '../images/shopping-cart.png';
+import './Home.css';
 
 class Home extends React.Component {
   constructor() {
@@ -85,6 +86,9 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
+          <Link data-testid="shopping-cart-button" to="/shopping-cart">
+            <img src={ Cart } alt="shopping cart" className="shopping-cart" />
+          </Link>
           <div>
             {search === undefined
               ? <p data-testid="home-initial-message">Nenhum produto foi encontrado</p>
@@ -96,9 +100,6 @@ class Home extends React.Component {
           {selectedCategoryArray
             .map((product) => <ItemCard key={ product.id } product={ product } />)}
         </div>
-        <Link data-testid="shopping-cart-button" to="/shopping-cart">
-          <img src={ Cart } alt="shopping cart" />
-        </Link>
       </div>
     );
   }

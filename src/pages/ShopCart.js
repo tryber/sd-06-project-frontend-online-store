@@ -106,7 +106,7 @@ class ShopCart extends React.Component {
 
 ShopCart.propTypes = {
   location: PropTypes.shape({
-    state: PropTypes.shape({ cartList: PropTypes.objectOf(PropTypes.any).isRequired,
+    state: PropTypes.shape({ cartList: PropTypes.objectOf(PropTypes.any),
     }).isRequired,
   }).isRequired,
 };

@@ -7,7 +7,6 @@ import ProductDetail from './Pages/ProductDetail';
 
 import './App.css';
 
-
 function App() {
   return (
     <BrowserRouter>

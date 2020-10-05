@@ -3,6 +3,29 @@ import propTypes from 'prop-types';
 import ProductDetailComponent from '../Components/ProductDetailComponent';
 
 class ProductDetails extends Component {
+  constructor() {
+    super();
+
+    this.onClickCart = this.onClickCart.bind(this);
+
+    this.state = {
+      cart: [],
+    };
+  }
+
+  onClickCart(prod) {
+    // const { onClick } = this.props;
+    // onClick(this.state);
+    const { cart } = this.state;
+    const prevState = cart;
+    prevState.push(prod);
+    this.setState({
+      cart: prevState,
+    });
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   render() {
     const { match, location } = this.props;
     const { params } = match;
@@ -11,7 +34,7 @@ class ProductDetails extends Component {
     const arr = busca.filter((num) => num.id === idprod);
     return (
       <div>
-        {arr.map((item) => <ProductDetailComponent product={ item } key={ item.id } />)}
+        {arr.map((item) => <ProductDetailComponent onClick={ () => this.onClickCart(item) } product={ item } key={ item.id } />)}
       </div>
     );
   }

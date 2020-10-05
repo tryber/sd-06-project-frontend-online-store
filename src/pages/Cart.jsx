@@ -7,7 +7,7 @@ class Cart extends Component {
     this.localStorageSave = this.localStorageSave.bind(this);
     this.state = {
       cartList: null,
-    }
+    };
   }
 
   componentDidMount() {
@@ -20,7 +20,7 @@ class Cart extends Component {
 
   localStorageSave() {
     const cartLocalStorage = this.getLocalStorageProduct();
-    this.setState({ cartList: cartLocalStorage});
+    this.setState({ cartList: cartLocalStorage });
   }
 
   render() {
@@ -28,7 +28,8 @@ class Cart extends Component {
     return (
       <div className="cart-product">
         {(cartList)
-          ? cartList.map((product) => <Product bt="cart" key={product.id} data={product} />)
+          ? cartList
+            .map((product) => <Product bt="cart" key={ product.id } data={ product } />)
           : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
       </div>
     );

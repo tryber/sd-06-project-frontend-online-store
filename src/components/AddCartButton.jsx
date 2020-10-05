@@ -24,15 +24,15 @@ class AddCartButton extends React.Component {
     const cartLocalStorage = this.getLocalStorageProduct();
     let newLocalStorage;
     if (cartLocalStorage) {
-      (cartLocalStorage.some((item) => item.id === data.id ))
+      (cartLocalStorage.some((item) => item.id === data.id))
         ? newLocalStorage = this.countLocalStorage(cartLocalStorage, data.id)
-        : newLocalStorage = [ ...cartLocalStorage, data];
+        : newLocalStorage = [...cartLocalStorage, data];
     } else {
       newLocalStorage = [data];
     }
     const stringData = JSON.stringify(newLocalStorage);
     localStorage.setItem('cart', stringData);
-    console.log('Produto adicionado ao carrinho com sucesso!')
+    console.log('Produto adicionado ao carrinho com sucesso!');
   }
 
   localStorageRemove() {
@@ -44,23 +44,37 @@ class AddCartButton extends React.Component {
     let testid;
     if (bt === 'home') testid = 'product-add-to-cart';
     if (bt === 'productDetails') testid = 'product-detail-add-to-cart';
-    
+
     return (
       <div id="cart-button">
-        <button data-testid={testid} type="button" onClick={this.localStorageSave}>Adicionar ao Carrinho de Compras</button>
+        <button data-testid={ testid } type="button" onClick={ this.localStorageSave }>
+          Adicionar ao Carrinho de Compras
+        </button>
       </div>
     );
   }
    
 
+
   btRemove() {
     const { data } = this.props;
     return (
       <div id="cart-button">
-        <div data-testid="shopping-cart-product-quantity">Quantidade: {data.qtd}</div>
-        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageRemove}>+</button>
-        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageRemove}>-</button>
-        <button data-testid="product-add-to-cart" type="button" onClick={this.localStorageRemove}>Remover</button>
+
+        <div data-testid="shopping-cart-product-quantity">
+          Quantidade:
+          {' '}
+          {data.qtd}
+        </div>
+        <button data-testid="product-add-to-cart" type="button" onClick={ this.localStorageRemove }>
+          +
+        </button>
+        <button data-testid="product-add-to-cart" type="button" onClick={ this.localStorageRemove }>
+          -
+        </button>
+        <button data-testid="product-add-to-cart" type="button" onClick={ this.localStorageRemove }>
+          Remover
+        </button>
       </div>
     );
   }
@@ -73,6 +87,6 @@ class AddCartButton extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default AddCartButton;

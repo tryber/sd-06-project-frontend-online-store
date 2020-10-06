@@ -49,7 +49,6 @@ class ShoppingCart extends React.Component {
 
   render() {
     const { products, totalCart } = this.state;
-    // console.log(totalCart);
     return (
       <div>
         <div>
@@ -57,8 +56,11 @@ class ShoppingCart extends React.Component {
         </div>
         <div>
           <h3>{`Total R$ ${(totalCart).toFixed(2)}`}</h3>
+          {/* IMPORTANTE: Passando o state dentro do link */}
+          <Link data-testid="checkout-products" to={{pathname: "/closepurchase", state: { products: products }}}>Fechar Compra</Link>
         </div>
         <Link to="/">Voltar</Link>
+
       </div>
     );
   }

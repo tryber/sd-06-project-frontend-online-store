@@ -20,9 +20,11 @@ class ShoppingCartPage extends Component {
     return (
       <div>
         {cartProductList.map((item) => (
-          <div data-testid="shopping-cart-product-name" key={ item.id }>
-            <p>{item.title}</p>
-            <p data-testid="shopping-cart-product-quantity"><ProductQuantity /></p>
+          <div key={ item.id }>
+            <p data-testid="shopping-cart-product-name">{item.title}</p>
+            <div data-testid="shopping-cart-product-quantity">
+              <ProductQuantity />
+            </div>
             <p data-testid="shopping-cart-product-price">{item.price}</p>
           </div>
         )) }
@@ -33,9 +35,8 @@ class ShoppingCartPage extends Component {
 
 ShoppingCartPage.propTypes = {
   location: PropTypes.shape({
-    id: PropTypes.string,
-    title: PropTypes.string,
-    price: PropTypes.number,
+    cartProductList: PropTypes.arrayOf(PropTypes.object),
+    cartProductItens: PropTypes.number.isRequired,
   }).isRequired,
 };
 

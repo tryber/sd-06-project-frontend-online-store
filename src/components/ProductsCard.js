@@ -42,4 +42,5 @@ ProductsCard.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
 };

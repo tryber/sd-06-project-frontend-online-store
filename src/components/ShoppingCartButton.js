@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class ShoppingCartButton extends Component {
   render() {
@@ -18,5 +19,10 @@ class ShoppingCartButton extends Component {
     );
   }
 }
+
+ShoppingCartButton.propTypes = {
+  cartProductItens: PropTypes.number.isRequired,
+  cartProductList: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default ShoppingCartButton;

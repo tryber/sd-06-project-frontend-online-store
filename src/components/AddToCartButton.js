@@ -29,6 +29,7 @@ AddToCartButton.propTypes = {
     title: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
 };
 
 export default AddToCartButton;

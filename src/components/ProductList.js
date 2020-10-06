@@ -49,4 +49,5 @@ ProductList.propTypes = {
   categoryInput: PropTypes.string.isRequired,
   foundItems: PropTypes.bool,
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
 };

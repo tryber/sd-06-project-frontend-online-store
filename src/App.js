@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ShoppingCart from './pages/ShoppingCart';
 import ProductDetail from './pages/ProductDetail';
+import ClosePurchase from './pages/ClosePurchase';
 import Home from './pages/Home';
 import './App.css';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
             just to become clearer to understand */}
             <Route path="/shoppingcart" component={ ShoppingCart } />
             <Route path="/productdetail" component={ ProductDetail } />
+            <Route path="/closepurchase" component={ ClosePurchase } />
           </Switch>
         </BrowserRouter>
       </div>

@@ -49,7 +49,7 @@ class ProductList extends Component {
       products: results,
     });
   }
-  
+
   handleInput(event) {
     const input = event.target.value;
     this.setState({ valueInput: input });

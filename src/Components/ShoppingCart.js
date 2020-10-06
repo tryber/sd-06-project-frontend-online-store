@@ -16,8 +16,8 @@ class ShoppingCart extends Component {
     const cart = JSON.parse(localStorage.getItem('cart'));
     let itens;
     if (cart) {
-      itens = cart.map((prod, index) => (
-        <div data-testid="product" key={ index }>
+      itens = cart.map((prod) => (
+        <div data-testid="product" key={ prod.id }>
           <h4 data-testid="shopping-cart-product-name">{ prod.title }</h4>
           <img src={ prod.thumbnail } alt="fotografia do produto" />
           <p><span>{`R$: ${prod.price}`}</span></p>

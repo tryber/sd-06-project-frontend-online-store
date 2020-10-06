@@ -1,21 +1,43 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 
 import ShoppingCartButton from '../components/ShoppingCartButton';
 
+import './styles/ProductDetails.css';
+import AddToCartButton from '../components/AddToCartButton';
+
 class ProductDetails extends Component {
   render() {
-    const { location: { state: {
+    const {
+      location: {
+        state: { title, thumbnail, price },
+      },
+      match: {
+        params: { productId },
+      },
+    } = this.props;
+
+    const product = {
+      id: productId,
       title,
-      thumbnail,
-      price } } } = this.props;
+      price,
+    };
+    const details = true;
     return (
-      <div data-testid="product-detail-name">
-        <h1>{title}</h1>
-        <img src={ thumbnail } alt={ `Detalhes do Produto: ${title}` } />
-        <span>{`R$ ${price}` }</span>
-        <p>{}</p>
-        <ShoppingCartButton />
+      <div>
+        <div className="product-detail-header">
+          <Link to="/">Voltar</Link>
+          <ShoppingCartButton />
+        </div>
+        <div data-testid="product-detail-name" className="product-detail">
+          <h1>{title}</h1>
+          <img src={ thumbnail } alt={ `Detalhes do Produto: ${title}` } />
+          <span>{`R$ ${price}`}</span>
+          <p>{}</p>
+        </div>
+        <AddToCartButton product={ product } details={ details } />
       </div>
     );
   }
@@ -27,6 +49,11 @@ ProductDetails.propTypes = {
       title: PropTypes.string,
       thumbnail: PropTypes.string,
       price: PropTypes.number,
+    }),
+  }).isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      productId: PropTypes.string,
     }),
   }).isRequired,
 };

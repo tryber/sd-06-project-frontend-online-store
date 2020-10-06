@@ -35,7 +35,7 @@ export default class ProductsCard extends Component {
 ProductsCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,

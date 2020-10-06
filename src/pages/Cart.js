@@ -22,7 +22,6 @@ class Cart extends React.Component {
 
   renderCart() {
     const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart);
     if (!cart) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
     }

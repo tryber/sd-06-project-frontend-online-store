@@ -56,6 +56,14 @@ class ShoppingCart extends React.Component {
   render() {
     const { items, addedItems } = this.state;
     const empty = 0;
+    const decimals = 2;
+    const initialTotalPrice = 0;
+    let totalPrice = initialTotalPrice;
+    items.forEach((item) => {
+      const { price, id } = item;
+      const quantity = addedItems[`${id}`];
+      totalPrice += (quantity * price);
+    });
 
     if (items.length === empty) {
       return (
@@ -118,7 +126,9 @@ class ShoppingCart extends React.Component {
           );
         })}
         <div>
-          <span>Valor Total da Compra R$:</span>
+          <span>
+            { `Valor Total da Compra R$: ${totalPrice.toFixed(decimals)}` }
+          </span>
         </div>
         <br />
         <Link to="/checkout">

@@ -7,14 +7,14 @@ class Cart extends React.Component {
   constructor(props) {
     super();
 
-    const { location: { state: { data } } } = props;
+    const { productsAddToCart } = props;
 
     this.changeQuantity = this.changeQuantity.bind(this);
     this.changeState = this.changeState.bind(this);
 
     this.state = {
       loadMessage: true,
-      cartItems: data,
+      cartItems: productsAddToCart,
     };
   }
 

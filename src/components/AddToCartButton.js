@@ -11,6 +11,7 @@ class AddToCartButton extends Component {
     if (details) {
       testId = 'product-detail-add-to-cart';
     }
+
     return (
       <div>
         <Link
@@ -23,6 +24,7 @@ class AddToCartButton extends Component {
     );
   }
 }
+
 
 AddToCartButton.defaultProps = {
   details: false,

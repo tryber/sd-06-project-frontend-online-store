@@ -6,7 +6,7 @@ import AddCartButton from './AddCartButton';
 
 class ProductCard extends Component {
   render() {
-    const { products, isFail, handleAddCart } = this.props;
+    const { products, isFail, handleAddCart, productCart } = this.props;
 
 
     if (isFail) {
@@ -25,7 +25,7 @@ class ProductCard extends Component {
               {element.price}
             </p>
             <Link
-              to={ { pathname: `/products/${element.id}`, state: { element } } }
+              to={ { pathname: `/products/${element.id}`, state: { element, productCart } } }
               data-testid="product-detail-link"
             >
               Ver Detalhes

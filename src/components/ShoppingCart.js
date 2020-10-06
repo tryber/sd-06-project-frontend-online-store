@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ProductQtd from './ProductQtd';
 
 class ShoppingCart extends Component {
+  constructor() {
+    super();
+
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.state = {
+      quantity: 1,
+    };
+  }
+
+  increaseQuantity() {
+    const { quantity } = this.state;
+    this.setState({
+      quantity: quantity + 1,
+    });
+  }
+
+  decreaseQuantity() {
+    const { quantity } = this.state;
+    this.setState({
+      quantity: quantity - 1,
+    });
+  }
+
   renderCart() {
     const { shoppingCart } = this.props;
     if (!shoppingCart.length) {
@@ -24,10 +49,10 @@ class ShoppingCart extends Component {
             </div>
             <div className="right-content" data-testid="shopping-cart-product-name">
               <h3>{item.product.title}</h3>
+              <div className="quantity-div">
+                <ProductQtd />
+              </div>
               <div className="price-div">
-                <p data-testid="shopping-cart-product-quantity">
-                  {`Qtd: ${item.product.quantity}`}
-                </p>
                 <p className="detail-price">
                   {`Preço: ${item.product.price}`}
                 </p>

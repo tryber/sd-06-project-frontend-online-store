@@ -8,12 +8,18 @@ class AddToCartButton extends Component {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, details } = this.props;
+    let testId = 'product-add-to-cart';
+
+    if (details) {
+      testId = 'product-detail-add-to-cart';
+    }
+
     return (
       <div>
         <button
           type="button"
-          data-testid="product-add-to-cart"
+          data-testid={ testId }
           onClick={ () => this.addProductToCart(product) }
         >
           Adicionar ao carrinho
@@ -23,6 +29,11 @@ class AddToCartButton extends Component {
   }
 }
 
+
+AddToCartButton.defaultProps = {
+  details: false,
+};
+
 AddToCartButton.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.string,
@@ -30,6 +41,7 @@ AddToCartButton.propTypes = {
     price: PropTypes.number,
   }).isRequired,
   updateCartListAndItens: PropTypes.func.isRequired,
+  details: PropTypes.bool,
 };
 
 export default AddToCartButton;

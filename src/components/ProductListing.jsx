@@ -92,7 +92,6 @@ export default class ProductListing extends Component {
         </div>
         <div className="message">
           <span data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</span>
-          
         </div>
         <div className="main">
           <div>

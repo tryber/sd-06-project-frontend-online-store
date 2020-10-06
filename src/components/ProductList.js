@@ -5,13 +5,16 @@ import PropTypes from 'prop-types';
 class ProductList extends React.Component {
   constructor() {
     super();
-    this.addProduct = this.addProduct.bind(this);
+
+    this.handleAddProduct = this.handleAddProduct.bind(this);
   }
-  
-  addProduct() {
-    const getObj = this.props.location.state;
-    const localStorageLength = localStorage.length;
-    localStorage.setItem(localStorageLength, JSON.stringify(getObj));
+
+  handleAddProduct(newProduct) {
+    const shoppingCart = [];
+    const products = JSON.parse(localStorage.getItem('cartProducts'));
+    if (products) shoppingCart.push(...products, newProduct);
+    else shoppingCart.push(newProduct);
+    localStorage.setItem('cartProducts', JSON.stringify(shoppingCart));
   }
 
   render() {
@@ -25,9 +28,11 @@ class ProductList extends React.Component {
           <img src={ items.thumbnail } alt="Product" />
           <p>{ `R$ ${items.price}` }</p>
           <button
-            data-testid="product-detail-add-to-cart"
-            onClick={this.addProduct}
-          >adicionar ao carrinho
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => this.handleAddProduct(items) }
+          >
+            adicionar ao carrinho
           </button>
         </div>
       ))

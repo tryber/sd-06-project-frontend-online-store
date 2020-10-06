@@ -1,12 +1,13 @@
 import React from 'react';
 import EmptyBox from '../images/empty-box.png';
+import ItemCardCart from './ItemCardCart';
 import './ShoppingCart.css';
 
-const productAdded = [];
+const productsAdded = [];
 
 const addProduct = (product) => {
-  productAdded.push(product);
-  console.log(productAdded)
+  productsAdded.push(product);
+  console.log(productsAdded);
 };
 
 
@@ -14,25 +15,21 @@ class ShoppingCart extends React.Component {
   constructor() {
     super();
     this.state = {
-      shoppingCart: [],
-      total: 0,
+      cart: [],
     };
     this.addToCart = this.addToCart.bind(this);
-    this.addOne = this.addOne.bind(this);
-    this.removeOne = this.removeOne.bind(this);
-    this.removeProduct = this.removeProduct.bind(this);
   }
 
   componentDidMount() {
-    console.log(productAdded);
-    this.addToCart(productAdded);
+    console.log(productsAdded);
+    this.addToCart(productsAdded);
   }
 
-  adddToCart(item) {
-    const { shoppingCart } = this.state;
+  addToCart(product) {
+    const { cart } = this.state;
     const array = [];
     let productCard;
-    item.forEach((item) => {
+    product.forEach((item) => {
       productCard = {
         id: item.id,
         title: item.title,
@@ -41,15 +38,24 @@ class ShoppingCart extends React.Component {
         quantity: 1,
       };
       array.push(productCard);
-      this.setState({ shoppingCart: [...shoppingCart, ...array] });
+      this.setState({ cart: [...cart, ...array] });
     });
   }
 
   render() {
+    const { cart } = this.state;
+    const zero = 0;
+    if (cart.length === zero) {
+      return (
+        <div>
+          <img src={ EmptyBox } alt="empty-box" className="empty-box" />
+          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        </div>
+      );
+    }
     return (
       <div>
-        <img src={EmptyBox} alt="empty-box" className="empty-box" />
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+        {cart.map((item) => <ItemCardCart key={ item.id } product={ item } />)}
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import React from 'react';
+import CategoryDisplay from '../components/CategoryDisplay';
 import ShoppingCartButton from './ShoppingCartButton';
 
 class SearchBar extends React.Component {
@@ -26,6 +27,7 @@ class SearchBar extends React.Component {
         </section>
         <section className="shopping-car-button">
           <ShoppingCartButton />
+          <CategoryDisplay />
         </section>
       </div>
     )

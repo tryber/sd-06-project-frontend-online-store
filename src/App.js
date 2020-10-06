@@ -1,22 +1,11 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import PagInicial from './PagInicial';
-import CarrinhoCompras from './components/CarrinhoCompras';
-import ProductDetails from './components/ProductDetails';
+import React, { Component } from 'react';
+import ControlShoppingCart from './ControlShoppingCart';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route
-          path="/ProductDetails/:id"
-          render={ (props) => <ProductDetails { ...props } /> }
-        />
-        <Route path="/CarrinhoCompras" component={ CarrinhoCompras } />
-        <Route exact path="/" component={ PagInicial } />
-      </Switch>
-    </BrowserRouter>
-  );
+class App extends Component {
+  render() {
+    return (
+      <ControlShoppingCart />
+    );
+  }
 }
-
 export default App;

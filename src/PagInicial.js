@@ -1,82 +1,53 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ListCategories from './components/ListCategories';
-import * as api from './services/api';
 import CardsContainer from './components/CardsContainer';
 import CartItems from './components/CartItems';
 import cart from './img/cart-image.png';
 
 class PagInicial extends Component {
-  constructor() {
-    super();
-
-    this.setValue = this.setValue.bind(this);
-    this.fetchApi = this.fetchApi.bind(this);
-    this.setProductCart = this.setProductCart.bind(this);
-    this.fetchCategory = this.fetchCategory.bind(this);
-
-    this.state = {
-      category: '',
-      value: '',
-      products: [],
-      empty: '',
-      productCart: [],
-      countProducts: '0',
-    };
-  }
-
-  setValue({ target }) {
-    this.setState({
-      value: target.value,
+  increaseProduct(productId) {
+    const { productCart } = this.state;
+    productCart.forEach((productList) => {
+      if (productList.id === productId) {
+        const beforeState = productList.countTotal;
+        productList.countTotal = beforeState + 1;
+      }
     });
   }
 
-  setProductCart(productName, productId) {
-    this.setState((prevState) => ({
-      productCart: prevState.productCart.concat({ name: productName, id: productId }),
-      countProducts: (Number(prevState.countProducts) + 1).toString(),
-
-    }));
-  }
-
-  async fetchCategory(param) {
-    const { empty } = this.state;
-    const result = await api.getProductsFromCategoryAndQuery(param, empty);
-    this.setState(() => ({
-      products: result.results,
-    }));
-  }
-
-  async fetchApi() {
-    const { value, category } = this.state;
-    const result = await api.getProductsFromCategoryAndQuery(category, value);
-    this.setState(() => ({
-      products: result.results,
-    }));
-  }
-
   render() {
-    const { value, products, productCart, countProducts } = this.state;
-    const idInput = 'Digite algum termo de pesquisa ou escolha uma categoria.';
+    const {
+      fetchCategory,
+      products,
+      setProductCart,
+      productCart,
+      countProducts,
+      fetchApi,
+      setValue,
+      value,
+    } = this.props;
+    const idInput = 'query-input';
     return (
       <div data-testid="home-initial-message">
         <form>
           <label htmlFor={ idInput }>
-            { idInput }
+            Digite algum termo de pesquisa ou escolha uma categoria.
+            <input
+              data-testid="query-input"
+              name="user-input"
+              id={ idInput }
+              type="text"
+              onChange={ setValue }
+              value={ value }
+            />
           </label>
-          <input
-            data-testid="query-input"
-            name="user-input"
-            id={ idInput }
-            type="text"
-            onChange={ this.setValue }
-            value={ value }
-          />
           <button
             type="button"
             data-testid="query-button"
             onClick={ (event) => {
-              this.fetchApi();
+              fetchApi();
               event.preventDefault();
             } }
           >
@@ -84,7 +55,7 @@ class PagInicial extends Component {
           </button>
         </form>
         <section data-testid="shopping-cart-button">
-          <Link to="/CarrinhoCompras">
+          <Link to={ { pathname: '/CarrinhoCompras', state: { props: 'test' } } }>
             <img
               src={ cart }
               alt="test"
@@ -96,14 +67,25 @@ class PagInicial extends Component {
           </div>
         </section>
         <section>
-          <ListCategories fetchCategory={ this.fetchCategory } />
+          <ListCategories fetchCategory={ fetchCategory } />
         </section>
         <section>
-          <CardsContainer setProductCart={ this.setProductCart } products={ products } />
+          <CardsContainer setProductCart={ setProductCart } products={ products } />
         </section>
       </div>
     );
   }
 }
+
+PagInicial.propTypes = {
+  fetchCategory: PropTypes.func.isRequired,
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setProductCart: PropTypes.func.isRequired,
+  productCart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  countProducts: PropTypes.string.isRequired,
+  fetchApi: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+};
 
 export default PagInicial;

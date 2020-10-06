@@ -1,0 +1,30 @@
+.homePage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+  overflow: scroll;
+  width: 80%;
+}
+
+.cart-count {
+  display: inline-block;
+  background: linear-gradient(45deg, #0fa36b 30%, #0fa36b 90%);
+  border-radius: 50%;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  left: -10px;
+  color: white
+}
+
+.nav {
+  display: flex;
+  width: 20%;
+}

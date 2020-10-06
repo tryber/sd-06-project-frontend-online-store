@@ -5,6 +5,8 @@ import ProductsList from '../components/ProductsList';
 import SearchBar from '../components/SearchBar';
 import { arrayProductList, countQuantity } from '../dados/cart_arrayProductList';
 import * as api from '../services/api';
+import homePage from '../style/HomePage.css';
+import ShoppingCart from '../shopping-cart.svg'
 
 class HomePage extends Component {
   constructor() {
@@ -60,14 +62,18 @@ class HomePage extends Component {
     const { cards } = this.state;
 
     return (
-      <div>
-        <div>
-          <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
-          <span data-testid="shopping-cart-size">{countQuantity()}</span>
-          <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
+      <div className="homePage">
+        <Categories className="nav" handleCategoryClick={this.handleCategoryClick} />
+        <div className="header">
+          <header>
+            <div>
+              <Link data-testid="shopping-cart-button" to="/cart"> <img src={ShoppingCart} width="30"/><span className="cart-count" data-testid="shopping-cart-size">{countQuantity()}</span></Link>
+              
+            </div>
+            <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
+          </header>
+          <ProductsList className="productList" cards={cards} counterQuantity={this.counterQuantity} />
         </div>
-        <Categories handleCategoryClick={this.handleCategoryClick} />
-        <ProductsList cards={cards} counterQuantity={this.counterQuantity} />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { cart } from '../dados/cart_arrayProductList';
-
+import '../style/ProductsList.css';
 
 class ProductsList extends Component {
   constructor() {
@@ -25,29 +25,30 @@ class ProductsList extends Component {
     }
 
     return (
-      <section>
+      <section className="body-list">
         {cards.map((product) => {
           const { title, thumbnail, price, id, shipping } = product;
 
           return (
-            <div key={id} data-testid="product">
-              <Link to={`/details/${id}`} data-testid="product-detail-link" key={id} >
-                <section>
-                  <p>{title}</p>
-                  <img src={thumbnail} alt="" />
+            <div key={id} data-testid="product" className="product-cart">
+              <Link to={`/details/${id}`} data-testid="product-detail-link" key={id} className="product-link">
+                <section className="product-info">
+                  <p className="product-title">{title}</p>
+                  <img src={thumbnail} alt="" className="product-img" />
                   <p>{`R$${price}`}</p>
                   {
                     (shipping.free_shipping)
                     ? <span data-testid="free-shipping">Frete Grátis</span>
-                    : ''
+                    : []
                   }
                 </section>
               </Link>
               <button
                 type="button"
+                className="product-button"
                 id={id} data-testid="product-add-to-cart"
-                onClick={this.handleAddCart}
-              >Adicionar ao cart</button>
+                onClick={this.handleAddCart}                
+              >Adicionar ao carrinho</button>
             </div>
           );
         })}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from '../services/api';
+import nav from '../style/Categories.css';
 
 
 class Categories extends Component {
@@ -36,17 +37,17 @@ class Categories extends Component {
     
     return (
       <nav>
-        <ul>
+        <ul className="categoryList">
           {name.map(names => (
-            <label htmlFor={names.id} key={names.id}>
-              <input
-                type="radio" id={names.id}
-                name="categoryID"
-                data-testid="category"
-                onClick={this.handleClick}
-              />
-              {names.name}
-            </label>
+              <label htmlFor={names.id} key={names.id}>
+                <input
+                  type="radio" id={names.id}
+                  name="categoryID"
+                  data-testid="category"
+                  onClick={this.handleClick}
+                />
+                {names.name}
+              </label>
           ))}
         </ul>
       </nav>

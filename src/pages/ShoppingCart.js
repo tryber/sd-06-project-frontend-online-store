@@ -5,7 +5,7 @@ import Cart from '../services/cart';
 class ShoppingCart extends React.Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       checkout: false,
     };
   }
@@ -14,7 +14,7 @@ class ShoppingCart extends React.Component {
     const productArray = Cart.getItemsFromLocalStorage();
     let totalValue = 1 - 1;
     productArray.forEach((product) => {
-      totalValue += product.price;
+      totalValue += (product.price * product.amount);
     });
     return totalValue;
   }
@@ -37,7 +37,7 @@ class ShoppingCart extends React.Component {
         <ShoppingCart />
         <div>
           <span>Total a pagar: R$ </span>
-          {this.getTotalValue()}
+          {(this.getTotalValue()).toFixed(2)}
         </div>
         <div>
           <form>
@@ -113,7 +113,7 @@ class ShoppingCart extends React.Component {
                   <div>
                     <p>
                       Preço R$
-                      {element.price}
+                      {(element.price * element.amount).toFixed(2)}
                     </p>
                     <div data-testid="shopping-cart-product-quantity">
                       <p>

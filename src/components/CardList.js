@@ -7,7 +7,7 @@ import NoSearching from './NoSearching';
 import Loading from './Loading';
 
 class CardList extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
@@ -32,7 +32,7 @@ class CardList extends React.Component {
     if (value !== '' || value != null) {
       this.setState({
         loading: true,
-      })
+      });
       this.fetchCard('');
     }
   }
@@ -83,7 +83,8 @@ class CardList extends React.Component {
         </div>
         <CategoriesList handleID={ this.handleClickID } />
         <div>
-          { loading ? <Loading /> : products.map((product) => <Card product={ product } key={ product.id } />) }
+          { loading ? <Loading /> : products.map((product) => (
+            <Card product={ product } key={ product.id } />)) }
           { (empty != null && empty) ? <NoSearching /> : false }
         </div>
       </div>

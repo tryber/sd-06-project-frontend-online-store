@@ -48,24 +48,22 @@ class ShoppingCart extends React.Component {
       return (
         <div>
           <Header />
-          <Link to="/">Voltar</Link>
-          <br />
           <img src={ EmptyBox } alt="empty-box" className="empty-box" />
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          <Link to="/"><button type="button">Voltar</button></Link>
         </div>
       );
     }
     return (
       <div>
         <Header />
-        <Link to="/">Voltar</Link>
-        <br />
-        { cart.map((item) => <ItemCardCart key={ item.id } product={ item } />) }
-        <div>
-          <Link data-testid="checkout-products" to="/checkout">
-            <button type="button">Finalizar a compra</button>
-          </Link>
+        <div className="shopping-cart-products">
+          { cart.map((item) => <ItemCardCart key={ item.id } product={ item } />) }
         </div>
+        <Link to="/"><button type="button">Voltar</button></Link>
+        <Link data-testid="checkout-products" to="/checkout">
+          <button type="button">Finalizar a compra</button>
+        </Link>
       </div>
     );
   }

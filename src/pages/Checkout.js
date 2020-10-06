@@ -1,7 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Cart from '../services/cart';
 
 class Checkout extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      fullName: '',
+      email: '',
+      cpfId: '',
+      phone: '',
+      cepId: '',
+      address: '',
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   getTotalValue() {
     const productArray = Cart.getItemsFromLocalStorage();
     let totalValue = 1 - 1;
@@ -11,9 +25,17 @@ class Checkout extends React.Component {
     return totalValue;
   }
 
+  handleChange({ target }) {
+    const { name } = target;
+    this.setState({
+      [name]: target.value,
+    });
+  }
+
   render() {
     const produtos = Cart.getItemsFromLocalStorage();
-    const number2 = 2;
+    const round = 2;
+    const { fullName, email, cpfId, phone, cepId, address } = this.state;
     return (
       <div>
         <h1>MLB - Compra 100% segura</h1>
@@ -37,31 +59,60 @@ class Checkout extends React.Component {
             )) }
             <br />
             <span>Total a pagar: R$ </span>
-            { this.getTotalValue().toFixed(number2) }
+            { this.getTotalValue().toFixed(round) }
           </fieldset>
           <br />
           <fieldset>
             <legend>Informações do comprador</legend>
             <input
               type="text"
+              name="fullName"
               data-testid="checkout-fullname"
               placeholder="Nome Completo"
+              value={ fullName }
+              onChange={ this.handleChange }
+              required="required"
             />
             <input
               type="text"
-              data-testid="
-              checkout-email"
-              placeholder="Email:
-              exemplo@exem.com"
+              name="email"
+              data-testid="checkout-email"
+              placeholder="Email:exemplo@exem.com"
+              value={ email }
+              onChange={ this.handleChange }
             />
-            <input type="text" data-testid="checkout-cpf" placeholder="CPF" />
             <input
               type="text"
+              name="cpfId"
+              data-testid="checkout-cpf"
+              placeholder="CPF"
+              value={ cpfId }
+              onChange={ this.handleChange }
+            />
+            <input
+              type="text"
+              name="phone"
               data-testid="checkout-phone"
               placeholder="Telefone (XX) XXXX-XXXX"
+              value={ phone }
+              onChange={ this.handleChange }
             />
-            <input type="text" data-testid="checkout-cep" placeholder="CEP" />
-            <input type="text" data-testid="checkout-address" placeholder="Endereço" />
+            <input
+              type="text"
+              name="cepId"
+              data-testid="checkout-cep"
+              placeholder="CEP"
+              value={ cepId }
+              onChange={ this.handleChange }
+            />
+            <input
+              type="text"
+              name="address"
+              data-testid="checkout-address"
+              placeholder="Endereço"
+              value={ address }
+              onChange={ this.handleChange }
+            />
           </fieldset>
           <br />
           <fieldset>
@@ -88,7 +139,9 @@ class Checkout extends React.Component {
           </fieldset>
         </form>
         <br />
-        <button type="button">COMPRAR</button>
+        <Link to="/">
+          <button type="submit" onClick={ this.handleClick }>COMPRAR</button>
+        </Link>
       </div>
     );
   }

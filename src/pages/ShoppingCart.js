@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import Cart from '../services/cart';
 
 class ShoppingCart extends React.Component {
-  constructor() {
-    super();
-    this.state = { checkout: false };
-  }
-
   getTotalValue() {
     const productArray = Cart.getItemsFromLocalStorage();
     let totalValue = 1 - 1;
@@ -29,48 +24,7 @@ class ShoppingCart extends React.Component {
     Cart.addItem(product);
   }
 
-  checkoutFields() {
-    return (
-      <div>
-        <ShoppingCart />
-        <div>
-          <span>Total a pagar: R$ </span>
-          {this.getTotalValue()}
-        </div>
-        <div>
-          <form>
-            <input
-              type="text"
-              data-testid="checkout-fullname"
-              placeholder="Nome Completo"
-            />
-            <input
-              type="text"
-              data-testid="
-              checkout-email"
-              placeholder="Email:
-              exemplo@exem.com"
-            />
-            <input type="text" data-testid="checkout-cpf" placeholder="CPF" />
-            <input
-              type="text"
-              data-testid="checkout-phone"
-              placeholder="Telefone (XX) XXXX-XXXX"
-            />
-            <input type="text" data-testid="checkout-cep" placeholder="CEP" />
-            <input type="text" data-testid="checkout-address" placeholder="Endereço" />
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-
   render() {
-    const { checkout } = this.state;
-    if (checkout) {
-      return this.checkoutFields();
-    }
     const produtos = Cart.getItemsFromLocalStorage();
     return (
       produtos.length < 1

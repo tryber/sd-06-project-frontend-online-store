@@ -7,12 +7,12 @@ import '../styles/ProductList.css';
 
 export default class ProductList extends Component {
   render() {
-    const { queryInput, foundItems, products } = this.props;
+    const { queryInput, foundItems, products, categoryInput } = this.props;
     const zero = 0;
     return (
       <div className="product-list">
         {/* if there is not anything in query input, render this block */}
-        {queryInput === '' && (
+        {queryInput === '' && categoryInput === '' && (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
@@ -39,6 +39,9 @@ ProductList.defaultProps = {
 
 ProductList.propTypes = {
   queryInput: PropTypes.string.isRequired,
+  categoryInput: PropTypes.string.isRequired,
   foundItems: PropTypes.bool,
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  products: PropTypes.shape({
+    results: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };

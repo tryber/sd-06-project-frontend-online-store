@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 class Checkout extends React.Component {
   constructor(props) {
@@ -85,7 +86,9 @@ class Checkout extends React.Component {
               </label>
             </div>
           </form>
-          <button type="submit">Finalizar compra</button>
+          <Link to="/">
+            <button type="submit">Finalizar compra</button>
+          </Link>
         </div>
       </section>
     );

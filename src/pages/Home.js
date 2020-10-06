@@ -1,62 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ListCategories from '../components/ListCategories';
-
 import ShoppingCartButton from '../components/ShoppingCartButton';
 import ProductCard from '../components/ProductCard';
-import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
-  constructor() {
-    super();
-    this.state = {
-      query: '',
-      products: [],
-      isFail: false,
-      categoryId: '',
-      productCart: [],
-    };
-    this.handleInputSearchChange = this.handleInputSearchChange.bind(this);
-    this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
-    this.handleListCategories = this.handleListCategories.bind(this);
-    this.handleAddCart = this.handleAddCart.bind(this);
-  }
-
-  async handleClickSearchButton() {
-    const { query, categoryId } = this.state;
-    const valueFromApi = await getProductsFromCategoryAndQuery(categoryId, query);
-    const emptyArray = 0;
-    if (valueFromApi.results.length === emptyArray) {
-      this.setState({
-        isFail: true,
-        products: [],
-      });
-    } else {
-      this.setState({
-        products: valueFromApi.results,
-        isFail: false,
-      });
-    }
-  }
-
-  handleInputSearchChange({ target }) {
-    const { value } = target;
-    this.setState({ query: value });
-  }
-
-  handleListCategories(id) {
-    const value = id;
-    this.setState({ categoryId: value }, async () => {
-      await this.handleClickSearchButton();
-    });
-  }
-
-  handleAddCart(product) {
-    this.setState((prevState) => ({ productCart: [...prevState.productCart, product] }));
-  }
-
   render() {
-    const { products, isFail, productCart } = this.state;
+    const {
+      handleInputSearchChange,
+      handleClickSearchButton,
+      handleListCategories,
+      handleAddCart,
+    } = this.props;
+    const { products, cartList, isFail } = this.props;
+
     return (
       <main>
         <label
@@ -67,29 +25,39 @@ class Home extends Component {
           <input
             name="query"
             data-testid="query-input"
-            onChange={ this.handleInputSearchChange }
+            onChange={ handleInputSearchChange }
           />
         </label>
         <button
           type="button"
           data-testid="query-button"
-          onClick={ this.handleClickSearchButton }
+          onClick={ handleClickSearchButton }
         >
           BUSCAR
         </button>
         <div>
-          <ListCategories handleListCategories={ this.handleListCategories } />
+          <ListCategories handleListCategories={ handleListCategories } />
         </div>
-        <ShoppingCartButton productCart={ productCart } />
+        <ShoppingCartButton />
         <ProductCard
           products={ products }
-          productCart={ productCart }
+          cartList={ cartList }
           isFail={ isFail }
-          handleAddCart={ this.handleAddCart }
+          handleAddCart={ handleAddCart }
         />
       </main>
     );
   }
 }
+
+Home.propTypes = {
+  handleInputSearchChange: PropTypes.func,
+  handleClickSearchButton: PropTypes.func,
+  handleListCategories: PropTypes.func,
+  handleAddCart: PropTypes.func,
+  products: PropTypes.object,
+  cartList: PropTypes.array,
+  isFail: PropTypes.bool,
+}.isRequired;
 
 export default Home;

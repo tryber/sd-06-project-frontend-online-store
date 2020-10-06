@@ -12,11 +12,14 @@ class Checkout extends React.Component {
 
   render() {
     const { cartItems, addedItems } = this.state;
-    let totalPrice = null;
+    const decimalBase = 10;
+    const decimals = 2;
+    const initialTotalPrice = 0;
+    let totalPrice = initialTotalPrice;
     cartItems.forEach((item) => {
       const { price, id } = item;
-      const { quantity } = addedItems[`${id}`];
-      totalPrice += quantity * price;
+      const quantity = addedItems[`${id}`];
+      totalPrice += (quantity * price);
     });
     return (
       <section>
@@ -34,11 +37,11 @@ class Checkout extends React.Component {
                 />
                 <h3 className="checkout-product-title">{ title }</h3>
                 <p>{ `x${quantity}` }</p>
-                <span>{ price }</span>
+                <span>{ (price * quantity).toFixed(decimals) }</span>
               </div>
             );
           }) }
-          <span className="checkout-total-price">{ `Total: R$ ${totalPrice}` }</span>
+          <span className="checkout-total-price">{ `Total: R$ ${parseFloat(totalPrice.toFixed(decimals), decimalBase)}` }</span>
         </div>
         <div>
           <form className="checkout-form">

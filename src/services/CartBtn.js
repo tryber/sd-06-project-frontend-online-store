@@ -6,7 +6,7 @@ import '../App.css';
 function CartBtn() {
   return (
     <div className="cartImg">
-      <Link data-testid="shopping-cart-button" to="/Cart">
+      <Link data-testid="shopping-cart-button" to="/ShoppingCart">
         <img src={ cartImg } className="cartImg" alt="cart" />
       </Link>
     </div>

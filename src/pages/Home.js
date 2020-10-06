@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Categories from './Categories';
 import CartBtn from '../services/CartBtn';
 import ProductList from '../components/ProductList';
@@ -42,6 +43,7 @@ class Home extends React.Component {
   }
 
   render() {
+    const { addToCart } = this.props;
     const { products } = this.state;
     return (
       <div className="container">
@@ -67,7 +69,7 @@ class Home extends React.Component {
           >
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-          <ProductList products={ products } />
+          <ProductList products={ products } addToCart={ addToCart } />
 
         </div>
         <CartBtn />
@@ -75,5 +77,7 @@ class Home extends React.Component {
     );
   }
 }
+
+Home.propTypes = { addToCart: PropTypes.func.isRequired };
 
 export default Home;

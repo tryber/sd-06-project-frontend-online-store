@@ -7,7 +7,7 @@ class ProductQuantity extends Component {
       quantity: 1,
     };
     this.increaseItemProduct = this.increaseItemProduct.bind(this);
-    this.decreateItemProduct = this.decreateItemProduct.bind(this);
+    this.decreaseItemProduct = this.decreaseItemProduct.bind(this);
   }
 
   increaseItemProduct() {
@@ -15,7 +15,7 @@ class ProductQuantity extends Component {
     this.setState({ quantity: quantity + 1 });
   }
 
-  decreateItemProduct() {
+  decreaseItemProduct() {
     const { quantity } = this.state;
     if (quantity > 1) {
       this.setState({ quantity: quantity - 1 });
@@ -28,8 +28,8 @@ class ProductQuantity extends Component {
       <div>
         <button
           type="button"
-          data-testid="product-decreate-quantity"
-          onClick={ () => this.decreateItemProduct() }
+          data-testid="product-decrease-quantity"
+          onClick={ () => this.decreaseItemProduct() }
         >
           -
         </button>

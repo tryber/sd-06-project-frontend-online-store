@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { ShopList, ShopCart, ProductDetails, Checkout } from './pages';
 import './App.css';
+import './App.scss';
 
 class App extends React.Component {
   render() {

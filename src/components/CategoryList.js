@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
   render() {
-    const { categories, handleSelect } = this.props;
+    const { categories, handleSelect, handleReset } = this.props;
     const empty = 0;
 
     return (
       <section className="category-list">
+        <button type="button" onClick={ handleReset }>Limpar seleção</button>
         {(categories.length > empty)
           ? categories
             .map((category) => (

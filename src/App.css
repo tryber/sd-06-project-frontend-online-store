@@ -1,6 +1,8 @@
 .wrapper-category-shoplist {
   display: flex;
   flex-flow: row nowrap;
+
+
   padding: 18px;
 }
 
@@ -8,13 +10,30 @@
   border: 1px solid black;
   border-radius: 12px;
   margin: 0 20px;
-  width: 28%;
+  width: 20%;
   padding: 10px 20px;
 }
 
 .category-list label {
-  display: block;
+  background-color: #f8f2ac;
+  border-radius: 12px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.9em;
   margin: 3px;
+  padding: 6px 12px;
+}
+
+.category-list label.checked {
+  background-color: #ffef14;
+}
+
+.category-list input[type=radio] {
+  display: none;
+}
+
+.wrapper-shoplist {
+  width: 80%;
 }
 
 .productsList {

@@ -21,6 +21,10 @@
   outline-color: #0fa36b;
 }
 
+.product-cart:hover {
+  border-color: #0fa36b;
+}
+
 .product-button {
   background: linear-gradient(45deg, #0fa36b 30%, #0fa36b 90%);
   border-radius: 3px;

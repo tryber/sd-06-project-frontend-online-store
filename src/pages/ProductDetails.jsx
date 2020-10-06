@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { cart, arrayProductList, reviews, countQuantity } from '../dados/cart_arrayProductList';
+import '../style/Detail.css';
+import ShoppingCart from '../shopping-cart.svg'
 
 class ProductDetails extends Component {
   constructor() {
@@ -47,34 +49,39 @@ class ProductDetails extends Component {
     const product = this.filterProduct();
     const { title, thumbnail, price, id, shipping } = product;
     return (
-      <section>
-        <div>
-          <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
-          <span data-testid="shopping-cart-size">{this.state.countQuantity}</span>
+      <section className="detailPage">
+        <Link data-testid="shopping-cart-button" to="/cart"> 
+          <img src={ShoppingCart} width="30"/>
+          <span className="cart-count" data-testid="shopping-cart-size">{this.state.countQuantity}</span>
+        </Link>
+        <div className="cart-detail">
+          <section key={id} className="cart">
+            <h1 data-testid="product-detail-name">{title}</h1>
+            <img src={thumbnail} className="image"/>
+            <span>{`R$${price}`}</span>
+            {
+              (shipping.free_shipping)
+              ? <span data-testid="free-shipping">Frete Grátis</span>
+              : ''
+            }
+          </section>
+          <button
+            type="button"
+            onClick={() => this.AddCart(product)}
+            data-testid="product-detail-add-to-cart"
+            className="product-button"
+          >Adicionar ao cart</button>
         </div>
-        <section key={id}>
-          <h1 data-testid="product-detail-name">{title}</h1>
-          <img src={thumbnail} />
-          <span>{`R$${price}`}</span>
-          {
-            (shipping.free_shipping)
-            ? <span data-testid="free-shipping">Frete Grátis</span>
-            : ''
-          }
-        </section>
-        <button
-          type="button"
-          onClick={() => this.AddCart(product)}
-          data-testid="product-detail-add-to-cart"
-        >Adicionar ao cart</button>
         <form className="review">
-          <input type="text"  onChange={({ target }) => {this.setState({email: target.value})}} value={this.state.email} placeholder="Email" />
-          <textarea
+          <h2>Avaliações</h2>
+          <input type="text"  onChange={({ target }) => {this.setState({email: target.value})}} value={this.state.email} placeholder="Email" className="inputEmail"/>
+          <br></br><textarea
             data-testid="product-detail-evaluation"
             onChange={({ target }) => {this.setState({message: target.value})}}
             value={this.state.message}
-            placeholder="Mensagem(opcional)" 
-          />
+            placeholder="Mensagem(opcional)"
+            className="inputEmail"
+          /><br></br>
           <button type="button" onClick={this.reviewSubmit}>Avaliar</button>
         </form>
         {

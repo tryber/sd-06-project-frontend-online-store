@@ -67,7 +67,10 @@ class HomePage extends Component {
         <div className="header">
           <header>
             <div>
-              <Link data-testid="shopping-cart-button" to="/cart"> <img src={ShoppingCart} width="30"/><span className="cart-count" data-testid="shopping-cart-size">{countQuantity()}</span></Link>
+              <Link data-testid="shopping-cart-button" to="/cart"> 
+                <img src={ShoppingCart} width="30"/>
+                <span className="cart-count" data-testid="shopping-cart-size">{countQuantity()}</span>
+              </Link>
               
             </div>
             <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />

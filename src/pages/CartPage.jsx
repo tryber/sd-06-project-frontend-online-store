@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import { cart } from '../dados/cart_arrayProductList';
+import '../style/cart.css';
+import BackIcon from '../back.svg';
 
 class CartPage extends Component {
   constructor() {
@@ -29,8 +30,8 @@ class CartPage extends Component {
   }
   render() {
     return (
-      <div>
-        <Link to="/">Back</Link>
+      <div className="cart-container">
+        <Link to="/"><img src={BackIcon} width="30" /></Link>
         <h1>Carrinho de compras</h1>
         {
           (cart <= 0 )
@@ -38,16 +39,18 @@ class CartPage extends Component {
           : cart.map((product) => {
               const { id, thumbnail, title, price } = product;
               return (
-                <div key={id}>
+                <div key={id} className="cart-product">
                   <img src={thumbnail}/>
-                  <h2 data-testid="shopping-cart-product-name">{title}</h2>
-                  <div className="quantidade">
+                  <h3 data-testid="shopping-cart-product-name">{title}</h3>
+                  <div className="quantidade qty-price">
                     <button
                       value="-"
                       name={id}
                       type="button"
                       data-testid="product-decrease-quantity"
                       onClick={this.handleClayton}
+                      className="minus"
+
                     > - </button>
                     <p data-testid="shopping-cart-product-quantity">
                       {this.state[id] ? this.state[id] : cart.find((product) => product.id === id).quantity}
@@ -58,6 +61,7 @@ class CartPage extends Component {
                       type="button"
                       data-testid="product-increase-quantity"
                       onClick={this.handleClayton}
+                      className="add"
                     > + </button>
                   </div>
                   <p>{`R$${price}`}</p>
@@ -65,7 +69,7 @@ class CartPage extends Component {
               );
             })
         }
-        <Link to="/checkout" data-testid="checkout-products"><button>Finalizar Compra</button></Link>
+        <Link to="/checkout" data-testid="checkout-products" ><button className="finalizarCompra">Finalizar Compra</button></Link>
       </div>
     );
   }

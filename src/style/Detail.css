@@ -1,0 +1,71 @@
+.detailPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.cart-detail {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.692);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  margin-bottom: 0px;
+  overflow: hidden;
+  justify-content: space-between;
+  outline-color: #0fa36b;
+  font-size: 16pt;
+}
+.image {
+  width: 20%;
+}
+
+.product-button {
+  background: linear-gradient(45deg, #0fa36b 30%, #0fa36b 90%);
+  border-radius: 3px;
+  border: none;
+  color: white;
+  height: 50px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+}
+
+.review {
+  width: 100%;
+  padding: 15px;
+}
+
+.review input {
+  width: 20%
+}
+
+.review textarea {
+  width: 30%
+}
+
+.review button {
+  background: linear-gradient(45deg, #0fa36b 30%, #0fa36b 90%);
+  padding: 5px;
+  width: 15%;
+  color: white;
+  border: none;
+}
+
+.inputEmail {
+  width: 70%;
+  border-radius: 3;
+  border: 0;
+  height: 25px;
+  padding: 0 30px;
+  box-shadow: 0 1px 5px 2px rgba(4, 95, 39, 0.644);
+  outline-color: #0fa36b;
+}

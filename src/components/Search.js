@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Category from '../Category';
-import * as api from '../services/api';
-import ProductCard from './ProductCard';
-
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Category from "../Category";
+import * as api from "../services/api";
+import ProductCard from "./ProductCard";
+import Category from "../Category";
 
 class Search extends Component {
   constructor() {
@@ -13,8 +13,8 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.state = {
-      searchInput: '',
-      categoryInput: '',
+      searchInput: "",
+      categoryInput: "",
       products: {},
       seachDone: false,
     };
@@ -28,19 +28,20 @@ class Search extends Component {
     const { searchInput, categoryInput } = this.state;
 
     this.setState({ seachDone: true }, async () => {
-      const productsList = await api
-        .getProductsFromCategoryAndQuery(categoryInput, searchInput);
+      const productsList = await api.getProductsFromCategoryAndQuery(
+        categoryInput,
+        searchInput,
+      );
       this.setState({ products: productsList });
     });
   }
-
 
   render() {
     const { searchInput, products, seachDone } = this.state;
     const zero = 0;
     return (
       <div className="container">
-        <Category/>
+        <Category />
         <form className="searchForm">
           <input
             id="home-initial-input"
@@ -48,13 +49,13 @@ class Search extends Component {
             data-testid="query-input"
             placeholder="Digite aqui o termo da sua busca"
             // required="required"
-            value={ searchInput }
-            onChange={ this.handleChange }
+            value={searchInput}
+            onChange={this.handleChange}
           />
           <button
             type="button"
             data-testid="query-button"
-            onClick={ this.handleClick }
+            onClick={this.handleClick}
           >
             Buscar
           </button>
@@ -64,18 +65,17 @@ class Search extends Component {
             </Link>
           </button>
         </form>
-        { searchInput === '' && (
+        {searchInput === "" && (
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
-        { Object.keys(products).length !== zero && (seachDone) && (
-          products.results
-            .map((item) => <ProductCard product={ item } key={ item.title } />)
-        )}
-        
+        {Object.keys(products).length !== zero &&
+          seachDone &&
+          products.results.map((item) => (
+            <ProductCard product={item} key={item.title} />
+          ))}
       </div>
-
     );
   }
 }

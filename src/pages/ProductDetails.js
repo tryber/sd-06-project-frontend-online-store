@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ProductEvaluation from '../components/ProductEvaluation';
 
 class ProductDetails extends Component {
   render() {
@@ -17,6 +18,7 @@ class ProductDetails extends Component {
           <li>Especificacoes</li>
           <li>Especificacoes</li>
           <li>Especificacoes</li>
+          <ProductEvaluation />
         </ul>
       </div>
     );

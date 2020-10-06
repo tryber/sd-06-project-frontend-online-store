@@ -1,0 +1,12 @@
+.header {
+  background-color: #353535;
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.logo-icon {
+  height: 70px;
+}

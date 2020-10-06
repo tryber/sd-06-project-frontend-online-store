@@ -17,10 +17,10 @@ class App extends React.Component {
     this.handleEventChecked = this.handleEventChecked.bind(this);
     this.handleCartItems = this.handleCartItems.bind(this);
     this.removeItem = this.removeItem.bind(this);
-    this.saveDetails = this.saveDetails.bind(this)
+    this.saveDetails = this.saveDetails.bind(this);
 
     this.state = {
-      textInput: "",
+      textInput: '',
       data: null,
       checkedId: null,
       productDetails: null,
@@ -32,6 +32,11 @@ class App extends React.Component {
     };
   }
 
+  onClick() {
+    const { textInput: { query } } = this.state;
+    if (query !== '') this.fetchProducts({ query });
+  }
+
   addOrRemoveProduct(product, op) {
     console.log('Produto adicionado ao carrinho com sucesso!');
     console.log(product, op);
@@ -41,9 +46,9 @@ class App extends React.Component {
       if (products.some((item) => (item.id === product.id))) {
         newListItems = products.map((item) => {
           if (item.id === product.id) {
-            if (op === "plus") {
+            if (op === 'plus') {
               item.aqtd += 1;
-            } else {
+            } else if (op === 'minus') {
               if (item.aqtd > 1) item.aqtd -= 1;
             }
             return item;
@@ -51,12 +56,10 @@ class App extends React.Component {
           return item;
         });
         return newListItems;
-      } else {
-        return [...products, product];
       }
-    } else {
-      return [product];
+      return [...products, product];
     }
+    return [product];
   }
 
   handleCartItems(product, op) {
@@ -67,7 +70,7 @@ class App extends React.Component {
 
   removeItem(id) {
     const { cart: { products } } = this.state;
-    const newCartItems = products.filter(item => item.id !== id);
+    const newCartItems = products.filter((item) => item.id !== id);
     this.setState({ cart: { products: newCartItems } });
   }
 
@@ -86,39 +89,45 @@ class App extends React.Component {
     this.fetchProducts({ categoryId });
   }
 
-  onClick() {
-    const query = this.state.textInput;
-    if (query !== '') this.fetchProducts({ query });
-  }
-
   async fetchProducts({ categoryId, query }) {
     const fetchData = await api.getProductsFromCategoryAndQuery({ categoryId, query });
     this.setState({ data: fetchData });
   }
+
   render() {
     const { data, textInput, cart, checkedId, productDetails } = this.state;
     return (
       <Router>
         <Switch>
-          <Route path="/products/:id" component={ () => <ProductDetails
-            productDetails={productDetails}
-            handleCartItems={this.handleCartItems}
-          /> } />
-          <Route path="/cart" component={ () => <Cart
-            removeItem={this.removeItem}
-            handleCartItems={this.handleCartItems} 
-            cart={cart}
-          /> } />
-          <Route exact path="/" component={ () => <Home
-            saveDetails={this.saveDetails}
-            data={data} 
-            textInput={textInput} 
-            handleEvent={this.handleEvent} 
-            onClick={this.onClick} 
-            handleCartItems={this.handleCartItems} 
-            handleEventChecked={this.handleEventChecked}
-            checkedId={checkedId}
-          /> } />
+          <Route
+            path="/products/:id"
+            component={ () => (<ProductDetails
+              productDetails={ productDetails }
+              handleCartItems={ this.handleCartItems }
+            />) }
+          />
+          <Route
+            path="/cart"
+            component={ () => (<Cart
+              removeItem={ this.removeItem }
+              handleCartItems={ this.handleCartItems }
+              cart={ cart }
+            />) }
+          />
+          <Route
+            exact
+            path="/"
+            component={ () => (<Home
+              saveDetails={ this.saveDetails }
+              data={ data }
+              textInput={ textInput }
+              handleEvent={ this.handleEvent }
+              onClick={ this.onClick }
+              handleCartItems={ this.handleCartItems }
+              handleEventChecked={ this.handleEventChecked }
+              checkedId={ checkedId }
+            />) }
+          />
         </Switch>
       </Router>
     );

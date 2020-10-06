@@ -51,7 +51,7 @@ class ShoppingCart extends Component {
               <h3>{item.product.title}</h3>
               <div className="quantity-div">
                 <p data-testid="shopping-cart-product-quantity">
-                  {`${quantity}`}
+                  {`Qtd: ${quantity}`}
                 </p>
                 <button
                   type="button"

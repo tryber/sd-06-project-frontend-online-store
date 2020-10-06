@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import AddToCartButton from './AddToCartButton';
+
 import '../styles/ProductsCard.css';
 
 export default class ProductsCard extends Component {
@@ -23,6 +25,7 @@ export default class ProductsCard extends Component {
         >
           Detalhes do Produto
         </Link>
+        <AddToCartButton product={ product } />
       </div>
     );
   }
@@ -32,7 +35,7 @@ export default class ProductsCard extends Component {
 ProductsCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,

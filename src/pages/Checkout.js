@@ -12,8 +12,10 @@ class Checkout extends React.Component {
       phone: '',
       cepId: '',
       address: '',
+      errorMessage: '',
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   getTotalValue() {
@@ -32,10 +34,24 @@ class Checkout extends React.Component {
     });
   }
 
+  handleClick(event) {
+    const { fullName, email, cpfId, phone, cepId, address } = this.state;
+    if (
+      fullName === '' || email === '' || cpfId === '' || phone === ''
+      || cepId === '' || address === '') {
+      event.preventDefault();
+      this.setState({
+        errorMessage: 'Todos os campos devem ser preenchidos!',
+      });
+    } else {
+      Cart.removeAll();
+    }
+  }
+
   render() {
     const produtos = Cart.getItemsFromLocalStorage();
     const round = 2;
-    const { fullName, email, cpfId, phone, cepId, address } = this.state;
+    const { fullName, email, cpfId, phone, cepId, address, errorMessage } = this.state;
     return (
       <div>
         <h1>MLB - Compra 100% segura</h1>
@@ -118,29 +134,33 @@ class Checkout extends React.Component {
           <fieldset>
             <legend>Método de pagamento</legend>
             <label htmlFor="boleto">
-              Boleto
               <input type="radio" id="boleto" value="bo" name="payment" checked />
+              Boleto
             </label>
             &nbsp;
             <label htmlFor="visa">
-              Visa
               <input type="radio" id="visa" value="cardVisa" name="payment" />
+              Visa
             </label>
             &nbsp;
             <label htmlFor="mastercard">
-              MasterCard
               <input type="radio" id="mastercard" value="cardMaster" name="payment" />
+              MasterCard
             </label>
             &nbsp;
             <label htmlFor="elo">
-              Elo
               <input type="radio" id="elo" value="cardElo" name="payment" />
+              Elo
             </label>
           </fieldset>
         </form>
         <br />
+        <div>{ errorMessage }</div>
+        <br />
         <Link to="/">
-          <button type="submit" onClick={ this.handleClick }>COMPRAR</button>
+          <button type="button" onClick={ (event) => this.handleClick(event) }>
+            COMPRAR
+          </button>
         </Link>
       </div>
     );

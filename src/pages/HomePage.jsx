@@ -1,5 +1,7 @@
+ 
 /* eslint-disable react/no-unused-state */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
@@ -16,16 +18,27 @@ class HomePage extends React.Component {
       categorySelected: '',
       products: [],
       categories: [],
+      cartItem: [],
+      cartCount: '0',
     };
 
     this.onClick = this.onClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
+    this.teste = this.teste.bind(this);
+    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
     api.getCategories().then((value) => this.setState({
       categories: value,
+    }));
+  }
+  addCart(productName, productId) {
+    this.setState((prevState) => ({
+      cartItem: prevState.cartItem.concat({ name: productName, id: productId }),
+      cartCount: (Number(prevState.cartCount) + 1).toString(),
+
     }));
   }
 
@@ -53,7 +66,13 @@ class HomePage extends React.Component {
     }
   }
 
+
+  teste(items) {
+    console.log(items);
+  }
+
   render() {
+    // if () return <Redirect to="/" />;
     const { products, categories } = this.state;
     return (
       <div>
@@ -76,8 +95,12 @@ class HomePage extends React.Component {
         </button>
         <div>
           {products.map((items) => (<ProductList
+          cartItem={this.state.cartItem}
+          cartCount={this.state.cartCount}
+          addCart={ this.addCart}
             key={ items.id }
             items={ items }
+            teste={ this.teste }
           />))}
         </div>
         <div>
@@ -91,5 +114,10 @@ class HomePage extends React.Component {
     );
   }
 }
+
+HomePage.propTypes = {
+  cartItem: PropTypes.arrayOf.isRequired,
+  cartCount: PropTypes.string.isRequired,
+};
 
 export default HomePage;

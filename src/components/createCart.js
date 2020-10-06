@@ -15,8 +15,12 @@ export default class CreateCart extends Component {
 
   componentDidMount() {
     const cartLocalStorage = JSON.parse(localStorage.getItem('cartLocal'));
-    const result = cartLocalStorage.reduce((previousValue, next) => previousValue + next.price, 0);
+    const zer = 0;
+    if (cartLocalStorage !== null) {
+      const result = cartLocalStorage
+      .reduce((previousValue, next) => previousValue + next.price, zer);
     this.setStateTotal(result);
+    }
   }
 
   setStateTotal(element) {
@@ -29,7 +33,8 @@ export default class CreateCart extends Component {
     const { total } = this.state;
     const product = target.parentNode;
     const cartLocalStorage = JSON.parse(localStorage.getItem('cartLocal'));
-    const removeLocalStorage = cartLocalStorage.filter((element) => element.id !== elementId);
+    const removeLocalStorage = cartLocalStorage
+      .filter((element) => element.id !== elementId);
     const CartLocal = JSON.stringify(removeLocalStorage);
     localStorage.setItem('cartLocal', CartLocal);
     product.remove();
@@ -38,23 +43,26 @@ export default class CreateCart extends Component {
   }
 
   sumProduct(target, element, price) {
-    const number = parseInt(target.parentNode.lastChild.innerText);
-    const quandity = number + 1;
-    document.getElementById(element).innerText = quandity;
-    document.getElementById(`${element}price`).innerText = price * quandity;
-    const result = Math.round(price + this.state.total);
+    const { total } = this.state;
+    const number = parseInt(target.parentNode.lastChild.innerText, 0);
+    const quantity = number + 1;
+    document.getElementById(element).innerText = quantity;
+    document.getElementById(`${element}price`).innerText = price * quantity;
+    const result = Math.round(price + total);
     this.setStateTotal(result);
   }
 
   decreaseProduct(target, element, price) {
-    const number = parseInt(target.parentNode.lastChild.innerText);
-    const quandity = number - 1;
-    const result = (Math.round(this.state.total - price));
-    if (quandity === 0) {
+    const number = parseInt(target.parentNode.lastChild.innerText, 0);
+    const { total } = this.state;
+    const quantity = number - 1;
+    const zer2 = 0;
+    const result = (Math.round(total - price));
+    if (quantity === zer2) {
       this.setStateTotal(result);
       this.removeProduct(target, element, price);
     } else {
-      document.getElementById(element).innerText = quandity;
+      document.getElementById(element).innerText = quantity;
       this.setStateTotal(result);
     }
   }
@@ -65,49 +73,60 @@ export default class CreateCart extends Component {
 
   render() {
     const { cart, total } = this.props;
-    return total === 0 ? (
-      <div>
-        <h1 data-testid="shopping-cart-empty-message">
+
+    if(total === undefined){
+      return (
+        <div>
+          <h1 data-testid="shopping-cart-empty-message">
           Seu carrinho está vazio
-        </h1>
-      </div>
-    ) : (
-      <div data-testid="shopping-cart-empty-message">
+          </h1>
+        </div>
+      ) 
+    }
+    else if (total !== 0) {
+      return(
+        <div data-testid="shopping-cart-empty-message">
         {cart.map((element) => (
           <div key={ element.id }>
             <img src={ element.thumbnail } alt={ element.title } />
             <h4 data-testid="shopping-cart-product-name">{element.title}</h4>
             <button
+              type="button"
               onClick={ (e) => this.removeProduct(e.target, element.id, element.price) }
             >
               [X]
             </button>
             <p id={ `${element.id}price` }>{element.price}</p>
             <button
+              type="button"
               data-testid="product-increase-quantity"
               onClick={ (e) => this.sumProduct(e.target, element.id, element.price) }
             >
               +
             </button>
             <button
+              type="button"
               data-testid="product-decrease-quantity"
               onClick={ (e) => this.decreaseProduct(e.target, element.id, element.price) }
             >
               -
             </button>
             <p id={ element.id } data-testid="shopping-cart-product-quantity">
-              1<p className='bug'>23</p>
+              1
+              <p className="bug">23</p>
             </p>
           </div>
         ))}
-        <div>{this.state.total}</div>
-        <button type="button" onClick={ this.removeLocalStorage }>
-          Deletar Todos
-        </button>
-      </div>
-    );
+        <div>{total}</div>
+          <button type="button" onClick={ this.removeLocalStorage }>
+            Deletar Todos
+          </button>
+        </div>
+      )
+    };
   }
 }
 CreateCart.propTypes = {
   cart: PropTypes.objectOf.isRequired,
+  total: PropTypes.objectOf.isRequired,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CartBtn from '../services/CartBtn';
-import Evaluations from '../components/Evaluations'
+import Evaluations from '../components/Evaluations';
 
 class ProductDetails extends React.Component {
   saveEvaluation() {

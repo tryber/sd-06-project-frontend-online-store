@@ -8,15 +8,29 @@ class ProductCard extends React.Component {
     return (
       <div data-testid="product" className="product-card">
         <img src={ product.thumbnail } alt="product" className="product-card-image" />
+        <div className="product-card-title">
+          <h3>{product.title}</h3>
+        </div>
         <div className="product-card-body">
-          <h1>{product.title}</h1>
-          <p>{product.price}</p>
-          <Link
-            data-testid="product-detail-link"
-            to={ { pathname: '/product', state: product } }
-          >
-            DETALHES
-          </Link>
+          <p>
+            Preço: {product.price}
+          </p>
+          <div className="product-card-links">
+            <Link
+              data-testid="product-detail-link"
+              to={ { pathname: '/product', state: product } }
+            >
+              DETALHES
+            </Link>
+            <Link
+              data-testid="product-detail-add-to-cart"
+              to={ { pathname: '/shopping-cart', state: product } }
+              //addItem(event)
+              //
+            >
+                ADICIONAR AO CARRINHO
+            </Link>
+          </div>
         </div>
       </div>
     );

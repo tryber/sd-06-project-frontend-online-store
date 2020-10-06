@@ -5,14 +5,16 @@ import Cart from '../services/cart';
 class ShoppingCart extends React.Component {
   constructor() {
     super();
-    this.state = { checkout: false };
+    this.state = {
+      checkout: false,
+    };
   }
 
   getTotalValue() {
     const productArray = Cart.getItemsFromLocalStorage();
     let totalValue = 1 - 1;
     productArray.forEach((product) => {
-      totalValue += product.price;
+      totalValue += (product.price * product.amount);
     });
     return totalValue;
   }
@@ -65,7 +67,6 @@ class ShoppingCart extends React.Component {
     );
   }
 
-
   render() {
     const { checkout } = this.state;
     if (checkout) {
@@ -112,7 +113,7 @@ class ShoppingCart extends React.Component {
                   <div>
                     <p>
                       Preço R$
-                      {element.price}
+                      {(element.price * element.amount)}
                     </p>
                     <div data-testid="shopping-cart-product-quantity">
                       <p>

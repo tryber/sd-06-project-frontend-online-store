@@ -3,8 +3,33 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
+  constructor() {
+    super();
+
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.state = {
+      quantity: 1,
+    };
+  }
+
+  increaseQuantity() {
+    const { quantity } = this.state;
+    this.setState({
+      quantity: quantity + 1,
+    });
+  }
+
+  decreaseQuantity() {
+    const { quantity } = this.state;
+    this.setState({
+      quantity: quantity - 1,
+    });
+  }
+
   renderCart() {
     const { shoppingCart } = this.props;
+    const { quantity } = this.state;
     if (!shoppingCart.length) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
@@ -24,10 +49,26 @@ class ShoppingCart extends Component {
             </div>
             <div className="right-content" data-testid="shopping-cart-product-name">
               <h3>{item.product.title}</h3>
-              <div className="price-div">
+              <div className="quantity-div">
                 <p data-testid="shopping-cart-product-quantity">
-                  {`Qtd: ${item.product.quantity}`}
+                  {`${quantity}`}
                 </p>
+                <button
+                  type="button"
+                  data-testid="product-increase-quantity"
+                  onClick={ this.increaseQuantity }
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  data-testid="product-decrease-quantity"
+                  onClick={ this.decreaseQuantity }
+                >
+                  -
+                </button>
+              </div>
+              <div className="price-div">
                 <p className="detail-price">
                   {`Preço: ${item.product.price}`}
                 </p>

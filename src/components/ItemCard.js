@@ -12,8 +12,9 @@ class ItemCard extends React.Component {
     return (
       <div className="product-card" data-testid="product">
         <img src={ product.thumbnail } alt="foto do produto" className="product-image" />
-        {freeShipping && <div data-testid="free-shipping">FRETE GRÁTIS</div>}
-        <h2>{ product.title }</h2>
+        {freeShipping
+          && <p data-testid="free-shipping" className="free-shipping">FRETE GRÁTIS</p>}
+        <h3>{ product.title }</h3>
         <p>{`R$${product.price.toFixed(decimal)}`}</p>
         <Link data-testid="product-detail-link" to={ `/product-details/${product.id}` }>
           <button type="button" className="details-button">DETALHES</button>

@@ -9,8 +9,8 @@ class ProductCard extends Component {
   }
 
   handleAddClick() {
-    const { title, setProductCart, id } = this.props;
-    setProductCart(title, id);
+    const { title, setProductCart, id, thumbnail, price } = this.props;
+    setProductCart(title, id, price, thumbnail);
   }
 
   render() {
@@ -43,11 +43,11 @@ class ProductCard extends Component {
 }
 
 ProductCard.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   thumbnail: PropTypes.string.isRequired,
   setProductCart: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
   product: PropTypes.shape({
     title: PropTypes.string,
     price: PropTypes.number,

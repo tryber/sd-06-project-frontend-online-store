@@ -7,16 +7,6 @@ import CartItems from './components/CartItems';
 import cart from './img/cart-image.png';
 
 class PagInicial extends Component {
-  increaseProduct(productId) {
-    const { productCart } = this.state;
-    productCart.forEach((productList) => {
-      if (productList.id === productId) {
-        const beforeState = productList.countTotal;
-        productList.countTotal = beforeState + 1;
-      }
-    });
-  }
-
   render() {
     const {
       fetchCategory,
@@ -26,8 +16,7 @@ class PagInicial extends Component {
       countProducts,
       fetchApi,
       setValue,
-      value,
-    } = this.props;
+      value } = this.props;
     const idInput = 'query-input';
     return (
       <div data-testid="home-initial-message">
@@ -54,9 +43,10 @@ class PagInicial extends Component {
             Pesquisar
           </button>
         </form>
-        <section data-testid="shopping-cart-button">
+        <section>
           <Link to={ { pathname: '/CarrinhoCompras', state: { props: 'test' } } }>
             <img
+              data-testid="shopping-cart-button"
               src={ cart }
               alt="test"
               width="80px"
@@ -78,14 +68,14 @@ class PagInicial extends Component {
 }
 
 PagInicial.propTypes = {
-  fetchCategory: PropTypes.func.isRequired,
-  products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setProductCart: PropTypes.func.isRequired,
-  productCart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  productCart: PropTypes.arrayOf.isRequired,
   countProducts: PropTypes.string.isRequired,
+  fetchCategory: PropTypes.func.isRequired,
+  setProductCart: PropTypes.func.isRequired,
   fetchApi: PropTypes.func.isRequired,
   setValue: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  products: PropTypes.arrayOf.isRequired,
 };
 
 export default PagInicial;

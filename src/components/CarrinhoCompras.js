@@ -5,15 +5,21 @@ class CarrinhoCompras extends Component {
   constructor() {
     super();
     this.setShoppingCart = this.setShoppingCart.bind(this);
-    // this.increaseProduct = this.increaseProduct.bind(this);
+    this.setStateShoppingCart = this.setStateShoppingCart.bind(this);
+    this.state = {
+      productCartState: '',
+    };
   }
 
-  componentDidUpdate(prevPros) {
-    console.log('componentDidUpdate', this.props, prevPros);
+  setStateShoppingCart(valueButton) {
+    this.setState({
+      productCartState: valueButton,
+    });
   }
 
   setShoppingCart(productCart) {
-    const { increaseProduct } = this.props;
+    const { increaseProduct, decreateProduct } = this.props;
+    const { productCartState } = this.state;
     const arrayEmpty = 0;
     if (productCart.length > arrayEmpty) {
       return productCart.map((product) => (
@@ -34,16 +40,19 @@ class CarrinhoCompras extends Component {
             { product.price }
           </h2>
           <h2
-            data-testid="shopping-cart-product-quantity"
             style={ { color: 'black' } }
+            data-testid="shopping-cart-product-quantity"
           >
             { product.countTotal }
           </h2>
           <div>
             <button
               type="button"
-              value={ product.countTotal }
-              onClick={ () => increaseProduct(product.id) }
+              value={ productCartState }
+              onClick={ () => {
+                increaseProduct(product.id);
+                this.setStateShoppingCart('Increase');
+              } }
               data-testid="product-increase-quantity"
             >
               Aumenta
@@ -52,6 +61,11 @@ class CarrinhoCompras extends Component {
           <div>
             <button
               type="button"
+              value={ productCartState }
+              onClick={ () => {
+                decreateProduct(product.id);
+                this.setStateShoppingCart('Decreate');
+              } }
               data-testid="product-decrease-quantity"
             >
               Diminui
@@ -81,8 +95,9 @@ class CarrinhoCompras extends Component {
 }
 
 CarrinhoCompras.propTypes = {
-  productCart: PropTypes.arrayOf(PropTypes.object).isRequired,
+  decreateProduct: PropTypes.func.isRequired,
   increaseProduct: PropTypes.func.isRequired,
+  productCart: PropTypes.arrayOf.isRequired,
 };
 
 export default CarrinhoCompras;

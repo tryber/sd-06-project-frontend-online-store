@@ -7,13 +7,13 @@ class ListCard extends Component {
     super();
 
     this.addToCart = this.addToCart.bind(this);
-    this.state = {
-      quantity: 1,
-    };
+    this.state = {};
   }
 
-  addToCart() {
-    console.log(this.props);
+  addToCart(iten) {
+    const { title, thumbnail, price, id } = iten;
+    const { addItem } = this.props;
+    addItem({ title, thumbnail, price, id, quantity: 1 });
   }
 
   render() {
@@ -29,16 +29,13 @@ class ListCard extends Component {
           <span>{price}</span>
           <img src={ thumbnail } alt=" Product" />
         </Link>
-        <Link
-          to={ { pathname: `/Cart/${id}/1`, state: { product: iten } } }
+        <button
+          type="button"
+          onClick={ () => this.addToCart(iten) }
+          data-testid="product-add-to-cart"
         >
-          <button
-            type="button"
-            onClick={ this.addToCart }
-            data-testid="product-add-to-cart">
-            Adicionar ao Carrinho
-          </button>
-        </Link>
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
@@ -52,6 +49,7 @@ ListCard.propTypes = {
     id: PropTypes.string,
     quantity: PropTypes.number,
   }).isRequired,
+  addItem: PropTypes.func.isRequired,
 };
 
 export default ListCard;

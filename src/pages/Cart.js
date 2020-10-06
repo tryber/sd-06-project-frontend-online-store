@@ -7,19 +7,19 @@ class Cart extends Component {
   render() {
     const { carrinho } = this.props;
     console.log(carrinho);
-    if (carrinho.length === 0) {
+    if (!carrinho.length) {
       return <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>;
     }
     return (
       <div>
         {
           carrinho.map((iten) => (
-            <div key={ iten }>
+            <div key={ iten.name }>
               <h2 data-testid="shopping-cart-product-name" key={ iten }>
-                Título do produto
+                { iten.title }
               </h2>
               <p data-testid="shopping-cart-product-quantity">
-                Quantidade
+                { iten.quantity }
               </p>
             </div>))
         }
@@ -32,7 +32,7 @@ class Cart extends Component {
 }
 
 Cart.propTypes = {
-  carrinho: PropTypes.array.isRequired,
+  carrinho: PropTypes.shape(PropTypes.object).isRequired,
 };
 
 export default Cart;

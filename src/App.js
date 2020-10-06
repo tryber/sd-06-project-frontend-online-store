@@ -15,20 +15,22 @@ class App extends React.Component {
   }
 
   addItem(item) {
-    const { carrinho } = this.state;
-    this.setState({
-      carrinho: carrinho.concat(item),
-    });
+    this.setState((previousState) => (
+      { carrinho: [...previousState.carrinho, item] }
+    ));
   }
 
   render() {
     const { carrinho } = this.state;
-    // console.log(this.state);
     return (
       <div>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={ ItemList } />
+            <Route
+              exact
+              path="/"
+              render={ () => <ItemList addItem={ this.addItem } /> }
+            />
             <Route
               path="/Cart"
               render={ (props) => <Cart carrinho={ carrinho } { ...props } /> }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import returnArrow from '../images/return-arrow.png';
+import { CartItem } from '../components';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Cart extends React.Component {
       <div>
         {cart.map((item) => (
           <div key={ item.id }>
-            {this.renderProduct(item)}
+            <CartItem item={item} />
           </div>
         ))}
         <p data-testid="shopping-cart-product-quantity">

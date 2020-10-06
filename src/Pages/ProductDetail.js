@@ -9,18 +9,15 @@ class ProductDetails extends Component {
     this.onClickCart = this.onClickCart.bind(this);
 
     this.state = {
-      cart: [],
+      cart: JSON.parse(localStorage.getItem('cart')) || [],
     };
   }
 
   onClickCart(prod) {
-    // const { onClick } = this.props;
-    // onClick(this.state);
     const { cart } = this.state;
-    const prevState = cart;
-    prevState.push(prod);
+    cart.push(prod);
     this.setState({
-      cart: prevState,
+      cart,
     });
 
     localStorage.setItem('cart', JSON.stringify(cart));

@@ -1,11 +1,4 @@
 import React, { Component } from 'react';
-/*
-Felipe Gomes
-
-Problemas para resolver:
-1- alterar quantidades de cada item,
-2- adicionar item de outra categoria sem limpar o carrinho,
-*/
 
 class ShoppingCart extends Component {
   constructor() {
@@ -23,8 +16,8 @@ class ShoppingCart extends Component {
     const cart = JSON.parse(localStorage.getItem('cart'));
     let itens;
     if (cart) {
-      itens = cart.map((prod) => (
-        <div data-testid="product" key={ prod.id }>
+      itens = cart.map((prod, index) => (
+        <div data-testid="product" key={ index }>
           <h4 data-testid="shopping-cart-product-name">{ prod.title }</h4>
           <img src={ prod.thumbnail } alt="fotografia do produto" />
           <p><span>{`R$: ${prod.price}`}</span></p>

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Product from '../Components/Product';
 import CategoriesList from './CategoriesList';
@@ -13,25 +12,20 @@ class ProductList extends Component {
     this.onClickButton = this.onClickButton.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.onClickCategory = this.onClickCategory.bind(this);
-    this.resetState = this.resetState.bind(this);
     this.onClickCart = this.onClickCart.bind(this);
 
     this.state = {
       valueInput: '',
-      categoryId: '',
       products: [],
-      cart: [],
+      cart: JSON.parse(localStorage.getItem('cart')) || [],
     };
   }
 
   onClickCart(prod) {
-    const { onClick } = this.props;
-    onClick(this.state);
     const { cart } = this.state;
-    const prevState = cart;
-    prevState.push(prod);
+    cart.push(prod);
     this.setState({
-      cart: prevState,
+      cart,
     });
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -47,7 +41,6 @@ class ProductList extends Component {
   }
 
   async onClickButton(valueOfInput) {
-    await this.resetState();
     const { categoryId } = this.state;
     const getCategories = await getProductsFromCategoryAndQuery(categoryId, valueOfInput);
     const { results } = getCategories;
@@ -56,17 +49,12 @@ class ProductList extends Component {
       products: results,
     });
   }
-
+  
   handleInput(event) {
     const input = event.target.value;
     this.setState({ valueInput: input });
   }
 
-  async resetState() {
-    this.setState({
-      categoryId: '',
-    });
-  }
 
   render() {
     const { products, valueInput } = this.state;
@@ -90,8 +78,5 @@ class ProductList extends Component {
   }
 }
 
-ProductList.propTypes = {
-  onClick: propTypes.func.isRequired,
-};
 
 export default ProductList;

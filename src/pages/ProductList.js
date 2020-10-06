@@ -45,10 +45,9 @@ class ProductList extends React.Component {
     this.setState({ products: requestReturn.results });
   }
 
-  async handleQuery({ target }) {
+  handleQuery({ target }) {
     const { name, value } = target;
-    await this.setState({ [name]: value });
-    this.getProducts();
+    this.setState({ [name]: value }, () => (this.getProducts()));
   }
 
   renderCategoriesNames() {

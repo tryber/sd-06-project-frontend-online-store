@@ -39,7 +39,7 @@ class CardDetails extends React.Component {
   render() {
     const { product: { thumbnail, title, price } } = this.state;
 
-    const { location: { teste: { addtoCart } } } = this.props;
+    const { location: { teste: { addtoCart }, shipping: { shipping } } } = this.props;
 
     return (
       <main>
@@ -47,6 +47,7 @@ class CardDetails extends React.Component {
           <img src={ thumbnail } alt="product thumbnail" />
           <p>{ title }</p>
           <p>{ price }</p>
+          { shipping ? <div data-testid="free-shipping">Frete Grátis </div> : <div />}
           <CartAddButtons addtoCart={ addtoCart } productName={ title } />
           <div>
             <Link
@@ -73,6 +74,9 @@ CardDetails.propTypes = {
     teste: PropTypes.shape({
       addtoCart: PropTypes.func.isRequired,
     }).isRequired,
+    shipping: PropTypes.shape({
+      shipping: PropTypes.bool.isRequired,
+    }),
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({

@@ -70,7 +70,6 @@ class Home extends Component {
 
           <SearchButton fetchSearchedItem={ this.fetchSearchedItem } />
 
-
           {searchedItems === undefined
             ? <span data-testid="home-initial-message">{ spanMessage }</span>
             : searchedItems.map((item) => (
@@ -79,6 +78,7 @@ class Home extends Component {
                 key={ item.id }
                 item={ item }
                 query={ searchInput }
+                freeShipping={ item.shipping.free_shipping }
               />
             ))}
         </div>

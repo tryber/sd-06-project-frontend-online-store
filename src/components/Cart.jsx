@@ -4,10 +4,6 @@ class Cart extends React.Component {
   constructor() {
     super();
 
-    this.state = {
-      emptyCart: false,
-    }
-
     this.getProduct = this.getProduct.bind(this);
     this.clearCart = this.clearCart.bind(this);
   }
@@ -24,28 +20,32 @@ class Cart extends React.Component {
 
   clearCart() {
     localStorage.clear();
-    this.setState({ emptyCart: true });
   }
 
   render() {
-    const { emptyCart } = this.state;
-    if (emptyCart) return <p>carrinho vazio</p>
+    if(this.getProduct().length < 1) {
+      return (
+        <div data-testid="shopping-cart-empty-message">
+          <p>Seu carrinho está vazio</p>
+        </div>
+      );
+    }
+    
     return (
-    <div data-testid="shopping-cart-empty-message">
-      <button onClick={this.clearCart}>limpar carrinho</button>
-      {this.getProduct()
-      .map(itens => 
-      <div key={itens.id}data-testid="shopping-cart-product-name">
-        <h3>{itens.title}</h3>
-        <img src={itens.thumbnail} alt={`imagem de ${itens.title}`} />
-        <p>{itens.price}</p>
-        <p>quantidade</p>
-        <label>
-          <button data-testid="shopping-cart-product-quantity">1</button>
-        </label>
-      </div>)}
-
-    </div>
+      <div>
+        <button onClick={this.clearCart}>limpar carrinho</button>
+        {this.getProduct()
+        .map(itens => 
+        <div key={itens.id}data-testid="shopping-cart-product-name">
+          <h3>{itens.title}</h3>
+          <img src={itens.thumbnail} alt={`imagem de ${itens.title}`} />
+          <p>{itens.price}</p>
+          <p>quantidade</p>
+          <label>
+            <button data-testid="shopping-cart-product-quantity">1</button>
+          </label>
+        </div>)}
+      </div>
     );
   }
 }

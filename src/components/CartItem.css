@@ -1,0 +1,17 @@
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.cart-item button {
+  padding: 3px 8px;
+}
+/* 
+.cart-item-number {
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 12px;
+} */
+

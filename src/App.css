@@ -1,16 +1,32 @@
 .wrapper-category-shoplist {
   display: flex;
-  flex-flow: row nowrap;
-
-
+  flex-flow: column nowrap;
   padding: 18px;
 }
 
+.searchbar {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.searchbar .search-input {
+  background-color: rgb(235, 235, 235);
+  border: 0;
+  border-radius: 20px;
+  flex-grow: 1;
+  margin: 0 10px;
+  outline: none;
+  padding: 12px 22px;
+}
+
+.category-wrapper {
+  text-align: center;
+}
+
 .category-list {
-  border: 1px solid black;
-  border-radius: 12px;
   margin: 0 20px;
-  width: 20%;
   padding: 10px 20px;
 }
 
@@ -32,13 +48,10 @@
   display: none;
 }
 
-.wrapper-shoplist {
-  width: 80%;
-}
-
 .productsList {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
 }
 
 .red {

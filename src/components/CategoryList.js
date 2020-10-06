@@ -7,23 +7,25 @@ class CategoryList extends React.Component {
     const empty = 0;
 
     return (
-      <section className="category-list">
+      <section className="category-wrapper">
         <button type="button" onClick={ handleReset }>Limpar seleção</button>
-        {(categories.length > empty)
-          ? categories
-            .map((category) => (
-              <label htmlFor={ category.id } key={ category.id }>
-                <input
-                  type="radio"
-                  name="category"
-                  id={ category.id }
-                  data-testid="category"
-                  onChange={ handleSelect }
-                />
-                {category.name}
-              </label>
-            ))
-          : <span>Loading...</span>}
+        <section className="category-list">
+          {(categories.length > empty)
+            ? categories
+              .map((category) => (
+                <label htmlFor={ category.id } key={ category.id }>
+                  <input
+                    type="radio"
+                    name="category"
+                    id={ category.id }
+                    data-testid="category"
+                    onChange={ handleSelect }
+                  />
+                  {category.name}
+                </label>
+              ))
+            : <span>Loading...</span>}
+        </section>
       </section>
     );
   }

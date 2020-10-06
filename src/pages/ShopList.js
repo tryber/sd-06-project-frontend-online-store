@@ -107,28 +107,38 @@ class ShopList extends React.Component {
   render() {
     const { categories, loading, products, cartList, selectedCategory } = this.state;
     const inCategory = (selectedCategory !== '')
-      ? `em ${categories.find(
+      ? `Pesquisar em ${categories.find(
         (object) => object.id === selectedCategory,
       ).name}`
       : '';
 
     return (
       <section className="wrapper-category-shoplist">
-        <CategoryList
-          categories={ categories }
-          handleSelect={ this.handleSelect }
-          handleReset={ this.handleResetCategory }
-        />
-        <div className="wrapper-shoplist">
-          <input data-testid="query-input" type="text" onChange={ this.handleChange } />
-          <button
-            data-testid="query-button"
-            onClick={ this.handleClick }
-            type="button"
-          >
-            Pesquisar
-          </button>
-          <span>{ inCategory }</span>
+        <header className="header">
+          <section className="searchbar">
+            <input
+              data-testid="query-input"
+              type="text"
+              placeholder={ inCategory }
+              onChange={ this.handleChange }
+              className="search-input"
+            />
+            <button
+              data-testid="query-button"
+              onClick={ this.handleClick }
+              type="button"
+            >
+              Pesquisar
+            </button>
+            {/* <span>{ inCategory }</span> */}
+          </section>
+          <CategoryList
+            categories={ categories }
+            handleSelect={ this.handleSelect }
+            handleReset={ this.handleResetCategory }
+          />
+        </header>
+        <div>
           <Cart cartList={ cartList } />
           <div className="productsList">
             <RenderProduct

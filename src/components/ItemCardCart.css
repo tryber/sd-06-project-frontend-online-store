@@ -1,0 +1,17 @@
+.product-card-cart {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.circle-button {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}

@@ -1,0 +1,16 @@
+.product-info {
+  align-content: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin: 50px;
+}
+
+.rate-form {
+  display: flex;
+  justify-content: space-around;
+}
+
+.text-area-form {
+  width: 100%;
+}

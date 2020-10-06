@@ -1,0 +1,14 @@
+.shopping-cart {
+  width: 50px;
+}
+
+.query-input {
+  height: 30px;
+  width: 300px;
+}
+
+.products-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

@@ -112,7 +112,7 @@ export default class CreateCart extends Component {
         ))}
         <div>{this.state.total}</div>
         <button type="button" onClick={this.removeLocalStorage}>
-          Deletar todos
+          Deletar Todos
         </button>
       </div>
     );

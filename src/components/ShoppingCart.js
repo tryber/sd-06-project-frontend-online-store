@@ -14,17 +14,17 @@ class ShoppingCart extends Component {
     };
   }
 
-  increaseQuantity() {
-    const { quantity } = this.state;
+  increaseQuantity(product) {
+    const { [product.product.id]: quantity } = this.state;
     this.setState({
-      quantity: quantity + 1,
+      [product.product.id]: (quantity || product.product.quantity) + 1,
     });
   }
 
-  decreaseQuantity() {
-    const { quantity } = this.state;
+  decreaseQuantity(product) {
+    const { [product.product.id]: quantity } = this.state;
     this.setState({
-      quantity: quantity - 1,
+      [product.product.id]: (quantity || product.product.quantity) - 1,
     });
   }
 
@@ -77,7 +77,17 @@ class ShoppingCart extends Component {
               width="50"
             />
           </Link>
+          <div className="add-button-div">
+            <button
+              type="button"
+              onClick={ this.addItemsToCart }
+              className="shoppingcart-submit"
+            >
+              Finalizar Compra
+            </button>
+          </div>
         </div>
+
       </div>
     );
   }

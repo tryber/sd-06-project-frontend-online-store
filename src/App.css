@@ -286,7 +286,7 @@ form:hover {
 }
 
 .shoppingcart-content {
-  width: 90%;
+  width: 900px;
   border-radius: 5px;
   display: flex;
   justify-content: space-around;
@@ -295,6 +295,7 @@ form:hover {
   margin: 20px 0 20px 0;
   height: 220px;
   background-color: rgb(255, 255, 255);
+  background-color: brown;
 }
 
 .detail-img-div {
@@ -344,8 +345,24 @@ form:hover {
 }
 
 .details-backarrow-div{
-  width: 100%;
+  width: 95%;
   display: flex;
-  justify-content: left;
-  margin: 20px 0 20px 60px; 
+  justify-content: space-between;
+  margin: 20px 0 20px 0; 
 }
+
+.shoppingcart-submit{
+  background: linear-gradient(#3acde7, #089dca);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font: 600 16.5px Arial , Helvetica , sans-serif;
+  line-height: 23.94px;
+  padding: 8px 2px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 160px;
+}
+

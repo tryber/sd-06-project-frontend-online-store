@@ -5,6 +5,14 @@ import * as api from '../services/api';
 import ProductList from '../components/ProductList';
 import CategoryList from '../components/CategoryList';
 
+export function onClick() {
+  const { categoryId } = this.state;
+  const query = document.getElementById('search-label').value;
+  api.getProductsFromCategoryAndQuery(categoryId, query)
+    .then((items) => this.setState({
+      products: items.results,
+    }));
+}
 
 class HomePage extends React.Component {
   constructor() {

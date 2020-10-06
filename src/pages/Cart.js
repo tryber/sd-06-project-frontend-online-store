@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CartEmptyMessage extends Component {
+class Cart extends Component {
   constructor() {
     super();
 
@@ -56,4 +56,4 @@ class CartEmptyMessage extends Component {
   }
 }
 
-export default CartEmptyMessage;
+export default Cart;

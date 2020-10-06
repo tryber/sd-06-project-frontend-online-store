@@ -7,12 +7,15 @@ import ShoppingCart from './ShoppingCart';
 class ItemCard extends React.Component {
   render() {
     const { product } = this.props;
+    const { shipping: { free_shipping: freeShipping } } = product;
+    const decimal = 2;
     return (
       <div className="product-card" data-testid="product">
         <img src={ product.thumbnail } alt="foto do produto" className="product-image" />
-
-        <h2>{ product.title }</h2>
-        <p>{ product.price }</p>
+        {freeShipping
+          && <p data-testid="free-shipping" className="free-shipping">FRETE GRÁTIS</p>}
+        <h3>{ product.title }</h3>
+        <p>{`R$${product.price.toFixed(decimal)}`}</p>
         <Link data-testid="product-detail-link" to={ `/product-details/${product.id}` }>
           <button type="button" className="details-button">DETALHES</button>
         </Link>
@@ -36,6 +39,9 @@ ItemCard.propTypes = {
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
+    shipping: PropTypes.shape({
+      free_shipping: PropTypes.bool.isRequired,
+    }).isRequired,
   }).isRequired,
 };
 

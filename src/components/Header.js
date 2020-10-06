@@ -10,11 +10,14 @@ class Header extends React.Component {
     return (
       <header className="header">
         <div>
-          <img src={ LogoIcon } alt="logo icon" className="logo-icon" />
-          <img src={ Logo } alt="logo icon" className="logo-icon" />
+          <Link to="/">
+            <img src={ LogoIcon } alt="logo icon" className="logo-icon" />
+            <img src={ Logo } alt="logo icon" className="logo-icon" />
+          </Link>
         </div>
         <Link data-testid="shopping-cart-button" to="/shopping-cart">
           <img src={ Cart } alt="shopping cart" className="shopping-cart" />
+          <div data-testid="shopping-cart-size">Tamanho carrinho</div>
         </Link>
       </header>
     );

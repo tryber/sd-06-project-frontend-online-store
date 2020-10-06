@@ -23,9 +23,9 @@ class App extends Component {
     console.log('função sendo chamada');
     const zero = 0;
     this.setState((currentState) => ({
-      productsAddToCart: {
-        ...currentState.productsAddToCart,
-        [productName]: (currentState.productsAddToCart[productName] || zero) + 1,
+      addToCart: {
+        ...currentState.addToCart,
+        [productName]: (currentState.addToCart[productName] || zero) + 1,
       },
     }));
   }

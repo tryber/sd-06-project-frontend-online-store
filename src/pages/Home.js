@@ -16,8 +16,6 @@ class Home extends Component {
     this.fetchSearchedItem = this.fetchSearchedItem.bind(this);
     this.onSearchTextChange = this.onSearchTextChange.bind(this);
     this.saveSelectedCategory = this.saveSelectedCategory.bind(this);
-    this.addTocart = this.addTocart.bind(this);
-
 
     this.state = {
       searchInput: '',

@@ -26,14 +26,7 @@
   border:1px solid  red;
 }
 
-.productCard {
-  border: 1px solid grey;
-  display: flex;
-  flex-flow: column;
-  margin: 12px;
-  max-width: 240px;
-  padding: 10px;
-}
+
 
 .checkout-form label {
   display: block;

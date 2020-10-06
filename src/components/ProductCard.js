@@ -7,24 +7,37 @@ class ProductCard extends React.Component {
   render() {
     const { product, addToCart, cartList } = this.props;
     const { title, price, id, thumbnail } = product;
-    const valueType = 2;
+
 
     return (
       <div className="productCard" data-testid="product">
-        <div className="product-card-item">{title}</div>
-        <div className="product-card-item">{`R$${price.toFixed(valueType)}`}</div>
+        <img src={ thumbnail } className="product__img" alt="product" />
+        <div className="product__item product__title">{title}</div>
         <Shipping shipping={ product.shipping } />
-        <img src={ thumbnail } className="product-img" alt="product" />
-        <Link to={ { pathname: `productDetails/${id}`, state: { product, cartList } } }>
-          <div data-testid="product-detail-link">View Details</div>
-        </Link>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => addToCart(product) }
-        >
-          add to cart
-        </button>
+        <div className="product__item product__price">
+          {`${price.toLocaleString('pt-br', { style: 'currency', currency: 'BRl' })}`}
+        </div>
+
+        <div className="buttons-container product__item">
+          <Link to={ { pathname: `productDetails/${id}`, state: { product, cartList } } }>
+            <button
+              type="button"
+              data-testid="product-detail-link"
+              className="button__viewDetails button"
+            >
+              more Details
+            </button>
+          </Link>
+          <button
+            className="button__add_to_cart button"
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => addToCart(product) }
+          >
+            add to cart
+          </button>
+        </div>
+
       </div>
     );
   }

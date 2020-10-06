@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Rater from 'react-rater';
+import 'react-rater/lib/react-rater.css';
 import './ProductDetails.css';
 
 class ProductDetails extends React.Component {
@@ -29,11 +31,31 @@ class ProductDetails extends React.Component {
     const { product } = this.state;
     const { title, price, thumbnail } = product;
     return (
-      <div className="product-details">
-        <img alt="Product" src={ thumbnail } className="product-image" />
-        <div className="product-info">
-          <h1 data-testid="product-detail-name">{title}</h1>
-          <p>{price}</p>
+      <div>
+        <h1 data-testid="product-detail-name">{title}</h1>
+        <p>{price}</p>
+        <img alt="Product" src={ thumbnail } />
+        <div className="rate-form">
+          <hr />
+          <h2>Avaliações</h2>
+          <form>
+            <Rater total={ 5 } rating={ 0 } />
+            <br />
+            <textarea
+              data-testid="product-detail-evaluation"
+              type="text"
+              placeholder="Mensagem (opcional)"
+            />
+            <br />
+            <button type="button">Avaliar</button>
+          </form>
+        </div>
+        <div className="product-details">
+          <img alt="Product" src={ thumbnail } className="product-image" />
+          <div className="product-info">
+            {/* <h1 data-testid="product-detail-name">{title}</h1> */}
+            <p>{price}</p>
+          </div>
         </div>
       </div>
     );

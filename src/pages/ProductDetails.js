@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Rater from 'react-rater';
+import 'react-rater/lib/react-rater.css';
 import PropTypes from 'prop-types';
 import '../App.css';
 
@@ -45,6 +47,21 @@ class ProductDetails extends Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className="formDetailed">
+          <form className="detailedDescription">
+            <p>Avaliação</p>
+            <textarea
+              className="labelRating"
+              id="labelRating"
+              placeholder="Mensagem (Opcional)"
+              data-testid="product-detail-evaluation"
+              maxLength="250"
+              rows="5"
+              cols="50"
+            />
+            <Rater total={ 5 } rating={ 2 } />
+          </form>
         </div>
         <div className="product-details-buttons">
           <div className="backarrow-div">

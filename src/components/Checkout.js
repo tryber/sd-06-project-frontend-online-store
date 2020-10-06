@@ -12,14 +12,18 @@ class Checkout extends React.Component {
 
   render() {
     const { cartItems, addedItems } = this.state;
-    let totalPrice = 0;
+    let totalPrice = null;
+    cartItems.forEach((item) => {
+      const { price, id } = item;
+      const { quantity } = addedItems[`${id}`];
+      totalPrice += quantity * price;
+    });
     return (
       <section>
         <div className="checkout-product-checking">
           { cartItems.map((item) => {
             const { id, title, thumbnail, price } = item;
             const quantity = addedItems[`${id}`];
-            totalPrice += quantity * price;
 
             return (
               <div key={ id } className="checkout-product">

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import ProductEvaluations from '../components/ProductEvaluations'
+
 export default class ProductDetail extends Component {
   handleClick(productObject) {
     this.props.location.updateCart(productObject);
@@ -32,6 +34,7 @@ export default class ProductDetail extends Component {
           >
             add to cart
           </Link>
+          <ProductEvaluations product={ this.props.location.product } />
         </div>
       </div>
     );

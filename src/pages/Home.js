@@ -4,7 +4,7 @@ import '../styles/Home.css';
 import CategoryList from '../components/CategoryList';
 import Header from '../components/Header';
 import Input from '../components/Input';
-import ProductList from '../components/ProductList';
+import ProductCard from '../components/ProductCard';
 import Carrinho from '../imgs/carrinho.png';
 import * as API from '../services/api';
 
@@ -16,11 +16,13 @@ class Home extends React.Component {
     this.filterCategory = this.filterCategory.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.addItem = this.addItem.bind(this);
     this.state = {
       search: '',
       items: '',
       loadProducts: false,
       filter: '',
+      shopCart: [],
     };
   }
 
@@ -47,18 +49,32 @@ class Home extends React.Component {
     this.handleFilter();
   }
 
+  addItem(product) {
+    const { shopCart } = this.state;
+    this.setState({ shopCart: [...shopCart, product] });
+  }
+
   renderProducts() {
-    const { loadProducts, search, items, filter } = this.state;
+    const { loadProducts, search, items, filter, shopCart } = this.state;
     if (loadProducts) {
       if (search === '' && filter === '') {
         return <span>Nenhum produto foi encontrado</span>;
       }
-      return <ProductList items={ items } />;
+      return (
+        items.map((item) => (
+          <ProductCard
+            product={ item }
+            key={ item.id }
+            value={ shopCart }
+            onClick={ () => this.addItem(item) }
+          />
+        ))
+      );
     }
   }
 
   render() {
-    const { search, filter } = this.state;
+    const { search, filter, shopCart } = this.state;
     return (
       <div>
         <div className="header-container">
@@ -80,7 +96,7 @@ class Home extends React.Component {
             {this.renderProducts()}
           </div>
           <div>
-            <Link to="/shopping-cart">
+            <Link to={ { pathname: '/shopping-cart', state: shopCart } }>
               <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
             </Link>
           </div>

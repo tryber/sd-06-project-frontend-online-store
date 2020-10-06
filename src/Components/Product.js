@@ -8,7 +8,7 @@ class Product extends Component {
     const { product, search, onClick } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
-      <div>
+      <div className="product-list-each">
         <Link
           to={ {
             pathname: `/product-detail/${id}`,
@@ -21,8 +21,8 @@ class Product extends Component {
             <div data-testid="product">
               <h5>{ title }</h5>
               <img src={ thumbnail } alt="fotografia do produto" />
-              <p><span>{`R$: ${price}`}</span></p>
             </div>
+            <p><span>{`R$: ${price}`}</span></p>
           </div>
         </Link>
         <p>

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Product } from '../components';
 import shoppingCart from '../images/shopping-cart.png';
@@ -16,7 +15,6 @@ class ProductList extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleQuery = this.handleQuery.bind(this);
-    this.addToCart = this.addToCart.bind(this);
 
     this.state = {
       categories: [],
@@ -45,11 +43,6 @@ class ProductList extends React.Component {
       selectedCategoryId, searchText,
     );
     this.setState({ products: requestReturn.results });
-  }
-
-  addToCart(item) {
-    const { addToCart: addItem } = this.props;
-    addItem(item);
   }
 
   async handleQuery({ target }) {
@@ -84,7 +77,7 @@ class ProductList extends React.Component {
 
   renderProducts() {
     const { products } = this.state;
-    return <Product products={ products } addToCart={ this.addToCart } />;
+    return <Product products={ products } />;
   }
 
   render() {
@@ -130,13 +123,5 @@ class ProductList extends React.Component {
     );
   }
 }
-
-ProductList.propTypes = {
-  addToCart: PropTypes.func,
-};
-
-ProductList.defaultProps = {
-  addToCart: () => 1,
-};
 
 export default ProductList;

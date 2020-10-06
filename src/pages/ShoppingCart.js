@@ -37,7 +37,7 @@ class ShoppingCart extends React.Component {
         <ShoppingCart />
         <div>
           <span>Total a pagar: R$ </span>
-          {(this.getTotalValue()).toFixed(2)}
+          {this.getTotalValue()}
         </div>
         <div>
           <form>
@@ -113,7 +113,7 @@ class ShoppingCart extends React.Component {
                   <div>
                     <p>
                       Preço R$
-                      {(element.price * element.amount).toFixed(2)}
+                      {(element.price * element.amount)}
                     </p>
                     <div data-testid="shopping-cart-product-quantity">
                       <p>

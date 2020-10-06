@@ -1,5 +1,6 @@
 import React from 'react';
-import QuantifyProducts from "../components/QuantifyProducts";
+import { Link } from 'react-router-dom';
+import QuantifyProducts from '../components/QuantifyProducts';
 
 class ShoppingCart extends React.Component {
   render() {
@@ -21,6 +22,9 @@ class ShoppingCart extends React.Component {
             </div>
           </div>
         )) }
+        <Link to={ { pathname: '/checkout', cartProductList } } data-testid="checkout-products" >
+          Go to Checkout
+        </Link>
       </div>
     )
   }

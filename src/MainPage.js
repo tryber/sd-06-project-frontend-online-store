@@ -14,6 +14,7 @@ class MainPage extends React.Component {
       products: [],
       cartProducts: [],
       quantityCartProducts: 0,
+      totalCartProducts: 0,
       loading: false,
     };
 
@@ -24,6 +25,18 @@ class MainPage extends React.Component {
 
   componentDidMount() {
     this.renderCategories();
+    if (localStorage.Cart) {
+      this.setCartQuantity();
+    }
+  }
+
+  setCartQuantity() {
+    const total = JSON.parse(localStorage.Cart);
+    const initialValue = 0;
+    const result = total
+      .map((item) => item.quantityCartProducts)
+      .reduce((acc, curr) => acc + curr, initialValue);
+    this.setState({ totalCartProducts: result });
   }
 
   async searchProduct() {
@@ -45,10 +58,18 @@ class MainPage extends React.Component {
   }
 
   addCart(product) {
+    let result = 1;
+    if (localStorage.Cart) {
+      const total = JSON.parse(localStorage.Cart);
+      result = total
+        .map((item) => item.quantityCartProducts)
+        .reduce((acc, curr) => acc + curr, 1);
+    }
     this.setState(
       {
         cartProducts: [product],
         quantityCartProducts: 1,
+        totalCartProducts: result,
       }, () => {
         if (localStorage.Cart) {
           const update = JSON.parse(localStorage.Cart);
@@ -87,7 +108,7 @@ class MainPage extends React.Component {
   }
 
   render() {
-    const { categories, products, loading } = this.state;
+    const { categories, products, loading, totalCartProducts } = this.state;
     return (
       <div>
         <div className="div-search">
@@ -99,6 +120,7 @@ class MainPage extends React.Component {
             />
             <Link to="/shoppingcart" data-testid="shopping-cart-button">
               <img width="30px" src={ shoppingCartImage } alt="Cart" />
+              <span data-testid="shopping-cart-size">{ totalCartProducts }</span>
             </Link>
           </div>
           <button type="button" data-testid="query-button" onClick={ this.searchProduct }>

@@ -41,6 +41,7 @@ class App extends React.Component {
             path="/ProductDetails/:id"
             render={ (props) => (<ProductDetails
               { ...props }
+              addToCart={ this.handleAddProduct }
               cartProducts={ cartProducts }
             />) }
           />

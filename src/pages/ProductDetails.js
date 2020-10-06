@@ -3,13 +3,6 @@ import PropTypes from 'prop-types';
 import CartBtn from '../services/CartBtn';
 
 class ProductDetails extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.addCart = this.addCart.bind(this);
-  }
-
-
   saveEvaluation() {
     const email = document.getElementById('email').value;
     const rating = document.getElementById('rating').value;
@@ -21,23 +14,6 @@ class ProductDetails extends React.Component {
     };
     const evaluationString = JSON.stringify(evaluation);
     localStorage.setItem('evaluations', [evaluationString]);
-  }
-
-  addCart(id, title) {
-    let cart = localStorage.getItem('cart');
-
-    if (!cart) { cart = {}; } else { cart = JSON.parse(cart); }
-
-    const qtd = cart[id];
-    const itemCard = [qtd, title];
-
-
-    if (itemCard.qtd) { return itemCard.qtd + 1; } itemCard.qtd = 1;
-
-
-    cart[id] = itemCard;
-    localStorage.setItem('cart', JSON.stringify(cart));
-    console.log(cart);
   }
 
   render() {
@@ -60,8 +36,7 @@ class ProductDetails extends React.Component {
         <div>
           <button
             type="button"
-            data-testid="product-detail-add-to-car
-          t"
+            data-testid="product-detail-add-to-cart"
             onClick={ () => addToCart(product) }
           >
             Adicionar ao Carrinho

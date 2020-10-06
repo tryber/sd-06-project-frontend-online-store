@@ -6,33 +6,12 @@ import ProductDetails from './pages/ProductDetails';
 import './App.css';
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.addToCart = this.addToCart.bind(this);
-
-    this.state = {
-      cartItems: [],
-    };
-  }
-
-  async addToCart(item) {
-    await this.setState((previousState) => ({
-      cartItems: previousState.cartItems.concat(item),
-    }));
-  }
-
   render() {
-    const { cartItems } = this.state;
     return (
       <BrowserRouter>
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={ () => <ProductList addToCart={ this.addToCart } /> }
-          />
-          <Route path="/cart" component={ () => <Cart cartItems={ cartItems } /> } />
+          <Route exact path="/" component={ ProductList } />
+          <Route path="/cart" component={ Cart } />
           <Route path="/product-details" component={ ProductDetails } />
         </Switch>
       </BrowserRouter>

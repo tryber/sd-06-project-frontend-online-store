@@ -9,13 +9,19 @@ class ProductCard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
-    const { addItem, details } = this.props;
-    addItem(details);
+  handleClick(item) {
+    const cart = [];
+    const items = JSON.parse(localStorage.getItem('cart'));
+    if (items) {
+      cart.push(...items, item);
+    } else {
+      cart.push(item);
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
   }
 
   render() {
-    const { title, thumbnail, price, details, addItem: add } = this.props;
+    const { title, thumbnail, price, details } = this.props;
     return (
       <div data-testid="product" className="product-card">
         <h3>{title}</h3>
@@ -25,7 +31,7 @@ class ProductCard extends React.Component {
           to={ {
             pathname: './product-details',
             product: details,
-            addItem: add,
+            addFromDetails: this.handleClick,
           } }
           data-testid="product-detail-link"
         >
@@ -35,7 +41,7 @@ class ProductCard extends React.Component {
           type="button"
           className="add-to-cart-button"
           data-testid="product-add-to-cart"
-          onClick={ () => this.handleClick() }
+          onClick={ () => this.handleClick(details) }
         >
           Adicionar ao carrinho
         </button>
@@ -49,7 +55,6 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string,
   price: PropTypes.number,
   details: PropTypes.shape(),
-  addItem: PropTypes.func,
 };
 
 ProductCard.defaultProps = {
@@ -57,7 +62,6 @@ ProductCard.defaultProps = {
   thumbnail: '',
   price: 0,
   details: {},
-  addItem: () => 1,
 };
 
 export default ProductCard;

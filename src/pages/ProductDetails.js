@@ -14,8 +14,8 @@ class ProductDetails extends React.Component {
 
   handleClick() {
     const { location } = this.props;
-    const { addItem, product } = location;
-    addItem(product);
+    const { addFromDetails, product } = location;
+    addFromDetails(product);
   }
 
   render() {

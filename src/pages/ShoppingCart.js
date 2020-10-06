@@ -90,13 +90,14 @@ class ShoppingCart extends React.Component {
                 <button type="button">Página Inicial</button>
               </Link>
               <h1>Carrinho de Compras</h1>
-              <button
-                onClick={ () => this.setState({ checkout: true }) }
-                data-testid="checkout-products"
-                type="button"
-              >
-                Finalizar Compra
-              </button>
+              <Link to="/checkout">
+                <button
+                  data-testid="checkout-products"
+                  type="button"
+                >
+                  Finalizar Compra
+                </button>
+              </Link>
               <button
                 type="button"
                 onClick={ () => { Cart.removeAll(); this.forceUpdate(); } }

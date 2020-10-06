@@ -5,29 +5,6 @@ import Carrinho from '../imgs/carrinho.png';
 
 
 class ProductDetails extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.getQuantity = this.getQuantity.bind(this);
-
-    const { location } = this.props;
-    const { state } = location;
-    const { title: name } = state;
-
-    this.state = {
-      title: name,
-      quantity: 1,
-    };
-  }
-
-  getQuantity({ target }) {
-    const { value } = target;
-
-    this.setState({
-      quantity: value,
-    });
-  }
-
   render() {
     const { location, onClick } = this.props;
     const { state } = location;
@@ -53,14 +30,14 @@ class ProductDetails extends React.Component {
             data-testid="product-detail-add-to-cart"
             onClick={ onClick }
           >
-              ADICIONAR AO CARRINHO
+            ADICIONAR AO CARRINHO
           </button>
           <Link
-              data-testid="shopping-cart-button"
-              to={ { pathname: '/shopping-cart', state: state[1] } }
-            >
-              <img src={ Carrinho } alt="Carrinho" />
-            </Link>
+            data-testid="shopping-cart-button"
+            to={ { pathname: '/shopping-cart', state: state[1] } }
+          >
+            <img src={ Carrinho } alt="Carrinho" />
+          </Link>
         </div>
       </div>
     );

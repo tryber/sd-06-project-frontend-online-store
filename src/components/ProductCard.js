@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class ProductCard extends React.Component {
   render() {
     const { product, onClick, value } = this.props;
-    const allState = [product, value]
+    const allState = [product, value];
 
     return (
       <div data-testid="product" className="product-card">
@@ -22,7 +22,7 @@ class ProductCard extends React.Component {
             <Link
               data-testid="product-detail-link"
               to={ { pathname: '/product', state: allState } }
-              onClick={onClick}
+              onClick={ onClick }
             >
               DETALHES
             </Link>
@@ -42,6 +42,7 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
   onClick: PropTypes.func.isRequired,
+  value: PropTypes.array.isRequired,
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,

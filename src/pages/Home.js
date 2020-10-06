@@ -65,7 +65,7 @@ class Home extends React.Component {
           <ProductCard
             product={ item }
             key={ item.id }
-            value={shopCart}
+            value={ shopCart }
             onClick={ () => this.addItem(item) }
           />
         ))

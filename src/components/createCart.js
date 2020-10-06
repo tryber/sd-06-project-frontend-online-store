@@ -17,6 +17,7 @@ export default class CreateCart extends Component {
     const cartLocalStorage = JSON.parse(localStorage.getItem('cartLocal'));
     const result = cartLocalStorage.reduce((previousValue, next) => previousValue + next.price, 0);
     this.setStateTotal(result);
+    console.log(cartLocalStorage)
   }
 
   setStateTotal(element) {

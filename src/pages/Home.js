@@ -83,6 +83,7 @@ class Home extends Component {
         <ShoppingCartButton productCart={ productCart } />
         <ProductCard
           products={ products }
+          productCart={ productCart }
           isFail={ isFail }
           handleAddCart={ this.handleAddCart }
         />

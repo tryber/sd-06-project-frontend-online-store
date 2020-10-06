@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import PropTypes, { objectOf } from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
@@ -42,7 +42,7 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
   onClick: PropTypes.func.isRequired,
-  value: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
+  value: PropTypes.arrayOf(objectOf).isRequired,
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,

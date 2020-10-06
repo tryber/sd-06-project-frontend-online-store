@@ -31,10 +31,12 @@ class ProductDetails extends React.Component {
     const { product } = this.state;
     const { title, price, thumbnail } = product;
     return (
-      <div>
-        <h1 data-testid="product-detail-name">{title}</h1>
-        <p>{price}</p>
-        <img alt="Product" src={ thumbnail } />
+      <div className="product-details">
+        <div className="product-info">
+          <img alt="Product" src={ thumbnail } className="product-image" />
+          <h1 data-testid="product-detail-name">{title}</h1>
+          <p>{price}</p>
+        </div>
         <div className="rate-form">
           <hr />
           <h2>Avaliações</h2>
@@ -49,13 +51,6 @@ class ProductDetails extends React.Component {
             <br />
             <button type="button">Avaliar</button>
           </form>
-        </div>
-        <div className="product-details">
-          <img alt="Product" src={ thumbnail } className="product-image" />
-          <div className="product-info">
-            {/* <h1 data-testid="product-detail-name">{title}</h1> */}
-            <p>{price}</p>
-          </div>
         </div>
       </div>
     );

@@ -29,8 +29,8 @@ class ProductCard extends React.Component {
         <div data-testid="product-detail-link" onClick={ this.changeStateRedirect } >
           <img alt="Product" src={ thumbnail } />
           <div className="product-card-body">
-            <p>{title}</p>
-            <p>{`R$ ${(price).toFixed(2)}`}</p>
+            <p className="item-cart">{title}</p>
+            <p className="item-cart">{`R$ ${(price).toFixed(2)}`}</p>
           </div>
         </div>
         <div>

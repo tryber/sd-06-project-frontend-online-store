@@ -1,72 +1,158 @@
 .App {
+  font-family: Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  }
-  
-  .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  }
-  }
-  
-  .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+}
+
+.logo {
+  margin-left: 25px;
+  width: 110px;
+}
+
+.app-header {
+  background-color: rgb(245, 245, 245);
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  color: rgb(51, 50, 50);
+}
+
+.app-header h1 {
+  margin: 10px;
+  font-size: 26px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.project {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  }
-  
-  .App-link {
-  color: #61dafb;
-  }
-  
-  @keyframes App-logo-spin {
-  from {
-  transform: rotate(0deg);
-  }
-  to {
-  transform: rotate(360deg);
-  }
-  }
-  
-  .main-container {
+  justify-content: left;
+  height: 100%;
+  width: 30%;
+}
+
+.search-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: left;
+  height: 100%;
+  width: 80%;
+}
+
+.search-bar-div {
   display: flex;
   flex-direction: row;
-  }
-  
-  .category-container {
-  text-align: left;
-  background-color: rgb(170, 170, 170);
-  width: 300px;
-  height: 100%;
-  }
-  
-  .product-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    /* text-align: center; */
-    background-color: rgb(204, 196, 196);
-    width: 100vmax;
-  }
-  
-  .product-card {
-    border: 1px solid black;
-    border-radius: 8px;
-    margin: 10px 15px;
-    width: 250px;
-    cursor: pointer;
-  }
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
-  .circulo {
+.search-bar input {
+  border: 1px solid rgb(204, 211, 218);
+  border-radius: 0.4rem;
+  color: rgb(66, 71, 77);
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out , box-shadow 0.15s;
+  max-width: 400px;
+  height: 25px;
+}
+
+.message {
+  margin: 3px 2px 8px;
+}
+
+.my-button {
+  background-color: rgb(45, 113, 185);
+  border: none;
+  border-radius: 3px;
+  color: rgb(248, 249, 250);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  max-width: 150px;
+  padding: 5px 10px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.my-button:hover {
+  background-color: rgb(16, 53, 93);
+}
+
+.my-cart {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  margin-right: 15px;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+  
+.category-container {
+  text-align: left;
+  background-color:  rgb( 135 , 155 , 133 );
+  width: 300px;
+  height: 100vmax;
+}
+
+.product-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* text-align: center; */
+  background-color: rgb(182, 197, 181);
+  width: 100vmax;
+}
+
+.product-card {
+  border: 1px solid rgb( 3 , 58 , 8 );
+  background-color: rgb( 253 , 251 , 251 );
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  margin: 5px;
+  width: 200px;
+  align-items: center;
+  transition: 0.35s;
+  padding: 10px;
+}
+
+.item-cart {
+  padding: 3px 5px;
+  text-align: center;
+  font-size: 13px;
+}
+
+product-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* text-align: center; */
+  background-color: rgb(204, 196, 196);
+  width: 100vmax;
+}
+  
+.product-card {
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px 15px;
+  width: 250px;
+  cursor: pointer;
+}
+
+.circulo {
   border-radius: 50%;
   border: solid 2px black;
   display: table-cell;
@@ -76,18 +162,17 @@
   white-space: nowrap;
   width: 30px;
   margin-top: 5px;
-  }
+}
   
-  .item-shopping-cart {
+.item-shopping-cart {
   display: flex;
   justify-content: space-between;
   width: 90%;
   height: 50px;
   margin: 5px;
-  /* background-color: red; */
-  }
+}
   
-  .item-shopping-cart-title {
+.item-shopping-cart-title {
   text-align: left;
   width: 60%;
   margin-left: 5px;
@@ -95,41 +180,22 @@
   /* padding-bottom: 15px; */
   /* background-color: blue; */
   /* background-color: orange; */
-  }
+}
   
-  .item-shopping-cart-unitary-price {
+.item-shopping-cart-unitary-price {
   /* background-color: aliceblue; */
   text-align: left;
   width: 8%;
   padding-right: 10px;
-  }
+}
   
-  .item-shopping-cart-total-price{
+.item-shopping-cart-total-price{
   width: 10%;
   text-align: left;
   font-weight: 500;
-  }
+}
   
-  /* .button {
-  background-color: #4CAF50; 
-  border: 2px solid black;
-  border-radius: 10px;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  width: 5px;
-  }
-  
-  .button:hover {
-  background-color: #568259;
-  } */
-  
-  .btn{
+.btn{
   border-radius: 10px;
   font-family: arial;
   font-size: 14px;
@@ -141,67 +207,61 @@
   display: inline-block;
   text-decoration: none;
   margin-bottom: 10px;
-  }
-  .btn-green{
+}
+
+.btn-green{
   background: green;
   color: #fff;
   box-shadow: 0 5px 0 #006000;
-  }
-  .btn-green:hover{
+}
+
+.btn-green:hover{
   background: #006000;
   color: #fff;
   box-shadow: 0 5px 0 #003F00;
-  }
-  .btn-green:active{
+}
+
+.btn-green:active{
   box-shadow: none;
   position: relative;
   top: 5px;
-  }
+}
   
-  .btn:focus{
+.btn:focus{
   outline-style: none;
-  }
+}
   
-  .evaluator-container {
+.evaluator-container {
   display: flex;
   flex-direction: column;
   margin: 5px;
-  /* width: 30%; */
-  }
+}
   
-  /* .email-container {
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  width: 30%;
-  } */
-  
-  .stars {
+.stars {
   display: flex;
   flex-direction: row;
   margin: 5px;
   width: 30%;
-  }
+}
   
-  .comment-container {
+.comment-container {
   display: flex;
   flex-direction: column;
   margin: 5px;
   width: 30%;
-  }
+}
   
-  .evaluator-button {
+.evaluator-button {
   display: flex;
   flex-direction: column;
   margin: 5px;
   width: 10%;
   text-align: center;
-  }
+}
 
 .buyer-informations{
   display: flex;
   justify-content: space-around;
   text-align: center;
-  /* background-color: red; */
   margin-bottom: 20px;
 }

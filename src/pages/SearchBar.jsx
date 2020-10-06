@@ -1,5 +1,4 @@
 import React from 'react';
-import MyCart from './MyCart';
 
 class SearchBar extends React.Component {
   constructor() {
@@ -30,18 +29,16 @@ class SearchBar extends React.Component {
     const { searchText } = this.state;
     const { onFilter } = this.props;
     return (
-      <div>
+      <div className="search-bar-div">
         <input type="text" data-testid="query-input" name="query-input" 
           onChange={this.onChangeInput}>
         </input>
         
         <button 
-          type="button" data-testid="query-button"
+          type="button" data-testid="query-button" className="my-button"
           onClick={() => { if (searchText !== '') onFilter(undefined, searchText)}}
         >Search
         </button>
-
-        <MyCart />
 
       </div>
     );

@@ -39,23 +39,23 @@ class ItemShoppingCart extends React.Component {
     const { quantity } = this.state;
 
     return (
-      <div key={id} className="item-shopping-cart">
-      <button 
-      type="button" className="btn btn-green"
-      onClick={() => remove(id)}>X
-      </button>
-      <p data-testid="shopping-cart-product-name" className="item-shopping-cart-title">{title}</p>
-      <p className="item-shopping-cart-unitary-price">{`Un. R$ ${(price).toFixed(2)}`}</p>
-      <p className="item-shopping-cart-total-price">{`Total R$ ${(price * quantity).toFixed(2)}`}</p>
-      <button 
-      type="button" className="btn btn-green" data-testid="product-decrease-quantity"
-      onClick={() => this.changeQuantity(id, '-')}>(-)
-      </button>
-      <div data-testid="shopping-cart-product-quantity" className="circulo">{quantity}</div>
-      <button 
-      type="button" className="btn btn-green" data-testid="product-increase-quantity"
-      onClick={() => this.changeQuantity(id, '+')}>(+)
-      </button>
+      <div className="item-shopping-cart">
+        <button 
+          type="button" className="btn btn-green"
+          onClick={() => remove(id)}>X
+        </button>
+        <p data-testid="shopping-cart-product-name" className="item-shopping-cart-title">{title}</p>
+        <p className="item-shopping-cart-unitary-price">{`Un. R$ ${(price).toFixed(2)}`}</p>
+        <p className="item-shopping-cart-total-price">{`Total R$ ${(price * quantity).toFixed(2)}`}</p>
+        <button 
+          type="button" className="btn btn-green" data-testid="product-decrease-quantity"
+          onClick={() => this.changeQuantity(id, '-')}>(-)
+        </button>
+        <div data-testid="shopping-cart-product-quantity" className="circulo">{quantity}</div>
+        <button 
+          type="button" className="btn btn-green" data-testid="product-increase-quantity"
+          onClick={() => this.changeQuantity(id, '+')}>(+)
+        </button>
       </div>
     );
   }

@@ -30,6 +30,7 @@ class AddToCartButton extends React.Component {
     return (
       <div>
         <button
+          className="my-button"
           type="button"
           data-testid={ testId }
           onClick={ this.saveShoppingCart }

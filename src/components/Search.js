@@ -56,13 +56,18 @@ class Search extends Component {
     const { addItemCart } = this.props;
     const zero = 0;
     return (
-      <div className="main-container">
-        <Category
-          handleCategory={ this.handleCategory }
-          handleClickCategory={ this.handleClickCategory }
-        />
-        <div className="search-container">
+      <div>
+        <header className="header">
           <div className="form-div">
+            <div className="shopping-cart-div">
+              <Link data-testid="shopping-cart-button" to="/ShoppingCart">
+                <img
+                  src="https://www.flaticon.com/svg/static/icons/svg/263/263142.svg"
+                  alt="Carrinho de compra"
+                  width="50"
+                />
+              </Link>
+            </div>
             <form className="searchForm">
               <input
                 className="search-input"
@@ -70,7 +75,6 @@ class Search extends Component {
                 type="text"
                 data-testid="query-input"
                 placeholder="Digite aqui o termo da sua busca"
-                // required="required"
                 value={ searchInput }
                 onChange={ this.handleChange }
               />
@@ -83,31 +87,30 @@ class Search extends Component {
                 Buscar
               </button>
             </form>
-            <div className="shopping-cart-div">
-              <Link data-testid="shopping-cart-button" to="/ShoppingCart">
-                <img
-                  src="https://www.flaticon.com/svg/static/icons/svg/263/263142.svg"
-                  alt="Carrinho de compra"
-                  width="50"
-                />
-              </Link>
-            </div>
           </div>
-          <div className="product-container">
-            {!seachDone && (
-              <p data-testid="home-initial-message">
-                Digite algum termo de pesquisa ou escolha uma categoria.
-              </p>
-            )}
-            {Object.keys(products).length !== zero
-            && seachDone
-            && products.results.map((item) => (
-              <ProductCard
-                addItemCart={ addItemCart }
-                product={ item }
-                key={ item.title }
-              />
-            ))}
+        </header>
+        <div className="center-container">
+          <Category
+            handleCategory={ this.handleCategory }
+            handleClickCategory={ this.handleClickCategory }
+          />
+          <div className="search-container">
+            <div className="product-container">
+              {!seachDone && (
+                <p data-testid="home-initial-message">
+                  Digite algum termo de pesquisa ou escolha uma categoria.
+                </p>
+              )}
+              {Object.keys(products).length !== zero
+              && seachDone
+              && products.results.map((item) => (
+                <ProductCard
+                  addItemCart={ addItemCart }
+                  product={ item }
+                  key={ item.title }
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

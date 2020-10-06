@@ -68,22 +68,22 @@ class Checkout extends React.Component {
             <legend>Método de pagamento</legend>
             <label htmlFor="boleto">
               Boleto
-              <input type="radio" id="boleto" />
+              <input type="radio" id="boleto" value="bo" name="payment" />
             </label>
             &nbsp;
             <label htmlFor="visa">
               Visa
-              <input type="radio" id="visa" />
+              <input type="radio" id="visa" value="cardVisa" name="payment" />
             </label>
             &nbsp;
             <label htmlFor="mastercard">
               MasterCard
-              <input type="radio" id="mastercard" />
+              <input type="radio" id="mastercard" value="cardMaster" name="payment" />
             </label>
             &nbsp;
             <label htmlFor="elo">
               Elo
-              <input type="radio" id="elo" />
+              <input type="radio" id="elo" value="cardElo" name="payment" />
             </label>
           </fieldset>
         </form>

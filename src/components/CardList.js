@@ -5,6 +5,7 @@ import CategoriesList from './CategoriesList';
 import Cart from '../services/cart';
 import NoSearching from './NoSearching';
 import Loading from './Loading';
+import './cardList.css';
 
 class CardList extends React.Component {
   constructor() {
@@ -66,8 +67,8 @@ class CardList extends React.Component {
   render() {
     const { products, value, empty, loading } = this.state;
     return (
-      <div>
-        <div>
+      <div className="card-container">
+        <div className="search-container">
           <input
             data-testid="query-input"
             value={ value }
@@ -82,7 +83,7 @@ class CardList extends React.Component {
           </button>
         </div>
         <CategoriesList handleID={ this.handleClickID } />
-        <div>
+        <div className="card-list">
           { loading ? <Loading /> : products.map((product) => (
             <Card product={ product } key={ product.id } />)) }
           { (empty != null && empty) ? <NoSearching /> : false }

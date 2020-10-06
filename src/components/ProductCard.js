@@ -11,7 +11,7 @@ class ProductCard extends React.Component {
 
     return (
       <div className="productCard" data-testid="product">
-        <img src={ thumbnail } className="product__img" alt="product" />
+        <img src={ thumbnail } className="product__img zoom" alt="product" />
         <div className="product__item product__title">{title}</div>
         <Shipping shipping={ product.shipping } />
         <div className="product__item product__price">

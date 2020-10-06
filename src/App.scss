@@ -33,6 +33,7 @@
   .product__img {
     justify-self: center;
     align-self: center;
+    
   }
 
   .product__shipping {
@@ -81,6 +82,19 @@
     .button__viewDetails:hover {
       background: linear-gradient(rgba(3, 104, 205,0.9), rgba(7, 60, 167,0.9))
     }
+  }
+
+  .zoom {
+    transition: .4s;
+
+  }
+
+  .zoom:hover {
+    transform: scale(1.1);
+    width:auto;
+    height: 120px;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 
 }

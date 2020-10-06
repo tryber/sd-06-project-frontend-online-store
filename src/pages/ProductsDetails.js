@@ -6,23 +6,10 @@ import ProductSpecs from '../components/ProductSpecs';
 import ShoppingCartButton from '../components/ShoppingCartButton';
 
 class ProductsDetails extends Component {
-
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     productCart: [],
-  //   };
-  //   this.handleAddCart = this.handleAddCart.bind(this);
-  // }
-
-  // handleAddCart(product) {
-  //   this.setState((prevState) => ({ productCart: [...prevState.productCart, product] }));
-  // }
-
   render() {
-    const { location: { state: { element, productCart, handleAddCart } } } = this.props;
-    // const { productCart } = this.state;
-    console.log(this.props);
+    const { location: { state: { element } } } = this.props;
+    const { handleAddCart, cartList } = this.props;
+
     return (
       <div>
         <ProductSpecs details={ element } />
@@ -33,7 +20,7 @@ class ProductsDetails extends Component {
         >
           Adicionar
         </button>
-        <ShoppingCartButton productCart={ productCart } />
+        <ShoppingCartButton cartList={ cartList } />
         <Link to="/">Voltar</Link>
       </div>
     );

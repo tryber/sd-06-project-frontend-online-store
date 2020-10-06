@@ -33,6 +33,7 @@ class ProductCard extends Component {
         <Link
           to={ { pathname: `/ProductDetails/${id}`, state: { props: product } } }
           data-testid="product-detail-link"
+
         >
           <button type="button">Detalhes do produto</button>
         </Link>

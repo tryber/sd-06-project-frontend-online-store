@@ -121,7 +121,12 @@ class ControlShoppingCart extends Component {
           <Switch>
             <Route
               path="/ProductDetails/:id"
-              render={ (props) => <ProductDetails { ...props } /> }
+              render={ (props) => (
+                <ProductDetails
+                  { ...props }
+                  setProductCart={ this.setProductCart }
+                  products={ products }
+                />) }
             />
             <Route
               path="/CarrinhoCompras"

@@ -17,21 +17,21 @@ class PagInicial extends Component {
       fetchApi,
       setValue,
       value } = this.props;
-    const idInput = 'Digite algum termo de pesquisa ou escolha uma categoria.';
+    const idInput = 'query-input';
     return (
       <div data-testid="home-initial-message">
         <form>
           <label htmlFor={ idInput }>
-            { idInput }
+            Digite algum termo de pesquisa ou escolha uma categoria.
+            <input
+              data-testid="query-input"
+              name="user-input"
+              id={ idInput }
+              type="text"
+              onChange={ setValue }
+              value={ value }
+            />
           </label>
-          <input
-            data-testid="query-input"
-            name="user-input"
-            id={ idInput }
-            type="text"
-            onChange={ setValue }
-            value={ value }
-          />
           <button
             type="button"
             data-testid="query-button"
@@ -66,7 +66,6 @@ class PagInicial extends Component {
     );
   }
 }
-
 
 PagInicial.propTypes = {
   productCart: PropTypes.arrayOf.isRequired,

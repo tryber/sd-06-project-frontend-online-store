@@ -11,7 +11,6 @@ class CarrinhoCompras extends Component {
     };
   }
 
-
   setStateShoppingCart(valueButton) {
     this.setState({
       productCartState: valueButton,

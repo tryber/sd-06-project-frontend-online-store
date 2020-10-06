@@ -3,28 +3,46 @@ import React, { Component } from 'react';
 import './ItemCard.css';
 
 class ItemCardCart extends Component {
-  // constructor() {
-  //   super();
-  // }
+  constructor(props) {
+    super(props);
 
-  // handleClicks({ target }) {
-  //   const { name, value } = target;
-  //   this.setState({ [name]: value });
-  // }
+    this.state = {
+      quantity: 1,
+    };
+
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
+  }
+
+  decreaseQuantity() {
+    const { quantity } = this.state;
+    this.setState({ quantity: (quantity - 1) });
+  }
+
+  increaseQuantity() {
+    const { quantity } = this.state;
+    this.setState({ quantity: (quantity + 1) });
+  }
 
   render() {
     const { product } = this.props;
-    const { id, title, price, quantity, thumbnail } = product;
+    const { id, title, price, thumbnail } = product;
+    const { quantity } = this.state;
+    const two = 2;
     return (
       <li key={ id }>
-        <button type="button">X</button>
+        <button
+          type="button"
+        >
+          X
+        </button>
         <br />
         <img src={ thumbnail } alt={ title } />
         <p data-testid="shopping-cart-product-name">{ title }</p>
-        <p>{ `R$ ${price}` }</p>
+        <p>{ `R$ ${parseFloat(quantity * price).toFixed(two)}` }</p>
         <button
           type="button"
-          onClick={ console.log('diminui 1') }
+          onClick={ this.decreaseQuantity }
           data-testid="product-decrease-quantity"
         >
           -
@@ -32,7 +50,7 @@ class ItemCardCart extends Component {
         <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
         <button
           type="button"
-          onClick={ console.log('soma 1') }
+          onClick={ this.increaseQuantity }
           data-testid="product-increase-quantity"
         >
           +

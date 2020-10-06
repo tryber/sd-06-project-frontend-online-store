@@ -8,7 +8,6 @@ const productsAdded = [];
 
 const addProduct = (product) => {
   productsAdded.push(product);
-  console.log(productsAdded);
 };
 
 
@@ -22,7 +21,6 @@ class ShoppingCart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(productsAdded);
     this.addToCart(productsAdded);
   }
 
@@ -49,9 +47,8 @@ class ShoppingCart extends React.Component {
     if (cart.length === zero) {
       return (
         <div>
-          <header>
-            <Link to="/">Voltar</Link>
-          </header>
+          <Link to="/">Voltar</Link>
+          <br />
           <img src={ EmptyBox } alt="empty-box" className="empty-box" />
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
         </div>
@@ -59,9 +56,8 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
-        <header>
-          <Link to="/">Voltar</Link>
-        </header>
+        <Link to="/">Voltar</Link>
+        <br />
         { cart.map((item) => <ItemCardCart key={ item.id } product={ item } />) }
         <div>
           <Link data-testid="checkout-products" to="/checkout">Finalizar a compra</Link>

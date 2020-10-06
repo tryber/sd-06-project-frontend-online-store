@@ -1,29 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import CartBtn from '../services/CartBtn';
 import Evaluations from '../components/Evaluations';
 
 class ProductDetails extends React.Component {
+  saveEvaluation() {
+    const email = document.getElementById('email').value;
+    const rating = document.getElementById('rating').value;
+    const message = document.getElementById('message').value;
+    const evaluation = {
+      email,
+      rating,
+      message,
+    };
+    const evaluationString = JSON.stringify(evaluation);
+    localStorage.setItem('evaluations', [evaluationString]);
+  }
+
   render() {
-    const { location: { state: { title, thumbnail, attibutes, id } } } = this.props;
+    const { location: { state: product } } = this.props;
+    const { addToCart } = this.props;
+
+    console.log(product);
+
     return (
       <div>
         <div>
           <div>
-            <Link data-testid="product-detail-add-to-cart" to="/ShoppingCart">
-              Carrinho de compras
-            </Link>
-            <h1 data-testid="product-detail-name">{title}</h1>
-            <img src={ thumbnail } alt={ title } />
+            <h1 data-testid="product-detail-name">{ product.title }</h1>
+            <img src={ product.thumbnail } alt={ product.title } />
           </div>
           <div>
-            <p>{ attibutes }</p>
+            <p>{ product.attibutes }</p>
           </div>
         </div>
         <div>
+          <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => addToCart(product) }
+          >
+            Adicionar ao Carrinho
+          </button>
           <CartBtn />
-          <Evaluations productId={ id } />
+          <Evaluations productId={ product.id } />
         </div>
       </div>
     );
@@ -36,9 +56,9 @@ ProductDetails.propTypes = {
       title: PropTypes.string.isRequired,
       thumbnail: PropTypes.string.isRequired,
       attibutes: PropTypes.arrayOf(PropTypes.object).isRequired,
-      id: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

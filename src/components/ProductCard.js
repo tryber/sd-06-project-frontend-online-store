@@ -24,7 +24,8 @@ class ProductCard extends React.Component {
           } }
           data-testid="product-detail-link"
         >
-          Detalhes do produto
+
+          <button type="button">Detalhes do produto</button>
         </Link>
       </div>
     );

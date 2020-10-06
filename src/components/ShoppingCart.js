@@ -12,7 +12,9 @@ class ShoppingCart extends Component {
     const { location } = this.props;
     const { state } = location;
     if (state.length < 1) {
-      return <span>Seu carrinho está vazio.</span>;
+      return (
+        <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio.</span>
+      );
     }
     return (
       <div>

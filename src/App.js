@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Switch>
-          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/checkout" component={ Checkout } />
           <Route exact path="/product/:id" component={ ProductDetail } />
           <Route exact path="/shoppingcart" component={ ShoppingCart } />
           <Route exact path="/shoppingcartbutton" component={ ShoppingCartButton } />

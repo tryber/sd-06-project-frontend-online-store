@@ -9,7 +9,7 @@ export default class CreateCart extends Component {
     this.decreaseProduct = this.decreaseProduct.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
     this.state = {
-      total: '',
+      totalCartValueCartValue: '',
     };
   }
 
@@ -18,19 +18,19 @@ export default class CreateCart extends Component {
     const zer = 0;
     if (cartLocalStorage !== null) {
       const result = cartLocalStorage
-      .reduce((previousValue, next) => previousValue + next.price, zer);
-    this.setStateTotal(result);
+        .reduce((previousValue, next) => previousValue + next.price, zer);
+      this.setStatetotalCartValue(result);
     }
   }
 
-  setStateTotal(element) {
+  setStatetotalCartValue(element) {
     this.setState({
-      total: element,
+      totalCartValue: element,
     });
   }
 
   removeProduct(target, elementId, price) {
-    const { total } = this.state;
+    const { totalCartValue } = this.state;
     const product = target.parentNode;
     const cartLocalStorage = JSON.parse(localStorage.getItem('cartLocal'));
     const removeLocalStorage = cartLocalStorage
@@ -38,32 +38,32 @@ export default class CreateCart extends Component {
     const CartLocal = JSON.stringify(removeLocalStorage);
     localStorage.setItem('cartLocal', CartLocal);
     product.remove();
-    const result = Math.round(total - price);
-    this.setStateTotal(result);
+    const result = Math.round(totalCartValue - price);
+    this.setStatetotalCartValue(result);
   }
 
   sumProduct(target, element, price) {
-    const { total } = this.state;
+    const { totalCartValue } = this.state;
     const number = parseInt(target.parentNode.lastChild.innerText, 0);
     const quantity = number + 1;
     document.getElementById(element).innerText = quantity;
     document.getElementById(`${element}price`).innerText = price * quantity;
-    const result = Math.round(price + total);
-    this.setStateTotal(result);
+    const result = Math.round(price + totalCartValue);
+    this.setStatetotalCartValue(result);
   }
 
   decreaseProduct(target, element, price) {
     const number = parseInt(target.parentNode.lastChild.innerText, 0);
-    const { total } = this.state;
+    const { totalCartValue } = this.state;
     const quantity = number - 1;
     const zer2 = 0;
-    const result = (Math.round(total - price));
+    const result = (Math.round(totalCartValue - price));
     if (quantity === zer2) {
-      this.setStateTotal(result);
+      this.setStatetotalCartValue(result);
       this.removeProduct(target, element, price);
     } else {
       document.getElementById(element).innerText = quantity;
-      this.setStateTotal(result);
+      this.setStatetotalCartValue(result);
     }
   }
 
@@ -72,20 +72,11 @@ export default class CreateCart extends Component {
   }
 
   render() {
-    const { cart, total } = this.props;
+    const { cart } = this.props;
+    const { totalCartValue } = this.state;
 
-    if(total === undefined){
-      return (
-        <div>
-          <h1 data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-          </h1>
-        </div>
-      ) 
-    }
-    else if (total !== 0) {
-      return(
-        <div data-testid="shopping-cart-empty-message">
+    return cart !== null ? (
+      <div data-testid="shopping-cart-empty-message">
         {cart.map((element) => (
           <div key={ element.id }>
             <img src={ element.thumbnail } alt={ element.title } />
@@ -117,16 +108,22 @@ export default class CreateCart extends Component {
             </p>
           </div>
         ))}
-        <div>{total}</div>
-          <button type="button" onClick={ this.removeLocalStorage }>
-            Deletar Todos
-          </button>
-        </div>
-      )
-    };
+        <div>{totalCartValue}</div>
+        <button type="button" onClick={ this.removeLocalStorage }>
+          Deletar Todos
+        </button>
+      </div>
+    ) : (
+      <div>
+        <h1 data-testid="shopping-cart-empty-message">
+          Seu carrinho está vazio
+        </h1>
+      </div>
+    );
   }
 }
+
 CreateCart.propTypes = {
   cart: PropTypes.objectOf.isRequired,
-  total: PropTypes.objectOf.isRequired,
+  totalCartValue: PropTypes.objectOf.isRequired,
 };

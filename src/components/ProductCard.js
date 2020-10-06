@@ -3,11 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
 
-
 class ProductCard extends Component {
   render() {
     const { products, isFail, handleAddCart } = this.props;
-
 
     if (isFail) {
       return <span>Nenhum produto foi encontrado</span>;
@@ -22,7 +20,7 @@ class ProductCard extends Component {
             </h4>
             <img src={ element.thumbnail } alt={ `foto do ${element.title}` } />
             <p>
-              {element.price}
+              {`R$ ${element.price}`}
             </p>
             <Link
               to={ { pathname: `/products/${element.id}`, state: { element } } }

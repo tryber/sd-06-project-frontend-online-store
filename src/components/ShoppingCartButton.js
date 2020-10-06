@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 
 class ShoppingCartButton extends Component {
   render() {
-    const { productCart } = this.props;
     return (
       <div>
-        <Link to={ { pathname: '/shopping-cart', state: { productCart } } }>
+        <Link to="/shopping-cart">
           <button type="button" data-testid="shopping-cart-button">Carrinho</button>
         </Link>
       </div>

@@ -84,6 +84,8 @@ class ShopList extends React.Component {
   }
 
   handleResetCategory() {
+    const labels = document.querySelectorAll('.category-list label');
+    labels.forEach((label) => label.classList.remove('checked'));
     const checkedCategory = document.querySelector('input[name="category"]:checked');
     if (checkedCategory) checkedCategory.checked = false;
     this.setState({ products: [], selectedCategory: '' });

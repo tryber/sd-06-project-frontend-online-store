@@ -62,8 +62,13 @@ class Home extends React.Component {
       }
       return (
         items.map((item) => (
-          <ProductCard product={ item } key={ item.id } onClick={() => this.addItem(item)}/>
-        )));
+          <ProductCard
+            product={ item }
+            key={ item.id }
+            onClick={ () => this.addItem(item) }
+          />
+        ))
+      );
     }
   }
 
@@ -90,7 +95,7 @@ class Home extends React.Component {
             {this.renderProducts()}
           </div>
           <div>
-            <Link to= { { pathname: '/shopping-cart', state: shopCart } }>
+            <Link to={ { pathname: '/shopping-cart', state: shopCart } }>
               <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
             </Link>
           </div>

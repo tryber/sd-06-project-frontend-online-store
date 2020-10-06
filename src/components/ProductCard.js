@@ -13,7 +13,8 @@ class ProductCard extends React.Component {
         </div>
         <div className="product-card-body">
           <p>
-            Preço: {product.price}
+            Preço:
+            {product.price}
           </p>
           <div className="product-card-links">
             <Link
@@ -25,7 +26,7 @@ class ProductCard extends React.Component {
             <button
               type="button"
               data-testid="product-add-to-cart"
-              onClick={onClick}
+              onClick={ onClick }
             >
               ADICIONAR AO CARRINHO
             </button>
@@ -37,6 +38,7 @@ class ProductCard extends React.Component {
 }
 
 ProductCard.propTypes = {
+  onClick: PropTypes.func.isRequired,
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,

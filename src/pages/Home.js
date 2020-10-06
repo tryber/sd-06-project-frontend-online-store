@@ -55,7 +55,7 @@ class Home extends React.Component {
   }
 
   renderProducts() {
-    const { loadProducts, search, items, filter } = this.state;
+    const { loadProducts, search, items, filter, shopCart } = this.state;
     if (loadProducts) {
       if (search === '' && filter === '') {
         return <span>Nenhum produto foi encontrado</span>;
@@ -65,6 +65,7 @@ class Home extends React.Component {
           <ProductCard
             product={ item }
             key={ item.id }
+            value={shopCart}
             onClick={ () => this.addItem(item) }
           />
         ))

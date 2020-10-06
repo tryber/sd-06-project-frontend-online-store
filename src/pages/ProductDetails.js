@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Carrinho from '../imgs/carrinho.png';
 
 
 class ProductDetails extends React.Component {
@@ -19,11 +20,6 @@ class ProductDetails extends React.Component {
     };
   }
 
-  componentWillUnmount() {
-    const { title, quantity } = this.state;
-    addItem.addItem(title, quantity);
-  }
-
   getQuantity({ target }) {
     const { value } = target;
 
@@ -33,9 +29,9 @@ class ProductDetails extends React.Component {
   }
 
   render() {
-    const { location } = this.props;
+    const { location, onClick } = this.props;
     const { state } = location;
-    const { title, thumbnail, price } = state;
+    const { title, thumbnail, price } = state[0];
 
     return (
       <div>
@@ -52,12 +48,19 @@ class ProductDetails extends React.Component {
           </label>
         </form>
         <div>
-          <Link
+          <button
+            type="button"
             data-testid="product-detail-add-to-cart"
-            to="/"
+            onClick={ onClick }
           >
-            ADICIONAR AO CARRINHO
-          </Link>
+              ADICIONAR AO CARRINHO
+          </button>
+          <Link
+              data-testid="shopping-cart-button"
+              to={ { pathname: '/shopping-cart', state: state[1] } }
+            >
+              <img src={ Carrinho } alt="Carrinho" />
+            </Link>
         </div>
       </div>
     );
@@ -65,6 +68,7 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.propTypes = {
+  onClick: PropTypes.func.isRequired,
   location: PropTypes.shape({
     state: PropTypes.shape({
       title: PropTypes.string.isRequired,

@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
   render() {
-    const { product, onClick } = this.props;
+    const { product, onClick, value } = this.props;
+    const allState = [product, value]
+
     return (
       <div data-testid="product" className="product-card">
         <img src={ product.thumbnail } alt="product" className="product-card-image" />
@@ -19,7 +21,8 @@ class ProductCard extends React.Component {
           <div className="product-card-links">
             <Link
               data-testid="product-detail-link"
-              to={ { pathname: '/product', state: product } }
+              to={ { pathname: '/product', state: allState } }
+              onClick={onClick}
             >
               DETALHES
             </Link>

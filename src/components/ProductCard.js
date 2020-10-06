@@ -9,8 +9,8 @@ class ProductCard extends Component {
   }
 
   handleAddClick() {
-    const { title, setProductCart, id } = this.props;
-    setProductCart(title, id);
+    const { title, setProductCart, id, thumbnail, price } = this.props;
+    setProductCart(title, id, price, thumbnail);
   }
 
   render() {

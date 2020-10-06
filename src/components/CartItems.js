@@ -2,38 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class CartItems extends Component {
-  // constructor() {
-  //   super();
-  //   this.renderProduct = this.renderProduct.bind(this);
-  //   this.setShoppingCart = this.setShoppingCart.bind(this);
-
-  //   this.state = {
-  //     productCartState: [],
-  //   };
-  // }
-
-  //  setStateCart() {
-  //     const { productCart, countProducts } = this.props;
-  //     this.setState({
-  //       productCartState: productCart,
-  //     });
-  //   }
-  setShoppingCart(productCart, countProducts) {
+  setShoppingCart(productCart) {
     const arrayEmpty = 0;
     if (productCart.length > arrayEmpty) {
       return productCart.map((product) => (
         <div style={ { background: 'yellow' } } key={ product.id }>
           <h3
             style={ { color: 'red' } }
-            data-testid="shopping-cart-product-name"
           >
             {product.name}
           </h3>
           <h3
             style={ { color: 'blue' } }
-            data-testid="shopping-cart-product-quantity"
           >
-            { countProducts }
+            { product.countTotal }
           </h3>
         </div>
       ));
@@ -48,11 +30,11 @@ class CartItems extends Component {
   }
 
   render() {
-    const { productCart, countProducts } = this.props;
+    const { productCart } = this.props;
 
     return (
       <div>
-        {this.setShoppingCart(productCart, countProducts)}
+        {this.setShoppingCart(productCart)}
       </div>
     );
   }
@@ -60,7 +42,6 @@ class CartItems extends Component {
 
 CartItems.propTypes = {
   productCart: PropTypes.arrayOf.isRequired,
-  countProducts: PropTypes.string.isRequired,
 };
 
 export default CartItems;

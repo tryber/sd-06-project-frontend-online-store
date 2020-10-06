@@ -9,12 +9,16 @@ class ProductDetails extends React.Component {
 
     this.getQuantity = this.getQuantity.bind(this);
 
+    const { location } = this.props;
+    const { state } = location;
+    const { title: name } = state;
+
     this.state = {
-      title: this.props.location.state.title,
-      quantity: 0,
-    }
+      title: name,
+      quantity: 1,
+    };
   }
-  
+
   componentWillUnmount() {
     const { title, quantity } = this.state;
     addItem.addItem(title, quantity);
@@ -42,9 +46,9 @@ class ProductDetails extends React.Component {
         </p>
         <img src={ thumbnail } alt={ title } />
         <form>
-          <label>
-            Quantidade: 
-            <input type="number" onChange={this.getQuantity}/>
+          <label htmlFor="number">
+            Quantidade:
+            <input type="number" name="number" onChange={ this.getQuantity } />
           </label>
         </form>
         <div>

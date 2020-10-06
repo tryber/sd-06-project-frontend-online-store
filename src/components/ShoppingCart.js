@@ -17,7 +17,7 @@ class ShoppingCart extends Component {
           {product.title}
         </div>
         <div data-testid="shopping-cart-product-quantity">
-          {product.quantity}
+          {product.quantity.toString()}
         </div>
       </div>
     );

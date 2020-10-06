@@ -1,5 +1,7 @@
 let cartList = [];
 
+console.log(cartList);
+
 export function addItem(title, quantity) {
   const newItem = { title, quantity };
 

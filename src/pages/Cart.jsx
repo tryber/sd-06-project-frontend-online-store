@@ -1,36 +1,23 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Product from '../components/Product';
 
 class Cart extends Component {
-  constructor() {
-    super();
-    this.localStorageSave = this.localStorageSave.bind(this);
-    this.state = {
-      cartList: null,
-    };
-  }
-
-  componentDidMount() {
-    this.localStorageSave();
-  }
-
-  getLocalStorageProduct() {
-    return JSON.parse(localStorage.getItem('cart'));
-  }
-
-  localStorageSave() {
-    const cartLocalStorage = this.getLocalStorageProduct();
-    this.setState({ cartList: cartLocalStorage });
-  }
-
   render() {
-    const { cartList } = this.state;
+    const { handleCartItems, removeItem, cart: { products} } = this.props;
+    console.log(products);
     return (
       <div className="cart-product">
-        {(cartList)
-          ? cartList
-            .map((product) => <Product bt="cart" key={ product.id } data={ product } />)
+        {(products && products.length > 0)
+          ? products.map((product) => <Product
+            removeItem={removeItem}
+            handleCartItems={handleCartItems}
+            bt="cart"
+            key={ product.id }
+            data={ product }
+          />)
           : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
+        <Link to="/">Voltar para a Home</Link>
       </div>
     );
   }

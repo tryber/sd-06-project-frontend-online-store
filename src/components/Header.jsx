@@ -7,7 +7,7 @@ import quindimlogo from '../img/quindimshop.png';
 
 class Header extends Component {
   render() {
-    const { inputValue, handleEvent, onClick } = this.props;
+    const { inputValue, handleEvent, onClick, cart } = this.props;
     return (
       <div className="header">
         <img id="logo-quindim-header" alt="logomarca quindim shop" src={ quindimlogo } />
@@ -26,7 +26,7 @@ class Header extends Component {
             <img id="logo-ml" alt="logomarca mercado livre" src={ mercadolivre } />
           </p>
         </div>
-        <CartButton />
+        <CartButton cart={ cart } />
         <div id="header-bar-grey" />
         <div id="header-bar-black" />
         <div id="header-bar-yellow" />

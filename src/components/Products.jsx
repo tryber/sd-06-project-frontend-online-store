@@ -3,7 +3,7 @@ import Product from './Product';
 
 class Products extends React.Component {
   render() {
-    const { data } = this.props;
+    const { data, handleCartItems, saveDetails } = this.props;
     return (
       <main className="products-list">
         <h4 className="section-title">Produtos:</h4>
@@ -12,7 +12,13 @@ class Products extends React.Component {
             ? 'Loading...'
             : (data.results.length === 0)
               ? 'Nenhum produto encontrado.'
-              : data.results.map((product) => <Product bt="home" key={product.id} data={product} />)}
+              : data.results.map((product) => <Product
+                saveDetails={saveDetails}
+                handleCartItems={handleCartItems}
+                bt="home"
+                key={product.id}
+                data={product}
+              />)}
         </div>
       </main>
     );

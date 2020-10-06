@@ -36,7 +36,6 @@ class SearchEngine extends React.Component {
               sendQueryInputToHome(queryInput);
             } }
           />
-          <ShoppingCartButton />
         </div>
 
         <button

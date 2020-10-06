@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import ListCard from '../components/ListCard';
 import ListOfCategories from '../components/ListOfCategories';
@@ -46,6 +47,7 @@ class ItemList extends Component {
 
   render() {
     const { searchValeu, filterValues, clicked } = this.state;
+    const { addItem } = this.props;
     return (
       <div>
         <h4 data-testid="home-initial-message">
@@ -65,12 +67,20 @@ class ItemList extends Component {
           SEARCH
         </button>
         { clicked ? filterValues
-          .map((iten) => <ListCard key={ iten.title } iten={ iten } />) : '' }
+          .map((iten) => (<ListCard
+            key={ iten.title }
+            addItem={ addItem }
+            iten={ iten }
+          />)) : '' }
         <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
         <ListOfCategories handleSelectOption={ this.handleSelectOption } />
       </div>
     );
   }
 }
+
+ItemList.propTypes = {
+  addItem: PropTypes.func.isRequired,
+};
 
 export default ItemList;

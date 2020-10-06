@@ -3,6 +3,19 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ListCard extends Component {
+  constructor() {
+    super();
+
+    this.addToCart = this.addToCart.bind(this);
+    this.state = {};
+  }
+
+  addToCart(iten) {
+    const { title, thumbnail, price, id } = iten;
+    const { addItem } = this.props;
+    addItem({ title, thumbnail, price, id, quantity: 1 });
+  }
+
   render() {
     const { iten } = this.props;
     const { title, thumbnail, price, id } = iten;
@@ -16,6 +29,13 @@ class ListCard extends Component {
           <span>{price}</span>
           <img src={ thumbnail } alt=" Product" />
         </Link>
+        <button
+          type="button"
+          onClick={ () => this.addToCart(iten) }
+          data-testid="product-add-to-cart"
+        >
+          Adicionar ao Carrinho
+        </button>
       </div>
     );
   }
@@ -27,7 +47,9 @@ ListCard.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
     id: PropTypes.string,
+    quantity: PropTypes.number,
   }).isRequired,
+  addItem: PropTypes.func.isRequired,
 };
 
 export default ListCard;

@@ -24,7 +24,6 @@ class ListOfCategories extends Component {
 
   async handleOnChange(category) {
     const { handleSelectOption } = this.props;
-    console.log(category.id);
     handleSelectOption(category.id);
   }
 

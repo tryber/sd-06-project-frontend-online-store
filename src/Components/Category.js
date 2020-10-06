@@ -13,6 +13,7 @@ export default class Category extends Component {
           id={ id }
           value={ category } // texto dentro de cada button
           onClick={ onClick }
+          className="category-input"
         />
         {/* { category } */}
       </label>

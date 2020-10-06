@@ -4,8 +4,8 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import HomePage from './Pages/HomePage';
 import ShoppingCart from './Components/ShoppingCart';
 import ProductDetail from './Pages/ProductDetail';
-
-import './App.css';
+import './HomePage.css';
+import './ProductList.css';
 
 function App() {
   return (

@@ -1,4 +1,11 @@
 import React, { Component } from 'react';
+/*
+Felipe Gomes
+
+Problemas para resolver:
+1- alterar quantidades de cada item,
+2- adicionar item de outra categoria sem limpar o carrinho,
+*/
 
 class ShoppingCart extends Component {
   constructor() {

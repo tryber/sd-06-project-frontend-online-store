@@ -3,16 +3,20 @@ import propTypes from 'prop-types';
 
 export default class Input extends Component {
   render() {
-    const { onChange } = this.props;
+    const { onChange, placeholder } = this.props;
     return (
       <input
         id="query-input"
         data-testid="query-input"
         type="text"
         onChange={ onChange }
+        placeholder={ placeholder }
       />
     );
   }
 }
 
-Input.propTypes = { onChange: propTypes.func.isRequired };
+Input.propTypes = {
+  onChange: propTypes.func.isRequired,
+  placeholder: propTypes.string.isRequired,
+};

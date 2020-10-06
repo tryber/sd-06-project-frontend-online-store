@@ -17,7 +17,6 @@ class Home extends Component {
     this.saveSelectedCategory = this.saveSelectedCategory.bind(this);
     this.addTocart = this.addTocart.bind(this);
 
-
     this.state = {
       searchInput: '',
       spanMessage: 'Digite algum termo de pesquisa ou escolha uma categoria.',
@@ -78,7 +77,6 @@ class Home extends Component {
           <SearchInput onSearchTextChange={ this.onSearchTextChange } />
 
           <SearchButton fetchSearchedItem={ this.fetchSearchedItem } />
-
 
           {searchedItems === undefined
             ? <span data-testid="home-initial-message">{ spanMessage }</span>

@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import addItem from '../components/addItem';
+import * as addItem from '../components/addItem';
 
 class ProductDetails extends React.Component {
-  
   render() {
     const { location } = this.props;
     const { state } = location;
@@ -18,7 +17,14 @@ class ProductDetails extends React.Component {
         </p>
         <img src={ thumbnail } alt={ title } />
         <div>
-          <Link onClick={addItem(title, price)} to="/">ADICIONAR AO CARRINHO</Link>
+          <Link
+            data-testid="product-detail-add-to-cart"
+            to="/"
+            title={ title }
+            onClick={ addItem.addItem }
+          >
+            ADICIONAR AO CARRINHO
+          </Link>
         </div>
       </div>
     );

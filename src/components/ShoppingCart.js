@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
+import * as addItem from './addItem';
 
 class ShoppingCart extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      productList: this.props.cartList,
+      productList: addItem.cartList,
     };
   }
-  
+
   render() {
     const { productList } = this.state;
-    if (productList.length === 0)
-    return (
-      <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
-    );
+    if (productList === '') {
+      return (
+        <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+      );
+    }
 
     return (
       <div>
-        <span>Empty List</span>
+        {productList.map((product, index) => <div key={ index }>{product.title}</div>)}
       </div>
     );
   }

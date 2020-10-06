@@ -13,6 +13,7 @@ body{
 
 .header {
   display: flex;
+  width: 104%;
   background: linear-gradient(#59b4ff, #2e99d6);
   height: 100px;
   border: 1px solid rgb(185, 185, 185);

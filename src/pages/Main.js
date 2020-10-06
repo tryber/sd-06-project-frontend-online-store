@@ -42,7 +42,7 @@ class Main extends Component {
           if (el.id === id) {
             el.amount += 0.5;
           }
-          return [...acc]
+          return [...acc];
         }, shoppingCart);
 
         localStorage.cart = JSON.stringify(updatedCart);
@@ -68,7 +68,7 @@ class Main extends Component {
           <ShoppingCartButton />
         </div>
 
-        <ProductsList products={ products } addProductToCard= { this.addProductToCard } />
+        <ProductsList products={ products } addProductToCard={ this.addProductToCard } />
 
       </div>
     );

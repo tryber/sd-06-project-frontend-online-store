@@ -25,6 +25,7 @@ function ProductsList(props) {
 
 ProductsList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  addProductToCard: PropTypes.func.isRequired,
 };
 
 export default ProductsList;

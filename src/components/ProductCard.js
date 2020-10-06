@@ -21,7 +21,7 @@ function ProductCard(props) {
         </Link>
         <button
           type="button"
-          onClick={ () => { addProductToCard(id, title, thumbnail, price) } }
+          onClick={ () => { addProductToCard(id, title, thumbnail, price); } }
           data-testid="product-add-to-cart"
         >
           Add to cart
@@ -39,6 +39,7 @@ ProductCard.propTypes = {
     price: PropTypes.number.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  addProductToCard: PropTypes.func.isRequired,
 };
 
 export default ProductCard;

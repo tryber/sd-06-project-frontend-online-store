@@ -4,14 +4,19 @@ class CartEmptyMessage extends Component {
   constructor() {
     super();
 
+    this.getShoppingCartProducts = this.getShoppingCartProducts.bind(this);
+
     this.state = {
       isEmpty: true,
       cartProducts: [],
-    }
+    };
   }
 
   componentDidMount() {
-    
+    this.getShoppingCartProducts();
+  }
+
+  getShoppingCartProducts() {
     if (localStorage.cart) {
       const shoppingCart = JSON.parse(localStorage.cart);
       this.setState({
@@ -19,7 +24,7 @@ class CartEmptyMessage extends Component {
         cartProducts: shoppingCart,
       });
     } else {
-      this.setState({ isEmpty: true })
+      this.setState({ isEmpty: true });
     }
   }
 
@@ -28,24 +33,27 @@ class CartEmptyMessage extends Component {
 
     return (
       (isEmpty)
-      ? (
-        <div>
-          <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        </div>
-      )
-      : (
-        cartProducts.map((item) => (
-          <div key={item.id}>
-
-            <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
-            <span data-testid="shopping-cart-product-quantity">Quantity: {item.amount}</span>
+        ? (
+          <div>
+            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           </div>
-        ))
-      )
+        )
+        : (
+          cartProducts.map((item) => (
+            <div key={ item.id }>
+
+              <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
+              <span
+                data-testid="shopping-cart-product-quantity"
+              >
+                Quantity:
+                {item.amount}
+              </span>
+            </div>
+          ))
+        )
     );
   }
-
-  
 }
 
 export default CartEmptyMessage;

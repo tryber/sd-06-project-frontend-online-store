@@ -36,7 +36,11 @@ class ProductsList extends Component {
                   <p>{title}</p>
                   <img src={thumbnail} alt="" />
                   <p>{`R$${price}`}</p>
-                  <span data-testid="free-shipping">{shipping.free_shipping ? 'Frete Grátis' : ''}</span>
+                  {
+                    (shipping.free_shipping)
+                    ? <span data-testid="free-shipping">Frete Grátis</span>
+                    : ''
+                  }
                 </section>
               </Link>
               <button

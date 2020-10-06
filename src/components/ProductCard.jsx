@@ -57,13 +57,6 @@ export default class ProductCard extends Component {
             return (<p key={id}>{`${name}: ${value_name}`}</p>);
           })
         }
-        <button
-          type="submit"
-          data-testid="product-add-to-cart"
-          onClick={ this.addToCart }
-        >
-          Adicionar ao Carrinho
-        </button>
       </div >
     )
   }
@@ -90,8 +83,26 @@ export default class ProductCard extends Component {
     
     return (
       details
-        ? <this.detailedProduct />
-        : <this.plainProduct />
+        ? <>
+            <this.detailedProduct />
+            <button
+              type="submit"
+              data-testid="product-add-to-cart"
+              onClick={ this.addToCart }
+            >
+              Adicionar ao Carrinho
+            </button>
+          </>
+        : <>
+            <this.plainProduct />
+            <button
+              type="submit"
+              data-testid="product-add-to-cart"
+              onClick={ this.addToCart }
+            >
+              Adicionar ao Carrinho
+            </button>
+          </>
     )
   }
 }

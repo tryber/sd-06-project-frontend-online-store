@@ -96,7 +96,7 @@ export default class CreateCart extends Component {
               -
             </button>
             <p id={ element.id } data-testid="shopping-cart-product-quantity">
-              1
+              1<p className='bug'>23</p>
             </p>
           </div>
         ))}

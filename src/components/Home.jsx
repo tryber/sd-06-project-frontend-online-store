@@ -18,7 +18,6 @@ class Home extends React.Component {
     this.handleOnclick = this.handleOnclick.bind(this);
     this.getObj = this.getObj.bind(this);
     this.fetchApiList = this.fetchApiList.bind(this);
-
   }
 
   handleOnchange({ target }) {

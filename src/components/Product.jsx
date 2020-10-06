@@ -4,6 +4,22 @@ import { Link } from 'react-router-dom';
 import '../css/Product.css';
 
 class Product extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      clickCounter: 0,
+      cartItems: [],
+    }
+
+    this.addToCart = this.addToCart.bind(this);
+  }
+
+  addToCart(){
+    const obj = this.props.item;
+    const storageLength = localStorage.length;
+    localStorage.setItem(storageLength, JSON.stringify(obj));
+  }
 
   render() {
     const { title, price, thumbnail, id } = this.props.item;
@@ -20,6 +36,11 @@ class Product extends Component {
           }}
           >detalhes
         </Link>
+        <button
+          data-testid="product-add-to-cart"
+          onClick={this.addToCart}
+          >adicionar ao carrinho
+        </button>
       </div>
     );
   }

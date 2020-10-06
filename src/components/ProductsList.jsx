@@ -24,12 +24,10 @@ class ProductsList extends Component {
       );
     }
 
-    console.log(countQuantity());
-
     return (
       <section>
         {cards.map((product) => {
-          const { title, thumbnail, price, id } = product;
+          const { title, thumbnail, price, id, shipping } = product;
 
           return (
             <div key={id} data-testid="product">
@@ -38,6 +36,7 @@ class ProductsList extends Component {
                   <p>{title}</p>
                   <img src={thumbnail} alt="" />
                   <p>{`R$${price}`}</p>
+                  <span data-testid="free-shipping">{shipping.free_shipping ? 'Frete Grátis' : ''}</span>
                 </section>
               </Link>
               <button

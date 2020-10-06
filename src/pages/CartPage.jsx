@@ -37,7 +37,7 @@ class CartPage extends Component {
   }
 
   render() {
-    console.log(cart);
+    // console.log(cart);
 
     return (
       <div>

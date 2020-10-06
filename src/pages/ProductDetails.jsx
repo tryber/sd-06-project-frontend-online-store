@@ -45,7 +45,7 @@ class ProductDetails extends Component {
 
   render() {
     const product = this.filterProduct();
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, shipping } = product;
     return (
       <section>
         <div>
@@ -56,6 +56,7 @@ class ProductDetails extends Component {
           <h1 data-testid="product-detail-name">{title}</h1>
           <img src={thumbnail} />
           <span>{`R$${price}`}</span>
+          <span data-testid="free-shipping">{shipping.free_shipping ? 'Frete Grátis' : ''}</span>
         </section>
         <button
           type="button"

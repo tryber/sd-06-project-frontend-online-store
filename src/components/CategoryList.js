@@ -22,7 +22,7 @@ class CategoryList extends React.Component {
     const { categories } = this.state;
     const { handleCategory } = this.props;
     return (
-      <div>
+      <div className="categoryList">
         {categories
           .map((category) => (
             <label htmlFor={ category.id } key={ category.id }>

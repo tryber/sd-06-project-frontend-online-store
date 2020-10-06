@@ -18,13 +18,18 @@ class ProductItem extends React.Component {
     const { product } = this.props;
     const { title, thumbnail, price, id } = product;
     return (
-      <div data-testid="product">
+      <div className="product" data-testid="product">
         <p>{title}</p>
         <img alt="Product" src={ thumbnail } />
-        <p>{price}</p>
+        <p>
+          R$:
+          {' '}
+          {price}
+        </p>
         <Link to={ `productdetails/${id}` } data-testid="product-detail-link">
           Ver Detalhes
         </Link>
+        <br />
         <button
           type="button"
           data-testid="product-add-to-cart"

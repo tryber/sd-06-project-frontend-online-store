@@ -1,38 +1,86 @@
-.App {
+body {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+  font-variant: small-caps;
+  text-align: center;
+  background-color: whitesmoke;
+  border: outset;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.titleCart {
+  text-align: center;
+  font-style: italic;
+  text-decoration: underline;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
+.imgCart {
+  height: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.inputQuery {
+  margin-top: 10px;
+  width: 70%;
+  margin-left: 10%;
+}
+
+.homeMessage {
+  text-align: center;
+  font-style: italic;
+}
+
+.shoppingCartButton, .shoppingCartButtonDetails {
+  float: right;
+  background: fixed;
+  border: none;
+  margin-right: 10px;
+  margin-top: -90px;
+  height: 81%;
+  width: 15%;
+}
+
+.shoppingCartButtonDetails {
+  margin-top: -70px;
+}
+
+.categoryList {
+  display: inline-grid;
+  overflow: auto;
+  display: inline-grid;
+  height: 150px;
+  width: 50%;
+  overflow: auto;
+  margin-top: 15px;
+  margin-left: 25%;
+  text-align: justify;
+}
+
+.product {
   flex-direction: column;
+  flex: 1;
+  flex-wrap: unset;
+  display: inline-grid;
+  max-height: 300px;
+  margin-top: 15px;
+  border: outset;
+  min-width: 100px;
+  max-width: 200px;
+  margin: 15px 5px 5px 5px;
+  height: 350px;
+  max-height: 350px;
+  text-align: -webkit-center;
+}
+
+.buttonQuantityCart {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  margin: 10px;
 }

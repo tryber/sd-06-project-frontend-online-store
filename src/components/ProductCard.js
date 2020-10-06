@@ -12,7 +12,6 @@ class ProductCard extends Component {
     };
   }
 
-
   addItemsToCart() {
     const { product, addItemCart } = this.props;
     const { title, thumbnail, price, id } = product;
@@ -43,7 +42,6 @@ class ProductCard extends Component {
         <div className="addToCart">
           <button
             type="button"
-            // data-testid="shopping-cart-button"
             data-testid="product-add-to-cart"
             onClick={ this.addItemsToCart }
           >

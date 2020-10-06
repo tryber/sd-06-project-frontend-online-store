@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as addItem from '../components/addItem';
+import AddItem from '../components/addItem';
+
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class ProductDetails extends React.Component {
 
   componentWillUnmount() {
     const { title, quantity } = this.state;
-    addItem.addItem(title, quantity);
+    AddItem.addItem(title, quantity);
   }
 
   getQuantity({ target }) {

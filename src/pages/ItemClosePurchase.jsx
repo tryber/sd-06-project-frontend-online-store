@@ -44,9 +44,9 @@ class ItemClosePurchase extends React.Component {
           type="button" className="button"
           onClick={() => remove(id)}>X
         </button> */}
-        <h5 data-testid="shopping-cart-product-name">{title}</h5>
-        <p>{`Un. R$ ${(price).toFixed(2)}`}</p>
-        <p>{`Total R$ ${(price * quantity).toFixed(2)}`}</p>
+        <p className="item-shopping-cart-title" data-testid="shopping-cart-product-name">{title}</p>
+        <p className="item-shopping-cart-unitary-price">{`Un. R$ ${(price).toFixed(2)}`}</p>
+        <p className="item-shopping-cart-total-price">{`Total R$ ${(price * quantity).toFixed(2)}`}</p>
         {/* <button 
           type="button" className="button" data-testid="product-decrease-quantity"
           onClick={() => this.changeQuantity(id, '-')}>(-)

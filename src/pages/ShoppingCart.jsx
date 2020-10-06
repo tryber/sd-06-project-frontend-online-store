@@ -49,7 +49,9 @@ class ShoppingCart extends Component {
       return (
         <div className="product-on-cart">
             <this.headerMount />
-            {this.state.productList.map(product => <div><h3 data-testid="shopping-cart-product-name">{product.title}</h3><h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5></div>)}
+            {this.state.productList.map(product => <div><h3 data-testid="shopping-cart-product-name">{product.title}</h3><button>-</button><h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5><button>+</button><h5>{product.price * product.quantity}</h5></div>)}
+            <h2>Valor total da compra: R${this.state.productList.reduce((acumulator, nextvalue) => acumulator + (nextvalue.price * nextvalue.quantity), 0)}</h2>
+            <button>Finalizar Compra</button>
         </div>
       );
     }

@@ -41,7 +41,9 @@ class Checkout extends React.Component {
               </div>
             );
           }) }
-          <span className="checkout-total-price">{ `Total: R$ ${parseFloat(totalPrice.toFixed(decimals), decimalBase)}` }</span>
+          <span className="checkout-total-price">
+            { `Total: R$ ${parseFloat(totalPrice.toFixed(decimals), decimalBase)}` }
+          </span>
         </div>
         <div>
           <form className="checkout-form">

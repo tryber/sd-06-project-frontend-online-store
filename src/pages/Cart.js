@@ -54,6 +54,8 @@ Cart.propTypes = {
       data: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  productsAddToCart: propTypes.objectOf(PropType.any).isRequired,
+
 };
 
 export default Cart;

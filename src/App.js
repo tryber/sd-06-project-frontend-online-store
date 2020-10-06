@@ -14,7 +14,7 @@ class App extends Component {
     this.addTocart = this.addTocart.bind(this);
 
     this.state = {
-      productsAddToCart: {},
+      addToCart: {},
     };
   }
 
@@ -31,13 +31,21 @@ class App extends Component {
   }
 
   render() {
-    const { productsAddToCart } = this.state;
+    const { addToCart } = this.state;
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={ (props) => <Home { ...props } addToCart={ this.addTocart } /> } />
+          <Route
+            exact
+            path="/"
+            render={ (props) => <Home { ...props } addToCart={ this.addTocart } /> }
+          />
           <Route path="/card/:id" component={ CardDetails } />
-          <Route exact path="/cart" render={ (props) => <Cart { ...props } productsAddToCart={ productsAddToCart } /> } />
+          <Route
+            exact
+            path="/cart"
+            render={ (props) => <Cart { ...props } productsAddToCart={ addToCart } /> }
+          />
           <Route component={ NotFound } />
         </Switch>
       </Router>

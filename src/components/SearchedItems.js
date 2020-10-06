@@ -24,7 +24,9 @@ class SearchedItems extends Component {
         <div>
           <Link
             data-testid="product-detail-link"
-            to={ { pathname: `/card/${id}`, state: { data: query }, teste: { addtoCart: addTocart } } }
+            to={ { pathname: `/card/${id}`,
+              state: { data: query },
+              teste: { addtoCart: addTocart } } }
           >
             Detalhes
           </Link>

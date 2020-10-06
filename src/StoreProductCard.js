@@ -20,33 +20,35 @@ function StoreProductCard(product, handleCart, productsOnCart) {
   }
   return (
     <div className="card" key={ id } data-testid="product">
+      { (product.shipping.free_shipping) ? <p className="free-shipping-tag">
+        {isFreeShipping(product.shipping.free_shipping)}</p> : ''
+      }
       <img src={ thumbnail } alt={ title } />
       <div className="product-data">
         <p className="title">{title}</p>
         <p className="price">{`R$: ${price}`}</p>
-        {isFreeShipping(product.shipping.free_shipping)}
-        <div data-testid="product-detail-name">
-          <Link
-            to={ { pathname: `/product-details/${id}`,
-              state: { product },
-            } }
-            data-testid="product-detail-link"
-          >
-            Details
-          </Link>
-        </div>
       </div>
-      <div>
+      <div className="actions">
+        <div data-testid="product-detail-name">
+            <Link className="link"
+              to={ { pathname: `/product-details/${id}`,
+                state: { product },
+              } }
+              data-testid="product-detail-link"
+            >
+              Details
+            </Link>
+          </div>
         <button
-          type="button"
-          name="productsOnCart/add"
-          data-testid="product-add-to-cart"
-          value={ JSON.stringify(product) }
-          onClick={ handleCart }
-          disabled={ disabledOption }
-        >
-          Adicionar ao carrinho
-        </button>
+            type="button"
+            name="productsOnCart/add"
+            data-testid="product-add-to-cart"
+            value={ JSON.stringify(product) }
+            onClick={ handleCart }
+            disabled={ disabledOption }
+          >
+            Adicionar ao carrinho
+          </button>
       </div>
     </div>
   );

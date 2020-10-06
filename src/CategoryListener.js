@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as api from './services/api';
+import './CategoryListener.css';
 
 class CategoryListener extends React.Component {
   constructor() {
@@ -21,7 +22,7 @@ class CategoryListener extends React.Component {
     return (
       <div>
         {apiCategories.map((category) => (
-          <div key={ category.id }>
+          <div className="category-option" key={ category.id }>
             <input
               id={ category.id }
               type="radio"

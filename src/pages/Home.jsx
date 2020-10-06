@@ -6,7 +6,7 @@ import Products from '../components/Products';
 class Home extends Component {
   render() {
     const { data, textInput, cart, handleEvent, onClick } = this.props;
-    const { handleEventChecked, addCartItems, checkedId  } = this.props;
+    const { handleEventChecked, handleCartItems, checkedId, saveDetails  } = this.props;
 
     return (
       <div>
@@ -21,7 +21,8 @@ class Home extends Component {
             handleEventChecked={ handleEventChecked } 
           />
           <Products
-            addCartItems={ addCartItems }
+            saveDetails={ saveDetails }
+            handleCartItems={ handleCartItems }
             cart={ cart }
             data={ data }
           />

@@ -15,12 +15,15 @@ class App extends React.Component {
     this.fetchProducts = this.fetchProducts.bind(this);
     this.handleEvent = this.handleEvent.bind(this);
     this.handleEventChecked = this.handleEventChecked.bind(this);
-    this.addCartItems = this.addCartItems.bind(this);
+    this.handleCartItems = this.handleCartItems.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+    this.saveDetails = this.saveDetails.bind(this)
 
     this.state = {
       textInput: "",
       data: null,
       checkedId: null,
+      productDetails: null,
       cart: {
         totalPrice: null,
         totalQtd: null,
@@ -29,11 +32,10 @@ class App extends React.Component {
     };
   }
 
-  addProduct(product, op) {
+  addOrRemoveProduct(product, op) {
     console.log('Produto adicionado ao carrinho com sucesso!');
     console.log(product, op);
     const { cart: { products } } = this.state;
-    let newCartState;
     let newListItems = [];
     if (products) {
       if (products.some((item) => (item.id === product.id))) {
@@ -57,11 +59,20 @@ class App extends React.Component {
     }
   }
 
-  addCartItems(product, op) {
+  handleCartItems(product, op) {
     if (!product.aqtd) product.aqtd = 1;
-    const productsUpdated = this.addProduct(product, op);
-    console.log(productsUpdated);
-    this.setState({ cart: { products: productsUpdated } })
+    const productsUpdated = this.addOrRemoveProduct(product, op);
+    this.setState({ cart: { products: productsUpdated } });
+  }
+
+  removeItem(id) {
+    const { cart: { products } } = this.state;
+    const newCartItems = products.filter(item => item.id !== id);
+    this.setState({ cart: { products: newCartItems } });
+  }
+
+  saveDetails(product) {
+    this.setState({ productDetails: product });
   }
 
   handleEvent({ target }) {
@@ -85,18 +96,26 @@ class App extends React.Component {
     this.setState({ data: fetchData });
   }
   render() {
-    const { data, textInput, cart, checkedId } = this.state;
+    const { data, textInput, cart, checkedId, productDetails } = this.state;
     return (
       <Router>
         <Switch>
-          <Route path="/products/:id" component={ ProductDetails } />
-          <Route path="/cart" component={ () => <Cart cart={cart} /> } />
-          <Route exact path="/" component={ () => <Home 
+          <Route path="/products/:id" component={ () => <ProductDetails
+            productDetails={productDetails}
+            handleCartItems={this.handleCartItems}
+          /> } />
+          <Route path="/cart" component={ () => <Cart
+            removeItem={this.removeItem}
+            handleCartItems={this.handleCartItems} 
+            cart={cart}
+          /> } />
+          <Route exact path="/" component={ () => <Home
+            saveDetails={this.saveDetails}
             data={data} 
             textInput={textInput} 
             handleEvent={this.handleEvent} 
             onClick={this.onClick} 
-            addCartItems={this.addCartItems} 
+            handleCartItems={this.handleCartItems} 
             handleEventChecked={this.handleEventChecked}
             checkedId={checkedId}
           /> } />

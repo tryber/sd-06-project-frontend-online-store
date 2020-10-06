@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import ProductQtd from './ProductQtd';
 
 class ShoppingCart extends Component {
   constructor() {
@@ -29,7 +30,6 @@ class ShoppingCart extends Component {
 
   renderCart() {
     const { shoppingCart } = this.props;
-    const { quantity } = this.state;
     if (!shoppingCart.length) {
       return <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
@@ -50,23 +50,7 @@ class ShoppingCart extends Component {
             <div className="right-content" data-testid="shopping-cart-product-name">
               <h3>{item.product.title}</h3>
               <div className="quantity-div">
-                <p data-testid="shopping-cart-product-quantity">
-                  {`${quantity}`}
-                </p>
-                <button
-                  type="button"
-                  data-testid="product-increase-quantity"
-                  onClick={ this.increaseQuantity }
-                >
-                  +
-                </button>
-                <button
-                  type="button"
-                  data-testid="product-decrease-quantity"
-                  onClick={ this.decreaseQuantity }
-                >
-                  -
-                </button>
+                <ProductQtd />
               </div>
               <div className="price-div">
                 <p className="detail-price">

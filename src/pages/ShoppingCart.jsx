@@ -1,20 +1,32 @@
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import ProductList from '../components/ProductList';
 import '../styles/ShoppingCart.css';
-import cart from './../img/cart.png';
-import goHome from './../img/back.png';
-import empytCart from './../img/empty-cart.png';
+import cart from '../img/cart.png';
+import goHome from '../img/back.png';
+import empytCart from '../img/empty-cart.png';
 
 class ShoppingCart extends Component {
   constructor() {
     super();
 
     this.state = {
+      products: [],  
       productList: [],
     }
+        
+    this.buildCartFromStorage = this.buildCartFromStorage.bind(this);
   }
 
+  buildCartFromStorage() {
+    if (localStorage.getItem('cart')) {
+      const save = JSON.parse(localStorage.getItem('cart'));
+      this.setState({ products: save });
+    } 
+  }      
+        
   componentDidMount() {
+    this.buildCartFromStorage()
     if(localStorage.getItem('cart')) {
       const productList = JSON.parse(localStorage.getItem('cart'));
       this.setState({
@@ -48,8 +60,15 @@ class ShoppingCart extends Component {
     } else { 
       return (
         <div className="product-on-cart">
-            <this.headerMount />
-            {this.state.productList.map(product => <div><h3 data-testid="shopping-cart-product-name">{product.title}</h3><h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5></div>)}
+          <this.headerMount />
+          {
+            this.state.productList.map((product, index) => 
+              <div key={index}>
+                <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
+                <h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5>
+              </div>
+            )
+          }
         </div>
       );
     }

@@ -10,9 +10,22 @@ class ShoppingCart extends Component {
     };
   }
 
+  renderItem(product) {
+    return (
+      <div key={ product.title }>
+        <div data-testid="shopping-cart-product-name">
+          {product.title}
+        </div>
+        <div data-testid="shopping-cart-product-quantity">
+          {product.quantity}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { productList } = this.state;
-    if (productList === '') {
+    if (productList.length < 1) {
       return (
         <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
       );
@@ -20,7 +33,7 @@ class ShoppingCart extends Component {
 
     return (
       <div>
-        {productList.map((product, index) => <div key={ index }>{product.title}</div>)}
+        {productList.map((product) => this.renderItem(product))}
       </div>
     );
   }

@@ -1,10 +1,9 @@
 let cartList = [];
 
-export async function addItem({ target }) {
-  const { title, price } = target;
-  const newItem = { title, price };
+export function addItem(title, quantity) {
+  const newItem = { title, quantity };
 
-  cartList = cartList.concat({ title: newItem.title });
+  cartList = cartList.concat({ title: newItem.title, quantity: newItem.quantity });
 }
 
 export { cartList };

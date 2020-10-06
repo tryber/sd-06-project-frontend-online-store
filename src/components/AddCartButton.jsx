@@ -4,6 +4,7 @@ class AddCartButton extends React.Component {
   constructor() {
     super();
     this.cartStateSave = this.cartStateSave.bind(this);
+    this.btRemove = this.btRemove.bind(this)
   }
          
   cartStateSave(op) {
@@ -26,14 +27,23 @@ class AddCartButton extends React.Component {
     );
   }
 
+  removeButton() {
+    const { data, removeItem } = this.props;
+    return (
+      <button data-testid="product-add-to-cart" type="button" onClick={ (event) => removeItem(data.id) }>
+        Remover
+      </button>
+    );
+  }
+
   btRemove() {
-    const { data, handleCartItems, removeItem } = this.props;
+    const { data, handleCartItems, showBtRemove } = this.props;
     return (
       <div id="cart-button">
         <div>
           Quantidade:
           <div data-testid="shopping-cart-product-quantity"> 
-            {data.aqtd}
+            {(data.aqtd) ? data.aqtd : 0}
           </div>
         </div>
         <button data-testid="product-increase-quantity" type="button" onClick={ () => handleCartItems(data, 'plus') }>
@@ -42,9 +52,7 @@ class AddCartButton extends React.Component {
         <button data-testid="product-decrease-quantity" type="button" onClick={ (event) => handleCartItems(data, 'minus') }>
           -
         </button>
-        <button data-testid="product-add-to-cart" type="button" onClick={ (event) => removeItem(data.id) }>
-          Remover
-        </button>
+        { (showBtRemove) ? this.removeButton() : null }
       </div>
     );
   }

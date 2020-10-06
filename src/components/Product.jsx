@@ -16,6 +16,7 @@ class Product extends React.Component {
           </div>
         </Link>
         <AddCartButton
+          showBtRemove={true}
           removeItem={removeItem}
           handleCartItems={handleCartItems}
           id="button-product-list"

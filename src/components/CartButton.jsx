@@ -12,12 +12,7 @@ class CartButton extends React.Component {
           <Link data-testid="shopping-cart-button" to="/cart">
             <FaShoppingCart /> 
           </Link>
-          <h6>
-            Visualizar
-            <br />
-            Carrinho
-            <div>{(cart) ? cart.totalQtd : 0}</div>
-          </h6>
+          <div>{(cart) ? cart.totalQtd : 0}</div>
         </button>
       </div>
     );

@@ -78,6 +78,8 @@ class App extends React.Component {
 
   removeItem(id) {
     const { cart: { products } } = this.state;
+    const zeroQtd = products.filter((item) => item.id === id);
+    zeroQtd[0].aqtd = 0;
     const newCartItems = products.filter((item) => item.id !== id);
     // const qtdItems = this.calcQtdItems(newCartItems);
     this.setState({ cart: { products: newCartItems } }); // totalQtd: qtdItems

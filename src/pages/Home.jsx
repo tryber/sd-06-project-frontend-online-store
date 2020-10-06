@@ -2,59 +2,31 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import Categories from '../components/Categories';
 import Products from '../components/Products';
-import * as api from '../services/api';
 
 class Home extends Component {
-  constructor() {
-    super();
-
-    this.onClick = this.onClick.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
-    this.handleEvent = this.handleEvent.bind(this);
-    this.handleEventChecked = this.handleEventChecked.bind(this);
-
-    this.state = {
-      textInput: "",
-      data: null,
-      checkedId: null,
-    };
-  }
-
-  handleEvent({ target }) {
-    const query = target.value;
-    this.setState({ textInput: query });
-  }
-
-  handleEventChecked({ target }) {
-    const categoryId = target.value;
-    this.setState({ checkedId: categoryId });
-    this.fetchProducts({ categoryId });
-  }
-
-  onClick() {
-    const query = this.state.textInput;
-    if (query !== '') this.fetchProducts({ query });
-  }
-
-  async fetchProducts({ categoryId, query }) {
-    const fetchData = await api.getProductsFromCategoryAndQuery({ categoryId, query });
-    this.setState({ data: fetchData });
-  }
-
   render() {
-    const { data, textInput } = this.state;
+    const { data, textInput, cart, handleEvent, onClick } = this.props;
+    const { handleEventChecked, handleCartItems, checkedId, saveDetails  } = this.props;
+
     return (
       <div>
         <Header
+          cart={ cart }
           inputValue={ textInput }
-          handleEvent={ this.handleEvent } 
-          onClick={ this.onClick }
+          handleEvent={ handleEvent } 
+          onClick={ onClick }
         />
         <div className="content">
-          <Categories 
-            handleEventChecked={ this.handleEventChecked } 
+          <Categories
+            checkedId={ checkedId }
+            handleEventChecked={ handleEventChecked } 
           />
-          <Products data={ data }/>
+          <Products
+            saveDetails={ saveDetails }
+            handleCartItems={ handleCartItems }
+            cart={ cart }
+            data={ data }
+          />
         </div>
       </div>
     );

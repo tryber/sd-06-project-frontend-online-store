@@ -7,14 +7,14 @@ import quindimlogo from '../img/quindimshop.png';
 
 class Header extends Component {
   render() {
-    const { inputValue, handleEvent, onClick } = this.props;
+    const { inputValue, handleEvent, onClick, cart } = this.props;
     return (
       <div className="header">
         <img id="logo-quindim-header" alt="logomarca quindim shop" src={ quindimlogo } />
         <div id="box">
           <input id="box-search" onChange={ handleEvent } value={ inputValue } data-testid="query-input" type="text" placeholder="Buscar produtos, marcas e muito mais..." />
           <button id="button-search" onClick={ onClick } data-testid="query-button" type="button">
-            <FaSearch />
+             <FaSearch />
           </button>
           <h3 id="message-header" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -26,7 +26,7 @@ class Header extends Component {
             <img id="logo-ml" alt="logomarca mercado livre" src={ mercadolivre } />
           </p>
         </div>
-        <CartButton />
+        <CartButton cart={ cart } />
         <div id="header-bar-grey" />
         <div id="header-bar-black" />
         <div id="header-bar-yellow" />

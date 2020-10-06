@@ -54,7 +54,7 @@ Cart.propTypes = {
       data: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  productsAddToCart : PropTypes.func.isRequired
+  productsAddToCart: PropTypes.func.isRequired,
 
 };
 

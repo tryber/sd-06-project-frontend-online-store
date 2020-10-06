@@ -29,7 +29,7 @@ class CartAddButton extends React.Component {
 }
 
 CartAddButton.propTypes = {
-  addTocart: PropTypes.func,
+  addtoCart: PropTypes.func,
   productName: PropTypes.string,
 };
 

@@ -69,7 +69,7 @@ class Home extends Component {
   }
 
   render() {
-    const { searchedItems, spanMessage, searchInput, } = this.state
+    const { searchedItems, spanMessage, searchInput } = this.state;
 
     const { addToCart } = this.props;
 

@@ -54,7 +54,7 @@ class Checkout extends React.Component {
         </div>
         <div className="checkout-info">
           Informações do comprador
-          <form>
+          <form className="form">
             <input
               onChange={ this.handleChanges }
               name="fullname"

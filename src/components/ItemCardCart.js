@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import './ItemCard.css';
+import './ItemCardCart.css';
 
 class ItemCardCart extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       quantity: 1,
@@ -30,20 +30,18 @@ class ItemCardCart extends Component {
     const { quantity } = this.state;
     const two = 2;
     return (
-      <li key={ id }>
-        <button
-          type="button"
-        >
-          X
-        </button>
-        <br />
+      <div className="product" key={ id }>
+        <button type="button" className="circle-button">X</button>
         <img src={ thumbnail } alt={ title } />
-        <p data-testid="shopping-cart-product-name">{ title }</p>
-        <p>{ `R$ ${parseFloat(quantity * price).toFixed(two)}` }</p>
+        <div className="product-info">
+          <p data-testid="shopping-cart-product-name">{ title }</p>
+          <p>{ `R$ ${parseFloat(quantity * price).toFixed(two)}` }</p>
+        </div>
         <button
           type="button"
           onClick={ this.decreaseQuantity }
           data-testid="product-decrease-quantity"
+          className="circle-button"
         >
           -
         </button>
@@ -52,10 +50,11 @@ class ItemCardCart extends Component {
           type="button"
           onClick={ this.increaseQuantity }
           data-testid="product-increase-quantity"
+          className="circle-button"
         >
           +
         </button>
-      </li>
+      </div>
     );
   }
 }

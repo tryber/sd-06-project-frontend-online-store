@@ -2,3 +2,8 @@
   width: 300px;
   padding: 100px;
 }
+
+.shopping-cart-products {
+  display: flex;
+  flex-direction: column;
+}

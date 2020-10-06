@@ -8,6 +8,8 @@
     border: 1px solid black;
     margin: 30px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .checkout-payment {
@@ -18,4 +20,11 @@
 
 label{
     font-weight: 900;
+}
+
+.form {
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: red;
 }

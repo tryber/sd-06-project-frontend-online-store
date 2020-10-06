@@ -13,7 +13,7 @@ export default class shoppingCart extends Component {
   componentDidMount() {
     this.localStorageMount();
   }
-  
+
   async localStorageMount() {
     const cartLocalStorage = await JSON.parse(
       localStorage.getItem('cartLocal'),
@@ -25,7 +25,7 @@ export default class shoppingCart extends Component {
 
   render() {
     const { cart } = this.state;
-    return(
+    return (
       <div>
         <h1>Seu Carrinho:</h1>
         <CreateCart localStorageMount={ this.localStorageMount } cart={ cart } />

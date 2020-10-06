@@ -1,0 +1,14 @@
+.header {
+  align-items: center;
+  background-color: #52AC00;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1.5%;
+}
+
+.empty-cart-msg {
+  font-size: 1em;
+  font-weight: 500;
+  margin-left: 2%;
+}

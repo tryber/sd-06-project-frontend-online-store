@@ -62,7 +62,7 @@ class Home extends React.Component {
             <CategoryListener handleCategory={ this.handleState } />
           </div>
           <div className="gallery-container">
-            <div>
+            <div className="search-bar">
               <input
                 type="text"
                 placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
@@ -87,10 +87,10 @@ class Home extends React.Component {
 
               {/* GAMBIARRA P/ PASSAR O TESTE2 QUE FICOU SEM SENTIDO USANDO O STORAGE */}
               {/* SE TEM PRODUTOS, A MENSAGEM INICIAL É RENDERIZADA E ESCONDIDA */}
-              { (products === '') ? <p data-testid={ msgId }>{ initMsg }</p>
+              { (products.length < 1) ? <p className="gallery-msg" data-testid={ msgId }>{ initMsg }</p>
                 : <p data-testid={ msgId } hidden>{ initMsg }</p> }
-              { (products === '') ? '' : <div>{ gallery }</div> }
-              { (loading === true) ? <p>Loading...</p> : '' }
+              { (products.length < 1) ? '' : <div>{ gallery }</div> }
+              { (loading === true) ? <p className="gallery-msg">Loading...</p> : '' }
             </div>
           </div>
         </div>

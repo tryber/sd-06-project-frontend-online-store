@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Rater from 'react-rater';
 import 'react-rater/lib/react-rater.css';
+import ShoppingCart from './ShoppingCart';
 import './ProductDetails.css';
 
 class ProductDetails extends React.Component {
@@ -52,6 +53,16 @@ class ProductDetails extends React.Component {
             <button type="button">Avaliar</button>
           </form>
         </div>
+        <button
+          data-testid="product-add-to-cart"
+          onClick={ () => {
+            ShoppingCart.addProduct(product);
+          } }
+          type="button"
+        >
+          ADICIONAR AO CARRINHO
+        </button>
+
       </div>
     );
   }

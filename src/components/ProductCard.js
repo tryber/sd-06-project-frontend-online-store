@@ -12,7 +12,6 @@ class ProductCard extends Component {
     };
   }
 
-
   addItemsToCart() {
     const { product, addItemCart } = this.props;
     const { title, thumbnail, price, id } = product;

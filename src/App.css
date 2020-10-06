@@ -91,14 +91,13 @@
   align-items: center;
   justify-content: right;
   margin-right: 15px;
-
 }
 
 .main-container {
   display: flex;
   flex-direction: row;
 }
-
+  
 .category-container {
   text-align: left;
   background-color:  rgb( 135 , 155 , 133 );
@@ -135,69 +134,134 @@
   text-align: center;
   font-size: 13px;
 }
+
+product-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  /* text-align: center; */
+  background-color: rgb(204, 196, 196);
+  width: 100vmax;
+}
   
+.product-card {
+  border: 1px solid black;
+  border-radius: 8px;
+  margin: 10px 15px;
+  width: 250px;
+  cursor: pointer;
+}
+
 .circulo {
   border-radius: 50%;
   border: solid 2px black;
   display: table-cell;
-  height: 45px;
-  line-height: 45px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
   white-space: nowrap;
-  width: 45px;
+  width: 30px;
+  margin-top: 5px;
 }
-
+  
 .item-shopping-cart {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
   height: 50px;
   margin: 5px;
 }
-
-.button {
-  background-color: #4CAF50; /* Green */
+  
+.item-shopping-cart-title {
+  text-align: left;
+  width: 60%;
+  margin-left: 5px;
+  font-size: 15px;
+  /* padding-bottom: 15px; */
+  /* background-color: blue; */
+  /* background-color: orange; */
+}
+  
+.item-shopping-cart-unitary-price {
+  /* background-color: aliceblue; */
+  text-align: left;
+  width: 8%;
+  padding-right: 10px;
+}
+  
+.item-shopping-cart-total-price{
+  width: 10%;
+  text-align: left;
+  font-weight: 500;
+}
+  
+.btn{
+  border-radius: 10px;
+  font-family: arial;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
   border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
+  padding: 10px 20px;
+  cursor: pointer;
   display: inline-block;
-  font-size: 16px;
+  text-decoration: none;
+  margin-bottom: 10px;
 }
 
+.btn-green{
+  background: green;
+  color: #fff;
+  box-shadow: 0 5px 0 #006000;
+}
+
+.btn-green:hover{
+  background: #006000;
+  color: #fff;
+  box-shadow: 0 5px 0 #003F00;
+}
+
+.btn-green:active{
+  box-shadow: none;
+  position: relative;
+  top: 5px;
+}
+  
+.btn:focus{
+  outline-style: none;
+}
+  
 .evaluator-container {
   display: flex;
   flex-direction: column;
   margin: 5px;
-  /* width: 30%; */
 }
-
-.email-container {
-  display: flex;
-  flex-direction: column;
-  margin: 5px;
-  width: 30%;
-}
-
+  
 .stars {
   display: flex;
   flex-direction: row;
   margin: 5px;
   width: 30%;
 }
-
+  
 .comment-container {
   display: flex;
   flex-direction: column;
   margin: 5px;
   width: 30%;
 }
-
+  
 .evaluator-button {
   display: flex;
   flex-direction: column;
   margin: 5px;
   width: 10%;
   text-align: center;
+}
+
+.buyer-informations{
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  margin-bottom: 20px;
 }

@@ -6,7 +6,7 @@ import ShoppingCart from './page/ShoppingCart';
 class App extends React.Component {
   constructor() {
     super();
-    this.state= { cartProducts:[], cartQuantity:0 };
+    this.state = { cartProducts: [], cartQuantity: 0 };
     this.handleAddProduct = this.handleAddProduct.bind(this);
   }
 
@@ -26,14 +26,14 @@ class App extends React.Component {
             <Route exact path="/shopping-cart" component={ ShoppingCart } />
             <Route exact path="/" component={ EmptyProductList } />
             <Route
-            path="/ShoppingCart"
-            render={ (props) => (<ShoppingCart
-              { ...props }
-              addToCart={ this.handleAddProduct }
-              cartProducts={ cartProducts }
-              cartQuantity={ cartQuantity }
-            />) }
-          />
+              path="/ShoppingCart"
+              render={ (props) => (<ShoppingCart
+                { ...props }
+                addToCart={ this.handleAddProduct }
+                cartProducts={ cartProducts }
+                cartQuantity={ cartQuantity }
+              />) }
+            />
           </Switch>
         </BrowserRouter>
       </div>

@@ -10,20 +10,26 @@ class ShoppingCart extends React.Component {
     this.increaseButton = this.increaseButton.bind(this);
     this.decreaseButton = this.decreaseButton.bind(this);
     this.addShoppingCart = this.addShoppingCart.bind(this);
+    this.emptyCart = this.emptyCart.bind(this);
   }
 
-  // emptyCart() {
-  //   return (
-  //     <p data-testid="shopping-cart-empty-message">
-  //       Seu carrinho está vazio
-  //     </p>
-  //   );
-  // }
+  emptyCart() {
+    return (
+      <div>
+        <p data-testid="shopping-cart-empty-message">
+          Seu carrinho está vazio
+        </p>
+        <button type="button">
+          <Link to="/">Página inicial</Link>
+        </button>
+      </div>
+    );
+  }
 
   increaseButton() {
     return (
       <button type="button" data-testid="product-increase-quantity">
-        +++
+        +
       </button>
     );
   }
@@ -31,62 +37,53 @@ class ShoppingCart extends React.Component {
   decreaseButton() {
     return (
       <button type="button" data-testid="product-decreate-quantity">
-        --
+        -
       </button>
     );
   }
 
-    addShoppingCart(cartItem, cartCount) {
-
-      if (cartItem.length === 0) {
-        return (
-          <p
-            data-testid="shopping-cart-empty-message"
-          >
-            Seu carrinho está vazio
-          </p>
-        );
-      }
-        return cartItem.map((product) => (
-          <div key={ product.id }>
-            <h3
-              data-testid="shopping-cart-product-name"
-            >
+  addShoppingCart(cartItem) {
+    return (
+      cartItem.map((product) => (
+        <div key={ product.id }>
+          <div>
+            <p data-testid="shopping-cart-product-name">
               {product.name}
-            </h3>
-            <h3
-              data-testid="shopping-cart-product-quantity"
-            >
-              { cartCount }
-            </h3>
-          </div>
-        ));
-    }
-  
-    render() {
-      const { location } = this.props;
-      const { state } = location;
-      const { cartItem, cartCount } = state;
-  
-      return (
-        <div>
-          <p>
-            {this.addShoppingCart(cartItem, cartCount)}
             </p>
-          {this.increaseButton()}
-        {this.decreaseButton()}
-        <button>
-      <Link to={'/'} >Página inicial</Link>
-      </button>
+          </div>
         </div>
-      );
-    }
+      )));
   }
-  
-  ShoppingCart.propTypes = {
-    cartItem: PropTypes.arrayOf.isRequired,
-    cartCount: PropTypes.string.isRequired,
-  };
+
+  render() {
+    const { location: { state: { cartItem, cartCount } } } = this.props;
+    const icaro = 0;
+    if (cartItem.length === icaro) return (this.emptyCart());
+    return (
+      <div>
+        {this.addShoppingCart(cartItem)}
+        <div data-testid="shopping-cart-product-quantity">
+          <p>
+            { cartCount }
+          </p>
+        </div>
+        {this.increaseButton()}
+        {this.decreaseButton()}
+        <button type="button">
+          <Link to="/">Página inicial</Link>
+        </button>
+      </div>
+    );
+  }
+}
+
+ShoppingCart.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      cartItem: PropTypes.arrayOf.isRequired,
+      cartCount: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
+};
 
 export default ShoppingCart;
-      

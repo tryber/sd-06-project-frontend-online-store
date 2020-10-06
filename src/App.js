@@ -5,23 +5,14 @@ import HomePage from './pages/HomePage';
 import ShoppingCart from './pages/ShoppingCart';
 
 class App extends React.Component {
-  // constructor() {
-  //   super();
-
-  //   this.state = {
-  //     cartItem: [],
-  //     cartCount: '0',
-  //   };
-  // }
-
-  render () {
-  return (
-    <BrowserRouter>
-      <Route exact path="/" component={ HomePage } />
-      <Route exact path="/cart" component={ ShoppingCart } />
-      <Route exact path="/products/:id" component={ ProductDetails } />
-    </BrowserRouter>
-  );
+  render() {
+    return (
+      <BrowserRouter>
+        <Route exact path="/" component={ HomePage } />
+        <Route exact path="/cart" component={ ShoppingCart } />
+        <Route exact path="/products/:id" component={ ProductDetails } />
+      </BrowserRouter>
+    );
   }
 }
 

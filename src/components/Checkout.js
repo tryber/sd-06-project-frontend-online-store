@@ -85,6 +85,7 @@ class Checkout extends React.Component {
               </label>
             </div>
           </form>
+          <button type="submit">Finalizar compra</button>
         </div>
       </section>
     );

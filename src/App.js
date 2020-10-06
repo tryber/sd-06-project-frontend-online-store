@@ -6,6 +6,7 @@ import ShoppingCart from './Components/ShoppingCart';
 import ProductDetail from './Pages/ProductDetail';
 import './HomePage.css';
 import './ProductList.css';
+import './ShoppingCart.css';
 
 function App() {
   return (

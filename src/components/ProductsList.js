@@ -14,7 +14,9 @@ function ProductsList(props) {
             <ProductCard product={ product } />
           </li>
         ))}
+
       </ul>
+
     )
     : (
       <p data-testid="home-initial-message">

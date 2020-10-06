@@ -6,12 +6,15 @@ import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import ShoppingCart from './pages/ShoppingCart';
 import ShoppingCartButton from './components/ShoppingCartButton';
+import Checkout from './pages/Checkout';
+
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Switch>
+          <Route exact path="/checkout" component={Checkout} />
           <Route exact path="/product/:id" component={ ProductDetail } />
           <Route exact path="/shoppingcart" component={ ShoppingCart } />
           <Route exact path="/shoppingcartbutton" component={ ShoppingCartButton } />

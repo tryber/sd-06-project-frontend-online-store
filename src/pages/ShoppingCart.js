@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
   render() {
-    const { location: { state: { productCart } } } = this.props;
+    const { cartList } = this.props;
     const emptyCart = 0;
-    if (!productCart || productCart.length === emptyCart) {
+    if (!cartList || cartList.length === emptyCart) {
       return (
         <div>
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
@@ -16,7 +16,7 @@ class ShoppingCart extends Component {
     }
     return (
       <div>
-        {productCart.map(({ title, price, id }) => (
+        {cartList.map(({ title, price, id }) => (
           <div key={ id }>
             <h4 data-testid="shopping-cart-product-name">
               { title }
@@ -30,7 +30,7 @@ class ShoppingCart extends Component {
           data-testid="shopping-cart-product-quantity"
         >
           Quantidade de itens:
-          {productCart.length}
+          {cartList.length}
         </span>
         <br />
         <Link to="/">Voltar</Link>

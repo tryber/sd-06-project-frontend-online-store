@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Search from './components/Search';
 import ShoppingCart from './components/ShoppingCart';
 import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 import './App.css';
 
 class App extends React.Component {
@@ -44,6 +45,13 @@ class App extends React.Component {
             path="/ProductDetails/:id"
             render={
               (props) => <ProductDetails addItemCart={ this.addItemCart } { ...props } />
+            }
+          />
+          <Route
+            exact
+            path="/Checkout"
+            render={
+              (props) => <Checkout addItemCart={ this.addItemCart } { ...props } />
             }
           />
         </Switch>

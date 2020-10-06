@@ -78,13 +78,15 @@ class ShoppingCart extends Component {
             />
           </Link>
           <div className="add-button-div">
-            <button
-              type="button"
-              onClick={ this.addItemsToCart }
-              className="shoppingcart-submit"
-            >
-              Finalizar Compra
-            </button>
+            <Link to="/Checkout">
+              <button
+                type="button"
+                onClick={ this.addItemsToCart }
+                className="shoppingcart-submit"
+              >
+                Finalizar Compra
+              </button>
+            </Link>
           </div>
         </div>
 

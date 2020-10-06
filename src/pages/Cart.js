@@ -52,7 +52,6 @@ class Cart extends React.Component {
   }
 
   render() {
-
     const { loadMessage, cartItems } = this.state;
     const treatedData = Object.entries(cartItems);
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Category from '../Category';
 import * as api from '../services/api';
 import ProductCard from './ProductCard';
 
@@ -39,6 +40,7 @@ class Search extends Component {
     const zero = 0;
     return (
       <div className="container">
+        <Category/>
         <form className="searchForm">
           <input
             id="home-initial-input"
@@ -71,8 +73,9 @@ class Search extends Component {
           products.results
             .map((item) => <ProductCard product={ item } key={ item.title } />)
         )}
-
+        
       </div>
+
     );
   }
 }

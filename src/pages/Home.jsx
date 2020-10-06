@@ -11,6 +11,7 @@ class Home extends Component {
     return (
       <div>
         <Header
+          cart={ cart }
           inputValue={ textInput }
           handleEvent={ handleEvent } 
           onClick={ onClick }

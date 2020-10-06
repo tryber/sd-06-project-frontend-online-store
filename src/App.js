@@ -18,6 +18,7 @@ class App extends React.Component {
     this.handleCartItems = this.handleCartItems.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveDetails = this.saveDetails.bind(this);
+    // this.calcQtdItems = this.calcQtdItems.bind(this);
 
     this.state = {
       textInput: '',
@@ -26,7 +27,7 @@ class App extends React.Component {
       productDetails: null,
       cart: {
         totalPrice: null,
-        totalQtd: null,
+        totalQtd: 0,
         products: [],
       },
     };
@@ -36,6 +37,12 @@ class App extends React.Component {
     const { textInput: { query } } = this.state;
     if (query !== '') this.fetchProducts({ query });
   }
+
+  // calcQtdItems(productsList) {
+  //   let qtd = 0;
+  //   if (productsList) productsList.forEach((product) => qtd += product.aqtd);
+  //   return qtd;
+  // }
 
   addOrRemoveProduct(product, op) {
     console.log('Produto adicionado ao carrinho com sucesso!');
@@ -65,13 +72,15 @@ class App extends React.Component {
   handleCartItems(product, op) {
     if (!product.aqtd) product.aqtd = 1;
     const productsUpdated = this.addOrRemoveProduct(product, op);
-    this.setState({ cart: { products: productsUpdated } });
+    // const qtdItems = this.calcQtdItems(productsUpdated);
+    this.setState({ cart: { products: productsUpdated } }); // totalQtd: qtdItems
   }
 
   removeItem(id) {
     const { cart: { products } } = this.state;
     const newCartItems = products.filter((item) => item.id !== id);
-    this.setState({ cart: { products: newCartItems } });
+    // const qtdItems = this.calcQtdItems(newCartItems);
+    this.setState({ cart: { products: newCartItems } }); // totalQtd: qtdItems
   }
 
   saveDetails(product) {
@@ -102,6 +111,7 @@ class App extends React.Component {
           <Route
             path="/products/:id"
             component={ () => (<ProductDetails
+              cart={ cart }
               productDetails={ productDetails }
               handleCartItems={ this.handleCartItems }
             />) }
@@ -118,6 +128,7 @@ class App extends React.Component {
             exact
             path="/"
             component={ () => (<Home
+              cart={ cart }
               saveDetails={ this.saveDetails }
               data={ data }
               textInput={ textInput }

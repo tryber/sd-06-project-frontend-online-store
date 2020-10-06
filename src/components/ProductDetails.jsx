@@ -4,10 +4,9 @@ import AddCartButton from './AddCartButton';
 import CartButton from './CartButton';
 
 class ProductDetails extends React.Component {
-  constructor(props) {
+  constructor() {
     super();
     this.dataOK = this.dataOK.bind(this);
-
   }
 
   dataOK(data) {

@@ -3,7 +3,8 @@ import React from 'react';
 class AddCartButton extends React.Component {
   constructor() {
     super();
-    this.localStorageSave = this.localStorageSave.bind(this);
+    // this.localStorageSave = this.localStorageSave.bind(this);
+    // this.cartStateSave = this.cartStateSave.bind(this);
     this.changeItem = this.changeItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
   }
@@ -12,33 +13,39 @@ class AddCartButton extends React.Component {
     return JSON.parse(localStorage.getItem('cart'));
   }
 
-  countLocalStorage(cartLocalStorage, id) {
-    const newLocalStorage = cartLocalStorage.map((item) => {
-      if (item.id === id) item.qtd += 1;
-      return item;
-    });
-    return newLocalStorage;
-  }
+  // countLocalStorage(cartLocalStorage, id) {
+  //   const newLocalStorage = cartLocalStorage.map((item) => {
+  //     if (item.id === id) item.qtd += 1;
+  //     return item;
+  //   });
+  //   return newLocalStorage;
+  // }
 
-  localStorageSave() {
-    const { data } = this.props;
-    data.qtd = 1;
-    const cartLocalStorage = this.getLocalStorageProduct();
-    let newLocalStorage;
-    if (cartLocalStorage) {
-      (cartLocalStorage.some((item) => item.id === data.id))
-        ? newLocalStorage = this.countLocalStorage(cartLocalStorage, data.id)
-        : newLocalStorage = [...cartLocalStorage, data];
-    } else {
-      newLocalStorage = [data];
-    }
-    const stringData = JSON.stringify(newLocalStorage);
-    localStorage.setItem('cart', stringData);
-    console.log('Produto adicionado ao carrinho com sucesso!');
-  }
-
-  localStorageRemove() {
-    console.log('Remove item');
+  
+  // localStorageSave() {
+    //   const { data } = this.props;
+  //   data.qtd = 1;
+  //   const cartLocalStorage = this.getLocalStorageProduct();
+  //   let newLocalStorage;
+  //   if (cartLocalStorage) {
+  //     (cartLocalStorage.some((item) => item.id === data.id))
+  //       ? newLocalStorage = this.countLocalStorage(cartLocalStorage, data.id)
+  //       : newLocalStorage = [...cartLocalStorage, data];
+  //   } else {
+  //     newLocalStorage = [data];
+  //   }
+  //   const stringData = JSON.stringify(newLocalStorage);
+  //   localStorage.setItem('cart', stringData);
+  //   console.log('Produto adicionado ao carrinho com sucesso!');
+  // }
+  
+  // localStorageRemove() {
+    //   console.log('Remove item');
+    // }
+    
+  cartStateSave(op) {
+    const { data, addCartItems } = this.props;
+    addCartItems(data, op);
   }
 
   btHome() {
@@ -49,7 +56,7 @@ class AddCartButton extends React.Component {
 
     return (
       <div id="cart-button">
-        <button data-testid={ testid } type="button" onClick={ this.localStorageSave }>
+        <button data-testid={ testid } type="button" onClick={ () => this.cartStateSave('plus') }>
           Adicionar ao Carrinho de Compras
         </button>
       </div>
@@ -83,7 +90,7 @@ class AddCartButton extends React.Component {
   }
 
   btRemove() {
-    const { data } = this.props;
+    const { data, addCartItems } = this.props;
     return (
       <div id="cart-button">
 
@@ -97,7 +104,7 @@ class AddCartButton extends React.Component {
         <button data-testid="product-increase-quantity" type="button" onClick={ (event) => this.changeItem(data.id, event, "plus") }>
           +
         </button>
-        <button data-testid="product-decrease-quantity" type="button" onClick={ (event) => this.changeItem(data.id, event, "test") }>
+        <button data-testid="product-decrease-quantity" type="button" onClick={ (event) => this.changeItem(data.id, event, "less") }>
           -
         </button>
         <button data-testid="product-add-to-cart" type="button" onClick={ (event) => this.removeItem(data.id, event) }>

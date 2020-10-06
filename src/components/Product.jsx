@@ -10,7 +10,7 @@ class Product extends React.Component {
   }
 
   render() {
-    const { data, bt } = this.props;
+    const { data, bt, addCartItems } = this.props;
     return (
       <div className="product-group">
         <Link data-testid="product-detail-link" to={`/products/${data.id}`} onClick={() => this.localStorageSave(data)}>
@@ -20,7 +20,7 @@ class Product extends React.Component {
             <div id="product-price">R$ {data.price}</div>
           </div>
         </Link>
-        <AddCartButton id="button-product-list" bt={bt} data={data} />
+        <AddCartButton addCartItems={addCartItems} id="button-product-list" bt={bt} data={data} />
       </div>
     );
   }

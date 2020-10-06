@@ -16,7 +16,7 @@ class EmptyProductList extends React.Component {
     this.state = {
       product: undefined,
       query: '',
-      categoryID: "",
+      categoryID: '',
     }
   }
 

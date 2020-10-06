@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Link } from 'react-router-dom';
-
 class AddToCartButton extends Component {
+  addProductToCart(newProduct) {
+    const { updateCartListAndItens } = this.props;
+    updateCartListAndItens(newProduct);
+  }
+
   render() {
     const { product } = this.props;
     return (
       <div>
-        <Link
-          to={ { pathname: '/shopping-cart', state: product } }
+        <button
+          type="button"
           data-testid="product-add-to-cart"
+          onClick={ () => this.addProductToCart(product) }
         >
           Adicionar ao carrinho
-        </Link>
+        </button>
       </div>
     );
   }

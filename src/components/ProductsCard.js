@@ -8,7 +8,7 @@ import '../styles/ProductsCard.css';
 
 export default class ProductsCard extends Component {
   render() {
-    const { product } = this.props;
+    const { product, updateCartListAndItens } = this.props;
     const { title, id, thumbnail, price } = product;
     return (
       <div data-testid="product" className="product-card">
@@ -25,7 +25,10 @@ export default class ProductsCard extends Component {
         >
           Detalhes do Produto
         </Link>
-        <AddToCartButton product={ product } />
+        <AddToCartButton
+          product={ product }
+          updateCartListAndItens={ updateCartListAndItens }
+        />
       </div>
     );
   }
@@ -35,7 +38,7 @@ export default class ProductsCard extends Component {
 ProductsCard.propTypes = {
   product: PropTypes.shape({
     title: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,

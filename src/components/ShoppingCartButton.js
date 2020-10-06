@@ -3,9 +3,15 @@ import { Link } from 'react-router-dom';
 
 class ShoppingCartButton extends Component {
   render() {
+    const { cartProductItens, cartProductList } = this.props;
     return (
       <div>
-        <Link to="/shopping-cart" data-testid="shopping-cart-button">
+        <Link
+          to={ { pathname: '/shopping-cart',
+            cartProductList,
+            cartProductItens } }
+          data-testid="shopping-cart-button"
+        >
           <button type="button">Cart</button>
         </Link>
       </div>

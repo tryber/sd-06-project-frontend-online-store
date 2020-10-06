@@ -69,7 +69,7 @@ class ProductDetails extends React.Component {
               type="button"
               onClick={ this.addCart }
             >
-              Adicionar ao carrinho
+              Add to Cart
             </button>
           </div>
           <div>

@@ -13,11 +13,16 @@ class Main extends Component {
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
     this.onCategoriesChange = this.onCategoriesChange.bind(this);
     this.addProductToCard = this.addProductToCard.bind(this);
+    this.loadShoppingCart = this.loadShoppingCart.bind(this);
 
     this.state = {
       products: [],
       shoppingCart: [],
     };
+  }
+
+  componentDidMount() {
+    this.loadShoppingCart();
   }
 
   async onSearchTextSubmit(event) {
@@ -33,6 +38,15 @@ class Main extends Component {
     const data = await getProductsFromCategoryAndQuery('', value);
     const { results } = data;
     this.setState({ products: [...results] });
+  }
+
+  loadShoppingCart() {
+    if (localStorage.cart) {
+      const productsOnCart = JSON.parse(localStorage.cart);
+      this.setState(({ shoppingCart }) => ({
+        shoppingCart: [...shoppingCart, ...productsOnCart],
+      }));
+    }
   }
 
   addProductToCard(id, title, thumbnail, price) {

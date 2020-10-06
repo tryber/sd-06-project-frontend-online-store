@@ -70,7 +70,7 @@ class HomePage extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
         <Link data-testid="shopping-cart-button" to="/cart">
-          <button type="button">CARRINHO DE COMPRAS</button>
+          <button type="button">Ver Carrinho de Compras</button>
         </Link>
         <button type="button" onClick={ this.onClick } data-testid="query-button">
           Buscar

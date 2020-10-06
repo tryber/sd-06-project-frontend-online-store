@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as api from '../services/api';
 import Loading from './Loading';
+import './categoriesList.css';
 
 
 class CategoriesList extends React.Component {
@@ -43,7 +44,7 @@ class CategoriesList extends React.Component {
     const { loading, categories } = this.state;
 
     return (
-      <div>
+      <div className="category-container">
         <ul>
           { loading ? <Loading />
             : categories.map((category) => (

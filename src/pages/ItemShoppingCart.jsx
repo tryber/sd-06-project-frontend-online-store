@@ -39,7 +39,7 @@ class ItemShoppingCart extends React.Component {
     const { quantity } = this.state;
 
     return (
-      <div key={id} className="item-shopping-cart">
+      <div className="item-shopping-cart">
         <button 
           type="button" className="button"
           onClick={() => remove(id)}>X

@@ -3,6 +3,8 @@ import SearchBar from './SearchBar';
 import ProductList from './ProductList';
 import CategoryList from './CategoryList';
 import * as api from '../services/api';
+import logo from '../imgs/trybe.png'
+import MyCart from './MyCart';
 
 class Home extends React.Component {
   constructor() {
@@ -44,15 +46,23 @@ class Home extends React.Component {
     const { message, products } = this.state;
     return (
       <div className="home">
-        <div>
-          <SearchBar onFilter={this.filterProducts} msgChange={this.messageOnChange} />
-          {/* Message */}
-          <h4 data-testid="home-initial-message">{message}</h4>
-        </div>
-        <div className="main-container">
+        <header className="app-header">
+          <img className="logo" src={logo} alt="Logo da Trybe" />
+          <div className="search-bar">
+            <h1>Project - Front-End Online Store! </h1>
+            <SearchBar onFilter={this.filterProducts} msgChange={this.messageOnChange} />
+            {/* Message */}
+            <h5 data-testid="home-initial-message" className="message">{message}</h5>
+          </div>
+          <div className="my-cart">
+            <MyCart />
+          </div>
+        </header>
+
+        <main className="main-container">
           <CategoryList onFilter={this.filterProducts} />
           <ProductList products={ products } />
-        </div>
+        </main>
       </div>
     );
   }

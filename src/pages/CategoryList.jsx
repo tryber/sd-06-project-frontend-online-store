@@ -30,7 +30,7 @@ class CategoryList extends React.Component {
       <div className="category-container">
         <h3>Escolha a categoria:</h3>
         {categories.map((category) => (
-          <div key={ category.id } className="category-container">
+          <div key={ category.id } >
             <input
               type="radio"
               name="categories"

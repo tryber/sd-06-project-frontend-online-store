@@ -11,7 +11,10 @@ export default class QuantifyProducts extends Component {
 
   async increase() {
     const { quantify } = this.state;
-    this.setState({ quantify: quantify + 1 });
+    const { max } = this.props;
+    if (quantify < max) {
+      this.setState({ quantify: quantify + 1 });
+    }
   }
 
   async decrease() {

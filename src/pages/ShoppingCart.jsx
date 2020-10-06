@@ -17,7 +17,7 @@ class ShoppingCart extends React.Component {
           <div key={ element.id }>
             <p data-testid="shopping-cart-product-name">{ element.title }</p>
             <div data-testid="shopping-cart-product-quantity">
-              <QuantifyProducts />
+              <QuantifyProducts max={ element.available_quantity }/>
             </div>
           </div>
         )) }

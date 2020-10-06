@@ -11,7 +11,6 @@ const addProduct = (product) => {
   console.log(productsAdded);
 };
 
-
 class ShoppingCart extends React.Component {
   constructor() {
     super();
@@ -65,4 +64,4 @@ class ShoppingCart extends React.Component {
   }
 }
 
-export default { ShoppingCart, addProduct };
+export default { ShoppingCart, addProduct, productsAdded };

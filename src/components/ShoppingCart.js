@@ -49,6 +49,9 @@ class ShoppingCart extends React.Component {
     if (cart.length === zero) {
       return (
         <div>
+          <header>
+            <Link to="/">Voltar</Link>
+          </header>
           <img src={ EmptyBox } alt="empty-box" className="empty-box" />
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
         </div>
@@ -56,6 +59,9 @@ class ShoppingCart extends React.Component {
     }
     return (
       <div>
+        <header>
+          <Link to="/">Voltar</Link>
+        </header>
         { cart.map((item) => <ItemCardCart key={ item.id } product={ item } />) }
         <div>
           <Link data-testid="checkout-products" to="/checkout">Finalizar a compra</Link>

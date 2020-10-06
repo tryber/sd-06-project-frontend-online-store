@@ -12,9 +12,11 @@ class Main extends Component {
 
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
     this.onCategoriesChange = this.onCategoriesChange.bind(this);
+    this.addProductToCard = this.addProductToCard.bind(this);
 
     this.state = {
       products: [],
+      shoppingCart: [],
     };
   }
 
@@ -33,6 +35,26 @@ class Main extends Component {
     this.setState({ products: [...results] });
   }
 
+  addProductToCard(id, title, thumbnail, price) {
+    this.setState(({ shoppingCart }) => {
+      if (shoppingCart.some((el) => el.id === id)) {
+        const updatedCart = shoppingCart.reduce((acc, el) => {
+          if (el.id === id) {
+            el.amount += 0.5;
+          }
+          return [...acc]
+        }, shoppingCart);
+
+        localStorage.cart = JSON.stringify(updatedCart);
+        return { shoppingCart: updatedCart };
+      }
+
+      const updatedCart = [...shoppingCart, { id, amount: 1, title, thumbnail, price }];
+      localStorage.cart = JSON.stringify(updatedCart);
+      return { shoppingCart: updatedCart };
+    });
+  }
+
   render() {
     const { products } = this.state;
 
@@ -46,7 +68,7 @@ class Main extends Component {
           <ShoppingCartButton />
         </div>
 
-        <ProductsList products={ products } />
+        <ProductsList products={ products } addProductToCard= { this.addProductToCard } />
 
       </div>
     );

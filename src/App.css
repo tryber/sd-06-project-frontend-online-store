@@ -13,8 +13,6 @@ body {
   width: 25%;
 }
 
-
-
 .radio {
   padding: 5px 0;
 }
@@ -43,7 +41,6 @@ body {
 
 button.product-group {
   align-self: baseline;
-  background-color: aqua;
 }
 
 .cart-button-product {
@@ -53,6 +50,13 @@ button.product-group {
 
 .cart-product {
   display: flex;
+  margin: 30px 20px 0 10px;
+  flex-wrap: wrap;
+}
+
+.cart {
+  height: 100%;
+  width: 100%;
 }
 
 .header {
@@ -82,7 +86,6 @@ button.product-group {
   font-size: 18pt;
   height: 29px;
   position: relative;
-
 }
 
 #box {
@@ -186,4 +189,28 @@ svg {
   margin-top: 135px;
   min-width: 100%;
   position: absolute;
+}
+
+#home-link {
+  font-size: 50pt;
+  flex-direction: row;
+  display: flex;
+  margin: 30px 20px 0 10px;
+}
+
+.cart-space {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+
+#cart-title {
+  flex-direction: column;
+  display: flex;
+  text-align: center;
+  margin-top: -70px;
+}
+
+#total-text {
+  
 }

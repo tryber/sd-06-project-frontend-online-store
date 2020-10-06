@@ -10,12 +10,9 @@ class CartButton extends React.Component {
       <div className="cart-button-container">
         <button className="cart-button" type="button">
           <Link data-testid="shopping-cart-button" to="/cart">
-            <FaShoppingCart /> 
+            <FaShoppingCart />
           </Link>
           <h6>
-            Visualizar
-            <br />
-            Carrinho
             <div>{(cart) ? cart.totalQtd : 0}</div>
           </h6>
         </button>

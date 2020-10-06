@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-class ProductDetails extends React.Component {
+class ItemCart extends React.Component {
   render() {
     const { location } = this.props;
     const { state } = location;
@@ -21,7 +21,7 @@ class ProductDetails extends React.Component {
   }
 }
 
-ProductDetails.propTypes = {
+ItemCart.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
       items: PropTypes.shape({
@@ -33,4 +33,4 @@ ProductDetails.propTypes = {
   }).isRequired,
 };
 
-export default ProductDetails;
+export default ItemCart;

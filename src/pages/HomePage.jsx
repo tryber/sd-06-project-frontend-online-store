@@ -16,12 +16,14 @@ class HomePage extends React.Component {
       categorySelected: '',
       products: [],
       categories: [],
+      cartItem: [],
+      cartCount: '0',
     };
 
     this.onClick = this.onClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.teste = this.teste.bind(this);
+    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +39,13 @@ class HomePage extends React.Component {
       .then((items) => this.setState({
         products: items.results,
       }));
+  }
+
+  addCart(productName, productId) {
+    this.setState((prevState) => ({
+      cartItem: prevState.cartItem.concat({ name: productName, id: productId }),
+      cartCount: (Number(prevState.cartCount) + 1).toString(),
+    }));
   }
 
   handleInputChange({ target }) {
@@ -55,13 +64,8 @@ class HomePage extends React.Component {
   }
 
 
-  teste(items) {
-    console.log(items);
-  }
-
   render() {
-    // if () return <Redirect to="/" />;
-    const { products, categories } = this.state;
+    const { products, categories, cartItem, cartCount } = this.state;
     return (
       <div>
         <label htmlFor="search-label">
@@ -75,17 +79,19 @@ class HomePage extends React.Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-        <Link data-testid="shopping-cart-button" to="/cart">
-          <button type="button">CARRINHO</button>
+        <Link to={ { pathname: '/cart', state: { cartItem, cartCount } } }>
+          <button data-testid="shopping-cart-button" type="button">CARRINHO</button>
         </Link>
         <button type="button" onClick={ this.onClick } data-testid="query-button">
           Buscar
         </button>
         <div>
           {products.map((items) => (<ProductList
+            cartItem={ cartItem }
+            cartCount={ cartCount }
+            addCart={ this.addCart }
             key={ items.id }
             items={ items }
-            teste={ this.teste }
           />))}
         </div>
         <div>
@@ -99,5 +105,6 @@ class HomePage extends React.Component {
     );
   }
 }
+
 
 export default HomePage;

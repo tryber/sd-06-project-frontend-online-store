@@ -61,7 +61,14 @@ class ShoppingCart extends Component {
       return (
         <div className="product-on-cart">
           <this.headerMount />
-          {this.state.productList.map(product => <div><h3 data-testid="shopping-cart-product-name">{product.title}</h3><h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5></div>)}
+          {
+            this.state.productList.map((product, index) => 
+              <div key={index}>
+                <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
+                <h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5>
+              </div>
+            )
+          }
         </div>
       );
     }

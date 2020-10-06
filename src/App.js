@@ -4,6 +4,7 @@ import './App.css';
 import ShoppingCart from './components/ShoppingCart';
 import ProductListing from './components/ProductListing';
 import ProductDetails from './components/ProductDetails';
+import Checkout from './components/Checkout';
 
 
 export default class App extends Component {
@@ -76,6 +77,16 @@ export default class App extends Component {
               <ProductDetails
                 { ...props }
                 handleAddToCart={ this.handleAddToCart }
+              />) }
+          />
+          <Route
+            exact
+            path="/checkout"
+            render={ (props) => (
+              <Checkout
+                { ...props }
+                cartList={ cartList }
+                cartQuantity={ cartQuantity }
               />) }
           />
         </Switch>

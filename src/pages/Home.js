@@ -19,14 +19,11 @@ class Home extends Component {
       queryInput: '',
       categoryInput: '',
       products: [],
-      cartProductList: [],
-      cartProductItens: 0,
     };
 
     this.handleClickButton = this.handleClickButton.bind(this);
     this.handleClickCategories = this.handleClickCategories.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
-    this.updateCartListAndItens = this.updateCartListAndItens.bind(this);
   }
 
   handleChangeInput(query) {
@@ -68,14 +65,6 @@ class Home extends Component {
           products: productsFound.results,
         });
       }
-    });
-  }
-
-  updateCartListAndItens(newProduct) {
-    const { cartProductList, cartProductItens } = this.state;
-    this.setState({
-      cartProductList: [...cartProductList, newProduct],
-      cartProductItens: cartProductItens + 1,
     });
   }
 

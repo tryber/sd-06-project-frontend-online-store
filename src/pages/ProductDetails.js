@@ -1,14 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import addItem from '../components/addItem';
+import * as addItem from '../components/addItem';
+
 
 class ProductDetails extends React.Component {
-  
+  constructor(props) {
+    super(props);
+
+    this.getQuantity = this.getQuantity.bind(this);
+
+    const { location } = this.props;
+    const { state } = location;
+    const { title: name } = state;
+
+    this.state = {
+      title: name,
+      quantity: 1,
+    };
+  }
+
+  componentWillUnmount() {
+    const { title, quantity } = this.state;
+    addItem.addItem(title, quantity);
+  }
+
+  getQuantity({ target }) {
+    const { value } = target;
+
+    this.setState({
+      quantity: value,
+    });
+  }
+
   render() {
     const { location } = this.props;
     const { state } = location;
     const { title, thumbnail, price } = state;
+
     return (
       <div>
         <h1 data-testid="product-detail-name">{title}</h1>
@@ -17,8 +46,19 @@ class ProductDetails extends React.Component {
           {price}
         </p>
         <img src={ thumbnail } alt={ title } />
+        <form>
+          <label htmlFor="number">
+            Quantidade:
+            <input type="number" name="number" onChange={ this.getQuantity } />
+          </label>
+        </form>
         <div>
-          <Link onClick={addItem(title, price)} to="/">ADICIONAR AO CARRINHO</Link>
+          <Link
+            data-testid="product-detail-add-to-cart"
+            to="/"
+          >
+            ADICIONAR AO CARRINHO
+          </Link>
         </div>
       </div>
     );

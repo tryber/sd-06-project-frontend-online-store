@@ -1,23 +1,11 @@
-import { Componet } from 'react';
+let cartList = [];
 
-class addItem extends Componet {
-  constructor() {
-    super();
+console.log(cartList);
 
-    this.addItem = this.addItem.bind(this);
+export function addItem(title, quantity) {
+  const newItem = { title, quantity };
 
-    this.state = {
-      cartList: [],
-    }
-  }
-
-  addItem(title, price) {
-    const newItem = { title, price };
-  
-    this.setState((previousState) => ({
-      cartList: previousState.cartList.concat(newItem),
-    }));
-  }
+  cartList = cartList.concat({ title: newItem.title, quantity: newItem.quantity });
 }
 
-export default addItem;
+export { cartList };

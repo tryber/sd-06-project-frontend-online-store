@@ -86,9 +86,10 @@ body {
 }
 
 .checkout-product-checking {
+  border: solid 1px black;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin: 25px;
 }
 
 .checkout-product {
@@ -101,10 +102,13 @@ body {
 
 .checkout-form {
   align-items: flex-start;
+  border: solid 1px black;
   display: flex;
   flex-direction: column;
-  margin-left: 15%;
-  margin-top: 100px;
+  margin: 25px;
+  padding-left: 15%;
+  padding-top: 25px;
+  padding-bottom: 50px;
 }
 
 .checkout-form-input {

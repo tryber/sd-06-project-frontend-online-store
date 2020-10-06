@@ -12,10 +12,13 @@ class MainPage extends React.Component {
       categories: [],
       categorieId: '',
       products: [],
+      cartProducts: [],
+      quantityCartProducts: 0,
       loading: false,
     };
 
     this.searchProduct = this.searchProduct.bind(this);
+    this.addCart = this.addCart.bind(this);
     this.searchCategoryProduct = this.searchCategoryProduct.bind(this);
   }
 
@@ -39,6 +42,43 @@ class MainPage extends React.Component {
     const { id } = target;
     const { results } = await api.getProductsFromCategoryAndQuery(id, value);
     this.setState({ products: results, loading: false, categorieId: id });
+  }
+
+  addCart(product) {
+    this.setState(
+      {
+        cartProducts: [product],
+        quantityCartProducts: 1,
+      }, () => {
+        if (localStorage.Cart) {
+          const update = JSON.parse(localStorage.Cart);
+          const menosUm = -1;
+          const { cartProducts, quantityCartProducts } = this.state;
+          const indexCart = update
+            .findIndex((item) => item.cartProducts[0].id === cartProducts[0].id);
+          if (indexCart !== menosUm) {
+            const value = update[indexCart].quantityCartProducts + 1;
+            update[indexCart].quantityCartProducts = value;
+            localStorage.Cart = JSON.stringify(update);
+          } else {
+            localStorage.Cart = JSON.stringify(
+              [...JSON.parse(localStorage.Cart), {
+                quantityCartProducts,
+                cartProducts: [product],
+              }],
+            );
+          }
+        } else {
+          const { quantityCartProducts } = this.state;
+          localStorage.Cart = JSON.stringify([
+            {
+              quantityCartProducts,
+              cartProducts: [product],
+            },
+          ]);
+        }
+      },
+    );
   }
 
   async renderCategories() {
@@ -94,14 +134,22 @@ class MainPage extends React.Component {
           <div className="div-all-products">
             { loading ? <p>Produto não encontrado</p>
               : products.map((product) => (
-                <Product
-                  key={ product.id }
-                  id={ product.id }
-                  title={ product.title }
-                  image={ product.thumbnail }
-                  price={ product.price }
-                  product={ product }
-                />
+                <div key={ product.id }>
+                  <Product
+                    id={ product.id }
+                    title={ product.title }
+                    image={ product.thumbnail }
+                    price={ product.price }
+                    product={ product }
+                  />
+                  <button
+                    type="button"
+                    data-testid="product-add-to-cart"
+                    onClick={ () => this.addCart(product) }
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               )) }
           </div>
         </div>

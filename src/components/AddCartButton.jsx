@@ -3,65 +3,9 @@ import React from 'react';
 class AddCartButton extends React.Component {
   constructor() {
     super();
-    // this.localStorageSave = this.localStorageSave.bind(this);
     this.cartStateSave = this.cartStateSave.bind(this);
-    // this.changeItem = this.changeItem.bind(this);
-    // this.removeItem = this.removeItem.bind(this);
   }
-
-  // getLocalStorageProduct() {
-  //   return JSON.parse(localStorage.getItem('cart'));
-  // }
-
-  // countLocalStorage(cartLocalStorage, id) {
-  //   const newLocalStorage = cartLocalStorage.map((item) => {
-  //     if (item.id === id) item.qtd += 1;
-  //     return item;
-  //   });
-  //   return newLocalStorage;
-  // }
-
-  
-  // localStorageSave() {
-    //   const { data } = this.props;
-  //   data.qtd = 1;
-  //   const cartLocalStorage = this.getLocalStorageProduct();
-  //   let newLocalStorage;
-  //   if (cartLocalStorage) {
-  //     (cartLocalStorage.some((item) => item.id === data.id))
-  //       ? newLocalStorage = this.countLocalStorage(cartLocalStorage, data.id)
-  //       : newLocalStorage = [...cartLocalStorage, data];
-  //   } else {
-  //     newLocalStorage = [data];
-  //   }
-  //   const stringData = JSON.stringify(newLocalStorage);
-  //   localStorage.setItem('cart', stringData);
-  //   console.log('Produto adicionado ao carrinho com sucesso!');
-  // }
-  
-  // localStorageRemove() {
-    //   console.log('Remove item');
-    // }
-    
-    // changeItem(id , event, op) {
-      //   const cartItems = this.getLocalStorageProduct();
-      //   const newCartItems = cartItems.map(item => {
-        //    if (item.id === id) {
-          //     if (op === "plus") {
-            //       item.qtd += 1
-            //     } else {
-              //       if (item.qtd > 1) {item.qtd -= 1}
-              //     }       
-              //     (op === "plus") 
-              //       ? event.target.previousSibling.lastChild.innerText = item.qtd
-              //       : event.target.previousSibling.previousSibling.lastChild.innerText = item.qtd;
-              //     return item;
-              //    }
-              //    return item;
-              // })
-              //  localStorage.cart = JSON.stringify(newCartItems);
-              // }
-              
+         
   cartStateSave(op) {
     const { data, handleCartItems } = this.props;
     handleCartItems(data, op);
@@ -81,14 +25,6 @@ class AddCartButton extends React.Component {
       </div>
     );
   }
-  
-  // removeItem(id, event) {
-  //   const cartItems = this.getLocalStorageProduct();
-  //   const newCartItems = cartItems.filter(item => item.id !== id);
-  //   const item = event.target.parentNode.parentNode.parentNode;
-  //   item.parentNode.removeChild(item);
-  //   localStorage.cart = JSON.stringify(newCartItems);
-  // }
 
   btRemove() {
     const { data, handleCartItems, removeItem } = this.props;

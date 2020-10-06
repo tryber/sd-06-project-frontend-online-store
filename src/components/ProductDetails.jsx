@@ -10,14 +10,6 @@ class ProductDetails extends React.Component {
 
   }
 
-  // componentDidMount() {
-  //   this.setState({ data: this.getLocalStorageProduct()})
-  // }
-
-  // getLocalStorageProduct() {
-  //   return JSON.parse(localStorage.getItem('product'));
-  // }
-
   dataOK(data) {
     const { handleCartItems } = this.props;
     return (

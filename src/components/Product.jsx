@@ -4,14 +4,8 @@ import AddCartButton from './AddCartButton';
 import ProductDetails from './ProductDetails';
 
 class Product extends React.Component {
-
-  // localStorageSave(data) {
-  //   const stringData = JSON.stringify(data);
-  //   localStorage.setItem('product', stringData);
-  // }
-
   render() {
-    const { data, bt, handleCartItems, removeItem, productDetailsPage, saveDetails } = this.props;
+    const { data, bt, handleCartItems, removeItem, saveDetails } = this.props;
     return (
       <div className="product-group">
         <Link data-testid="product-detail-link" to={`/products/${data.id}`} onClick={() => saveDetails(data)}>

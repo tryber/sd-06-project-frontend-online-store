@@ -7,7 +7,6 @@ export default class shoppingCart extends Component {
     this.localStorageMount = this.localStorageMount.bind(this);
     this.state = {
       cart: [],
-      // products: [],
     };
   }
 
@@ -24,27 +23,11 @@ export default class shoppingCart extends Component {
     });
   }
 
-// func to sum products price 
-//  async cartTotalValue(target) {
-//     const items = document.getElementsByTagName('li');
-//     let itemPrice = 0;
-  
-//     for (let i = 0; i < items.length; i += 1) {
-//       itemPrice += parseFloat(items[i].innerHTML.split('$')[1]);
-//     }
-// };
-
   render() {
     const { cart } = this.state;
-    return cart === null ? (
+    return(
       <div>
-        <h1 data-testid="shopping-cart-empty-message">
-          Seu carrinho está vazio
-        </h1>
-      </div>
-    ) : (
-      <div>
-        {/* <p>Price: {this.cartTotalValue}</p> */}
+        <h1>Seu Carrinho:</h1>
         <CreateCart localStorageMount={ this.localStorageMount } cart={ cart } />
       </div>
     );

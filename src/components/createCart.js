@@ -1,35 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ShoppingCart from '../pages/shoppingCart';
 import { Redirect } from 'react-router-dom';
 
 export default class CreateCart extends Component {
   constructor(props) {
     super(props);
-    const { cart } = this.props
     this.removeLocalStorage = this.removeLocalStorage.bind(this);
     this.sumProduct = this.sumProduct.bind(this);
     this.decreaseProduct = this.decreaseProduct.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
-    this.Price = this.Price.bind(this);
     this.state = {
-      cart,
-      totalPrice: '',
+      total: '',
     };
   }
 
   componentDidMount() {
-    this.Price()
-  }
-  async Price() {
-    const { cart } = await this.state
-    // this.setState({
-    //   totalPrice : cart.reduce((previousValue, next) => previousValue + next.price, 0)
-    // })
-    console.log(cart)
+    const cartLocalStorage = JSON.parse(localStorage.getItem('cartLocal'));
+    this.setState({
+      total: cartLocalStorage.reduce(
+        (previousValue, next) => previousValue + next.price,
+        0
+      ),
+    });
   }
 
-  removeProduct(target, elementId) {
+  removeProduct(target, elementId, price) {
     const product = target.parentNode;
     const cartLocalStorage = JSON.parse(localStorage.getItem('cartLocal'));
     const removeLocalStorage = cartLocalStorage.filter((element) => {
@@ -38,6 +33,9 @@ export default class CreateCart extends Component {
     const CartLocal = JSON.stringify(removeLocalStorage);
     localStorage.setItem('cartLocal', CartLocal);
     product.remove();
+    this.setState({
+      total: parseInt(Math.round(this.state.total - price)),
+    });
   }
 
   sumProduct(target, element, price) {
@@ -45,13 +43,24 @@ export default class CreateCart extends Component {
     const result = number + 1;
     document.getElementById(element).innerText = result;
     document.getElementById(`${element}price`).innerText = price * result;
+    this.setState({
+      total: Math.round(price + this.state.total),
+    });
   }
-
   decreaseProduct(target, element, price) {
     const number = parseInt(target.parentNode.lastChild.innerText);
     const result = number - 1;
-    document.getElementById(element).innerText = result;
-    document.getElementById(`${element}price`).innerText = price * result;
+    if (result === 0) {
+      this.setState({
+        total: parseInt(Math.round(this.state.total - price)),
+      });
+      this.removeProduct(target, element, price);
+    } else {
+      document.getElementById(element).innerText = result;
+      this.setState({
+        total: Math.round(this.state.total - price),
+      });
+    }
   }
 
   removeLocalStorage() {
@@ -60,14 +69,23 @@ export default class CreateCart extends Component {
 
   render() {
     const { cart } = this.props;
-
-    return (
+    return this.state.total === 0 ? (
+      <div>
+        <h1 data-testid="shopping-cart-empty-message">
+          Seu carrinho está vazio
+        </h1>
+      </div>
+    ) : (
       <div data-testid="shopping-cart-empty-message">
         {cart.map((element) => (
           <div key={element.id}>
             <img src={element.thumbnail} alt={element.title} />
             <h4 data-testid="shopping-cart-product-name">{element.title}</h4>
-            <button onClick={(e) => this.removeProduct(e.target, element.id)}>
+            <button
+              onClick={(e) =>
+                this.removeProduct(e.target, element.id, element.price)
+              }
+            >
               [X]
             </button>
             <p id={`${element.id}price`}>{element.price}</p>
@@ -77,26 +95,22 @@ export default class CreateCart extends Component {
                 this.sumProduct(e.target, element.id, element.price)
               }
             >
-              {' '}
-              +{' '}
+              +
             </button>
             <button
-              data-testid="product-decreate-quantity"
+              data-testid="product-decrease-quantity"
               onClick={(e) =>
                 this.decreaseProduct(e.target, element.id, element.price)
               }
             >
-              {' '}
-              -{' '}
+              -
             </button>
             <p id={element.id} data-testid="shopping-cart-product-quantity">
               1
             </p>
           </div>
         ))}
-        <div>
-          Total price:{this.state.totalPrice}
-        </div>
+        <div>{this.state.total}</div>
         <button type="button" onClick={this.removeLocalStorage}>
           Deletar todos
         </button>

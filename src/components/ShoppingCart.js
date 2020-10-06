@@ -21,7 +21,6 @@ class ShoppingCart extends React.Component {
   }
 
   componentDidMount() {
-    console.log(productsAdded);
     this.addToCart(productsAdded);
   }
 

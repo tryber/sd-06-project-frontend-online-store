@@ -16,7 +16,7 @@ class ProductList extends React.Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { items } = this.props; // addCart
     const { title, price, thumbnail } = items;
     return (
       <div data-testid="product">
@@ -35,7 +35,7 @@ class ProductList extends React.Component {
         </button>
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: `/products/${items.id}`, state: { items } } }
+          to={ { pathname: `/products/${items.id}`, state: { items } } } // addCart
         >
           <button type="button">VER DETALHES</button>
         </Link>

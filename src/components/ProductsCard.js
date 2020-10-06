@@ -21,7 +21,10 @@ export default class ProductsCard extends Component {
         <p>{`R$ ${price}`}</p>
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: `/details/${id}`, state: product } }
+          to={ { pathname: `/details/${id}`,
+            state: product,
+            updateCartListAndItens,
+          } }
         >
           Detalhes do Produto
         </Link>

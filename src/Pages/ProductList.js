@@ -20,20 +20,16 @@ class ProductList extends Component {
       valueInput: '',
       categoryId: '',
       products: [],
-      cart: [],
+      cart: JSON.parse(localStorage.getItem('cart')) || [],
     };
   }
 
   onClickCart(prod) {
-    const { onClick } = this.props;
-    onClick(this.state);
     const { cart } = this.state;
-    const prevState = cart;
-    prevState.push(prod);
+    cart.push(prod);
     this.setState({
-      cart: prevState,
+      cart,
     });
-
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
@@ -110,9 +106,5 @@ class ProductList extends Component {
     );
   }
 }
-
-ProductList.propTypes = {
-  onClick: propTypes.func.isRequired,
-};
 
 export default ProductList;

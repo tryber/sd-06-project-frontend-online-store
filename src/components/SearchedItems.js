@@ -14,19 +14,23 @@ class SearchedItems extends Component {
   }
 
   render() {
-    const { item: { id, title, thumbnail, price }, query, addTocart } = this.props;
+    const { item: { id, title, thumbnail, price },
+      query, addTocart, freeShipping } = this.props;
 
     return (
       <div data-testid="product">
         <h2>{title}</h2>
         <img src={ thumbnail } alt="thumbnail" />
+        { freeShipping ? <div data-testid="free-shipping">Frete Grátis </div> : <div />}
         <span>{price}</span>
         <div>
           <Link
             data-testid="product-detail-link"
             to={ { pathname: `/card/${id}`,
               state: { data: query },
-              teste: { addtoCart: addTocart } } }
+              teste: { addtoCart: addTocart },
+              shipping: { shipping: freeShipping },
+            } }
           >
             Detalhes
           </Link>
@@ -52,6 +56,7 @@ SearchedItems.propTypes = {
   }).isRequired,
   query: PropTypes.string.isRequired,
   addTocart: PropTypes.func.isRequired,
+  freeShipping: PropTypes.bool.isRequired,
 };
 
 export default SearchedItems;

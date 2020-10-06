@@ -78,6 +78,7 @@ class Home extends Component {
                 key={ item.id }
                 item={ item }
                 query={ searchInput }
+                freeShipping={ item.shipping.free_shipping }
               />
             ))}
         </div>

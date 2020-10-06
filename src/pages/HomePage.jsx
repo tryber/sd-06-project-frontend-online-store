@@ -106,9 +106,5 @@ class HomePage extends React.Component {
   }
 }
 
-// HomePage.propTypes = {
-//   cartItem: PropTypes.arrayOf.isRequired,
-//   cartCount: PropTypes.string.isRequired,
-// };
 
 export default HomePage;

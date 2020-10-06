@@ -3,6 +3,17 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class ProductCard extends React.Component {
+  constructor() {
+    super();
+    this.addItem = this.addItem.bind(this);
+  }
+
+  addItem(product) {
+    const titulo = product.title;
+    const price = product.price
+    this.setState({ title: titulo, price: price });
+  }
+
   render() {
     const { product } = this.props;
     return (
@@ -25,8 +36,9 @@ class ProductCard extends React.Component {
             <Link
               data-testid="product-detail-add-to-cart"
               to={ { pathname: '/shopping-cart', state: product } }
-              //addItem(event)
-              //
+              title={this.state.title}
+              quantity={this.state.quantity}
+              price={this.state.price}
             >
                 ADICIONAR AO CARRINHO
             </Link>

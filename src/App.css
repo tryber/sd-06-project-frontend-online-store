@@ -84,3 +84,37 @@ body {
   justify-content: center;
   margin: 10px;
 }
+
+.checkout-product-checking {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.checkout-product {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-left: 50px;
+  width: 50%;
+}
+
+.checkout-form {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  margin-top: 100px;
+}
+
+.checkout-form-input {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px;
+  width: 50%;
+}
+
+.checkout-form-input input {
+  margin-left: 25px;
+  width: 500px;
+}

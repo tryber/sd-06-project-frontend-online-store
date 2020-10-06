@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CartBtn from '../services/CartBtn';
+import Evaluations from '../components/Evaluations'
 
 class ProductDetails extends React.Component {
   saveEvaluation() {
@@ -42,28 +43,8 @@ class ProductDetails extends React.Component {
             Adicionar ao Carrinho
           </button>
           <CartBtn />
+          <Evaluations productId={ product.id } />
         </div>
-        <form>
-          <input type="text" placeholder="Coloque seu email" id="email" required />
-          <br />
-          <label htmlFor="rating">
-            Avaliação:
-            <input type="number" min={ 0 } max={ 5 } step={ 1 } id="rating" required />
-            <br />
-          </label>
-          <textarea
-            id="message"
-            data-testeid="product-detail-evaluation"
-            placeholder="Mensagem(opcional)"
-          />
-          <br />
-          <button
-            type="button"
-            onClick={ this.saveEvaluation }
-          >
-            Submeter avaliação
-          </button>
-        </form>
       </div>
     );
   }

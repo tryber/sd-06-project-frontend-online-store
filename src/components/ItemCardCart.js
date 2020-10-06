@@ -30,7 +30,7 @@ class ItemCardCart extends Component {
     const { quantity } = this.state;
     const two = 2;
     return (
-      <div className="product" key={ id }>
+      <div className="product-card-cart" key={ id }>
         <button type="button" className="circle-button">X</button>
         <img src={ thumbnail } alt={ title } />
         <div className="product-info">

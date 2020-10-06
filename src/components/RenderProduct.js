@@ -19,7 +19,11 @@ class RenderProduct extends React.Component {
           cartList={ cartList }
         />));
     }
-    return <span>Faça uma busca ou selecione uma categoria.</span>;
+    return (
+      <h4 data-testid="home-initial-message">
+        Digite algum termo de pesquisa ou escolha uma categoria.
+      </h4>
+    );
   }
 }
 

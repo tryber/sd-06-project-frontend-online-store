@@ -13,6 +13,7 @@ class ShopList extends React.Component {
     this.loadCategories = this.loadCategories.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.handleResetCategory = this.handleResetCategory.bind(this);
     const { location } = this.props;
     let currentCart = {};
 
@@ -58,6 +59,9 @@ class ShopList extends React.Component {
   }
 
   async handleSelect({ target }) {
+    const labels = document.querySelectorAll('.category-list label');
+    labels.forEach((label) => label.classList.remove('checked'));
+    target.parentElement.classList.add('checked');
     this.setState({ selectedCategory: target.id }, async () => {
       await this.handleClick();
     });
@@ -79,9 +83,16 @@ class ShopList extends React.Component {
     });
   }
 
+  handleResetCategory() {
+    const labels = document.querySelectorAll('.category-list label');
+    labels.forEach((label) => label.classList.remove('checked'));
+    const checkedCategory = document.querySelector('input[name="category"]:checked');
+    if (checkedCategory) checkedCategory.checked = false;
+    this.setState({ products: [], selectedCategory: '' });
+  }
+
   addToCart(product) {
     const { cartList } = this.state;
-
     const ourProduct = product;
     const item = cartList[product.id];
     if (item && item.available_quantity > item.quantity) {
@@ -94,22 +105,40 @@ class ShopList extends React.Component {
   }
 
   render() {
-    const { categories, loading, products, cartList } = this.state;
-
+    const { categories, loading, products, cartList, selectedCategory } = this.state;
+    const inCategory = (selectedCategory !== '')
+      ? `Pesquisar em ${categories.find(
+        (object) => object.id === selectedCategory,
+      ).name}`
+      : '';
 
     return (
       <section className="wrapper-category-shoplist">
-        <CategoryList categories={ categories } handleSelect={ this.handleSelect } />
-        <div data-testid="home-initial-message">
-          <input data-testid="query-input" type="text" onChange={ this.handleChange } />
-          Digite algum termo de pesquisa ou escolha uma categoria.
-          <button
-            data-testid="query-button"
-            onClick={ this.handleClick }
-            type="button"
-          >
-            Pesquisar
-          </button>
+        <header className="header">
+          <section className="searchbar">
+            <input
+              data-testid="query-input"
+              type="text"
+              placeholder={ inCategory }
+              onChange={ this.handleChange }
+              className="search-input"
+            />
+            <button
+              data-testid="query-button"
+              onClick={ this.handleClick }
+              type="button"
+            >
+              Pesquisar
+            </button>
+            {/* <span>{ inCategory }</span> */}
+          </section>
+          <CategoryList
+            categories={ categories }
+            handleSelect={ this.handleSelect }
+            handleReset={ this.handleResetCategory }
+          />
+        </header>
+        <div>
           <Cart cartList={ cartList } />
           <div className="productsList">
             <RenderProduct

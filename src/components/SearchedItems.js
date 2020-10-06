@@ -14,7 +14,7 @@ class SearchedItems extends Component {
   }
 
   render() {
-    const { item: { id, title, thumbnail, price }, query } = this.props;
+    const { item: { id, title, thumbnail, price }, query, addTocart } = this.props;
 
     return (
       <div data-testid="product">
@@ -24,7 +24,11 @@ class SearchedItems extends Component {
         <div>
           <Link
             data-testid="product-detail-link"
-            to={ { pathname: `/card/${id}`, state: { data: query } } }
+            to={ { 
+              pathname: `/card/${id}`, 
+              state: { data: query }, 
+              teste: { addtoCart: addTocart }
+            } }
           >
             Detalhes
           </Link>

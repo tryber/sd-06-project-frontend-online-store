@@ -6,7 +6,8 @@ import Evaluations from '../components/Evaluations';
 
 class ProductDetails extends React.Component {
   render() {
-    const { location: { state: { thumbnail, title, attibutes, id } } } = this.props;
+    const { location: { state: { title, thumbnail, attibutes, id } } } = this.props;
+    console.log(title);
     return (
       <div>
         <div>

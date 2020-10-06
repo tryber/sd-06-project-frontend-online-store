@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { cart, countQuantity } from '../dados/cart_arrayProductList';
+import { cart } from '../dados/cart_arrayProductList';
 
 
 class ProductsList extends Component {

@@ -64,10 +64,10 @@ class HomePage extends Component {
         <div>
           <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
           <span data-testid="shopping-cart-size">{countQuantity()}</span>
+          <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
         </div>
-        <SearchBar fetchCards={this.fetchProducts} handleStateChange={this.handleStateChange} />
-        <ProductsList cards={cards} counterQuantity={this.counterQuantity} />
         <Categories handleCategoryClick={this.handleCategoryClick} />
+        <ProductsList cards={cards} counterQuantity={this.counterQuantity} />
       </div>
     );
   }

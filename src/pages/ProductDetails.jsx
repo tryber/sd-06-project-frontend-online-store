@@ -35,7 +35,7 @@ class ProductDetails extends Component {
 
   reviewSubmit() {
     const { id } = this.props.match.params;
-    const { email, message, reviewsState} = this.state;
+    const { email, message } = this.state;
     const reviewObj = { email, message, id };
     this.setState({ email: '', message: '' });
     reviews.push(reviewObj);
@@ -52,10 +52,10 @@ class ProductDetails extends Component {
           <Link data-testid="shopping-cart-button" to="/cart">CART</Link>
           <span data-testid="shopping-cart-size">{this.state.countQuantity}</span>
         </div>
-        <span data-testid="free-shipping">{shipping.free_shipping ? 'Frete Grátis' : ''}</span>
         <section key={id}>
           <h1 data-testid="product-detail-name">{title}</h1>
           <img src={thumbnail} />
+          <span>{`R$${price}`}</span>
           {
             (shipping.free_shipping)
             ? <span data-testid="free-shipping">Frete Grátis</span>

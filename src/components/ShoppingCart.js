@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import imgCart from '../img/imgCart.jpg';
+import './ShoppingCart.css';
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -60,8 +61,10 @@ class ShoppingCart extends React.Component {
     if (items.length === empty) {
       return (
         <div>
-          <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>
-          <img src={ imgCart } alt="shopping-cart-button" />
+          <h2 className="titleCart" data-testid="shopping-cart-empty-message">
+            Seu carrinho está vazio
+          </h2>
+          <img className="imgCart" src={ imgCart } alt="shopping-cart-button" />
         </div>
       );
     }
@@ -72,10 +75,10 @@ class ShoppingCart extends React.Component {
           const { id, title, thumbnail, price } = item;
 
           return (
-            <div key={ id }>
+            <div className="product" key={ id }>
               <h3 data-testid="shopping-cart-product-name">{ title }</h3>
               <img alt="Product in the cart" src={ thumbnail } />
-              <div>
+              <div className="buttonQuantityCart">
                 <button
                   data-testid="product-increase-quantity"
                   type="button"
@@ -85,6 +88,7 @@ class ShoppingCart extends React.Component {
                   +
                 </button>
                 <p
+                  className="buttonQuantityCart"
                   data-testid="shopping-cart-product-quantity"
                 >
                   { addedItems[`${id}`] }
@@ -114,7 +118,10 @@ class ShoppingCart extends React.Component {
             </div>
           );
         })}
-        <span>Valor Total da Compra R$:</span>
+        <div>
+          <span>Valor Total da Compra R$:</span>
+        </div>
+        <br />
         <Link to="/checkout">
           <button type="button" data-testid="checkout-products">
             Finalizar Compra

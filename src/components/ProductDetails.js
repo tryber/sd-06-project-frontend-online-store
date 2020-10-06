@@ -43,11 +43,26 @@ class ProductDetails extends React.Component {
     const { title, price, thumbnail } = product;
     return (
       <div>
-        <div>
+        <Link to="/cart">
+          <button
+            className="shoppingCartButtonDetails"
+            data-testid="shopping-cart-button"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            <img src={ imgCart } alt="shopping-cart-button" width="50" />
+          </button>
+        </Link>
+        <div className="product">
           <p data-testid="product-detail-name">{title}</p>
-          <p>{price}</p>
           <img alt="Product" src={ thumbnail } />
+          <p>
+            R$:
+            {' '}
+            {price}
+          </p>
         </div>
+        <br />
         <div>
           <button
             type="button"
@@ -57,21 +72,18 @@ class ProductDetails extends React.Component {
             Adicionar ao carrinho
           </button>
         </div>
-        <Link to="/cart">
-          <button
-            data-testid="shopping-cart-button"
-            type="button"
-            onClick={ this.handleClick }
-          >
-            <img src={ imgCart } alt="shopping-cart-button" width="25" />
-          </button>
-        </Link>
+        <br />
         <div>
           <form className="review-form">
             <label htmlFor="review-stars">
-              Dê uma avaliação entre 1 e 5 estrelas
-              <input id="review-stars" type="number" min="1" max="5" />
+              <p>
+                {' '}
+                Dê uma avaliação entre 1 e 5 estrelas
+                {' '}
+                <input id="review-stars" type="number" min="1" max="5" />
+              </p>
             </label>
+            <br />
             <label htmlFor="written-review">
               <textarea
                 id="written-review"
@@ -81,6 +93,8 @@ class ProductDetails extends React.Component {
                 onChange={ this.handleReviewChange }
               />
             </label>
+            <br />
+            <br />
             <button type="submit">
               Enviar avaliação
             </button>

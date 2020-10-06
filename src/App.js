@@ -34,6 +34,9 @@ class App extends React.Component {
     const { cartItems, addedItems } = this.state;
     return (
       <BrowserRouter>
+        <header className="title">
+          <h1>Frontend Online Store</h1>
+        </header>
         <Switch>
           <Route
             exact

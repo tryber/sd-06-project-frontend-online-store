@@ -5,6 +5,7 @@ import ProductList from './ProductList';
 import * as api from '../services/api';
 import imgCart from '../img/imgCart.jpg';
 import CategoryList from './CategoryList';
+import './Home.css';
 
 class Home extends React.Component {
   constructor(props) {
@@ -40,7 +41,21 @@ class Home extends React.Component {
     const { addToCart } = this.props;
     return (
       <div>
+        <Link to="/cart">
+          <button
+            className="shoppingCartButton"
+            data-testid="shopping-cart-button"
+            type="button"
+            onClick={ this.handleClick }
+          >
+            <img src={ imgCart } alt="shopping-cart-button" width="50" />
+          </button>
+        </Link>
+        <p className="homeMessage" data-testid="home-initial-message">
+          Digite algum termo de pesquisa ou escolha uma categoria.
+        </p>
         <input
+          className="inputQuery"
           name="inputQuery"
           onChange={ this.handleChange }
           data-testid="query-input"
@@ -53,24 +68,12 @@ class Home extends React.Component {
         >
           BUSCAR
         </button>
-        <p data-testid="home-initial-message">
-          Digite algum termo de pesquisa ou escolha uma categoria.
-        </p>
         <CategoryList handleCategory={ this.handleCategory } />
         <ProductList
           products={ ProductArray }
           addFromList={ addToCart }
           query={ inputQuery }
         />
-        <Link to="/cart">
-          <button
-            data-testid="shopping-cart-button"
-            type="button"
-            onClick={ this.handleClick }
-          >
-            <img src={ imgCart } alt="shopping-cart-button" width="25" />
-          </button>
-        </Link>
       </div>
     );
   }

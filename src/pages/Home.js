@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import addCart from '../addCart.svg';
 import './style/home.css';
 import * as api from '../services/api';
@@ -7,7 +8,6 @@ import SearchedItems from '../components/SearchedItems';
 import SearchButton from '../components/SearchButton';
 import SearchInput from '../components/SearchInput';
 import CategoriesSideBar from '../components/CategoriesSideBar';
-import PropTypes from 'prop-types';
 
 class Home extends Component {
   constructor() {
@@ -69,7 +69,7 @@ class Home extends Component {
   }
 
   render() {
-    const { searchedItems, spanMessage, searchInput, } = this.state;
+    const { searchedItems, spanMessage, searchInput, } = this.state
 
     const { addToCart } = this.props;
 
@@ -108,7 +108,7 @@ class Home extends Component {
   }
 }
 Home.propTypes = {
-  addToCart: PropTypes.func
-}
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Home;

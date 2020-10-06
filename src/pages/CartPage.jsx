@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
 import { cart } from '../dados/cart_arrayProductList';
 
 class CartPage extends Component {
@@ -12,26 +13,20 @@ class CartPage extends Component {
   handleClayton({ target }) {
     const id = target.name;
     const value = target.value === '+' ? 1 : -1;
+    const product = cart.find((product) => product.id === id);
 
-    if (!this.state[id]) {
-      this.setState({ [id]: 1 + value });
-      this.catQuantity(value, id);
-    } else if (this.state[id] !== 1) {
-      this.setState((stateAntigo) => ({ [id]: stateAntigo[id] + value }));
-      this.catQuantity(value, id);
-    }
-  }
-
-  catQuantity(value, id) {
-    if (value === -1) {
-      if (cart.find((product) => product.id === id).quantity > 1) {
+    if (product.quantity < product.available_quantity) {
+      if (value === -1) {
+        if (cart.find((product) => product.id === id).quantity > 1) {
+          cart.find((product) => product.id === id).quantity += value;
+          this.setState(() => ({ [id]: cart.find((product) => product.id === id).quantity }));
+        }
+      } else {
         cart.find((product) => product.id === id).quantity += value;
+        this.setState(() => ({ [id]: cart.find((product) => product.id === id).quantity }));
       }
-    } else {
-      cart.find((product) => product.id === id).quantity += value;
     }
   }
-
   render() {
     return (
       <div>
@@ -54,7 +49,9 @@ class CartPage extends Component {
                       data-testid="product-decrease-quantity"
                       onClick={this.handleClayton}
                     > - </button>
-                    <p data-testid="shopping-cart-product-quantity">{this.state[id] ? this.state[id] : 1}</p>
+                    <p data-testid="shopping-cart-product-quantity">
+                      {this.state[id] ? this.state[id] : cart.find((product) => product.id === id).quantity}
+                    </p>
                     <button
                       value="+"
                       name={id}

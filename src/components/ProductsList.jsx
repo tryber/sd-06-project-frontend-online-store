@@ -12,6 +12,7 @@ class ProductsList extends Component {
   handleAddCart({ target }) {
     const product = this.props.cards.find(element => element.id === target.id);
     cart.push({...product, quantity: 1});
+    this.props.counterQuantity();
   }
 
   render() {
@@ -26,7 +27,7 @@ class ProductsList extends Component {
     return (
       <section>
         {cards.map((product) => {
-          const { title, thumbnail, price, id } = product;
+          const { title, thumbnail, price, id, shipping } = product;
 
           return (
             <div key={id} data-testid="product">
@@ -35,6 +36,11 @@ class ProductsList extends Component {
                   <p>{title}</p>
                   <img src={thumbnail} alt="" />
                   <p>{`R$${price}`}</p>
+                  {
+                    (shipping.free_shipping)
+                    ? <span data-testid="free-shipping">Frete Grátis</span>
+                    : ''
+                  }
                 </section>
               </Link>
               <button
@@ -44,7 +50,7 @@ class ProductsList extends Component {
               >Adicionar ao cart</button>
             </div>
           );
-        })};
+        })}
       </section>
     );
   }

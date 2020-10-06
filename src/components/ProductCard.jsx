@@ -79,7 +79,6 @@ export default class ProductCard extends Component {
 
   render() {
     const { details } = this.state;
-    const { title, price, thumbnail, quantity } = this.props.product;
     
     return (
       details

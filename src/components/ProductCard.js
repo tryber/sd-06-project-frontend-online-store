@@ -42,7 +42,7 @@ class ProductCard extends React.Component {
 
 ProductCard.propTypes = {
   onClick: PropTypes.func.isRequired,
-  value: PropTypes.array.isRequired,
+  value: PropTypes.objectOf(PropTypes.arrayOf).isRequired,
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,

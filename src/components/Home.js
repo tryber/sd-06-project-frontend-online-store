@@ -5,7 +5,6 @@ import ProductList from './ProductList';
 import * as api from '../services/api';
 import imgCart from '../img/imgCart.jpg';
 import CategoryList from './CategoryList';
-import './Home.css';
 
 class Home extends React.Component {
   constructor(props) {

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import imgCart from '../img/imgCart.jpg';
-import './ShoppingCart.css';
 
 class ShoppingCart extends React.Component {
   constructor(props) {

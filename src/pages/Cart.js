@@ -22,6 +22,7 @@ class Cart extends React.Component {
 
   renderCart() {
     const cart = JSON.parse(localStorage.getItem('cart'));
+    console.log(cart);
     if (!cart) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
     }
@@ -29,12 +30,9 @@ class Cart extends React.Component {
       <div>
         {cart.map((item) => (
           <div key={ item.id }>
-            <CartItem item={item} />
+            <CartItem item={ item } />
           </div>
         ))}
-        <p data-testid="shopping-cart-product-quantity">
-          {`Quantidade: ${cart.length}`}
-        </p>
       </div>
     );
   }

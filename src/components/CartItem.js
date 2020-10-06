@@ -1,29 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class CartItem extends React.Component {
   constructor() {
     super();
-    
     this.quantityHandler = this.quantityHandler.bind(this);
 
     this.state = {
       quantity: 1,
       totalValue: undefined,
-    }
+      minQuantity: 0,
+    };
   }
 
   quantityHandler({ target }) {
     const { name } = target;
-    const { quantity } = this.state;
-    if (name === "decreate") {
-      if (quantity > 0) {
+    const { quantity, minQuantity } = this.state;
+    if (name === 'decrease') {
+      if (quantity > minQuantity) {
         this.setState((previousState) => ({
           quantity: previousState.quantity - 1,
         }));
       }
     }
 
-    if (name  === "increase") {
+    if (name === 'increase') {
       this.setState((previousState) => ({
         quantity: previousState.quantity + 1,
       }));
@@ -39,17 +40,23 @@ class CartItem extends React.Component {
         <img src={ item.thumbnail } alt="produto" />
         <p>{`Preço: R$ ${item.price}`}</p>
         <button
-          data-testid="product-decreate-quantity"
-          name="decreate"
-          onClick={this.quantityHandler}
+          type="button"
+          data-testid="product-decrease-quantity"
+          name="decrease"
+          onClick={ this.quantityHandler }
         >
           -
         </button>
-        <span>{`${quantity}`}</span>
+        <span
+          data-testid="shopping-cart-product-quantity"
+        >
+          {`${quantity}`}
+        </span>
         <button
+          type="button"
           data-testid="product-increase-quantity"
           name="increase"
-          onClick={this.quantityHandler}
+          onClick={ this.quantityHandler }
         >
           +
         </button>
@@ -58,5 +65,13 @@ class CartItem extends React.Component {
     );
   }
 }
+
+CartItem.propTypes = {
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+};
 
 export default CartItem;

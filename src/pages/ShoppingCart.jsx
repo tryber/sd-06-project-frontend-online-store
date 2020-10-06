@@ -74,7 +74,6 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    // const quantity = this.state.productList;
     if (!localStorage.getItem('cart')) {
       return (
         <Fragment>

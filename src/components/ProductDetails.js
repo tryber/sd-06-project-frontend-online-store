@@ -32,6 +32,7 @@ class ProductDetails extends React.Component {
   render() {
     const { product } = this.state;
     const { title, price, thumbnail } = product;
+
     return (
       <div>
         <Header />
@@ -41,32 +42,30 @@ class ProductDetails extends React.Component {
             <div>
               <h1 data-testid="product-detail-name">{title}</h1>
               <p>{`R$${price}`}</p>
+              <button
+                data-testid="product-detail-add-to-cart"
+                onClick={ () => { ShoppingCart.addProduct(product); } }
+                type="button"
+              >
+                ADICIONAR AO CARRINHO
+              </button>
             </div>
           </div>
+          <hr />
           <div className="rate-form">
-            <hr />
             <h2>Avaliações</h2>
-            <form>
-              <Rater total={ 5 } rating={ 0 } />
-              <br />
+            <form className="rate-message-form">
               <textarea
                 data-testid="product-detail-evaluation"
                 type="text"
-                placeholder="Mensagem (opcional)"
+                placeholder=" Mensagem (opcional)"
+                className="text-area-form"
               />
-              <br />
+              <Rater total={ 5 } rating={ 0 } />
               <button type="button">Avaliar</button>
             </form>
           </div>
-          <button
-            data-testid="product-detail-add-to-cart"
-            onClick={ () => {
-              ShoppingCart.addProduct(product);
-            } }
-            type="button"
-          >
-            ADICIONAR AO CARRINHO
-          </button>
+          <hr />
         </div>
       </div>
     );

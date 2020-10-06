@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Checkout.css';
+import Header from './Header';
 
 class Checkout extends React.Component {
   constructor() {
@@ -41,7 +42,7 @@ class Checkout extends React.Component {
 
     return (
       <div>
-        <Link to="/shopping-cart">Voltar</Link>
+        <Header />
         <div className="checkout-review">
           <section>
             Revise seus produtos
@@ -170,6 +171,7 @@ class Checkout extends React.Component {
             Elo
           </section>
         </div>
+        <Link to="/shopping-cart"><button type="button">Voltar</button></Link>
         <button type="button">Comprar</button>
       </div>
     );

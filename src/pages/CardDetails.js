@@ -58,7 +58,7 @@ class CardDetails extends React.Component {
           </div>
         </div>
 
-        {/* <ProductReviewForm /> */}
+        <ProductReviewForm />
 
       </main>
     );

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as addItem from '../components/addItem';
 
 
 class ProductDetails extends React.Component {

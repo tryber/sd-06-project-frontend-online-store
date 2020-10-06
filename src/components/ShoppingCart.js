@@ -38,6 +38,8 @@ ShoppingCart.propTypes = {
       title: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
+      length: PropTypes.number.isRequired,
+      map: PropTypes.func.isRequired,
     }).isRequired,
   }).isRequired,
 };

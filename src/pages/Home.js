@@ -48,7 +48,7 @@ class Home extends React.Component {
     this.setState({ filter: target.id });
     this.handleFilter();
   }
-  
+
   addItem(product) {
     const { shopCart } = this.state;
     this.setState({ shopCart: [...shopCart, product] });

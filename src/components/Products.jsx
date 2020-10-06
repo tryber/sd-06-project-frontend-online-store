@@ -13,11 +13,11 @@ class Products extends React.Component {
             : (data.results.length === 0)
               ? 'Nenhum produto encontrado.'
               : data.results.map((product) => <Product
-                saveDetails={saveDetails}
-                handleCartItems={handleCartItems}
+                saveDetails={ saveDetails }
+                handleCartItems={ handleCartItems }
                 bt="home"
-                key={product.id}
-                data={product}
+                key={ product.id }
+                data={ product }
               />)}
         </div>
       </main>

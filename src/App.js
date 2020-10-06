@@ -121,6 +121,7 @@ class App extends React.Component {
           <Route
             path="/cart"
             component={ () => (<Cart
+              saveDetails={ this.saveDetails }
               removeItem={ this.removeItem }
               handleCartItems={ this.handleCartItems }
               cart={ cart }

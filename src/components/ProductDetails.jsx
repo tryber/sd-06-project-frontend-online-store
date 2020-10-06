@@ -10,6 +10,7 @@ class ProductDetails extends React.Component {
   }
 
   dataOK(data) {
+    console.log(data);
     const { handleCartItems } = this.props;
     return (
       <div className="product-details">

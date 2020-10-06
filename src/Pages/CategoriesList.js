@@ -34,9 +34,9 @@ export default class CategoriesList extends Component {
     return (
       <ul>
         {list.map((eachCat) => (
-          <li key={ eachCat.id }>
+          <p key={ eachCat.id }>
             <Category id={ eachCat.id } category={ eachCat.name } onClick={ onClick } />
-          </li>
+          </p>
         ))}
       </ul>
     );

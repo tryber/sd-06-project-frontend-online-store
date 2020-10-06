@@ -72,19 +72,40 @@ class ProductList extends Component {
     const { products, valueInput } = this.state;
     return (
       <div>
-        <Input onChange={ this.handleInput } />
-        <Button
-          testId="query-button"
-          nameButton="Buscar"
-          onClick={ () => this.onClickButton(valueInput) }
-        />
-        { products.map((prod) => (<Product
-          product={ prod }
-          key={ prod.id }
-          search={ products }
-          onClick={ () => this.onClickCart(prod) }
-        />)) }
-        <CategoriesList onClick={ (event) => this.onClickCategory(event.target.name) } />
+        <div className="product-list-container">
+          <div className="product-list-input">
+            <Input
+              onChange={ this.handleInput }
+              placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
+            />
+          </div>
+          <div className="product-list-button">
+            <Button
+              testId="query-button"
+              nameButton="Buscar"
+              onClick={ () => this.onClickButton(valueInput) }
+            />
+          </div>
+        </div>
+        <section className="product-list-section">
+          <section className="product-list-categories">
+            <h4>Categorias</h4>
+            <CategoriesList
+              onClick={ (event) => this.onClickCategory(event.target.name) }
+            />
+          </section>
+          <section className="product-list-all-products">
+            { products.map((prod) => (
+              <div key={ prod.id }>
+                <Product
+                  product={ prod }
+                  search={ products }
+                  onClick={ () => this.onClickCart(prod) }
+                />
+              </div>
+            ))}
+          </section>
+        </section>
       </div>
     );
   }

@@ -3,13 +3,14 @@ import propTypes from 'prop-types';
 
 export default class Input extends Component {
   render() {
-    const { onChange } = this.props;
+    const { onChange, placeholder } = this.props;
     return (
       <input
         id="query-input"
         data-testid="query-input"
         type="text"
         onChange={ onChange }
+        placeholder={ placeholder }
       />
     );
   }

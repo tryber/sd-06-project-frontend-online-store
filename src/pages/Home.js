@@ -4,6 +4,7 @@ import ListCategory from '../components/ListCategory';
 import ProductList from '../components/ProductList';
 
 import SearchEngine from '../components/SearchEngine';
+import ShoppingCartButton from '../components/ShoppingCartButton';
 
 import '../styles/Home.css';
 
@@ -17,12 +18,15 @@ class Home extends Component {
       foundItems: false,
       queryInput: '',
       categoryInput: '',
-      products: {},
+      products: [],
+      cartProductList: [],
+      cartProductItens: 0,
     };
 
     this.handleClickButton = this.handleClickButton.bind(this);
     this.handleClickCategories = this.handleClickCategories.bind(this);
     this.handleChangeInput = this.handleChangeInput.bind(this);
+    this.updateCartListAndItens = this.updateCartListAndItens.bind(this);
   }
 
   handleChangeInput(query) {
@@ -38,7 +42,7 @@ class Home extends Component {
       );
 
       this.setState({
-        products: productsFound,
+        products: productsFound.results,
       });
     });
   }
@@ -57,18 +61,29 @@ class Home extends Component {
       if (Object.keys(productsFound).length < 1) {
         this.setState({
           foundItems: false,
-          products: {},
+          products: [],
         });
       } else {
         this.setState({
-          products: productsFound,
+          products: productsFound.results,
         });
       }
     });
   }
 
+  updateCartListAndItens(newProduct) {
+    const { cartProductList, cartProductItens } = this.state;
+    this.setState({
+      cartProductList: [...cartProductList, newProduct],
+      cartProductItens: cartProductItens + 1,
+    });
+  }
+
   render() {
-    const { queryInput, foundItems, products, categoryInput } = this.state;
+    const {
+      queryInput,
+      foundItems,
+      products, categoryInput, cartProductItens, cartProductList } = this.state;
     return (
       <div className="home-page">
         <ListCategory onClick={ this.handleClickCategories } />
@@ -77,12 +92,17 @@ class Home extends Component {
             sendQueryInputToHome={ this.handleChangeInput }
             onClick={ this.handleClickButton }
           />
+          <ShoppingCartButton
+            cartProductItens={ cartProductItens }
+            cartProductList={ cartProductList }
+          />
           <div className="product-list-container">
             <ProductList
               queryInput={ queryInput }
               foundItems={ foundItems }
               products={ products }
               categoryInput={ categoryInput }
+              updateCartListAndItens={ this.updateCartListAndItens }
             />
           </div>
         </div>

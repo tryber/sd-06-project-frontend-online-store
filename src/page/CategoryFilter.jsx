@@ -29,11 +29,9 @@ class CategoryFilter extends Component{
     return (
       <div>
         {categories.map(category => 
-        <label key={category.id} htmlFor={category.id}>
-          {category.name}
-          <input id={category.id} name="chosen" type="radio" data-testid="category" />
-          <br />
-        </label>)}
+          <label htmlFor={category.id} key={category.id}>{category.name}
+            <input type="radio" id={category.id} data-testid="category" name="category" value={category.id} onClick={() => this.props.category(category.id)} />
+          </label>)}
       </div>
     )
   }

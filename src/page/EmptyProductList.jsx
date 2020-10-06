@@ -6,17 +6,25 @@ import { Link } from 'react-router-dom';
 import CategoryFilter from './CategoryFilter';
 
 class EmptyProductList extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.getCategory = this.getCategory.bind(this);
 
     this.state = {
       product: undefined,
-      query: undefined,
-      categoryID: "MLB1000",
+      query: '',
+      categoryID: "",
     }
+  }
+
+  async getCategory(category) {
+    await this.setState({
+      categoryID: category,
+    })
+    this.handleClick();
   }
 
   handleChange({ target }) {
@@ -31,8 +39,7 @@ class EmptyProductList extends React.Component {
     const fetch = await api.getProductsFromCategoryAndQuery(categoryID, query);
     this.setState({
       product: fetch.results,
-    });
-    console.log(fetch.results);
+    })
   }
 
   render() {
@@ -43,7 +50,7 @@ class EmptyProductList extends React.Component {
         <button data-testid="query-button" onClick={this.handleClick}>Pesquisar</button>
         <button><Link data-testid="shopping-cart-button" to="/shopping-cart">Seu carrinho está vazio</Link></button>
         {product ? <ProductList list={product} /> : <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>}
-        <CategoryFilter />
+        <CategoryFilter category={this.getCategory} />
       </div>
     );
   }

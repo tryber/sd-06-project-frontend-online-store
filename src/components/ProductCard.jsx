@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class ProductCard extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
+      details: false,
       productId: props.product.id,
       title: props.product.title,
       price: props.product.price,
       thumbnail: props.product.thumbnail,
       quantity: 1,
-    };
+    }
 
+    this.openDetails = this.openDetails.bind(this);
+    this.plainProduct = this.plainProduct.bind(this);
+    this.detailedProduct = this.detailedProduct.bind(this);
     this.addToCart = this.addToCart.bind(this);
   }
-
+  
   addToCart() {
     const obj = {
       title: this.state.title,
@@ -35,16 +40,23 @@ export default class ProductCard extends Component {
       localStorage.setItem('cart', JSON.stringify(save));
     }
   }
-  
-  render() {
-    const { title, price, thumbnail, quantity } = this.props.product;
 
+  detailedProduct() {
+    const { title, price, thumbnail, attributes, id } = this.props.product;
+    const { quantity } = this.state;
+    
     return (
-      <article data-testid="product">
+      <div data-testid="product">
         <div data-testid="shopping-cart-product-name">{title}</div>
         <div>{price}</div>
+        <img src={thumbnail} alt={title} />
         <div data-testid="shopping-cart-product-quantity">{quantity}</div>
-        <img src={thumbnail} alt={title}/>
+        <Link to={`/productDetails/${id}`} data-testid="product-detail-link">DETALHES</Link>
+        {
+          attributes.map(({ name, value_name, id }) => {
+            return (<p key={id}>{`${name}: ${value_name}`}</p>);
+          })
+        }
         <button
           type="submit"
           data-testid="product-add-to-cart"
@@ -52,7 +64,34 @@ export default class ProductCard extends Component {
         >
           Adicionar ao Carrinho
         </button>
-      </article>
-    );
+      </div >
+    )
+  }
+
+  openDetails() {
+    this.setState({ details: true });
+  }
+
+  plainProduct() {
+    const { title, price, thumbnail, id, } = this.props.product;
+    return (
+      <div data-testid="product" onClick={this.openDetails}>
+        <div>{title}</div>
+        <div>{price}</div>
+        <img src={thumbnail} alt={title} />
+        <Link to={`/productDetails/${id}`} data-testid="product-detail-link" >DETALHES</Link>
+      </div>
+    )
+  }
+
+  render() {
+    const { details } = this.state;
+    const { title, price, thumbnail, quantity } = this.props.product;
+    
+    return (
+      details
+        ? <this.detailedProduct />
+        : <this.plainProduct />
+    )
   }
 }

@@ -8,7 +8,6 @@ class CategoryList extends React.Component {
 
     return (
       <section className="category-wrapper">
-        <button type="button" onClick={ handleReset }>Limpar seleção</button>
         <section className="category-list">
           {(categories.length > empty)
             ? categories
@@ -26,6 +25,7 @@ class CategoryList extends React.Component {
               ))
             : <span>Loading...</span>}
         </section>
+        <button type="button" onClick={ handleReset }>Limpar seleção</button>
       </section>
     );
   }

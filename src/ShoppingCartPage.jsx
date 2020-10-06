@@ -16,19 +16,31 @@ class ShoppingCartPage extends React.Component {
 
   componentDidMount() {
     if (localStorage.Cart) {
+      const two = 2;
       const cartItems = JSON.parse(localStorage.Cart).map((item) => item.cartProducts[0]);
       const quantity = JSON.parse(localStorage.Cart).map((item) => item.quantityCartProducts);
       const prices = cartItems.map((item, index) => item.price * quantity[index]);
-      const totalPrices = prices.reduce((acc, curr) => acc + curr);
-      console.log(prices);
+      let totalPrices = prices.reduce((acc, curr) => acc + curr);
+      totalPrices = Number(totalPrices.toFixed(two));
       this.setState({ cartItems: [...cartItems], emptyCart: false, quantity, totalPrices });
     }
   }
 
   removeProduct(index) {
-    const { cartItems } = this.state;
+    const { cartItems, totalPrices } = this.state;
+    let total = totalPrices;
     cartItems.splice(index, 1);
-    this.setState({ cartItems });
+    const zero = 0;
+    if (cartItems.length === zero) {
+      total = zero;
+    }
+    const updateStorage = JSON.parse(localStorage.Cart);
+    updateStorage.splice(index, 1);
+    localStorage.Cart = JSON.stringify(updateStorage);
+    this.setState({
+      cartItems,
+      totalPrices: total });
+    localStorage.clear();
   }
 
   addProduct(index, price) {
@@ -36,6 +48,9 @@ class ShoppingCartPage extends React.Component {
     const two = 2;
     const value = quantity[index] + 1;
     quantity[index] = value;
+    const updateStorage = JSON.parse(localStorage.Cart);
+    updateStorage[index].quantityCartProducts = value;
+    localStorage.Cart = JSON.stringify(updateStorage);
     this.setState({
       quantity,
       totalPrices: Number((totalPrices + price).toFixed(two)),
@@ -50,6 +65,9 @@ class ShoppingCartPage extends React.Component {
     } else {
       const value = quantity[index] - 1;
       quantity[index] = value;
+      const updateStorage = JSON.parse(localStorage.Cart);
+      updateStorage[index].quantityCartProducts = value;
+      localStorage.Cart = JSON.stringify(updateStorage);
       this.setState({
         quantity,
         totalPrices: Number((totalPrices - price).toFixed(two)),
@@ -82,11 +100,8 @@ class ShoppingCartPage extends React.Component {
             </div>
           )) }
         <span>
-          `
-          Valor Total:
-          $
+          Valor Total: R$
           {totalPrices}
-          `
         </span>
         <button type="button"> Finalizar Compra </button>
       </div>

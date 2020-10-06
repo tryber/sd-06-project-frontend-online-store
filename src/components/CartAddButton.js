@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
 class CartAddButton extends React.Component {
@@ -20,11 +21,16 @@ class CartAddButton extends React.Component {
           onClick={ this.handleButtonClick }
           type="button"
         >
-          Adicionar Botão
+          Adicionar ao Carrinho
         </button>
       </div>
     );
   }
 }
+
+CartAddButton.propTypes = {
+  addTocart: PropTypes.func,
+  productName: PropTypes.string,
+};
 
 export default CartAddButton;

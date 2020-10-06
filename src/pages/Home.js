@@ -7,6 +7,7 @@ import SearchedItems from '../components/SearchedItems';
 import SearchButton from '../components/SearchButton';
 import SearchInput from '../components/SearchInput';
 import CategoriesSideBar from '../components/CategoriesSideBar';
+import PropTypes from 'prop-types';
 
 class Home extends Component {
   constructor() {
@@ -68,7 +69,7 @@ class Home extends Component {
   }
 
   render() {
-    const { searchedItems, spanMessage, searchInput, productsAddToCart } = this.state;
+    const { searchedItems, spanMessage, searchInput, } = this.state;
 
     const { addToCart } = this.props;
 
@@ -105,6 +106,9 @@ class Home extends Component {
       </div>
     );
   }
+}
+Home.propTypes = {
+  addToCart: PropTypes.func
 }
 
 export default Home;

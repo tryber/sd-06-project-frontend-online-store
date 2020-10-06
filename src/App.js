@@ -35,9 +35,19 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={ (props) => <Home { ...props } addToCart={ this.addTocart } /> } />
-          <Route path="/card/:id" component={ CardDetails } />
-          <Route exact path="/cart" render={ (props) => <Cart { ...props } productsAddToCart={ productsAddToCart } /> } />
+          <Route
+            exact path="/" 
+            render={ (props) => <Home { ...props } 
+            addToCart={ this.addTocart } /> } 
+          />
+          <Route 
+            path="/card/:id" component={ CardDetails } 
+          />
+          <Route 
+            exact path="/cart" 
+            render={ (props) => <Cart { ...props } 
+            productsAddToCart={ productsAddToCart } /> } 
+          />
           <Route component={ NotFound } />
         </Switch>
       </Router>

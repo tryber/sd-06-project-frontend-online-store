@@ -70,6 +70,9 @@ CardDetails.propTypes = {
     state: PropTypes.shape({
       data: PropTypes.string.isRequired,
     }).isRequired,
+    test: PropTypes.shape({
+      addtoCart: PropTypes.func.isRequired,
+    })
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({

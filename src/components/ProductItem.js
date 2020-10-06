@@ -16,11 +16,14 @@ class ProductItem extends React.Component {
 
   render() {
     const { product } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, shipping } = product;
+    const { free_shipping: freeShipping } = shipping;
     return (
       <div className="product" data-testid="product">
         <p>{title}</p>
         <img alt="Product" src={ thumbnail } />
+        {freeShipping ? <p data-testid="free-shipping">Frete Grátis!</p>
+          : false}
         <p>
           R$:
           {' '}
@@ -48,6 +51,7 @@ ProductItem.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
+    shipping: PropTypes.object.isRequired,
   }).isRequired,
   handleClick: PropTypes.func.isRequired,
 };

@@ -21,7 +21,7 @@ class Card extends React.Component {
             alt="fotografia do produto"
           />
         </Link>
-        <span>{ price }</span>
+        <span>R$ { price }</span>
         <AddToCartButton product={ product } />
       </div>
     );

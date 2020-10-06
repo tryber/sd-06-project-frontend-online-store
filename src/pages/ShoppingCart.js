@@ -5,7 +5,9 @@ import Cart from '../services/cart';
 class ShoppingCart extends React.Component {
   constructor() {
     super();
-    this.state = { checkout: false };
+    this.state = { 
+      checkout: false,
+    };
   }
 
   getTotalValue() {
@@ -64,7 +66,6 @@ class ShoppingCart extends React.Component {
       </div>
     );
   }
-
 
   render() {
     const { checkout } = this.state;

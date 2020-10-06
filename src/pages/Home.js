@@ -8,7 +8,6 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        Home
         <SearchBar />
         <Link to="/carrinho">
           <CartButton />

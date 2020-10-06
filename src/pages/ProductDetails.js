@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import ShoppingCartButton from '../components/ShoppingCartButton';
 
 import './styles/ProductDetails.css';
+import AddToCartButton from '../components/AddToCartButton';
 
 class ProductDetails extends Component {
   render() {
@@ -17,6 +18,13 @@ class ProductDetails extends Component {
         params: { productId },
       },
     } = this.props;
+
+    const product = {
+      id: productId,
+      title,
+      price,
+    };
+    const details = true;
     return (
       <div>
         <div className="product-detail-header">
@@ -29,17 +37,7 @@ class ProductDetails extends Component {
           <span>{`R$ ${price}`}</span>
           <p>{}</p>
         </div>
-        <div className="action">
-          <Link
-            to={ {
-              pathname: '/shopping-cart',
-              productId,
-            } }
-            data-testid="product-detail-add-to-cart"
-          >
-            Adicionar ao carrinho
-          </Link>
-        </div>
+        <AddToCartButton product={ product } details={ details } />
       </div>
     );
   }

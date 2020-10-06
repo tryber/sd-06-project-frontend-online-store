@@ -1,0 +1,10 @@
+.product-card {
+  background-color: white;
+  width: 300px;
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.product-image {
+  margin: 10px;
+}

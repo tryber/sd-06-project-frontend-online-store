@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ItemCard from './ItemCard';
-import Cart from '../images/shopping-cart.png';
+import Header from './Header';
 import './Home.css';
 
 class Home extends React.Component {
@@ -68,6 +67,7 @@ class Home extends React.Component {
     const { search, products, selectedCategoryArray } = this.state;
     return (
       <div>
+        <Header />
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
@@ -78,6 +78,7 @@ class Home extends React.Component {
             name="search"
             value={ search }
             onChange={ this.handleChanges }
+            className="query-input"
           />
           <button
             data-testid="query-button"
@@ -86,17 +87,14 @@ class Home extends React.Component {
           >
             Pesquisar
           </button>
-          <Link data-testid="shopping-cart-button" to="/shopping-cart">
-            <img src={ Cart } alt="shopping cart" className="shopping-cart" />
-          </Link>
-          <div>
+          <p>{this.returnCategories()}</p>
+          <div className="products-list">
             {search === undefined
               ? <p data-testid="home-initial-message">Nenhum produto foi encontrado</p>
               : products.map((item) => <ItemCard key={ item.id } product={ item } />)}
           </div>
         </div>
-        <p>{this.returnCategories()}</p>
-        <div>
+        <div className="products-list">
           {selectedCategoryArray
             .map((product) => <ItemCard key={ product.id } product={ product } />)}
         </div>

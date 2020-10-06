@@ -23,8 +23,8 @@ class Cart extends React.Component {
   }
 
   changeState() {
-    const { location: { state: { data } } } = this.props;
-    if (Object.keys(data).length >= 1) {
+    const { productsAddToCart } = this.props;
+    if (Object.keys(productsAddToCart).length >= 1) {
       this.setState({
         loadMessage: false,
       });
@@ -52,6 +52,7 @@ class Cart extends React.Component {
   }
 
   render() {
+
     const { loadMessage, cartItems } = this.state;
     const treatedData = Object.entries(cartItems);
 
@@ -82,6 +83,8 @@ Cart.propTypes = {
       data: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  productsAddToCart: PropTypes.objectOf(PropTypes.any).isRequired,
+
 };
 
 export default Cart;

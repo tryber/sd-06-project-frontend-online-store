@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import addCart from '../addCart.svg';
 import './style/home.css';
@@ -22,7 +23,6 @@ class Home extends Component {
       spanMessage: 'Digite algum termo de pesquisa ou escolha uma categoria.',
       searchedItems: undefined,
       selectedCategory: '',
-      productsAddToCart: {},
     };
   }
 
@@ -31,15 +31,6 @@ class Home extends Component {
     this.setState({ [name]: value });
   }
 
-  addTocart(productName) {
-    const zero = 0;
-    this.setState((currentState) => ({
-      productsAddToCart: {
-        ...currentState.productsAddToCart,
-        [productName]: (currentState.productsAddToCart[productName] || zero) + 1,
-      },
-    }));
-  }
 
   saveSelectedCategory(id) {
     this.setState({ selectedCategory: id }, () => {
@@ -66,7 +57,9 @@ class Home extends Component {
   }
 
   render() {
-    const { searchedItems, spanMessage, searchInput, productsAddToCart } = this.state;
+    const { searchedItems, spanMessage, searchInput } = this.state;
+
+    const { addToCart } = this.props;
 
     return (
       <div className="home-page">
@@ -82,7 +75,7 @@ class Home extends Component {
             ? <span data-testid="home-initial-message">{ spanMessage }</span>
             : searchedItems.map((item) => (
               <SearchedItems
-                addTocart={ this.addTocart }
+                addTocart={ addToCart }
                 key={ item.id }
                 item={ item }
                 query={ searchInput }
@@ -92,7 +85,7 @@ class Home extends Component {
         <div>
           <Link
             data-testid="shopping-cart-button"
-            to={ { pathname: '/cart', state: { data: productsAddToCart } } }
+            to={ { pathname: '/cart' } }
           >
             <img src={ addCart } alt="button car shopping" />
           </Link>
@@ -101,5 +94,9 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Home;

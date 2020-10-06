@@ -7,8 +7,9 @@ class ProductDetails extends React.Component {
     const { state } = location;
     const { items } = state;
     const { title, price, thumbnail } = items;
+
     return (
-      <div data-testid="shopping-cart-button">
+      <div>
         <h2 data-testid="shopping-cart-product-name">{ title }</h2>
         <p data-testid="product-detail-name">{ title }</p>
         <img src={ thumbnail } alt="item" width="250px" />

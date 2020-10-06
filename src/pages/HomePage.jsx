@@ -21,7 +21,6 @@ class HomePage extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.teste = this.teste.bind(this);
   }
 
   componentDidMount() {
@@ -55,12 +54,7 @@ class HomePage extends React.Component {
   }
 
 
-  teste(items) {
-    console.log(items);
-  }
-
   render() {
-    // if () return <Redirect to="/" />;
     const { products, categories } = this.state;
     return (
       <div>
@@ -76,19 +70,18 @@ class HomePage extends React.Component {
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
         <Link data-testid="shopping-cart-button" to="/cart">
-          <button type="button">CARRINHO</button>
+          <button type="button">CARRINHO DE COMPRAS</button>
         </Link>
         <button type="button" onClick={ this.onClick } data-testid="query-button">
           Buscar
         </button>
-        <div>
+        <div className="product-list">
           {products.map((items) => (<ProductList
             key={ items.id }
             items={ items }
-            teste={ this.teste }
           />))}
         </div>
-        <div>
+        <div className="category-list">
           {categories.map((items) => (<CategoryList
             key={ items.id }
             onClick={ this.handleSelect }

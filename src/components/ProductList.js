@@ -7,7 +7,7 @@ class ProductList extends React.Component {
     const { items } = this.props;
     const { title, price, thumbnail } = items;
     return (
-      <div data-testid="product">
+      <div className="product" data-testid="product">
         <h2>{ title }</h2>
         <img src={ thumbnail } alt="item" width="250px" />
         <p>

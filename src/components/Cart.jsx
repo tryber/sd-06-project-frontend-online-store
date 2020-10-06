@@ -1,6 +1,4 @@
 import React from 'react';
-import Product from './Product';
-
 
 class Cart extends React.Component {
   constructor() {

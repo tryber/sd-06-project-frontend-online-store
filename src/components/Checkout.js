@@ -12,21 +12,29 @@ class Checkout extends React.Component {
 
   render() {
     const { cartItems, addedItems } = this.state;
+    let totalPrice = 0;
     return (
       <section>
         <div className="checkout-product-checking">
           { cartItems.map((item) => {
             const { id, title, thumbnail, price } = item;
             const quantity = addedItems[`${id}`];
+            totalPrice += quantity * price;
 
             return (
               <div key={ id } className="checkout-product">
-                <img className="checkout-product-image" alt="Product in checkout page" src={ thumbnail } />
-                <h3 className="checkout-product-title">{ `${title} x${quantity}` }</h3>
+                <img
+                  className="checkout-product-image"
+                  alt="Product in checkout page"
+                  src={ thumbnail }
+                />
+                <h3 className="checkout-product-title">{ title }</h3>
+                <p>{ `x${quantity}` }</p>
                 <span>{ price }</span>
               </div>
             );
           }) }
+          <span className="checkout-total-price">{ `Total: R$ ${totalPrice}` }</span>
         </div>
         <div>
           <form className="checkout-form">

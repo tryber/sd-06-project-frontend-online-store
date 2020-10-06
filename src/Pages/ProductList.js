@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import propTypes from 'prop-types';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import Product from '../Components/Product';
 import CategoriesList from './CategoriesList';

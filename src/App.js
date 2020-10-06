@@ -3,6 +3,13 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import EmptyProductList from './page/EmptyProductList';
 import ShoppingCart from './page/ShoppingCart';
 
+// render={ (props) => (<ShoppingCart
+//   { ...props }
+//   addToCart={ this.handleAddProduct }
+//   cartProducts={ cartProducts }
+//   cartQuantity={ cartQuantity }
+// />) }
+
 class App extends React.Component {
   render() {
     return (

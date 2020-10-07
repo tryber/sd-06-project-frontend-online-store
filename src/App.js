@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import ProductDetails from './components/ProductDetails';
 import HomePage from './pages/HomePage';
 import ShoppingCart from './pages/ShoppingCart';
-import ProductList from './components/ProductList';
 
 class App extends React.Component {
   constructor() {
@@ -21,6 +20,13 @@ class App extends React.Component {
       cartCount: (Number(prevState.cartCount) + 1).toString(),
     }));
   }
+
+  // removeCart(productName, productId) {
+  //   this.setState((prevState) => ({
+  //     cartItem: prevState.cartItem.remove({ name: productName, id: productId }),
+  //     cartCount: (Number(prevState.cartCount) - 1).toString(),
+  //   }));
+  // }
 
   render() {
     const { cartCount, cartItem } = this.state;
@@ -40,16 +46,6 @@ class App extends React.Component {
           exact
           path="/cart"
           render={ (props) => (<ShoppingCart
-            { ...props }
-            cartItem={ cartItem }
-            cartCount={ cartCount }
-            addCart={ this.addCart }
-          />) }
-        />
-        <Route
-          exact
-          path="/productlist"
-          render={ (props) => (<ProductList
             { ...props }
             cartItem={ cartItem }
             cartCount={ cartCount }

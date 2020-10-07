@@ -7,6 +7,7 @@ import ShoppingCartButton from '../components/ShoppingCartButton';
 
 import './styles/ProductDetails.css';
 import AddToCartButton from '../components/AddToCartButton';
+import EvaluationProduct from '../components/EvaluationProduct';
 
 class ProductDetails extends Component {
   render() {
@@ -48,6 +49,7 @@ class ProductDetails extends Component {
           details={ details }
           updateCartListAndItens={ updateCartListAndItens }
         />
+        <EvaluationProduct />
       </div>
     );
   }

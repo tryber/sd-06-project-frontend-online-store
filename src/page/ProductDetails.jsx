@@ -6,7 +6,8 @@ class ProductDetails extends Component{
   constructor() {
     super();
 
-    this.getProductById = this.getProductById.bind(this)
+    this.getProductById = this.getProductById.bind(this);
+    this.handleAddProduct = this.handleAddProduct.bind(this);
 
     this.state = {
       products: [],
@@ -30,6 +31,14 @@ class ProductDetails extends Component{
     this.productFetch();
   }
 
+  handleAddProduct(newProduct) {
+    const shoppingCart = [];
+    const products = JSON.parse(localStorage.getItem('cartProducts'));
+    if (products) shoppingCart.push(...products, newProduct);
+    else shoppingCart.push(newProduct);
+    localStorage.setItem('cartProducts', JSON.stringify(shoppingCart));
+  }
+
   render() {
     let { products } = this.state;
     if(products === []) {
@@ -37,7 +46,14 @@ class ProductDetails extends Component{
     }
     return(
       <div>
-      <Link to="/shopping-cart"><button>Carrinho</button></Link>
+        <Link to="/shopping-cart"><button data-testid="shopping-cart-button">Carrinho</button></Link>
+        <button
+            type="button"
+            data-testid="product-detail-add-to-cart"
+            onClick={ () => this.handleAddProduct(products) }
+          >
+            Adicionar ao carrinho
+        </button>
         <div>
           <h2 data-testid="product-detail-name">{products.title}</h2>
           <h2>{products.price}</h2>

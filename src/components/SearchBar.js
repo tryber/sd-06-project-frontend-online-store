@@ -1,9 +1,10 @@
 import React from 'react';
+import './searchBar.css';
 
 class SearchBar extends React.Component {
   render() {
     return (
-      <nav>
+      <nav className="search-bar">
         <p data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>

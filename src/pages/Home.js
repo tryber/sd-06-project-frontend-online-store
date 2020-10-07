@@ -9,6 +9,7 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-container">
+        <h1>E-Cornmerce</h1>
         <div className="nav-container">
           <SearchBar />
           <Link to="/carrinho">

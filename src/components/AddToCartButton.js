@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Cart from '../services/cart';
+import './addToCartButton.css';
 
 class AddToCartButton extends React.Component {
   render() {

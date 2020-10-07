@@ -55,7 +55,7 @@ class CategoriesList extends React.Component {
                 id={ category.id }
                 data-testid="category"
               >
-                { category.name }
+                { (category.name).toUpperCase() }
               </button>)) }
         </ul>
       </div>

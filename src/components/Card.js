@@ -11,19 +11,23 @@ class Card extends React.Component {
     const { product: { title, thumbnail, price, id } } = this.props;
     return (
       <div className="product-card" data-testid="product">
-        <h3>{ title }</h3>
-        <Link
-          data-testid="product-detail-link"
-          to={ { pathname: `/${id}`, state: { product } } }
-        >
-          <img
+        <div className="product-data">
+          <h3>{ title }</h3>
+          <Link
             data-testid="product-detail-link"
-            src={ thumbnail }
-            alt="fotografia do produto"
-          />
-        </Link>
-        <span>{`R$ ${price}`}</span>
-        <AddToCartButton product={ product } />
+            to={ { pathname: `/${id}`, state: { product } } }
+          >
+            <img
+              data-testid="product-detail-link"
+              src={ thumbnail }
+              alt="fotografia do produto"
+            />
+          </Link>
+        </div>
+        <div className="button-container">
+          <span>{`R$ ${price}`}</span>
+          <AddToCartButton product={ product } />
+        </div>
       </div>
     );
   }

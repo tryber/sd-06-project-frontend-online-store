@@ -14,19 +14,19 @@ class Form extends React.Component {
   }
 
   newComment({ target }) {
-    const { value } = target;
-    this.setState({ newNote: value });
+    this.setState({ newNote: target.value });
   }
 
   addComment() {
     const { newNote } = this.state;
     this.setState((prevState) => ({
-      notes: prevState.cartItem.concat({ newNote }),
+      notes: prevState.notes.concat(newNote),
     }));
   }
 
   render() {
     const { notes, newNote } = this.state;
+    console.log(notes, newNote);
     return (
       <fieldset>
         <legend>Avaliações:</legend>

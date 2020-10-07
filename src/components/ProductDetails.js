@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 import { Link } from 'react-router-dom';
+import React from 'react';
+import Form from './Form';
 
 class ProductDetails extends React.Component {
   constructor() {
@@ -42,6 +43,7 @@ class ProductDetails extends React.Component {
         <Link to="/cart">
           <button data-testid="shopping-cart-button" type="button">CARRINHO</button>
         </Link>
+        <Form />
       </div>
     );
   }

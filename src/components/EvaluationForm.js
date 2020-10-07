@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ContornoEstrelaComponente from './ContornoEstrela';
 import { saveEvaluation, getEvaluations } from '../services/api';
+import EstrelaPintada from '../images/estrela.png';
+import Contorno from '../images/contorno-estrela.png';
+import './EvaluationForm.css';
 
 class EvaluationForm extends React.Component {
   constructor() {
@@ -9,11 +11,13 @@ class EvaluationForm extends React.Component {
     this.state = {
       email: '',
       texto: '',
+      estrela: 0,
     };
     this.renderText = this.renderText.bind(this);
     this.textChange = this.textChange.bind(this);
     this.clearText = this.clearText.bind(this);
     this.renderClick = this.renderClick.bind(this);
+    this.printStar = this.printStar.bind(this);
   }
 
   componentDidMount() {
@@ -21,7 +25,7 @@ class EvaluationForm extends React.Component {
     const evaluations = getEvaluations(productId);
     if (evaluations != null) {
       evaluations.forEach((evaluation) => {
-        this.renderText(evaluation.email, evaluation.texto);
+        this.renderText(evaluation.email, evaluation.texto, evaluation.estrela);
       });
     }
   }
@@ -40,37 +44,90 @@ class EvaluationForm extends React.Component {
     });
   }
 
-  renderText(email, texto) {
+  printStar(id) {
+    this.setState({ estrela: id });
+    const u = 1;
+    const d = 2;
+    const t = 3;
+    const q = 4;
+    const c = 5;
+    document.getElementById('1').src = ((id >= u) ? EstrelaPintada : Contorno);
+    document.getElementById('2').src = ((id >= d) ? EstrelaPintada : Contorno);
+    document.getElementById('3').src = ((id >= t) ? EstrelaPintada : Contorno);
+    document.getElementById('4').src = ((id >= q) ? EstrelaPintada : Contorno);
+    document.getElementById('5').src = ((id >= c) ? EstrelaPintada : Contorno);
+  }
+
+  renderText(email, texto, estrela) {
     const user = document.createElement('span');
     user.innerText = email;
+    user.className = 'inputAv';
     const textsDiv = document.getElementById('texts-div');
     const comment = document.createElement('p');
+    comment.className = 'inputAv';
     comment.innerText = texto;
 
+    const fim = 5;
+    for (let i = 1; i <= fim; i += 1) {
+      const img = document.createElement('img');
+      img.className = 'inputAv';
+      img.src = (i <= estrela) ? EstrelaPintada : Contorno;
+      textsDiv.appendChild(img);
+    }
+
+    const br = document.createElement('br');
+    textsDiv.appendChild(br);
     textsDiv.appendChild(user);
     textsDiv.appendChild(comment);
+    const hr = document.createElement('hr');
+    textsDiv.appendChild(hr);
   }
 
   renderClick(productId) {
-    const { email, texto } = this.state;
+    const { email, texto, estrela } = this.state;
 
-    this.renderText(email, texto);
+    this.renderText(email, texto, estrela);
 
     const evaluation = {
       email,
       texto,
+      estrela,
     };
     saveEvaluation(productId, evaluation);
+    this.clearText();
+    const zero = 0;
+    this.printStar(zero);
   }
 
   render() {
     const { email, texto } = this.state;
     const { productId } = this.props;
+    const u = 1;
+    const d = 2;
+    const t = 3;
+    const q = 4;
+    const c = 5;
     return (
-      <div id="main-div">
+      <div className="main-div" id="main-div">
         <fieldset>
+          <div className="estrelas">
+            <button type="button" onClick={ () => this.printStar(u) } className="Link">
+              <img id="1" src={ Contorno } alt="img" />
+            </button>
+            <button type="button" onClick={ () => this.printStar(d) } className="Link">
+              <img id="2" src={ Contorno } alt="img" />
+            </button>
+            <button type="button" onClick={ () => this.printStar(t) } className="Link">
+              <img id="3" src={ Contorno } alt="img" />
+            </button>
+            <button type="button" onClick={ () => this.printStar(q) } className="Link">
+              <img id="4" src={ Contorno } alt="img" />
+            </button>
+            <button type="button" onClick={ () => this.printStar(c) } className="Link">
+              <img id="5" src={ Contorno } alt="img" />
+            </button>
+          </div>
           <form>
-            <ContornoEstrelaComponente />
             <br />
             <input
               type="email"
@@ -78,18 +135,22 @@ class EvaluationForm extends React.Component {
               onChange={ this.textChange }
               name="email"
               value={ email }
+              className="input"
             />
             <br />
             <textarea
               data-testid="product-detail-evaluation"
               placeholder="Mensagem(opcional)"
               rows="5"
+              cols="40"
               onChange={ this.textChange }
               name="texto"
               value={ texto }
+              className="input"
             />
             <br />
             <button
+              className="buttonAvaliar"
               onClick={ () => { this.renderClick(productId); } }
               type="button"
             >

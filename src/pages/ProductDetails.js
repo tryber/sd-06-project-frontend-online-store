@@ -11,8 +11,8 @@ class ProductDetails extends Component {
     this.state = {};
   }
 
-  addToCart(iten) {
-    const { title, thumbnail, price, id } = iten;
+  addToCart(item) {
+    const { title, thumbnail, price, id } = item;
     const { addItem } = this.props;
     addItem({ title, thumbnail, price, id, quantity: 1 });
   }

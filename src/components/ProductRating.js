@@ -53,7 +53,6 @@ class ProductRating extends React.Component {
             <Rater
               total={ 5 }
               rating={ 0 }
-              onChange={ this.handleChange }
             />
             <br />
             <br />
@@ -79,7 +78,6 @@ class ProductRating extends React.Component {
           {register.map((comment) => (
             <div key={ comment.email }>
               <p>{ comment.email }</p>
-              <p>{ comment.rating }</p>
               <p>{ comment.message }</p>
             </div>
           ))}

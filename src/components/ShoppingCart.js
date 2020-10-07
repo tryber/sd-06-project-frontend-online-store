@@ -9,8 +9,10 @@ class ShoppingCart extends Component {
 
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
+
     this.state = {
       quantity: 1,
+      produtos: [],
     };
   }
 
@@ -66,6 +68,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    const { shoppingCart } = this.props;
     return (
       <div className="shoppingcart-container">
         {this.renderCart()}
@@ -78,10 +81,9 @@ class ShoppingCart extends Component {
             />
           </Link>
           <div className="add-button-div">
-            <Link to="/Checkout">
+            <Link to={ { pathname: '/Checkout', state: { produtos: shoppingCart } } }>
               <button
                 type="button"
-                onClick={ this.addItemsToCart }
                 className="shoppingcart-submit"
               >
                 Finalizar Compra

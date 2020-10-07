@@ -41,7 +41,7 @@ form:hover {
   border: 3px solid rgb(0, 0, 0);
   padding: 2px 5px 0 2px;
   border-radius: 8px;
-  background: linear-gradient(#9e9e9b, #8f8e8e);
+  background: rgb(204, 201, 201);
 }
 
 .search-button {
@@ -112,7 +112,7 @@ form:hover {
 
 .product-content:hover {
   z-index: 1;
-  transition: 0.5s;
+  transition: 0.2s;
   transform :scale(1.001);
   box-shadow: 0 25px 40px rgba(0,0,0,.5);
   margin: 20px 0px 20px 10px;
@@ -181,9 +181,10 @@ form:hover {
   border: 1px solid rgba(0, 0, 0, 0.325);
   border-radius: 8px;
   display: flex;
-  height: 750px;
+  height: 90%;
   margin: 100px auto;
   width: 55%;
+  padding-top: 40px;
 }
 
 .top-content {
@@ -229,7 +230,6 @@ form:hover {
   Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
   display: flex;
   margin: 0 40px 40px 0;
-
   background-color: #0cce1c;
   border-radius: 8px;
   color: white;
@@ -241,13 +241,40 @@ form:hover {
   height: 45px;
 }
 
+.rating {
+  margin: 30px 0;
+  text-align: center;
+  width: 500px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.250);
+  border-radius: 3px;
+}
+
+.rating textarea{
+  max-width: 450px;
+  max-height: 80px;
+  min-width: 450px;
+  min-height: 80px;
+}
+
+.rater-div{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  height: 50px;
+}
+
 .product-details-buttons {
-  width: 105%;
+  width: 100%;
   height: 15%;
   display: flex;
   align-items: center;
   justify-content: space-around;
-
+  margin-bottom: 40px;
 }
 
 .details-add-button {
@@ -269,7 +296,7 @@ form:hover {
   border: 2px solid black;
   padding: 2px 5px 0 2px;
   border-radius: 8px;
-  background-color: transparent;
+  background-color: rgb(236, 232, 232);
 }
 
 .shoppingcart-container {
@@ -345,14 +372,14 @@ form:hover {
 }
 
 .details-backarrow-div{
-  width: 95%;
+  width: 75%;
   display: flex;
   justify-content: space-between;
-  margin: 20px 0 20px 0; 
+  margin: 30px 0 20px 0; 
 }
 
 .shoppingcart-submit{
-  background: linear-gradient(#3acde7, #089dca);
+  background: linear-gradient(#0ed31e, #16ac23);
   border: 1px solid rgb(80, 79, 79);
   border-radius: 8px;
   color: white;
@@ -366,3 +393,160 @@ form:hover {
   width: 160px;
 }
 
+.checkout-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.425);
+  border-radius: 8px;
+  display: flex;
+  min-height: 750px;
+  margin: 100px auto;
+  width: 80%;
+  padding-top: 30px;
+}
+
+.checkout-top-content {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 3px;
+  width: 90%;
+  padding-bottom: 30px;
+  padding-top: 15px;
+  margin-top: 30px;
+}
+
+.checkout-top-content h3{
+  margin-left: 25px;
+}
+
+.checkout-product-container {
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin: 0 0 10px 15px;
+  width: 90%;
+  height: 70px;
+}
+
+.checkout-product-container img {
+  height: 50px;
+}
+
+.checkout-hr {
+  width: 96%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 0.3px solid rgba(97, 96, 96, 0.125);
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-flow: wrap column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 4px;
+  display: flex;
+  height: 250px;
+  margin: 30px auto;
+  width: 88%;
+  padding-bottom: 35px;
+  padding-left: 30px;
+}
+
+.form-container input{
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.425);
+  padding: 3px;
+  margin: 0 7px;
+  width: 280px;
+  height: 30px;
+}
+
+.form-middle-content input {
+  width: 582px;
+}
+
+.payment-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-flow: wrap column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 4px;
+  display: flex;
+  height: 230px;
+  margin: 0px auto 30px auto;
+  width: 88%;
+  padding-bottom: 35px;
+  padding-left: 30px;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 95%;
+  height: 165px;
+}
+
+.boleto-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 125px;
+  height: 100px;
+  padding-right: 30px;
+}
+
+.card-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 550px;
+  height: 100px;
+}
+
+.creditcard {
+  margin-left: 30px;
+}
+
+input[type=radio] {
+  border: 0px;
+  width: 20px;
+  height: 20px;
+}
+
+.checkout-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.checkout-button {
+  background: linear-gradient(#0ed31e, #16ac23);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font: 600 16.5px Arial , Helvetica , sans-serif;
+  line-height: 23.94px;
+  padding: 8px 2px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 160px;
+}

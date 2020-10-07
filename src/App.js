@@ -51,7 +51,7 @@ class App extends React.Component {
             exact
             path="/Checkout"
             render={
-              (props) => <Checkout addItemCart={ this.addItemCart } { ...props } />
+              (props) => <Checkout { ...props } />
             }
           />
         </Switch>

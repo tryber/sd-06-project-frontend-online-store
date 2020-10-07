@@ -26,7 +26,6 @@ class Form extends React.Component {
 
   render() {
     const { notes, newNote } = this.state;
-    console.log(notes, newNote);
     return (
       <fieldset>
         <legend>Avaliações:</legend>

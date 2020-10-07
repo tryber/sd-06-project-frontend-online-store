@@ -46,16 +46,16 @@ class EvaluationForm extends React.Component {
 
   printStar(id) {
     this.setState({ estrela: id });
-    const u = 1;
-    const d = 2;
-    const t = 3;
-    const q = 4;
-    const c = 5;
-    document.getElementById('1').src = ((id >= u) ? EstrelaPintada : Contorno);
-    document.getElementById('2').src = ((id >= d) ? EstrelaPintada : Contorno);
-    document.getElementById('3').src = ((id >= t) ? EstrelaPintada : Contorno);
-    document.getElementById('4').src = ((id >= q) ? EstrelaPintada : Contorno);
-    document.getElementById('5').src = ((id >= c) ? EstrelaPintada : Contorno);
+    const um = 1;
+    const dois = 2;
+    const tres = 3;
+    const quatro = 4;
+    const cinco = 5;
+    document.getElementById('1').src = ((id >= um) ? EstrelaPintada : Contorno);
+    document.getElementById('2').src = ((id >= dois) ? EstrelaPintada : Contorno);
+    document.getElementById('3').src = ((id >= tres) ? EstrelaPintada : Contorno);
+    document.getElementById('4').src = ((id >= quatro) ? EstrelaPintada : Contorno);
+    document.getElementById('5').src = ((id >= cinco) ? EstrelaPintada : Contorno);
   }
 
   renderText(email, texto, estrela) {
@@ -102,28 +102,48 @@ class EvaluationForm extends React.Component {
   render() {
     const { email, texto } = this.state;
     const { productId } = this.props;
-    const u = 1;
-    const d = 2;
-    const t = 3;
-    const q = 4;
-    const c = 5;
+    const um = 1;
+    const dois = 2;
+    const tres = 3;
+    const quatro = 4;
+    const cinco = 5;
     return (
       <div className="main-div" id="main-div">
         <fieldset>
           <div className="estrelas">
-            <button type="button" onClick={ () => this.printStar(u) } className="Link">
+            <button
+              type="button"
+              onClick={ () => this.printStar(um) }
+              className="Link"
+            >
               <img id="1" src={ Contorno } alt="img" />
             </button>
-            <button type="button" onClick={ () => this.printStar(d) } className="Link">
+            <button
+              type="button"
+              onClick={ () => this.printStar(dois) }
+              className="Link"
+            >
               <img id="2" src={ Contorno } alt="img" />
             </button>
-            <button type="button" onClick={ () => this.printStar(t) } className="Link">
+            <button
+              type="button"
+              onClick={ () => this.printStar(tres) }
+              className="Link"
+            >
               <img id="3" src={ Contorno } alt="img" />
             </button>
-            <button type="button" onClick={ () => this.printStar(q) } className="Link">
+            <button
+              type="button"
+              onClick={ () => this.printStar(quatro) }
+              className="Link"
+            >
               <img id="4" src={ Contorno } alt="img" />
             </button>
-            <button type="button" onClick={ () => this.printStar(c) } className="Link">
+            <button
+              type="button"
+              onClick={ () => this.printStar(cinco) }
+              className="Link"
+            >
               <img id="5" src={ Contorno } alt="img" />
             </button>
           </div>

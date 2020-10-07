@@ -564,7 +564,7 @@ Se ainda houver alguma dúvida sobre como entregar seu projeto, [aqui tem um vid
 
 ⚠ Lembre-se que garantir que todas as _issues_ comentadas pelo CodeClimate estão resolvidas! ⚠
 
----
+--- 
 
 ### REVISANDO UM PULL REQUEST
 

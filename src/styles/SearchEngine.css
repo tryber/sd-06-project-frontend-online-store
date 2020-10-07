@@ -1,0 +1,22 @@
+.search-engine-container {
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+}
+
+.search-engine-top {
+  display: flex;
+  max-width: 100%;
+}
+
+.search-engine-top > input {
+  width: 100%;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+.search-button {
+  align-self: center;
+  margin-top: 5px;
+  width: 20%;
+}

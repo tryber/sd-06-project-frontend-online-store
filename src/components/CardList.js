@@ -4,12 +4,15 @@ import Card from './Card';
 import CategoriesList from './CategoriesList';
 import Cart from '../services/cart';
 import NoSearching from './NoSearching';
+import Loading from './Loading';
+import './cardList.css';
 
 class CardList extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
+      loading: false,
       value: '',
       products: [],
       categoryId: '',
@@ -28,6 +31,9 @@ class CardList extends React.Component {
   handleClick() {
     const { value } = this.state;
     if (value !== '' || value != null) {
+      this.setState({
+        loading: true,
+      });
       this.fetchCard('');
     }
   }
@@ -35,6 +41,7 @@ class CardList extends React.Component {
   handleClickID(catID) {
     this.setState({
       categoryId: catID,
+      loading: true,
     }, () => {
       const { categoryId } = this.state;
       this.fetchCard(categoryId);
@@ -51,16 +58,17 @@ class CardList extends React.Component {
     const { results } = card;
     const noResults = 0;
     this.setState({
+      loading: false,
       products: results,
       empty: (results.length === noResults),
     });
   }
 
   render() {
-    const { products, value, empty } = this.state;
+    const { products, value, empty, loading } = this.state;
     return (
-      <div>
-        <div>
+      <div className="card-container">
+        <div className="search-container">
           <input
             data-testid="query-input"
             value={ value }
@@ -75,8 +83,9 @@ class CardList extends React.Component {
           </button>
         </div>
         <CategoriesList handleID={ this.handleClickID } />
-        <div>
-          { products.map((product) => <Card product={ product } key={ product.id } />) }
+        <div className="card-list">
+          { loading ? <Loading /> : products.map((product) => (
+            <Card product={ product } key={ product.id } />)) }
           { (empty != null && empty) ? <NoSearching /> : false }
         </div>
       </div>

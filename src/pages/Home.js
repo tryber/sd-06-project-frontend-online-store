@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import CartButton from '../components/CartButton';
 import CardList from '../components/CardList';
+import './home.css';
 
 class Home extends React.Component {
   render() {
     return (
-      <div>
-        Home
-        <SearchBar />
-        <Link to="/carrinho">
-          <CartButton />
-        </Link>
+      <div className="home-container">
+        <div className="nav-container">
+          <SearchBar />
+          <Link to="/carrinho">
+            <CartButton />
+          </Link>
+        </div>
         <CardList />
       </div>
     );

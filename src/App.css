@@ -85,3 +85,9 @@
   margin: 8px;
   padding: 10px;
 }
+
+.evaluation-textarea {
+  border: 2px solid #3a3a3a;
+  border-radius: 10px;
+  width: 500px;
+}

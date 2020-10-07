@@ -44,6 +44,15 @@ class ProductDetails extends React.Component {
         >
           Adicionar ao carrinho
         </button>
+        <div>
+          <h4>Avaliação do Produto:</h4>
+          <textarea
+            className="evaluation-textarea"
+            data-testid="product-detail-evaluation"
+            rows="10"
+            columns="500"
+          />
+        </div>
       </div>
     );
   }

@@ -16,13 +16,16 @@ class ShoppingCart extends Component {
     }
     return (
       <div>
-        {cartList.map(({ title, price, id }) => (
+        {cartList.map(({ title, price, id, ammount }) => (
           <div key={ id }>
             <h4 data-testid="shopping-cart-product-name">
               { title }
             </h4>
             <p>
-              { price }
+              {`R$ ${price}`}
+            </p>
+            <p>
+              {`Qtd de Itens ${ammount}`}
             </p>
           </div>
         ))}
@@ -30,8 +33,12 @@ class ShoppingCart extends Component {
           data-testid="shopping-cart-product-quantity"
         >
           Quantidade de itens:
-          {cartList.length}
+          {cartList.map((element) => element.ammount)
+            .reduce((acc, currentValue) => acc + currentValue)}
         </span>
+        <br />
+        {cartList.map(({ price, ammount }) => price * ammount)
+          .reduce((acc, currentValue) => acc + currentValue).toFixed(2)}
         <br />
         <Link to="/">Voltar</Link>
       </div>

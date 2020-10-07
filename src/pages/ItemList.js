@@ -72,7 +72,9 @@ class ItemList extends Component {
             addItem={ addItem }
             iten={ iten }
           />)) : '' }
-        <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link to="/Cart" data-testid="shopping-cart-button">
+          <button type="button">Carrinho </button>
+        </Link>
         <ListOfCategories handleSelectOption={ this.handleSelectOption } />
       </div>
     );

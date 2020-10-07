@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as api from '../services/api';
 
 class ProductDetails extends Component{
 
   constructor() {
     super();
 
+    this.getProductById = this.getProductById.bind(this)
+
     this.state = {
       products: [],
     }
   }
 
+  async getProductById(id) {
+    const response = await fetch(`https://api.mercadolibre.com/items/${id}`)
+    return response.json();
+  }
+
   async productFetch() {
     const { id } = this.props.match.params
-    const getProducts = await api.getProductById(id);
+    const getProducts = await this.getProductById(id)
     this.setState({
       products: getProducts
     });

@@ -7,7 +7,7 @@ class ProductList extends React.Component {
     const { list } = this.props;
     const empty = 0;
     if (list.length === empty) return <p>Nenhum produto foi encontrado</p>;
-   
+    console.log(list)
     return (
       list.map((items) => (
         <div key={ items.id } data-testid="product">

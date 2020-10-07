@@ -13,11 +13,13 @@ class ProductDetails extends Component {
     const {
       location: {
         state: { title, thumbnail, price },
-        updateCartListAndItens,
       },
       match: {
         params: { productId },
       },
+      updateCartListAndItens,
+      cartProductItens,
+      cartProductList,
     } = this.props;
 
     const product = {
@@ -30,7 +32,10 @@ class ProductDetails extends Component {
       <div>
         <div className="product-detail-header">
           <Link to="/">Voltar</Link>
-          <ShoppingCartButton updateCartListAndItens={ updateCartListAndItens } />
+          <ShoppingCartButton
+            cartProductList={ cartProductList }
+            cartProductItens={ cartProductItens }
+          />
         </div>
         <div data-testid="product-detail-name" className="product-detail">
           <h1>{title}</h1>
@@ -62,6 +67,8 @@ ProductDetails.propTypes = {
     }),
   }).isRequired,
   updateCartListAndItens: PropTypes.func.isRequired,
+  cartProductList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cartProductItens: PropTypes.number.isRequired,
 };
 
 export default ProductDetails;

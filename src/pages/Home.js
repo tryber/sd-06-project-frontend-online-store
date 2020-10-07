@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ListCategory from '../components/ListCategory';
 import ProductList from '../components/ProductList';
@@ -72,7 +73,8 @@ class Home extends Component {
     const {
       queryInput,
       foundItems,
-      products, categoryInput, cartProductItens, cartProductList } = this.state;
+      products, categoryInput } = this.state;
+    const { updateCartListAndItens, cartProductItens, cartProductList } = this.props;
     return (
       <div className="home-page">
         <ListCategory onClick={ this.handleClickCategories } />
@@ -91,7 +93,7 @@ class Home extends Component {
               foundItems={ foundItems }
               products={ products }
               categoryInput={ categoryInput }
-              updateCartListAndItens={ this.updateCartListAndItens }
+              updateCartListAndItens={ updateCartListAndItens }
             />
           </div>
         </div>
@@ -99,5 +101,11 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  cartProductList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cartProductItens: PropTypes.number.isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
+};
 
 export default Home;

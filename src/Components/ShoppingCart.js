@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
+import { Link } from 'react-router-dom';
+import ItemCart from './ItemCart';
+
 class ShoppingCart extends Component {
   constructor() {
     super();
 
     this.clearCart = this.clearCart.bind(this);
+
+    this.state = {
+      cart: JSON.parse(localStorage.getItem('cart')) || [],
+    };
   }
 
   clearCart() {
@@ -13,32 +20,35 @@ class ShoppingCart extends Component {
   }
 
   render() {
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const { cart } = this.state;
+    const zero = 0;
     let itens;
-    if (cart) {
-      itens = cart.map((prod) => (
-        <div
+
+    if (cart.length > zero) {
+      itens = cart.map((item) => (
+        <ItemCart
           className="shopping-list-each"
-          data-testid="product"
-          key={ prod.id }
-        >
-          <h5 data-testid="shopping-cart-product-name">{ prod.title }</h5>
-          <img src={ prod.thumbnail } alt="fotografia do produto" />
-          <p><span>{`R$: ${prod.price}`}</span></p>
-          <p data-testid="shopping-cart-product-quantity">1</p>
-        </div>
-      ));
+          key={ item.id }
+          product={ item }
+        />));
     } else {
       itens = <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
 
     return (
       <div className="shopping-container">
+        <Link to="/">Home</Link>
         <h1>Meu Carrinho</h1>
         <button type="button" onClick={ () => this.clearCart() }>Limpar Carrinho</button>
         <div className="shopping-list-section">
           {itens}
         </div>
+        <p>Valor Total:</p>
+        <button
+          type="button"
+        >
+          Finalizar Compra
+        </button>
       </div>
     );
   }

@@ -8,7 +8,7 @@ import '../styles/ProductsCard.css';
 
 export default class ProductsCard extends Component {
   render() {
-    const { product } = this.props;
+    const { product, updateCartListAndItens } = this.props;
     const { title, id, thumbnail, price } = product;
     return (
       <div data-testid="product" className="product-card">
@@ -21,11 +21,17 @@ export default class ProductsCard extends Component {
         <p>{`R$ ${price}`}</p>
         <Link
           data-testid="product-detail-link"
-          to={ { pathname: `/details/${id}`, state: product } }
+          to={ { pathname: `/details/${id}`,
+            state: product,
+            updateCartListAndItens,
+          } }
         >
           Detalhes do Produto
         </Link>
-        <AddToCartButton product={ product } />
+        <AddToCartButton
+          product={ product }
+          updateCartListAndItens={ updateCartListAndItens }
+        />
       </div>
     );
   }
@@ -39,4 +45,5 @@ ProductsCard.propTypes = {
     thumbnail: PropTypes.string,
     price: PropTypes.number,
   }).isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
 };

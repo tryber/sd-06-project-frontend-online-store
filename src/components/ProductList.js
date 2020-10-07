@@ -7,7 +7,10 @@ import '../styles/ProductList.css';
 
 export default class ProductList extends Component {
   render() {
-    const { queryInput, foundItems, products, categoryInput } = this.props;
+    const { queryInput,
+      foundItems,
+      products,
+      categoryInput, updateCartListAndItens } = this.props;
     const zero = 0;
     return (
       <div className="product-list">
@@ -25,8 +28,12 @@ export default class ProductList extends Component {
         )}
         {/* if there are products, render this block */}
         {Object.keys(products).length !== zero
-          && products.results.map((prod) => (
-            <ProductsCard key={ prod.title } product={ prod } />
+          && products.map((product) => (
+            <ProductsCard
+              key={ product.id }
+              product={ product }
+              updateCartListAndItens={ updateCartListAndItens }
+            />
           ))}
       </div>
     );
@@ -41,7 +48,6 @@ ProductList.propTypes = {
   queryInput: PropTypes.string.isRequired,
   categoryInput: PropTypes.string.isRequired,
   foundItems: PropTypes.bool,
-  products: PropTypes.shape({
-    results: PropTypes.arrayOf(PropTypes.object),
-  }).isRequired,
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
 };

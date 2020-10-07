@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ListCategory from '../components/ListCategory';
 import ProductList from '../components/ProductList';
 
 import SearchEngine from '../components/SearchEngine';
+import ShoppingCartButton from '../components/ShoppingCartButton';
 
 import '../styles/Home.css';
 
@@ -17,7 +19,7 @@ class Home extends Component {
       foundItems: false,
       queryInput: '',
       categoryInput: '',
-      products: {},
+      products: [],
     };
 
     this.handleClickButton = this.handleClickButton.bind(this);
@@ -38,7 +40,7 @@ class Home extends Component {
       );
 
       this.setState({
-        products: productsFound,
+        products: productsFound.results,
       });
     });
   }
@@ -57,18 +59,22 @@ class Home extends Component {
       if (Object.keys(productsFound).length < 1) {
         this.setState({
           foundItems: false,
-          products: {},
+          products: [],
         });
       } else {
         this.setState({
-          products: productsFound,
+          products: productsFound.results,
         });
       }
     });
   }
 
   render() {
-    const { queryInput, foundItems, products, categoryInput } = this.state;
+    const {
+      queryInput,
+      foundItems,
+      products, categoryInput } = this.state;
+    const { updateCartListAndItens, cartProductItens, cartProductList } = this.props;
     return (
       <div className="home-page">
         <ListCategory onClick={ this.handleClickCategories } />
@@ -77,12 +83,17 @@ class Home extends Component {
             sendQueryInputToHome={ this.handleChangeInput }
             onClick={ this.handleClickButton }
           />
+          <ShoppingCartButton
+            cartProductItens={ cartProductItens }
+            cartProductList={ cartProductList }
+          />
           <div className="product-list-container">
             <ProductList
               queryInput={ queryInput }
               foundItems={ foundItems }
               products={ products }
               categoryInput={ categoryInput }
+              updateCartListAndItens={ updateCartListAndItens }
             />
           </div>
         </div>
@@ -90,5 +101,11 @@ class Home extends Component {
     );
   }
 }
+
+Home.propTypes = {
+  cartProductList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  cartProductItens: PropTypes.number.isRequired,
+  updateCartListAndItens: PropTypes.func.isRequired,
+};
 
 export default Home;

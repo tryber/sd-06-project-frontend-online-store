@@ -31,7 +31,7 @@ class EmptyProductList extends React.Component {
     const value = target.value;
     this.setState({
       query: value,
-    })
+    });
   }
 
   async handleClick() {

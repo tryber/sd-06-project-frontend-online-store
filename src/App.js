@@ -2,13 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import EmptyProductList from './page/EmptyProductList';
 import ShoppingCart from './page/ShoppingCart';
-
-// render={ (props) => (<ShoppingCart
-//   { ...props }
-//   addToCart={ this.handleAddProduct }
-//   cartProducts={ cartProducts }
-//   cartQuantity={ cartQuantity }
-// />) }
+import ProductDetails from './page/ProductDetails';
 
 class App extends React.Component {
   render() {
@@ -18,6 +12,10 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/shopping-cart" component={ ShoppingCart } />
             <Route exact path="/" component={ EmptyProductList } />
+            <Route
+              path="/product-details/:id"
+              render={ (props) => <ProductDetails { ...props } /> }
+            />
           </Switch>
         </BrowserRouter>
       </div>

@@ -9,7 +9,8 @@ class ProductDetails extends React.Component {
   }
 
   addOnClick() {
-    const { location: { state: { items, addCart } } } = this.props;
+    const { location: { state: { items } } } = this.props;
+    const { addCart } = this.props;
     const { title, id } = items;
     addCart(title, id);
   }
@@ -19,7 +20,6 @@ class ProductDetails extends React.Component {
     const { state } = location;
     const { items } = state;
     const { title, price, thumbnail } = items;
-
     return (
       <div>
         <h2 data-testid="product-detail-name">{ title }</h2>
@@ -32,13 +32,16 @@ class ProductDetails extends React.Component {
         <button
           type="button"
           data-testid="product-detail-add-to-cart"
-          // onClick={ this.addOnClick }
+          onClick={ this.addOnClick }
         >
           Adicionar ao Carrinho
         </button>
         <button type="button">
           <Link to="/">Página inicial</Link>
         </button>
+        <Link to="/cart">
+          <button data-testid="shopping-cart-button" type="button">CARRINHO</button>
+        </Link>
       </div>
     );
   }
@@ -47,7 +50,6 @@ class ProductDetails extends React.Component {
 ProductDetails.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      addCart: PropTypes.func.isRequired,
       items: PropTypes.shape({
         title: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
@@ -56,6 +58,7 @@ ProductDetails.propTypes = {
       }),
     }),
   }).isRequired,
+  addCart: PropTypes.func.isRequired,
 };
 
 export default ProductDetails;

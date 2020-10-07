@@ -43,7 +43,7 @@ class ProductDetails extends Component {
           Adicionar ao Carrinho
         </button>
         <Link to="/Cart" data-testid="shopping-cart-button">
-          <button type="button">Carrinho </button>
+          <button type="button">Carrinho</button>
         </Link>
       </div>
     );

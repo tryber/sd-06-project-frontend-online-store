@@ -27,20 +27,20 @@ class ShoppingCart extends Component {
 
   decreaseButton(event) {
     this.setState({
-      [event.id]: this.state.[event.id] - 1,
+      [event.id]: this.state[event.id] - 1,
     });
   }
 
   increaseButton(event) {
     this.setState({
-      [event.id]: this.state.[event.id] + 1,
+      [event.id]: this.state[event.id] + 1,
     });
   }
 
   renderQuantity(element) {
     if (this.state.campo === 0) return 1;
-    else if (this.state.[element.id] < 1) return 1;
-    return this.state.[element.id]
+    else if (this.state[element.id] < 1) return 1;
+    return this.state[element.id]
   }
 
   renderShoppingCart() {
@@ -55,7 +55,7 @@ class ShoppingCart extends Component {
     return (
       <div>
         {state.map((item) => (
-          <div key={item.id}>
+          <div key={ item.id }>
             <p data-testid="shopping-cart-product-name">{item.title}</p>
             <button data-testid="product-decrease-quantity" onClick={() => this.decreaseButton(item)} type="button">Diminuir</button>
             <p data-testid="shopping-cart-product-quantity">{this.renderQuantity(item)}</p>

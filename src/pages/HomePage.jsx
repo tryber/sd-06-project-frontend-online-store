@@ -71,7 +71,6 @@ class HomePage extends React.Component {
     }
   }
 
-
   render() {
     const { products, categories, cartItem, cartCount } = this.state;
     return (

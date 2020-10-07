@@ -44,12 +44,13 @@ class ItemCart extends Component {
     const { quantity } = this.state;
     const { product } = this.props;
     const { title, price, thumbnail } = product;
+    const two = 2;
     return (
       <div>
         <img src={ thumbnail } alt={ title } />
         <div>
           <p data-testid="shopping-cart-product-name">{ title }</p>
-          <p>{ `R$ ${parseFloat(quantity * price).toFixed(2)}` }</p>
+          <p>{ `R$ ${parseFloat(quantity * price).toFixed(two)}` }</p>
         </div>
         <button
           type="button"

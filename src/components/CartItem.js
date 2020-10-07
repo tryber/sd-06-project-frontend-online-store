@@ -13,13 +13,27 @@ class CartItem extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.setInitialValue();
+  }
+
+  setInitialValue() {
+    const { item } = this.props;
+    const { price } = item;
+    this.setState({ totalValue: price });
+  }
+
   quantityHandler({ target }) {
+    const num = 100;
+    const { item } = this.props;
+    const { price } = item;
     const { name } = target;
     const { quantity, minQuantity } = this.state;
     if (name === 'decrease') {
       if (quantity > minQuantity) {
         this.setState((previousState) => ({
           quantity: previousState.quantity - 1,
+          totalValue: Math.round((previousState.totalValue - price) * num) / num,
         }));
       }
     }
@@ -27,6 +41,7 @@ class CartItem extends React.Component {
     if (name === 'increase') {
       this.setState((previousState) => ({
         quantity: previousState.quantity + 1,
+        totalValue: Math.round((previousState.totalValue + price) * num) / num,
       }));
     }
   }

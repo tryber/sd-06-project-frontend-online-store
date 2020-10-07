@@ -76,7 +76,7 @@
   padding: 10px;
 }
 
-.add-to-cart-button {
+.add-to-cart-button, .checkout-button {
   background-color: #3a3a3a;
   border: 0px;
   border-radius: 10px;
@@ -90,4 +90,22 @@
   border: 2px solid #3a3a3a;
   border-radius: 10px;
   width: 500px;
+}
+
+.checkout-form {
+  border: 2px solid #3a3a3a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+  padding: 25px;
+  width: 50%;
+}
+
+.checkout-form input {
+  height: 30px;
+  font-size: 20px;
+  margin-bottom: 15px;
 }

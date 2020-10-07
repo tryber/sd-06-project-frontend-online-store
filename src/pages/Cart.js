@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import returnArrow from '../images/return-arrow.png';
 import { CartItem } from '../components';
+import '../App.css';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -32,6 +33,15 @@ class Cart extends React.Component {
             <CartItem item={ item } />
           </div>
         ))}
+        <Link to="/checkout">
+          <button
+            type="button"
+            data-testid="checkout-products"
+            className="checkout-button"
+          >
+            Finalizar pedido
+          </button>
+        </Link>
       </div>
     );
   }

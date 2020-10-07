@@ -9,7 +9,7 @@ export default class CreateCart extends Component {
     this.decreaseProduct = this.decreaseProduct.bind(this);
     this.removeProduct = this.removeProduct.bind(this);
     this.state = {
-      totalCartValueCartValue: '',
+      totalCartValue: '',
     };
   }
 
@@ -56,13 +56,15 @@ export default class CreateCart extends Component {
     const number = parseInt(target.parentNode.lastChild.innerText, 0);
     const { totalCartValue } = this.state;
     const quantity = number - 1;
-    const zer2 = 0;
+    const zero = 0;
     const result = (Math.round(totalCartValue - price));
-    if (quantity === zer2) {
+    if (quantity === zero) {
       this.setStatetotalCartValue(result);
       this.removeProduct(target, element, price);
     } else {
       document.getElementById(element).innerText = quantity;
+      document.getElementById(`${element}price`).innerText = price * quantity;
+      console.log(price);
       this.setStatetotalCartValue(result);
     }
   }
@@ -125,5 +127,4 @@ export default class CreateCart extends Component {
 
 CreateCart.propTypes = {
   cart: PropTypes.objectOf.isRequired,
-  totalCartValue: PropTypes.objectOf.isRequired,
 };

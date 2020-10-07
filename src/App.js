@@ -11,8 +11,9 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Home } />
-        <Route path="/shopping-cart"
-        render={ (props) => <ShoppingCart { ...props } /> }
+        <Route
+          path="/shopping-cart"
+          render={ (props) => <ShoppingCart { ...props } /> }
         />
         <Route
           path="/product"

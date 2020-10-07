@@ -1,42 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import * as addItem from '../components/addItem';
+import Carrinho from '../imgs/carrinho.png';
+import ProductRating from '../components/ProductRating';
 
 
 class ProductDetails extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.getQuantity = this.getQuantity.bind(this);
-
-    const { location } = this.props;
-    const { state } = location;
-    const { title: name } = state;
-
-    this.state = {
-      title: name,
-      quantity: 1,
-    };
-  }
-
-  componentWillUnmount() {
-    const { title, quantity } = this.state;
-    addItem.addItem(title, quantity);
-  }
-
-  getQuantity({ target }) {
-    const { value } = target;
-
-    this.setState({
-      quantity: value,
-    });
-  }
-
   render() {
-    const { location } = this.props;
+    const { location, onClick } = this.props;
     const { state } = location;
-    const { title, thumbnail, price } = state;
+    const { title, thumbnail, price } = state[0];
 
     return (
       <div>
@@ -53,12 +26,20 @@ class ProductDetails extends React.Component {
           </label>
         </form>
         <div>
-          <Link
+          <button
+            type="button"
             data-testid="product-detail-add-to-cart"
-            to="/"
+            onClick={ onClick }
           >
             ADICIONAR AO CARRINHO
+          </button>
+          <Link
+            data-testid="shopping-cart-button"
+            to={ { pathname: '/shopping-cart', state: state[1] } }
+          >
+            <img src={ Carrinho } alt="Carrinho" />
           </Link>
+          <ProductRating />
         </div>
       </div>
     );
@@ -66,6 +47,7 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.propTypes = {
+  onClick: PropTypes.func.isRequired,
   location: PropTypes.shape({
     state: PropTypes.shape({
       title: PropTypes.string.isRequired,

@@ -1,21 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import PropTypes, { objectOf } from 'prop-types';
 
 class ProductCard extends React.Component {
-  constructor() {
-    super();
-    this.addItem = this.addItem.bind(this);
-  }
-
-  addItem(product) {
-    const titulo = product.title;
-    const price = product.price
-    this.setState({ title: titulo, price: price });
-  }
-
   render() {
-    const { product } = this.props;
+    const { product, onClick, value } = this.props;
+    const allState = [product, value];
+
     return (
       <div data-testid="product" className="product-card">
         <img src={ product.thumbnail } alt="product" className="product-card-image" />
@@ -24,24 +15,24 @@ class ProductCard extends React.Component {
         </div>
         <div className="product-card-body">
           <p>
-            Preço: {product.price}
+            Preço:
+            {product.price}
           </p>
           <div className="product-card-links">
             <Link
               data-testid="product-detail-link"
-              to={ { pathname: '/product', state: product } }
+              to={ { pathname: '/product', state: allState } }
+              onClick={ onClick }
             >
               DETALHES
             </Link>
-            <Link
-              data-testid="product-detail-add-to-cart"
-              to={ { pathname: '/shopping-cart', state: product } }
-              title={this.state.title}
-              quantity={this.state.quantity}
-              price={this.state.price}
+            <button
+              type="button"
+              data-testid="product-add-to-cart"
+              onClick={ onClick }
             >
-                ADICIONAR AO CARRINHO
-            </Link>
+              ADICIONAR AO CARRINHO
+            </button>
           </div>
         </div>
       </div>
@@ -50,6 +41,8 @@ class ProductCard extends React.Component {
 }
 
 ProductCard.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  value: PropTypes.arrayOf(objectOf).isRequired,
   product: PropTypes.shape({
     title: PropTypes.string.isRequired,
     thumbnail: PropTypes.string.isRequired,

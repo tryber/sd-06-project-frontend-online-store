@@ -6,6 +6,19 @@ class ShoppingCart extends Component {
     super(props);
 
     this.renderShoppingCart = this.renderShoppingCart.bind(this);
+    this.increaseButton = this.increaseButton.bind(this);
+    this.decreaseButton = this.decreaseButton.bind(this);
+  }
+
+
+  increaseButton() {
+    return (
+      <button type="button">Aumentar</button>
+    );
+  }
+
+  decreaseButton() {
+    const
   }
 
   renderShoppingCart() {
@@ -19,9 +32,11 @@ class ShoppingCart extends Component {
     return (
       <div>
         {state.map((item) => (
-          <div key={ item.id }>
+          <div key={item.id}>
             <p data-testid="shopping-cart-product-name">{item.title}</p>
+            <button onClick={this.decreaseButton} type="button">Diminuir</button>
             <p data-testid="shopping-cart-product-quantity">{state.length}</p>
+            <button onClick={this.increaseButton} type="button">Aumentar</button>
             <p data-testid="shopping-cart-product-price">{item.price}</p>
           </div>
         ))}

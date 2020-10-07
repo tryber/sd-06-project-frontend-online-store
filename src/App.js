@@ -26,6 +26,7 @@ class App extends Component {
   async handleClickSearchButton() {
     const { query, categoryId } = this.state;
     const valueFromApi = await getProductsFromCategoryAndQuery(categoryId, query);
+    valueFromApi.results.forEach((element) => { element.ammount = 0; });
     const emptyArray = 0;
     if (valueFromApi.results.length === emptyArray) {
       this.setState({
@@ -53,6 +54,8 @@ class App extends Component {
   }
 
   handleAddCart(product) {
+    product.ammount += 1;
+    if (product.ammount > 1) return;
     this.setState((prevState) => ({ cartList: [...prevState.cartList, product] }));
   }
 

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import React from 'react';
-import Botao from './Botao';
+import { Link } from 'react-router-dom';
 
 class ProductList extends React.Component {
   constructor() {

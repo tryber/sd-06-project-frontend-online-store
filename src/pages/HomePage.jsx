@@ -1,37 +1,23 @@
-/* eslint-disable react/no-unused-state */
+/*  eslint-disable react/no-unused-state */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import * as api from '../services/api';
 import ProductList from '../components/ProductList';
 import CategoryList from '../components/CategoryList';
 
-export function onClick() {
-  const { categoryId } = this.state;
-  const query = document.getElementById('search-label').value;
-  api.getProductsFromCategoryAndQuery(categoryId, query)
-    .then((items) => this.setState({
-      products: items.results,
-    }));
-}
-
 class HomePage extends React.Component {
   constructor() {
     super();
-
     this.state = {
       searchInput: '',
       categoryId: '',
       categorySelected: '',
       products: [],
       categories: [],
-      cartItem: [],
-      cartCount: '0',
     };
-
     this.onClick = this.onClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
-    this.addCart = this.addCart.bind(this);
   }
 
   componentDidMount() {
@@ -47,13 +33,6 @@ class HomePage extends React.Component {
       .then((items) => this.setState({
         products: items.results,
       }));
-  }
-
-  addCart(productName, productId) {
-    this.setState((prevState) => ({
-      cartItem: prevState.cartItem.concat({ name: productName, id: productId }),
-      cartCount: (Number(prevState.cartCount) + 1).toString(),
-    }));
   }
 
   handleInputChange({ target }) {
@@ -72,7 +51,8 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { products, categories, cartItem, cartCount } = this.state;
+    const { addCart, cartItem, cartCount } = this.props;
+    const { products, categories } = this.state;
     return (
       <div>
         <label htmlFor="search-label">
@@ -86,7 +66,7 @@ class HomePage extends React.Component {
         <h1 data-testid="home-initial-message">
           Digite algum termo de pesquisa ou escolha uma categoria.
         </h1>
-        <Link to={ { pathname: '/cart', state: { cartItem, cartCount } } }>
+        <Link to="/cart">
           <button data-testid="shopping-cart-button" type="button">CARRINHO</button>
         </Link>
         <button type="button" onClick={ this.onClick } data-testid="query-button">
@@ -94,11 +74,11 @@ class HomePage extends React.Component {
         </button>
         <div>
           {products.map((items) => (<ProductList
-            cartItem={ cartItem }
-            cartCount={ cartCount }
-            addCart={ this.addCart }
             key={ items.id }
             items={ items }
+            addCart={ addCart }
+            cartItem={ cartItem }
+            cartCount={ cartCount }
           />))}
         </div>
         <div>
@@ -113,5 +93,10 @@ class HomePage extends React.Component {
   }
 }
 
+HomePage.propTypes = {
+  cartItem: PropTypes.arrayOf.isRequired,
+  cartCount: PropTypes.string.isRequired,
+  addCart: PropTypes.func.isRequired,
+};
 
 export default HomePage;

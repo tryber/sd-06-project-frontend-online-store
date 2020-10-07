@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-
 class ShoppingCart extends React.Component {
   constructor() {
     super();
-
     this.increaseButton = this.increaseButton.bind(this);
     this.decreaseButton = this.decreaseButton.bind(this);
     this.addShoppingCart = this.addShoppingCart.bind(this);
@@ -56,7 +54,7 @@ class ShoppingCart extends React.Component {
   }
 
   render() {
-    const { location: { state: { cartItem, cartCount } } } = this.props;
+    const { cartItem, cartCount } = this.props;
     const icaro = 0;
     if (cartItem.length === icaro) return (this.emptyCart());
     return (
@@ -78,12 +76,8 @@ class ShoppingCart extends React.Component {
 }
 
 ShoppingCart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      cartItem: PropTypes.arrayOf.isRequired,
-      cartCount: PropTypes.string.isRequired,
-    }),
-  }).isRequired,
+  cartItem: PropTypes.arrayOf.isRequired,
+  cartCount: PropTypes.string.isRequired,
 };
 
 export default ShoppingCart;

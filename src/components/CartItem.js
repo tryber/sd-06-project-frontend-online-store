@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import { Link } from 'react-router-dom';
 import './CartItem.css';
 
 class CartItem extends Component {
@@ -13,7 +12,7 @@ class CartItem extends Component {
   updatePrice(number, event) {
     event.persist();
     console.log(event.target.parentNode);
-    event.target.parentNode.lastChild.innerText = number * 100;
+    event.target.parentNode.lastChild.innerText = number;
   }
 
   goingUp(event) {
@@ -41,15 +40,32 @@ class CartItem extends Component {
   }
 
   render() {
-    const { item, updateItem } = this.props;
-    const { title, thumbnail, price, id } = item;
+    const { item } = this.props;
+    const { title, thumbnail, price } = item;
     return (
       <div className="cart-item">
         <img src={ thumbnail } alt="selectedProduct" />
         <p data-testid="shopping-cart-product-name">{title}</p>
-        <button data-testid="product-decrease-quantity" type="button" onClick={ this.goingDown }>-</button>
-        <div data-testid="shopping-cart-product-quantity" className="cart-item-number">{ item.quantity }</div>
-        <button data-testid="product-increase-quantity" type="button" onClick={ this.goingUp }>+</button>
+        <button
+          data-testid="product-decrease-quantity"
+          type="button"
+          onClick={ this.goingDown }
+        >
+          -
+        </button>
+        <div
+          data-testid="shopping-cart-product-quantity"
+          className="cart-item-number"
+        >
+          { item.quantity }
+        </div>
+        <button
+          data-testid="product-increase-quantity"
+          type="button"
+          onClick={ this.goingUp }
+        >
+          +
+        </button>
         <p className="price">{price}</p>
       </div>
     );
@@ -62,7 +78,9 @@ CartItem.propTypes = {
     price: PropTypes.number,
     thumbnail: PropTypes.string,
     id: PropTypes.string,
+    quantity: PropTypes.number,
   }).isRequired,
+  updateItem: PropTypes.func.isRequired,
 };
 
 export default CartItem;

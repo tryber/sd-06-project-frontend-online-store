@@ -10,6 +10,18 @@ class CartProduct extends React.Component {
         <h1 data-testid="shopping-cart-product-name">{title}</h1>
         <img src={ thumbnail } alt="Foto do produto" />
         <p data-testid="shopping-cart-product-quantity">{ cartQuantity }</p>
+        <button
+          type="button"
+          data-testid="product-decrease-quantity"
+        >
+          -
+        </button>
+        <button
+          type="button"
+          data-testid="product-increase-quantity"
+        >
+          +
+        </button>
       </div>
     );
   }

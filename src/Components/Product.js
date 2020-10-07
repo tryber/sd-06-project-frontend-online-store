@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import Button from './Button';
 
 class Product extends Component {
+  handleShipping(shipping) {
+    if (shipping.free_shipping === true) {
+      return <p data-testid="free-shipping">Frete Grátis</p>;
+    }
+  }
+
   render() {
     const { product, search, onClick } = this.props;
-    const { title, thumbnail, price, id } = product;
+    const { title, thumbnail, price, id, shipping } = product;
+
     return (
-      <div>
+      <div className="product-list-each">
         <Link
           to={ {
             pathname: `/product-detail/${id}`,
@@ -21,8 +28,9 @@ class Product extends Component {
             <div data-testid="product">
               <h5>{ title }</h5>
               <img src={ thumbnail } alt="fotografia do produto" />
-              <p><span>{`R$: ${price}`}</span></p>
+              { this.handleShipping(shipping) }
             </div>
+            <p><span>{`R$: ${price}`}</span></p>
           </div>
         </Link>
         <p>
@@ -45,6 +53,7 @@ Product.propTypes = {
     thumbnail: propTypes.string,
     price: propTypes.number,
     id: propTypes.string,
+    shipping: propTypes.object,
   }).isRequired,
 };
 

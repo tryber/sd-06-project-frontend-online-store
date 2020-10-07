@@ -23,18 +23,26 @@ class ShoppingCart extends Component {
     const { cart } = this.state;
     const zero = 0;
     let itens;
+
     if (cart.length > zero) {
-      itens = cart.map((item) => <ItemCart key={ item.id } product={ item } />);
+      itens = cart.map((item) => (
+        <ItemCart
+          className="shopping-list-each"
+          key={ item.id }
+          product={ item }
+        />));
     } else {
       itens = <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>;
     }
 
     return (
-      <div>
+      <div className="shopping-container">
         <Link to="/">Home</Link>
         <h1>Meu Carrinho</h1>
         <button type="button" onClick={ () => this.clearCart() }>Limpar Carrinho</button>
-        {itens}
+        <div className="shopping-list-section">
+          {itens}
+        </div>
         <p>Valor Total:</p>
         <button
           type="button"

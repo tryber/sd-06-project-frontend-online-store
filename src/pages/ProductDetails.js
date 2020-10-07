@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Carrinho from '../imgs/carrinho.png';
+import ProductRating from '../components/ProductRating';
 
 
 class ProductDetails extends React.Component {
@@ -38,6 +39,7 @@ class ProductDetails extends React.Component {
           >
             <img src={ Carrinho } alt="Carrinho" />
           </Link>
+          <ProductRating />
         </div>
       </div>
     );

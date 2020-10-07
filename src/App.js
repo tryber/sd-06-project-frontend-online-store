@@ -37,7 +37,11 @@ class App extends React.Component {
             />
             <Route
               path="/ProductDetails/:id"
-              render={ (props) => <ProductDetails { ...props } /> }
+              render={ (props) => (<ProductDetails
+                addItem={ this.addItem }
+                { ...props }
+              />
+              ) }
             />
           </Switch>
         </BrowserRouter>
@@ -45,23 +49,5 @@ class App extends React.Component {
     );
   }
 }
-
-
-/* function App() {
-  return (
-    <div>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={ ItemList } />
-          <Route path="/Cart" component={ Cart } />
-          <Route
-            path="/ProductDetails/:id"
-            render={ (props) => <ProductDetails { ...props } /> }
-          />
-        </Switch>
-      </BrowserRouter>
-    </div>
-  );
-} */
 
 export default App;

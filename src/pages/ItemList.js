@@ -67,12 +67,14 @@ class ItemList extends Component {
           SEARCH
         </button>
         { clicked ? filterValues
-          .map((iten) => (<ListCard
-            key={ iten.title }
+          .map((item) => (<ListCard
+            key={ item.title }
             addItem={ addItem }
-            iten={ iten }
+            item={ item }
           />)) : '' }
-        <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link to="/Cart" data-testid="shopping-cart-button">
+          <button type="button">Carrinho</button>
+        </Link>
         <ListOfCategories handleSelectOption={ this.handleSelectOption } />
       </div>
     );

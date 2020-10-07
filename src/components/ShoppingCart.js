@@ -51,10 +51,10 @@ class ShoppingCart extends Component {
             </div>
             <div className="right-content" data-testid="shopping-cart-product-name">
               <h3>{item.product.title}</h3>
-              <div className="quantity-div">
-                <ProductQtd />
-              </div>
               <div className="price-div">
+                <div className="quantity-div">
+                  <ProductQtd />
+                </div>
                 <p className="detail-price">
                   {`Preço: ${item.product.price}`}
                 </p>

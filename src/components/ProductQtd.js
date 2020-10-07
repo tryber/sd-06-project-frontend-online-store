@@ -25,24 +25,26 @@ class ProductQtd extends Component {
   render() {
     const { quantity } = this.state;
     return (
-      <div>
-        <p data-testid="shopping-cart-product-quantity">
-          {`${quantity}`}
-        </p>
-        <button
-          type="button"
-          data-testid="product-increase-quantity"
-          onClick={ this.increaseQuantity }
-        >
-          +
-        </button>
-        <button
-          type="button"
-          data-testid="product-decrease-quantity"
-          onClick={ this.decreaseQuantity }
-        >
-          -
-        </button>
+      <div className="quantity-div">
+        <div className="quantity-div">
+          <button
+            type="button"
+            data-testid="product-increase-quantity"
+            onClick={ this.increaseQuantity }
+          >
+            +
+          </button>
+          <p data-testid="shopping-cart-product-quantity">
+            {`${quantity}`}
+          </p>
+          <button
+            type="button"
+            data-testid="product-decrease-quantity"
+            onClick={ this.decreaseQuantity }
+          >
+            -
+          </button>
+        </div>
       </div>
     );
   }

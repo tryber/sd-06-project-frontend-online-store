@@ -35,13 +35,14 @@ class ShoppingCart extends React.Component {
           </section>
         </section>
       )
-    }
+    } else {
     return (
       <section>
         <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
         <Link to="/">Voltar</Link>
       </section>
     )
+    }
   }
 
 }

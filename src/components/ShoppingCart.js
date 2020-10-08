@@ -28,22 +28,25 @@ class ShoppingCart extends Component {
 
   decreaseButton(event) {
     const { id } = event;
-    this.setState({
-      [id]: this.state[id] - 1,
-    });
+    this.setState((previousState) => ({
+      [id]: previousState[id] - 1,
+    }));
   }
 
   increaseButton(event) {
-    this.setState({
-      [event.id]: this.state[event.id] + 1,
-    });
+    const { id } = event;
+    this.setState((previousState) => ({
+      [id]: previousState[id] + 1,
+    }));
   }
 
   renderQuantity(element) {
-    const { campo } = this.state;
+    const key = this.state;
+    const { campo } = key;
+
     if (campo < 1) return 1;
-    if (this.state[element.id] < 1) return 1;
-    return this.state[element.id];
+    if (key[element.id] < 1) return 1;
+    return key[element.id];
   }
 
   renderShoppingCart() {

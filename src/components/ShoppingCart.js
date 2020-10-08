@@ -7,26 +7,26 @@ class ShoppingCart extends Component {
   constructor() {
     super();
 
-    this.increaseQuantity = this.increaseQuantity.bind(this);
-    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    // this.increaseQuantity = this.increaseQuantity.bind(this);
+    // this.decreaseQuantity = this.decreaseQuantity.bind(this);
 
     this.state = {
     };
   }
 
-  increaseQuantity(product) {
-    const { [product.product.id]: quantity } = this.state;
-    this.setState({
-      [product.product.id]: (quantity || product.product.quantity) + 1,
-    });
-  }
+  // increaseQuantity(product) {
+  //   const { [product.product.id]: quantity } = this.state;
+  //   this.setState({
+  //     [product.product.id]: (quantity || product.product.quantity) + 1,
+  //   });
+  // }
 
-  decreaseQuantity(product) {
-    const { [product.product.id]: quantity } = this.state;
-    this.setState({
-      [product.product.id]: (quantity || product.product.quantity) - 1,
-    });
-  }
+  // decreaseQuantity(product) {
+  //   const { [product.product.id]: quantity } = this.state;
+  //   this.setState({
+  //     [product.product.id]: (quantity || product.product.quantity) - 1,
+  //   });
+  // }
 
   renderCart() {
     const { shoppingCart } = this.props;

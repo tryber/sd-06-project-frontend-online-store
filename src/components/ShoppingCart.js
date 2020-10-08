@@ -11,8 +11,6 @@ class ShoppingCart extends Component {
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
 
     this.state = {
-      quantity: 1,
-      produtos: [],
     };
   }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import ListCategories from '../components/ListCategories';
 import ShoppingCartButton from '../components/ShoppingCartButton';
-import ProductCard from '../components/ProductCard';
+import ProductCardList from '../components/ProductCardList';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
@@ -81,7 +81,7 @@ class Home extends Component {
             <ListCategories handleListCategories={ this.handleListCategories } />
             <ShoppingCartButton />
           </div>
-          <ProductCard
+          <ProductCardList
             products={ products }
             isFail={ isFail }
             handleAddCart={ handleAddCart }

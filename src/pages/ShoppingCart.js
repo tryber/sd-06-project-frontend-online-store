@@ -3,8 +3,40 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 class ShoppingCart extends Component {
-  render() {
+  constructor() {
+    super();
+    this.state = {
+      cartList: [],
+    };
+
+    this.updatingCartListState = this.updatingCartListState.bind(this);
+  }
+
+  componentDidMount() {
+    this.updatingCartListState();
+  }
+
+  updatingCartListState() {
     const { cartList } = this.props;
+    this.setState({ cartList });
+  }
+
+  handleIncreaseAmmount(product) {
+    product.ammount += 1;
+    const { cartList } = this.props;
+    this.setState({ cartList });
+  }
+
+  handleDecreaseAmmount(product) {
+    if (product.ammount === 0) return;
+    product.ammount -= 1;
+    const { cartList } = this.props;
+    this.setState({ cartList });
+  }
+
+  render() {
+    const { cartList } = this.state;
+
     const emptyCart = 0;
     if (!cartList || cartList.length === emptyCart) {
       return (
@@ -16,17 +48,22 @@ class ShoppingCart extends Component {
     }
     return (
       <div>
-        {cartList.map(({ title, price, id, ammount }) => (
-          <div key={ id }>
+        {cartList.map((product) => (
+          <div key={ product.id }>
             <h4 data-testid="shopping-cart-product-name">
-              { title }
+              { product.title }
             </h4>
             <p>
-              {`R$ ${price}`}
+              {`R$ ${product.price}`}
             </p>
-            <p>
-              {`Qtd de Itens ${ammount}`}
-            </p>
+            <span>
+              Quantidade:
+            </span>
+            <button type="button" onClick={ () => this.handleIncreaseAmmount(product) }>+</button>
+            <span>
+              {product.ammount}
+            </span>
+            <button type="button" onClick={ () => this.handleDecreaseAmmount(product) }>-</button>
           </div>
         ))}
         <span

@@ -11,20 +11,35 @@ class ShoppingCartPage extends React.Component {
       quantity: [],
       emptyCart: true,
       totalPrices: '0',
-      checkout: false
-    }
-  };
+    };
+
+    this.loadStorage = this.loadStorage.bind(this);
+  }
 
   componentDidMount() {
+    this.loadStorage();
+  }
+
+  loadStorage() {
     if (localStorage.Cart) {
-      if (JSON.parse(localStorage.Cart).length > 0) {
+      if (JSON.parse(localStorage.Cart).length >= 1) {
         const two = 2;
-        const cartItems = JSON.parse(localStorage.Cart).map((item) => item.cartProducts[0]);
-        const quantity = JSON.parse(localStorage.Cart).map((item) => item.quantityCartProducts);
-        const prices = cartItems.map((item, index) => item.price * quantity[index]);
+        const cartItems = JSON.parse(localStorage.Cart)
+          .map((item) => item.cartProducts[0]);
+        const quantity = JSON.parse(localStorage.Cart)
+          .map((item) => item.quantityCartProducts);
+        const prices = cartItems
+          .map((item, index) => item.price * quantity[index]);
         let totalPrices = prices.reduce((acc, curr) => acc + curr);
         totalPrices = Number(totalPrices.toFixed(two));
-        this.setState({ cartItems: [...cartItems], emptyCart: false, quantity, totalPrices });
+        this.setState(
+          {
+            cartItems: [...cartItems],
+            emptyCart: false,
+            quantity,
+            totalPrices,
+          },
+        );
       }
     }
   }
@@ -44,14 +59,13 @@ class ShoppingCartPage extends React.Component {
     this.setState({
       cartItems,
       quantity,
-      totalPrices: total
-    }, () => { if (cartItems === []) localStorage.clear() });
+      totalPrices: total,
+    }, () => { if (cartItems === []) localStorage.clear(); });
   }
 
-  addProduct(index, { price, available_quantity }, { target }) {
+  addProduct(index, product, { target }) {
     const { quantity, totalPrices } = this.state;
-    // console.log(available_quantity);
-    if (available_quantity === quantity[index]) {
+    if (product.available_quantity === quantity[index]) {
       target.disabled = true;
     } else {
       const two = 2;
@@ -62,7 +76,7 @@ class ShoppingCartPage extends React.Component {
       localStorage.Cart = JSON.stringify(updateStorage);
       this.setState({
         quantity,
-        totalPrices: Number((totalPrices + price).toFixed(two)),
+        totalPrices: Number((totalPrices + product.price).toFixed(two)),
       });
     }
   }
@@ -71,7 +85,7 @@ class ShoppingCartPage extends React.Component {
     const { quantity, totalPrices } = this.state;
     const two = 2;
     if (quantity[index] <= 1) {
-      alert('quantidade menor que 1');
+      console.log('Numero menor que 1');
     } else {
       document.getElementById('btn-plus').disabled = false;
       const value = quantity[index] - 1;
@@ -86,43 +100,8 @@ class ShoppingCartPage extends React.Component {
     }
   }
 
-  checkout() {
-    return (
-      <div>
-        <ShoppingCartPage />
-        <div>
-          <form>
-            <input
-              type="text"
-              data-testid="checkout-fullname"
-              placeholder="Nome Completo"
-            />
-            <input
-              type="text"
-              data-testid="
-              checkout-email"
-              placeholder="Email:
-              exemplo@exem.com"
-            />
-            <input type="text" data-testid="checkout-cpf" placeholder="CPF" />
-            <input
-              type="text"
-              data-testid="checkout-phone"
-              placeholder="Telefone (XX) XXXX-XXXX"
-            />
-            <input type="text" data-testid="checkout-cep" placeholder="CEP" />
-            <input type="text" data-testid="checkout-address" placeholder="Endereço" />
-          </form>
-        </div>
-      </div>
-    );
-  }
-
   render() {
-    const { emptyCart, cartItems, quantity, totalPrices, checkout } = this.state;
-    if (checkout) {
-      return this.checkout();
-    }
+    const { emptyCart, cartItems, quantity, totalPrices } = this.state;
     return (
       <div>
         <Link to="/">Voltar</Link>
@@ -138,24 +117,47 @@ class ShoppingCartPage extends React.Component {
                 product={ product }
               />
               <p>
-                <button data-testid="product-increase-quantity" type="button" id="btn-plus" onClick={ (event) => this.addProduct(index, product, event) }> + </button>
-                <span data-testid="shopping-cart-product-quantity">{ quantity[index] }</span>
-                <button data-testid="product-decrease-quantity" onClick={ () => this.subProduct(index, product.price) }> - </button>
+                <button
+                  data-testid="product-increase-quantity"
+                  type="button"
+                  id="btn-plus"
+                  onClick={ (event) => this.addProduct(index, product, event) }
+                >
+                  +
+                </button>
+                <span
+                  data-testid="shopping-cart-product-quantity"
+                >
+                  { quantity[index] }
+                </span>
+                <button
+                  type="button"
+                  data-testid="product-decrease-quantity"
+                  onClick={ () => this.subProduct(index, product.price) }
+                >
+                  -
+                </button>
               </p>
-              <button type="button" onClick={ () => this.removeProduct(index) }> Delete </button>
+              <button
+                type="button"
+                onClick={ () => this.removeProduct(index) }
+              >
+                Delete
+              </button>
             </div>
           )) }
         <span>
           Total Price: R$
           { totalPrices }
         </span>
-        <button
-          onClick={ () => this.setState({ checkout: true }) }
-          data-testid="checkout-products"
-          type="button"
-        >
-          Buy
-        </button>
+        <Link to="/checkout">
+          <button
+            data-testid="checkout-products"
+            type="button"
+          >
+            Buy
+          </button>
+        </Link>
       </div>
     );
   }

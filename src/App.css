@@ -1,38 +1,571 @@
-.App {
+body{
+  font-family: "Proxima Nova",-apple-system,"Helvetica Neue",Helvetica,Roboto,Arial,sans-serif,sans-serif;
+  background-color: rgb(236, 232, 232);
+}
+
+.center-container {
+  display: flex;
+  align-self: center;
+  width: 87%;
+  margin: 0 auto;
+
+}
+
+.header {
+  display: flex;
+  width: 104%;
+  background: linear-gradient(#59b4ff, #2e99d6);
+  height: 100px;
+  border: 1px solid rgb(185, 185, 185);
+  margin: 0%;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), 0 -1px 2px 0 rgba(0,0,0,.1);
+}
+
+.form-div {
+  position: relative;
+  left: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+form:hover {
+  text-decoration: none;
+}
+
+.shopping-cart-div {
+  margin-right: 20px;
+  border: 3px solid rgb(0, 0, 0);
+  padding: 2px 5px 0 2px;
+  border-radius: 8px;
+  background: rgb(204, 201, 201);
+}
+
+.search-button {
+  background: linear-gradient(#9e9e9b, #8f8e8e);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 15px;
+  color: white;
+  cursor: pointer;
+  font: 700 15px Arial , Helvetica , sans-serif;
+  line-height: 18.94px;
+  padding: 7px 0px;
   text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 80px;
+  margin-left: 7px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.search-input {
+  height: 30px;
+  width: 1000px;
+  border-radius: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.category-container {
+  margin: 40px 0 0 25px;
+  height: 940px;
+  height: 100%;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 5px;
+  padding: 20px 20px 0 20px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), 0 -1px 2px 0 rgba(0,0,0,.1);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.category-element {
+  margin: 0 0 5px 0;
+  padding: 3px 0 2px 5px;
+}
+
+.search-container {
+  margin: 15px 0 0 55px;
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: center;
+  width: 77.5%;
+}
+
+.product-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.product-content {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  justify-content: space-around;
+  width: 300px;
+  height: 500px;
+  border: 1px solid rgb(185, 185, 185);
+  border-radius: 6px;
+  margin: 9px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,.1), 0 -1px 2px 0 rgba(0,0,0,.1);
+  background-color: rgb(255, 255, 255);
+}
+
+.product-content:hover {
+  z-index: 1;
+  transition: 0.2s;
+  transform :scale(1.001);
+  box-shadow: 0 25px 40px rgba(0,0,0,.5);
+  margin: 20px 0px 20px 10px;
+  border: 1px solid rgb(185, 185, 185);
+  margin-bottom: 15px;
+}
+
+.add-button {
+  position: relative;
+  bottom: 10px;
+  background: linear-gradient(#3acde7, #089dca);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 7px;
+  color: white;
+  cursor: pointer;
+  font: 600 12.5px Arial , Helvetica , sans-serif;
+  line-height: 23.94px;
+  padding: 10px 2px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 250px;
+}
+
+.img {
+  position: relative;
+  width: 250px;
+}
+
+.img-div {
+  justify-content: center;
+  display: flex;
+}
+
+.product-details-div {
+  position: relative;
+  top: 15px;
+  width: 80%;
+  height: 170px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.price {
+  position: relative;
+  bottom: 20px;
+  background-color: #0cce1c;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  font-size: 17px;
+  font-weight: 400;
+  justify-content: center;
+  padding: 7px 9px;
+  max-width: 95px;
+  min-width: 75px;
+}
+
+.product-details-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 8px;
+  display: flex;
+  height: 90%;
+  margin: 100px auto;
+  width: 55%;
+  padding-top: 40px;
+}
+
+.top-content {
+  display: flex;
+  justify-content: space-around;
+  width: 95%;
+  height: 400px;
+}
+
+.product-details-img-div {
+  width: 25%;
+  border: 1px solid rgba(0, 0, 0, 0.250);
+  border-radius: 3px;
+}
+
+.product-details-img-div img {
+  width: 100%;
+}
+
+.product-details-content {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+  border: 1px solid rgba(0, 0, 0, 0.250);
+  border-radius: 3px;
+  background-color: white;
+}
+
+.product-name {
+  text-align: center;
+  font: 100 18.5px Proxima Nova,-apple-system,
+  Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+}
+
+.price-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.product-price {
+  font: 100 13px Proxima Nova,-apple-system,
+  Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+  display: flex;
+  margin: 0 40px 40px 0;
+  background-color: #0cce1c;
+  border-radius: 8px;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 7px 9px;
+  max-width: 150px;
+  min-width: 55px;
+  height: 45px;
+}
+
+.rating {
+  margin: 30px 0;
+  text-align: center;
+  width: 500px;
+  height: 200px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.250);
+  border-radius: 3px;
+}
+
+.rating textarea{
+  max-width: 450px;
+  max-height: 80px;
+  min-width: 450px;
+  min-height: 80px;
+}
+
+.rater-div{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  height: 50px;
+}
+
+.product-details-buttons {
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+
+.details-add-button {
+  background: linear-gradient(#3acde7, #089dca);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 15px;
   color: white;
+  cursor: pointer;
+  font: 600 22.5px Arial , Helvetica , sans-serif;
+  line-height: 23.94px;
+  padding: 20px 2px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 500px;
 }
 
-.App-link {
-  color: #61dafb;
+.details-shopping-cart-div {
+  border: 2px solid black;
+  padding: 2px 5px 0 2px;
+  border-radius: 8px;
+  background-color: rgb(236, 232, 232);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.shoppingcart-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 8px;
+  display: flex;
+  min-height: 750px;
+  margin: 100px auto;
+  width: 1000px;
+}
+
+.shoppingcart-content {
+  width: 900px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-flow: row;
+  margin: 20px 0 20px 0;
+  height: 220px;
+  background-color: rgb(255, 255, 255);
+}
+
+.detail-img-div {
+  display: flex;
+  justify-content: left;
+  height: 200px;
+  width: 400px;
+}
+
+.detail-img-div img {
+  width: 50%;
+}
+
+.right-content {
+  height: 250px;
+  text-align: right;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 
+  'Helvetica Neue', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.detail-price {
+  background-color: #0cce1c;
+  border-radius: 8px;
+  color: white;
+  display: flex;
+  font-size: 17px;
+  font-weight: 400;
+  justify-content: center;
+  padding: 9px 15px;
+  max-width: 115px;
+  min-width: 75px;
+}
+
+.price-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 20px;
+  font-weight: 600;
+}
+
+.quantity-div {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.quantity-div p{
+  margin: 0 10px;
+}
+
+.hr{
+  width: 900px;
+  margin-top: 35px;
+  border: 0.3px solid rgba(97, 96, 96, 0.125);
+}
+
+.details-backarrow-div{
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0 20px 0; 
+}
+
+.shoppingcart-submit{
+  background: linear-gradient(#0ed31e, #16ac23);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font: 600 16.5px Arial , Helvetica , sans-serif;
+  line-height: 23.94px;
+  padding: 8px 2px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 160px;
+}
+
+.checkout-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.425);
+  border-radius: 8px;
+  display: flex;
+  min-height: 750px;
+  margin: 100px auto;
+  width: 80%;
+  padding-top: 30px;
+}
+
+.checkout-top-content {
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 3px;
+  width: 90%;
+  padding-bottom: 30px;
+  padding-top: 15px;
+  margin-top: 30px;
+}
+
+.checkout-top-content h3{
+  margin-left: 25px;
+}
+
+.checkout-product-container {
+  display: flex;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+  Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  margin: 0 0 10px 15px;
+  width: 90%;
+  height: 70px;
+}
+
+.checkout-product-container img {
+  height: 50px;
+}
+
+.checkout-hr {
+  width: 96%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border: 0.3px solid rgba(97, 96, 96, 0.125);
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-flow: wrap column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 4px;
+  display: flex;
+  height: 250px;
+  margin: 30px auto;
+  width: 88%;
+  padding-bottom: 35px;
+  padding-left: 30px;
+}
+
+.form-container input{
+  height: 20px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.425);
+  padding: 3px;
+  margin: 0 7px;
+  width: 280px;
+  height: 30px;
+}
+
+.form-middle-content input {
+  width: 582px;
+}
+
+.payment-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-flow: wrap column;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.325);
+  border-radius: 4px;
+  display: flex;
+  height: 230px;
+  margin: 0px auto 30px auto;
+  width: 88%;
+  padding-bottom: 35px;
+  padding-left: 30px;
+}
+
+.payment-methods {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 95%;
+  height: 165px;
+}
+
+.boleto-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 125px;
+  height: 100px;
+  padding-right: 30px;
+}
+
+.card-div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 550px;
+  height: 100px;
+}
+
+.creditcard {
+  margin-left: 30px;
+}
+
+input[type=radio] {
+  border: 0px;
+  width: 20px;
+  height: 20px;
+}
+
+.checkout-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  margin-bottom: 20px;
+}
+
+.checkout-button {
+  background: linear-gradient(#0ed31e, #16ac23);
+  border: 1px solid rgb(80, 79, 79);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font: 600 16.5px Arial , Helvetica , sans-serif;
+  line-height: 23.94px;
+  padding: 8px 2px;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
+  width: 160px;
 }

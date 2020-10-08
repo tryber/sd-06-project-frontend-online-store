@@ -1,30 +1,64 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Search from './components/Search';
+import ShoppingCart from './components/ShoppingCart';
+import ProductDetails from './pages/ProductDetails';
+import Checkout from './pages/Checkout';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+
+    this.addItemCart = this.addItemCart.bind(this);
+    this.state = {
+      shoppingCart: [],
+    };
+  }
+
+  addItemCart(product) {
+    const { shoppingCart } = this.state;
+    this.setState({
+      shoppingCart: shoppingCart.concat(product),
+    });
+  }
+
+  render() {
+    const { shoppingCart } = this.state;
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={ (props) => <Search addItemCart={ this.addItemCart } { ...props } /> }
+          />
+          <Route
+            exact
+            path="/ShoppingCart"
+            render={
+              (props) => <ShoppingCart shoppingCart={ shoppingCart } { ...props } />
+            }
+          />
+          <Route
+            exact
+            path="/ProductDetails/:id"
+            render={
+              (props) => <ProductDetails addItemCart={ this.addItemCart } { ...props } />
+            }
+          />
+          <Route
+            exact
+            path="/Checkout"
+            render={
+              (props) => <Checkout { ...props } />
+            }
+          />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
+
 
 export default App;

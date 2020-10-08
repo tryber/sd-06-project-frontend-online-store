@@ -10,6 +10,7 @@ class ShoppingCart extends Component {
     };
 
     this.updatingCartListState = this.updatingCartListState.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +32,16 @@ class ShoppingCart extends Component {
     if (product.ammount === 1) return;
     product.ammount -= 1;
     const { cartList } = this.props;
+    this.setState({ cartList });
+  }
+
+  removeProduct(id) {
+    const { cartList } = this.props;
+    cartList.forEach((item, index) => {
+      if (item.id === id) {
+        cartList.splice(index, 1);
+      }
+    });
     this.setState({ cartList });
   }
 
@@ -56,6 +67,13 @@ class ShoppingCart extends Component {
             <p>
               {`R$ ${product.price}`}
             </p>
+            <button
+              type="button"
+              className="delete"
+              onClick={ () => this.removeProduct(product.id) }
+            >
+              X
+            </button>
             <span>
               Quantidade:
             </span>

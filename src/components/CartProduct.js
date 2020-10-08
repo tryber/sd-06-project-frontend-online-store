@@ -3,22 +3,25 @@ import PropTypes from 'prop-types';
 
 class CartProduct extends React.Component {
   render() {
-    const { cartProduct, cartQuantity } = this.props;
+    const { quantity } = this.state;
+    const { cartProduct } = this.props;
     const { title, thumbnail } = cartProduct;
     return (
       <div>
         <h1 data-testid="shopping-cart-product-name">{title}</h1>
         <img src={ thumbnail } alt="Foto do produto" />
-        <p data-testid="shopping-cart-product-quantity">{ cartQuantity }</p>
+        <p data-testid="shopping-cart-product-quantity">{ quantity }</p>
         <button
           type="button"
           data-testid="product-decrease-quantity"
+          onClick={ this.decreaseQuantity }
         >
           -
         </button>
         <button
           type="button"
           data-testid="product-increase-quantity"
+          onClick={ this.increaseQuantity }
         >
           +
         </button>

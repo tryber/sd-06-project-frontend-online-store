@@ -9,21 +9,31 @@ import ShoppingCart from './pages/ShoppingCart';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cartProducts: [], cartQuantity: 0 };
+    this.state = { cartProducts: [], quantity: [] };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
+
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
   }
 
   handleAddProduct(newProduct) {
     this.setState((state) => ({
       cartProducts: state.cartProducts.concat(newProduct),
-      cartQuantity: state.cartQuantity + 1,
     }
     ));
   }
 
+  decreaseQuantity() {
+    console.log('click');
+  }
+
+  increaseQuantity() {
+    console.log('click');
+  }
+
   render() {
-    const { cartProducts, cartQuantity } = this.state;
+    const { cartProducts } = this.state;
 
     return (
       <BrowserRouter>
@@ -51,7 +61,6 @@ class App extends React.Component {
               { ...props }
               addToCart={ this.handleAddProduct }
               cartProducts={ cartProducts }
-              cartQuantity={ cartQuantity }
             />) }
           />
         </Switch>

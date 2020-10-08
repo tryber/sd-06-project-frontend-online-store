@@ -6,7 +6,7 @@ import CartProduct from './CartProduct';
 
 class ShoppingList extends React.Component {
   render() {
-    const { addToCart, cartProducts, cartQuantity } = this.props;
+    const { addToCart, cartProducts } = this.props;
 
     if (cartProducts.length < 1) {
       return (
@@ -21,7 +21,6 @@ class ShoppingList extends React.Component {
             key={ cartProduct.id }
             cartProduct={ cartProduct }
             addToCart={ addToCart }
-            cartQuantity={ cartQuantity }
           />
         ))}
       </div>

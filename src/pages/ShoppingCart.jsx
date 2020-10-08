@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 
 class ShoppingCart extends React.Component {
@@ -15,13 +16,12 @@ class ShoppingCart extends React.Component {
   
   render() {
     const { cartItems } = this.state;
-    console.log(cartItems);
     if (cartItems.length > 0) {
       return (
         <section>
           <section>
             {cartItems.map((item) => (
-              <section className="card">
+              <section className="card-in-cart" style={{maxWidth: "300px", border: "solid black 1px", padding: "5px"}}>
                 <button>Remover Item</button>
                 <div className="item-description">
                   <h4 data-testid="shopping-cart-product-name" key={item.id}>
@@ -31,7 +31,8 @@ class ShoppingCart extends React.Component {
                 </div>
                 <div>
                   <button data-testid="product-increase-quantity">Mais</button>
-                  <button data-testid="product-decreate-quantity">Menos</button>
+                  <span data-testid="shopping-cart-product-quantity"> 1 </span>
+                  <button data-testid="product-decrease-quantity">Menos</button>
                 </div>
               </section>
             ))}
@@ -53,5 +54,7 @@ class ShoppingCart extends React.Component {
   }
 
 }
+
+ShoppingCart.propTypes = { cartItems: PropTypes.array }
 
 export default ShoppingCart;

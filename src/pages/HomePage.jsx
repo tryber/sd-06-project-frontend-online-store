@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import SearchBar from './SearchBar';
-import ProductList from './ProductList';
+import React from 'react';
+import SearchBar from '../components/SearchBar';
+import ProductList from '../components/ProductList';
 import CategoryDisplay from '../components/CategoryDisplay';
 import * as api from '../services/api';
 import ShoppingCartButton from '../components/ShoppingCartButton';
 
-class HomePage extends Component {
+class HomePage extends React.Component {
   constructor() {
     super();
 
-    this.filterCard = this.filterCard.bind(this);
+    this.filterCards = this.filterCards.bind(this);
     this.messageOnChange = this.messageOnChange.bind(this);
 
     this.state = {
@@ -22,7 +22,7 @@ class HomePage extends Component {
     this.setState({ message: message });
   };
 
-  async filterCard(category, searchText) {
+  async filterCards(category, searchText) {
     let myMessage = 'Carregando...';
     this.setState(
       { message: myMessage },
@@ -43,26 +43,25 @@ class HomePage extends Component {
   render() {
     const { message, products } = this.state;
     return (
-      <div className="home">
-        <header className="app-header">
-          <img className="logo" src={logo} alt="Logo da Trybe" />
-          <div className="search-bar">
+      <div>
+        <header>
+          <div>
             <h1>Project - Front-End Online Store! </h1>
-            <SearchBar onFilter={this.filterProducts} msgChange={this.messageOnChange} />
-            <h5 data-testid="home-initial-message" className="message">{message}</h5>
+            <SearchBar onFilter={this.filterCards} msgChange={this.messageOnChange} />
+            <h5 data-testid="home-initial-message" >{message}</h5>
           </div>
-          <div className="my-cart">
+          <div>
             <ShoppingCartButton />
           </div>
         </header>
 
-        <main className="main-container">
-          <CategoryList onFilter={this.filterProducts} />
-          <ProductList products={ products } />
+        <main>
+          <CategoryDisplay onFilter={this.filterCards} />
+          <ProductList items={ products } />
         </main>
       </div>
     );
   }
 }
   
-export default Home;
+export default HomePage;

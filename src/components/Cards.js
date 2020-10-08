@@ -2,35 +2,37 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
 
-class ProductCard extends React.Component {
+class Cards extends React.Component {
   constructor() {
     super();
-    this.changeStateRedirect = this.changeStateRedirect.bind(this);
-
+    this.redirectPage = this.redirectPage.bind(this);
     this.state = { shouldRedirect: false };
   }
 
-  changeStateRedirect() {
+  redirectPage() {
     this.setState({ shouldRedirect: true });
   }
 
   render() {
     const { item } = this.props;
+
     const { title, thumbnail, price } = item;
     const { shouldRedirect } = this.state;
     if (shouldRedirect) {
       return (
-        <Redirect to={{ pathname: "/productdetail", state: { product: product }}} />
+        <Redirect to={{
+          pathname: "CardDetail",
+          state: { product: item }}} />
       );
     }
     
     return (
       <div data-testid="product">
-        <div data-testid="product-detail-link" onClick={ this.changeStateRedirect } >
+        <div data-testid="product-detail-link" onClick={ this.redirectPage } >
           <img alt="{item.title}" src={ thumbnail } />
           <div>
             <p>{title}</p>
-            <p>{`R$ ${(price).toFixed(2)}`}</p>
+            <p>{`R$ ${(price)}`}</p>
           </div>
         </div>
         <div>
@@ -41,4 +43,4 @@ class ProductCard extends React.Component {
   }
 }
   
-export default ProductCard;
+export default Cards;

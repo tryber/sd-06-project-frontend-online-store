@@ -1,85 +1,69 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Cards from '../components/Cards';
-import ProductEvaluation from '../components/PorductEvaluation';
-import ListEvaluation from '../components/ListEvaluation';
+import ShoppingCartButton from '../components/ShoppingCartButton';
+import AddToCartButton from '../components/AddToCartButton';
+import Evaluator from '../components/Evaluator';
+import SavedComments from '../components/SavedComments';
 
 class CardDetail extends React.Component {
-  constructor(props) {
-    super(props);
-    const {
-      location: {
-        state: {
-          product,
-          cartList
-        }
-      }
-    } = this.props;
+  constructor() {
+    super();
+
+    this.loadStateFromEvaluation = this.loadStateFromEvaluation.bind(this);
+
     this.state = {
-      cartList,
-      product,
-    };
-    this.renderDetails = this.renderDetails.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-  }
-  addToCart(item) {
-    const { cartList } = this.state;
-    const ourProduct = item;
-    if (cartList[item.id]) {
-      cartList[item.id].quantity += 1;
-      this.setState({ cartList });
-    } else {
-      this.setState({ cartList: { ...cartList, [item.id]: item } });
-      ourProduct.quantity = 1;
+      product: undefined,
+      evaluations: undefined,
     }
   }
 
-  renderDetails() {
-    const { product, cartList } = this.state;
-    const { title, quantity, thumbnail, price, id } = product;
+  componentDidMount(props){
+    const product = this.props.location.state.product;
+    this.setState({ product })
+    this.loadStateFromEvaluation();
+    // console.log(evaluations);
+  }
 
+  loadStateFromEvaluation() {
+    const evaluations = JSON.parse(localStorage.getItem('myEvaluations') || '[]');
+    this.setState({ evaluations })
+  }
 
+  showDetails(product) {
+    const { title, thumbnail, price } = product;
     return (
       <div>
-        <Link to={ { pathname: '/', state: { cartList } } }>voltar</Link>
-        <Cards cartList={ cartList } />
-        <div data-testid="product-detail-name">{title}</div>
-        <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => this.addToCart(product) }
-        >
-          Adicionar
-        </button>
-        <div data-testid="product-detail-quantity">
-          <span className="decrease-quantity"> - </span>
-          quantidade:
-          {quantity}
-          <span className="increase-quantity"> + </span>
+        <img alt="Product" src={ thumbnail } />
+        <div className="product-card-body">
+          <h4 data-testid="product-detail-name">{title}</h4>
+          <p>{`R$ ${(price).toFixed(2)}`}</p>
+          <p></p>
         </div>
-        <div>{price}</div>
-        <img src={ thumbnail } alt="product" />
-        <ProductEvaluation productId={ id } />
-        <ListEvaluation productId={ id } />
+        <AddToCartButton product={ product } testId="product-detail-add-to-cart" />
+      </div>
+    )
+  }
+
+  render() {
+    const { product, evaluations } = this.state;
+    // console.log(product);
+    
+    return (
+      <div>
+        <div className="product-card" >
+          {product ? this.showDetails(product) : null}
+        </div>
+        {product ? <Evaluator evaluation={this.loadStateFromEvaluation} productId={product.id}/> : null}
+        <br/>
+        <ShoppingCartButton />
+        <Link to="/">Voltar</Link>
+        <div>
+          {evaluations ? evaluations.map((item, index) =>
+            <SavedComments key={index} evaluation={item}/>) : null}
+        </div>
       </div>
     );
   }
-  render() {
-    return this.renderDetails();
-  }
 }
-CardDetail.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      cartList: PropTypes.objectOf(PropTypes.any).isRequired,
-      product: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        thumbnail: PropTypes.string.isRequired,
-        price: PropTypes.number.isRequired,
-        id: PropTypes.string.isRequired,
-      }),
-    }).isRequired,
-  }).isRequired,
-};
+
 export default CardDetail;

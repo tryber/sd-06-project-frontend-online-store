@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ShoppingCart from './pages/ShoppingCart';
 import CardDetail from './pages/CardDetail';
-import ClosePurchase from './pages/ClosePurchase';
+import CheckOut from './pages/CheckOut';
 import HomePage from './pages/HomePage';
 import './App.css';
 
@@ -15,7 +15,7 @@ class App extends Component {
             <Route exact path="/" component={ HomePage } />
             <Route path="/shoppingcart" component={ ShoppingCart } />
             <Route path="/CardDetail" component={ CardDetail } />
-            <Route path="/closepurchase" component={ ClosePurchase } />
+            <Route path="/CheckOut" component={ CheckOut } />
           </Switch>
         </BrowserRouter>
       </div>

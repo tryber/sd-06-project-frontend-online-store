@@ -4,16 +4,55 @@ import PropTypes from 'prop-types';
 import ListCategories from '../components/ListCategories';
 import ShoppingCartButton from '../components/ShoppingCartButton';
 import ProductCard from '../components/ProductCard';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      query: '',
+      products: [],
+      isFail: false,
+      categoryId: '',
+    };
+    this.handleInputSearchChange = this.handleInputSearchChange.bind(this);
+    this.handleClickSearchButton = this.handleClickSearchButton.bind(this);
+    this.handleListCategories = this.handleListCategories.bind(this);
+  }
+
+  async handleClickSearchButton() {
+    const { query, categoryId } = this.state;
+    const valueFromApi = await getProductsFromCategoryAndQuery(categoryId, query);
+    valueFromApi.results.forEach((element) => { element.ammount = 0; });
+    const emptyArray = 0;
+    if (valueFromApi.results.length === emptyArray) {
+      this.setState({
+        isFail: true,
+        products: [],
+      });
+    } else {
+      this.setState({
+        products: valueFromApi.results,
+        isFail: false,
+      });
+    }
+  }
+
+  handleInputSearchChange({ target }) {
+    const { value } = target;
+    this.setState({ query: value });
+  }
+
+  handleListCategories(id) {
+    const value = id;
+    this.setState({ categoryId: value }, async () => {
+      await this.handleClickSearchButton();
+    });
+  }
+
   render() {
-    const {
-      handleInputSearchChange,
-      handleClickSearchButton,
-      handleListCategories,
-      handleAddCart,
-    } = this.props;
-    const { products, cartList, isFail } = this.props;
+    const { handleAddCart } = this.props;
+    const { products, isFail } = this.state;
 
     return (
       <main>
@@ -25,23 +64,22 @@ class Home extends Component {
           <input
             name="query"
             data-testid="query-input"
-            onChange={ handleInputSearchChange }
+            onChange={ this.handleInputSearchChange }
           />
         </label>
         <button
           type="button"
           data-testid="query-button"
-          onClick={ handleClickSearchButton }
+          onClick={ this.handleClickSearchButton }
         >
           BUSCAR
         </button>
         <div>
-          <ListCategories handleListCategories={ handleListCategories } />
+          <ListCategories handleListCategories={ this.handleListCategories } />
         </div>
         <ShoppingCartButton />
         <ProductCard
           products={ products }
-          cartList={ cartList }
           isFail={ isFail }
           handleAddCart={ handleAddCart }
         />

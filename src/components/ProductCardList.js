@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AddCartButton from './AddCartButton';
 
-class ProductCard extends Component {
+class ProductCardList extends Component {
   render() {
     const { products, isFail, handleAddCart } = this.props;
 
@@ -36,9 +36,9 @@ class ProductCard extends Component {
   }
 }
 
-export default ProductCard;
+export default ProductCardList;
 
-ProductCard.propTypes = {
+ProductCardList.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object),
   isFail: PropTypes.bool,
 }.isRequired;

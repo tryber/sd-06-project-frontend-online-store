@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-
-class ShoppingCartButton extends React.Component {
+class MyCart extends React.Component {
   render() {
-    const { addtoCart } = this.props;
-
     return (
-      <section>
-        <Link data-testid="shopping-cart-button" to={{
-          pathname: "/shoppingcart",
-          cartItems: addtoCart,
-        }}>Carrinho de compras</Link>
-      </section>
-    )
+      <button type="button" className="my-button">
+        <Link to="/shoppingcart" data-testid="shopping-cart-button" />
+      </button>
+    );
   }
-
 }
-
-export default ShoppingCartButton;
+  
+export default MyCart;

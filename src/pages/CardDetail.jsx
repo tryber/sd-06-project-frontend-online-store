@@ -1,73 +1,85 @@
 import React from 'react';
-import ShoppingCartButton from '../components/ShoppingCartButton';
-import Stars from '../components/Stars';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import Cards from '../components/Cards';
+import ProductEvaluation from '../components/PorductEvaluation';
+import ListEvaluation from '../components/ListEvaluation';
 
 class CardDetail extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    const {
+      location: {
+        state: {
+          product,
+          cartList
+        }
+      }
+    } = this.props;
     this.state = {
-      cart: [],
+      cartList,
+      product,
     };
-    this.addtoCart = this.addtoCart.bind(this);
-}
-  addtoCart() {
-    const cartItems = this.props.location.cart;
-    const item = this.props.location.state;
-    this.setState({ cart: [...cartItems, item]});
+    this.renderDetails = this.renderDetails.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
-  render() {
-    const { title, thumbnail, price, attributes } = this.props.location.state;
-    const { cart } = this.state;
+  addToCart(item) {
+    const { cartList } = this.state;
+    const ourProduct = item;
+    if (cartList[item.id]) {
+      cartList[item.id].quantity += 1;
+      this.setState({ cartList });
+    } else {
+      this.setState({ cartList: { ...cartList, [item.id]: item } });
+      ourProduct.quantity = 1;
+    }
+  }
+
+  renderDetails() {
+    const { product, cartList } = this.state;
+    const { title, quantity, thumbnail, price, id } = product;
+
+
     return (
       <div>
-        <div className="item-description">
-          <section className="description">
-            <h2>Produto:</h2>
-            <h3 data-testid="product-detail-name">{title}</h3>
-            <h2>Preço:</h2>
-            <h3>R$ {price}</h3>
-            <img className="item-image" src={thumbnail} alt={title}></img>
-            <button
-            type="button"
-            data-testid="product-detail-add-to-cart"
-            onClick={ () => { this.addtoCart(); } }
-          >
-            Add to Cart
-          </button>
-          </section>
-          <section className="description">
-            <h2>Especificações Técnicas:</h2>
-            {attributes.map(attribute => <h3>{attribute.name}: {attribute.value_name}</h3>)}
-          </section>
-          <section className="shopping-car-button">
-            <ShoppingCartButton addtoCart={ cart } />
-          </section>
+        <Link to={ { pathname: '/', state: { cartList } } }>voltar</Link>
+        <Cards cartList={ cartList } />
+        <div data-testid="product-detail-name">{title}</div>
+        <button
+          type="button"
+          data-testid="product-detail-add-to-cart"
+          onClick={ () => this.addToCart(product) }
+        >
+          Adicionar
+        </button>
+        <div data-testid="product-detail-quantity">
+          <span className="decrease-quantity"> - </span>
+          quantidade:
+          {quantity}
+          <span className="increase-quantity"> + </span>
         </div>
-        <div className="formDeAvaliacao">
-          <form action="">
-            <div className="quantidade">
-              <button>-</button>
-              <label>0</label>
-              <button>+</button>
-              <button>Adicionar ao Carrinho</button><br />
-            </div>
-            <div className="avaliacao">
-              <Stars />
-              <label>Avaliações</label><br />
-              <div className="textos"><br />
-                <input type="email" name="" id="" placeholder="Email"/><br />
-                <input type="text" name="" id="" data-testid="product-detail-evaluation" placeholder="Mensagem (Opcional)"/><br />
-                <input type="submit" value="Avaliar"/>
-              </div>
-            </div>
-
-          </form>
-
-        </div>
+        <div>{price}</div>
+        <img src={ thumbnail } alt="product" />
+        <ProductEvaluation productId={ id } />
+        <ListEvaluation productId={ id } />
       </div>
-    )
+    );
+  }
+  render() {
+    return this.renderDetails();
   }
 }
-
-
+CardDetail.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      cartList: PropTypes.objectOf(PropTypes.any).isRequired,
+      product: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        thumbnail: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
+      }),
+    }).isRequired,
+  }).isRequired,
+};
 export default CardDetail;

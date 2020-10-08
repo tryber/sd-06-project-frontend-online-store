@@ -4,6 +4,7 @@ import MainPage from './MainPage';
 import './App.css';
 import ShoppingCartPage from './ShoppingCartPage';
 import ProductDetails from './ProductDetails';
+import Checkout from './Checkout';
 
 class App extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class App extends React.Component {
           <Route exact path="/" component={ MainPage } />
           <Route path="/shoppingcart" component={ ShoppingCartPage } />
           <Route path="/productdetails/:id/" component={ ProductDetails } />
+          <Route path="/checkout" component={ Checkout } />
         </Switch>
       </BrowserRouter>
     );

@@ -7,7 +7,7 @@ class Product extends React.Component {
     const { title, price, image, id, product } = this.props;
     return (
       <div data-testid="product" className="div-product">
-        <img src={ image } alt="Product" />
+        <img src={ image } alt={ title } />
         {
           (product.shipping.free_shipping)
             ? <p data-testid="free-shipping">Frete Grátis</p>

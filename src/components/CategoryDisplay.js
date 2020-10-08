@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types'
 import * as api from '../services/api';
 
 class CategoryDisplay extends React.Component {
@@ -43,6 +44,10 @@ class CategoryDisplay extends React.Component {
       </div>
     );
   }
+}
+
+CategoryDisplay: PropTypes = {
+  onFilter: PropTypes.function.isRequired,
 }
 
 export default CategoryDisplay;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
 
@@ -44,17 +45,12 @@ class Cards extends React.Component {
   }
 }
 
-Cards.prop-Types = {
-  item: PropTypes.exact({
-    id: PropTypes.number.isRequired,
+Cards: PropTypes.arrayOf(
+  PropTypes.shape({
     title: PropTypes.string.isRequired,
-    subtitle: PropTypes.string.isRequired,
-    storyline: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    imagePath: PropTypes.string.isRequired,
-    bookmarked: PropTypes.bool.isRequired,
-    genre: PropTypes.string.isRequired, 
-  }).isRequired,
-};
+    thumbnail: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  })
+)
 
 export default Cards;

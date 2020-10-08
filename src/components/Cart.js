@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 class Cart extends React.Component {
@@ -26,16 +27,22 @@ class Cart extends React.Component {
     return (
       <div>
         <Link
+
           data-testid="shopping-cart-button"
           to={ { pathname: '/cart', state: cartList } }
         >
-          carrinho
+          <button type="button" className="icon-bars">
+            <span className="popup__cart_quantity" data-testid="shopping-cart-size">
+              {
+                this.sumAllCartItemsQuantity(cartList)
+              }
+            </span>
+            <FontAwesomeIcon icon="shopping-cart" />
+          </button>
+
         </Link>
-        <span data-testid="shopping-cart-size">
-          {
-            this.sumAllCartItemsQuantity(cartList)
-          }
-        </span>
+
+
       </div>
 
     );

@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 
 class CategoryList extends React.Component {
   render() {
-    const { categories, handleSelect } = this.props;
+    const { categories, handleSelect, showSideBar } = this.props;
     const empty = 0;
 
     return (
-      <section className="category-list">
+      <section
+        className={ showSideBar ? 'category-list-active' : 'category-list' }
+      >
         {(categories.length > empty)
           ? categories
             .map((category) => (

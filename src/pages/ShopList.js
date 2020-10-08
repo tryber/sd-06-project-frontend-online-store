@@ -1,8 +1,9 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+
 import * as api from '../services/api';
-import { CategoryList, RenderProduct, Cart } from '../components';
+import { CategoryContainer, RenderProduct } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class ShopList extends React.Component {
       cartList: currentCart,
       selectedCategory: '',
       loading: false,
+
     };
   }
 
@@ -99,27 +101,22 @@ class ShopList extends React.Component {
 
     return (
       <section className="wrapper-category-shoplist">
-        <CategoryList categories={ categories } handleSelect={ this.handleSelect } />
-        <div data-testid="home-initial-message">
-          <input data-testid="query-input" type="text" onChange={ this.handleChange } />
-          Digite algum termo de pesquisa ou escolha uma categoria.
-          <button
-            data-testid="query-button"
-            onClick={ this.handleClick }
-            type="button"
-          >
-            Pesquisar
-          </button>
-          <Cart cartList={ cartList } />
-          <div className="productsList">
-            <RenderProduct
-              loading={ loading }
-              products={ products }
-              addToCart={ this.addToCart }
-              cartList={ cartList }
-            />
-          </div>
+        <CategoryContainer
+          handleSelect={ this.handleSelect }
+          categories={ categories }
+          cartList={ cartList }
+        />
+
+
+        <div className="productsList">
+          <RenderProduct
+            loading={ loading }
+            products={ products }
+            addToCart={ this.addToCart }
+            cartList={ cartList }
+          />
         </div>
+
       </section>
     );
   }

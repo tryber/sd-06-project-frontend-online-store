@@ -1,16 +1,6 @@
-.wrapper-category-shoplist {
-  display: flex;
-  flex-flow: row nowrap;
-  padding: 18px;
-}
 
-.category-list {
-  border: 1px solid black;
-  border-radius: 12px;
-  margin: 0 20px;
-  width: 28%;
-  padding: 10px 20px;
-}
+
+
 
 .category-list label {
   display: block;
@@ -20,6 +10,7 @@
 .productsList {
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 }
 
 .red {
@@ -36,6 +27,8 @@
 .checkout-form input {
   margin: 0 10px;
 }
+
+
 
 .red {
   border: 1px solid red;

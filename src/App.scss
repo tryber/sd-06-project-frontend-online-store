@@ -1,8 +1,96 @@
+  .nav-bar {
+    display:grid;
+    grid-template-columns: 40px 1fr ;
+    width:100%;
+    max-width:1200px; 
+    position:sticky;
+    margin:auto;
+    
+    z-index: 1000;
+  }
+
+  .search-container {
+    display: grid;
+    grid-template-columns: 1fr 40px 40px 40px;  
+    
+    
+    
+  }
+
+  
+
+  .searchBar {
+    
+    border:1px solid rgb(3, 104, 205);
+    border-right: none;
+  }
+
+  
+
+  .button__inSearch {
+    border-left: none;
+    border-right: none;
+    background-color:#fff;
+    border-top:1px solid rgb(3, 104, 205);
+    border-bottom: 1px solid rgb(3, 104, 205);
+    
+    
+    
+  }
+
+  
+
+  .popup__cart_quantity {
+    display:block;
+    font-size: 12px;
+    position: relative;
+    background-color: rgb(3, 104, 205);
+    border-radius: 50%;
+    color: #fff;
+    padding: 4px;
+    
+  }
+
+  
+
+  .icon-bars {
+    background-color: rgb(255,255,255);
+    
+    width: 40px;
+    height: 40px;
+  }  
+
+  .category-list-active {
+    display: grid;
+    font-size: 14px;
+    font-family: Helvetica;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(40px);
+    row-gap: 10px;
+    position: absolute;
+    z-index: 1000;
+    top:40px;
+    transition: .3s;
+    
+    color: #000;
+    
+    background-color: rgba(250, 250, 250, 0.98);
+    height: auto;
+    overflow-y: scroll;
+    padding:20px;
+    max-height: 1000px;
+  }
+
+
+
+
+
+
 .productCard {
   box-shadow: 1px solid grey;
   display: grid;
   grid-template-columns:1fr ;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 60px 40px;
   margin: 12px;
   height: 300px;
   width: 240px;
@@ -13,6 +101,9 @@
   }
 
   .product__title {  
+    
+    top:10px;
+    
     font-size: 18px;
     max-height: 36px;
     line-height: 24px;
@@ -39,6 +130,7 @@
   .product__shipping {
     color: green;
     font-style: italic;
+    position: relative;
   }
 
   .buttons-container {
@@ -60,6 +152,8 @@
       position: relative;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     }
+
+    
 
     .button__add_to_cart {
       background: linear-gradient(rgb(103, 174, 85), rgb(87, 136, 67));
@@ -85,16 +179,19 @@
   }
 
   .zoom {
-    transition: .4s;
+    transition: .2s;
+    
 
   }
 
   .zoom:hover {
     transform: scale(1.1);
+    margin:0;
     width:auto;
     height: 120px;
     object-fit: cover;
     object-position: 50% 50%;
+    position:relative;
   }
 
 }
@@ -103,4 +200,42 @@
   
   box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.085);
   
+}
+
+.filter-container {
+  position: relative;
+  display:flex;
+  justify-content: center;
+}
+
+.filter__button {
+  width:100%;
+}
+
+.dropdown {
+  display: none;
+  
+}
+
+.item {
+  margin:0;
+}
+
+.item:hover {
+  background-color: #000;
+  cursor: pointer;
+  color: #fff;
+  transition: .7s;
+}
+
+.dropdown-active {
+  
+  display: block;
+  position: absolute;
+  border: 1px solid gray;
+  min-width: 200px;
+  top:40px;
+  right:1px;
+  padding: 5px;
+  position: absolute;
 }

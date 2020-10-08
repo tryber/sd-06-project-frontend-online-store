@@ -78,21 +78,21 @@ class ShoppingCart extends Component {
               Quantidade:
             </span>
             <button
-              data-testid="product-increase-quantity"
-              type="button"
-              onClick={ () => this.handleIncreaseAmmount(product) }
-            >
-              +
-            </button>
-            <span data-testid="shopping-cart-product-quantity">
-              {product.ammount}
-            </span>
-            <button
               data-testid="product-decrease-quantity"
               type="button"
               onClick={ () => this.handleDecreaseAmmount(product) }
             >
               -
+            </button>
+            <span data-testid="shopping-cart-product-quantity">
+              {product.ammount}
+            </span>
+            <button
+              data-testid="product-increase-quantity"
+              type="button"
+              onClick={ () => this.handleIncreaseAmmount(product) }
+            >
+              +
             </button>
           </div>
         ))}

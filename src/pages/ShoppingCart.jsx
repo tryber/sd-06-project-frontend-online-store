@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
 
 class ShoppingCart extends React.Component {
   constructor(props) {
@@ -54,7 +52,5 @@ class ShoppingCart extends React.Component {
   }
 
 }
-
-ShoppingCart.propTypes = { cartItems: PropTypes.array }
 
 export default ShoppingCart;

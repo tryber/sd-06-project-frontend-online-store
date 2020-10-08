@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types';
+import boleto from '../img/boleto.jpeg';
+import cartao from '../img/cartao.jpeg';
 
 class Checkout extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      produtos: [],
     };
   }
 
@@ -19,7 +21,7 @@ class Checkout extends React.Component {
           {produtos.map((item) => (
             <div key={ this.id }>
               <div className="checkout-product-container">
-                <img src={item.product.thumbnail}/>
+                <img src={ item.product.thumbnail } alt="imagem do procuto" />
                 <h3>{item.product.title}</h3>
                 <h4>{item.product.price}</h4>
               </div>
@@ -55,7 +57,11 @@ class Checkout extends React.Component {
                 <label htmlFor="boleto">
                   <input id="boleto" type="radio" name="boleto" />
                 </label>
-                <img src={require("../img/boleto.jpeg")} width='100' />
+                <img
+                  src={ boleto }
+                  width="100"
+                  alt="imagem de boleto"
+                />
               </div>
             </div>
             <div className="creditcard">
@@ -65,17 +71,17 @@ class Checkout extends React.Component {
                   <input id="visa" type="radio" name="card" />
                   Visa
                 </label>
-                <img src={require("../img/cartao.jpeg")} width='100' />
+                <img src={ cartao } width="100" alt="imagem de cartao" />
                 <label htmlFor="mastercard">
                   <input id="mastercard" type="radio" name="card" />
                   Mastercard
                 </label>
-                <img src={require("../img/cartao.jpeg")} width='100' />
+                <img src={ cartao } width="100" alt="imagem de cartao" />
                 <label htmlFor="elo">
                   <input id="elo" type="radio" name="card" />
                   Elo
                 </label>
-                <img src={require("../img/cartao.jpeg")} width='100' />
+                <img src={ cartao } width="100" alt="imagem de cartao" />
               </div>
             </div>
           </div>
@@ -95,5 +101,9 @@ class Checkout extends React.Component {
   }
 }
 
+Checkout.propTypes = {
+  location: propTypes.arrayOf(propTypes.object).isRequired,
+  state: propTypes.string.isRequired,
+};
 
 export default Checkout;

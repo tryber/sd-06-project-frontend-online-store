@@ -46,8 +46,7 @@ class CardDetail extends React.Component {
 
   render() {
     const { product, evaluations } = this.state;
-    // console.log(product);
-    
+ 
     return (
       <div>
         <div className="product-card" >

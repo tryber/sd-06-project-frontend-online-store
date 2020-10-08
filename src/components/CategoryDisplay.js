@@ -8,7 +8,7 @@ class CategoryDisplay extends React.Component {
     this.handleClick = this.handleClick.bind(this);
 
     this.state = {
-      products: [],
+    //  products: [],
       categories: [],
     };
   }
@@ -30,7 +30,7 @@ class CategoryDisplay extends React.Component {
       <div className="category-container">
         <h3>Escolha a categoria:</h3>
         {categories.map((category) => (
-          <div key={ category.id } >
+          <div key={ category.id }>
             <input
               type="radio"
               name="categories"
@@ -41,7 +41,7 @@ class CategoryDisplay extends React.Component {
             <label htmlFor={ category.id }>{ category.name }</label>
           </div>))}
       </div>
-    )
+    );
   }
 }
 

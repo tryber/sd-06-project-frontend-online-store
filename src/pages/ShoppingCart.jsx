@@ -15,17 +15,24 @@ class ShoppingCart extends React.Component {
   
   render() {
     const { cartItems } = this.state;
-
+    console.log(cartItems);
     if (cartItems.length > 0) {
       return (
         <section>
           <section>
             {cartItems.map((item) => (
               <section className="card">
-                <h4 data-testid="shopping-cart-product-name" key={item.id}>
-                  {item.title}
-                </h4>
-                <img className="card-image" src={ item.thumbnail } alt="Item" />
+                <button>Remover Item</button>
+                <div className="item-description">
+                  <h4 data-testid="shopping-cart-product-name" key={item.id}>
+                    {item.title}
+                  </h4>
+                  <img className="card-image" src={ item.thumbnail } alt="Item" />
+                </div>
+                <div>
+                  <button data-testid="product-increase-quantity">Mais</button>
+                  <button data-testid="product-decreate-quantity">Menos</button>
+                </div>
               </section>
             ))}
             <h5 data-testid="shopping-cart-product-quantity">Item Count: {cartItems.length}</h5>

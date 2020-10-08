@@ -18,9 +18,15 @@ class App extends React.Component {
 
   addItemCart(product) {
     const { shoppingCart } = this.state;
+    // const { id } = product;
+    const index = shoppingCart.findIndex((product) => product);
+    console.log(index);
+    console.log(shoppingCart);
+    localStorage.setItem("product", JSON.stringify(product));
     this.setState({
       shoppingCart: shoppingCart.concat(product),
     });
+    console.log(shoppingCart);
   }
 
   render() {

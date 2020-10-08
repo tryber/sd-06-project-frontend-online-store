@@ -109,3 +109,28 @@
   font-size: 20px;
   margin-bottom: 15px;
 }
+
+.cart-container {
+  height: 50px;
+  position: relative;
+}
+
+.cart-img {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.cart-size {
+  align-items: center;
+  background-color: tomato;
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  left: 30px;
+  position: absolute;
+  top: 0;
+  width: 25px;
+}

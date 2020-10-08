@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Product } from '../components';
-import shoppingCart from '../images/shopping-cart.png';
+import PropTypes from 'prop-types';
+import { Product, ShoppingCart } from '../components';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../App.css';
 
@@ -15,21 +14,33 @@ class ProductList extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleQuery = this.handleQuery.bind(this);
+    this.updateCart = this.updateCart.bind(this);
+    this.setTotalItems = this.setTotalItems.bind(this);
 
     this.state = {
       categories: [],
       selectedCategoryId: '',
       searchText: '',
       products: [],
+      totalItems: 0,
     };
   }
 
   componentDidMount() {
     this.getCategoriesFromApi();
+    this.setTotalItems();
   }
 
   onSearchTextChange({ target }) {
     this.setState({ searchText: target.value });
+  }
+
+  setTotalItems() {
+    const { location } = this.props;
+    const { totalFromDetails } = location;
+    if (totalFromDetails) {
+      this.setState({ totalItems: totalFromDetails });
+    }
   }
 
   async getCategoriesFromApi() {
@@ -43,6 +54,10 @@ class ProductList extends React.Component {
       selectedCategoryId, searchText,
     );
     this.setState({ products: requestReturn.results });
+  }
+
+  updateCart() {
+    this.setState((state) => ({ totalItems: state.totalItems + 1 }));
   }
 
   handleQuery({ target }) {
@@ -75,12 +90,18 @@ class ProductList extends React.Component {
   }
 
   renderProducts() {
-    const { products } = this.state;
-    return <Product products={ products } />;
+    const { products, totalItems } = this.state;
+    return (
+      <Product
+        products={ products }
+        updateCart={ this.updateCart }
+        totalItems={ totalItems }
+      />
+    );
   }
 
   render() {
-    const { products } = this.state;
+    const { products, totalItems } = this.state;
     return (
       <div>
         <header className="header-container">
@@ -99,12 +120,7 @@ class ProductList extends React.Component {
             >
               Busca
             </button>
-            <Link
-              to="/cart"
-              data-testid="shopping-cart-button"
-            >
-              <img src={ shoppingCart } height="50" alt="carrinho de compras" />
-            </Link>
+            <ShoppingCart totalItems={ totalItems } />
           </nav>
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -122,5 +138,9 @@ class ProductList extends React.Component {
     );
   }
 }
+
+ProductList.propTypes = {
+  location: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default ProductList;

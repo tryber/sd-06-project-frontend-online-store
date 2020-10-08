@@ -9,7 +9,7 @@ class ProductCard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(item) {
+  handleClick(item, condition) {
     const cart = [];
     const items = JSON.parse(localStorage.getItem('cart'));
     if (items) {
@@ -18,10 +18,14 @@ class ProductCard extends React.Component {
       cart.push(item);
     }
     localStorage.setItem('cart', JSON.stringify(cart));
+    const { updateCart } = this.props;
+    if (condition) {
+      updateCart();
+    }
   }
 
   render() {
-    const { title, thumbnail, price, details } = this.props;
+    const { title, thumbnail, price, details, totalItems: items } = this.props;
     return (
       <div data-testid="product" className="product-card">
         <h3>{title}</h3>
@@ -32,6 +36,7 @@ class ProductCard extends React.Component {
             pathname: './product-details',
             product: details,
             addFromDetails: this.handleClick,
+            totalItems: items,
           } }
           data-testid="product-detail-link"
         >
@@ -41,7 +46,7 @@ class ProductCard extends React.Component {
           type="button"
           className="add-to-cart-button"
           data-testid="product-add-to-cart"
-          onClick={ () => this.handleClick(details) }
+          onClick={ () => this.handleClick(details, true) }
         >
           Adicionar ao carrinho
         </button>
@@ -55,6 +60,8 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string,
   price: PropTypes.number,
   details: PropTypes.shape(),
+  updateCart: PropTypes.func.isRequired,
+  totalItems: PropTypes.number.isRequired,
 };
 
 ProductCard.defaultProps = {

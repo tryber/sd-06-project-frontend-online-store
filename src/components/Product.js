@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 
 class Product extends React.Component {
   render() {
-    const { products } = this.props;
+    const { products, updateCart, totalItems } = this.props;
     return (
       <div className="product-container">
         {products.map((product) => (
@@ -14,6 +14,8 @@ class Product extends React.Component {
             thumbnail={ product.thumbnail }
             price={ product.price }
             details={ product }
+            updateCart={ updateCart }
+            totalItems={ totalItems }
           />
         ))}
       </div>
@@ -21,6 +23,10 @@ class Product extends React.Component {
   }
 }
 
-Product.propTypes = { products: PropTypes.arrayOf(PropTypes.object).isRequired };
+Product.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired,
+  updateCart: PropTypes.func.isRequired,
+  totalItems: PropTypes.number.isRequired,
+};
 
 export default Product;

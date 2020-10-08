@@ -60,29 +60,37 @@ class ShoppingCart extends Component {
             <span>
               Quantidade:
             </span>
-            <button type="button" onClick={ () => this.handleIncreaseAmmount(product) }>
+            <button
+              data-testid="product-increase-quantity"
+              type="button"
+              onClick={ () => this.handleIncreaseAmmount(product) }
+            >
               +
             </button>
-            <span>
+            <span data-testid="shopping-cart-product-quantity">
               {product.ammount}
             </span>
-            <button type="button" onClick={ () => this.handleDecreaseAmmount(product) }>
+            <button
+              data-testid="product-decrease-quantity"
+              type="button"
+              onClick={ () => this.handleDecreaseAmmount(product) }
+            >
               -
             </button>
           </div>
         ))}
-        <span
-          data-testid="shopping-cart-product-quantity"
-        >
+        <p>
           Quantidade de itens:
           {cartList.map((element) => element.ammount)
             .reduce((acc, currentValue) => acc + currentValue)}
-        </span>
-        <br />
-        {cartList.map(({ price, ammount }) => price * ammount)
-          .reduce((acc, currentValue) => acc + currentValue).toFixed('2')}
-        <br />
-        <Link to="/">Voltar</Link>
+        </p>
+        <h4>
+          Total:
+          {cartList.map(({ price, ammount }) => price * ammount)
+            .reduce((acc, currentValue) => acc + currentValue).toFixed('2')}
+        </h4>
+        <button type="button">Finalizar Compra</button>
+        <Link to="/"><h4>Voltar</h4></Link>
       </div>
     );
   }

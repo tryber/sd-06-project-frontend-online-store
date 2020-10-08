@@ -56,33 +56,37 @@ class Home extends Component {
 
     return (
       <main>
-        <label
-          htmlFor="input-message"
-          data-testid="home-initial-message"
-        >
-          Digite algum termo de pesquisa ou escolha uma categoria.
-          <input
-            name="query"
-            data-testid="query-input"
-            onChange={ this.handleInputSearchChange }
+        <section className="search-bar">
+          <label
+            htmlFor="input-message"
+            data-testid="home-initial-message"
+          >
+            Digite algum termo de pesquisa ou escolha uma categoria.
+            <input
+              name="query"
+              data-testid="query-input"
+              onChange={ this.handleInputSearchChange }
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="query-button"
+            onClick={ this.handleClickSearchButton }
+          >
+            BUSCAR
+          </button>
+        </section>
+        <section className="body-container">
+          <div className="categories">
+            <ListCategories handleListCategories={ this.handleListCategories } />
+            <ShoppingCartButton />
+          </div>
+          <ProductCard
+            products={ products }
+            isFail={ isFail }
+            handleAddCart={ handleAddCart }
           />
-        </label>
-        <button
-          type="button"
-          data-testid="query-button"
-          onClick={ this.handleClickSearchButton }
-        >
-          BUSCAR
-        </button>
-        <div>
-          <ListCategories handleListCategories={ this.handleListCategories } />
-        </div>
-        <ShoppingCartButton />
-        <ProductCard
-          products={ products }
-          isFail={ isFail }
-          handleAddCart={ handleAddCart }
-        />
+        </section>
       </main>
     );
   }

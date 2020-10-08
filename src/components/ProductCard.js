@@ -12,9 +12,9 @@ class ProductCard extends Component {
     }
 
     return (
-      <div>
+      <div className="product-card-list">
         {products.map((element) => (
-          <div data-testid="product" key={ element.id }>
+          <div data-testid="product" className="product-card" key={ element.id }>
             <h4>
               {element.title}
             </h4>

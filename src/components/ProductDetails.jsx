@@ -33,6 +33,12 @@ class ProductDetails extends Component {
         </button>
       </div>
       <Link to="/Cart" data-testid="shopping-cart-button">Carrinho</Link>
+      <form>
+        <fieldset>
+          <label><input type="email" placeholder="email" /></label>
+          <label><textarea data-testid="product-detail-evaluation" placeholder="coment"></textarea></label>
+        </fieldset>
+      </form>
     </div>
     );
   }

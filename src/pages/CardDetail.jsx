@@ -1,49 +1,68 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ShoppingCartButton from '../components/ShoppingCartButton';
+import AddToCartButton from '../components/AddToCartButton';
+import Evaluator from '../components/Evaluator';
+import SavedComments from '../components/SavedComments';
 
 class CardDetail extends React.Component {
   constructor() {
     super();
-    this.state = {
-      cart: [],
-    };
-    this.addtoCart = this.addtoCart.bind(this);
-}
-  addtoCart() {
-    const cartItems = this.props.location.cart;
-    const item = this.props.location.state;
-    this.setState({ cart: [...cartItems, item]});
-  }
-  render() {
-    const { title, thumbnail, price, attributes } = this.props.location.state;
-    const { cart } = this.state;
-    return (
-      <div className="item-description">
-        <section className="description">
-          <h2>Produto:</h2>
-          <h3 data-testid="product-detail-name">{title}</h3>
-          <h2>Preço:</h2>
-          <h3>R$ {price}</h3>
-          <img className="item-image" src={thumbnail} alt={title}></img>
-          <button
-          type="button"
-          data-testid="product-detail-add-to-cart"
-          onClick={ () => { this.addtoCart(); } }
-        >
-          Add to Cart
-        </button>
-        </section>
-        <section className="description">
-          <h2>Especificações Técnicas:</h2>
-          {attributes.map(attribute => <h3>{attribute.name}: {attribute.value_name}</h3>)}
-        </section>
-        <section className="shopping-car-button">
-          <ShoppingCartButton addtoCart={ cart } />
-        </section>
-      </div>
-    )
-  }
-}
 
+    this.loadStateFromEvaluation = this.loadStateFromEvaluation.bind(this);
+
+    this.state = {
+      product: undefined,
+      evaluations: undefined,
+    }
+  }
+
+  componentDidMount(props){
+    const product = this.props.location.state.product;
+    this.setState({ product })
+    this.loadStateFromEvaluation();
+    // console.log(evaluations);
+  }
+
+  loadStateFromEvaluation() {
+    const evaluations = JSON.parse(localStorage.getItem('myEvaluations') || '[]');
+    this.setState({ evaluations })
+  }
+
+  showDetails(product) {
+    const { title, thumbnail, price } = product;
+    return (
+      <div>
+        <img alt="Product" src={ thumbnail } />
+        <div className="product-card-body">
+          <h4 data-testid="product-detail-name">{title}</h4>
+          <p>{`R$ ${(price).toFixed(2)}`}</p>
+          <p></p>
+        </div>
+        <AddToCartButton product={ product } testId="product-detail-add-to-cart" />
+      </div>
+    );
+  }
+
+  render() {
+    const { product, evaluations } = this.state;
+ 
+    return (
+      <div>
+        <div className="product-card" >
+          {product ? this.showDetails(product) : null}
+        </div>
+        {product ? <Evaluator evaluation={this.loadStateFromEvaluation} productId={product.id}/> : null}
+        <br/>
+        <ShoppingCartButton />
+        <Link to="/">Voltar</Link>
+        <div>
+          {evaluations ? evaluations.map((item, index) =>
+            <SavedComments key={index} evaluation={item}/>) : null}
+        </div>
+      </div>
+    );
+  }
+}
 
 export default CardDetail;

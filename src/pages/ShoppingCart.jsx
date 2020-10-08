@@ -1,49 +1,68 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ItemShoppingCart from '../components/ItemShoppingCart'
 
 
 class ShoppingCart extends React.Component {
-  constructor(props) {
-    super(props);
-    const items = props.location.cartItems;
+  constructor() {
+    super();
+
+    this.removeItem = this.removeItem.bind(this);
+    this.showCart = this.showCart.bind(this);
+    this.emptyCart = this.emptyCart.bind(this);
 
     this.state = {
-      cartItems: items,
+      products: [],
+      totalCart: 0,
     }
-    
   }
-  
-  render() {
-    const { cartItems } = this.state;
 
-    if (cartItems.length > 0) {
-      return (
-        <section>
-          <section>
-            {cartItems.map((item) => (
-              <section className="card">
-                <h4 data-testid="shopping-cart-product-name" key={item.id}>
-                  {item.title}
-                </h4>
-                <img className="card-image" src={ item.thumbnail } alt="Item" />
-              </section>
-            ))}
-            <h5 data-testid="shopping-cart-product-quantity">Item Count: {cartItems.length}</h5>
-          </section>
-          <section>
-            <Link to="/">Voltar</Link>
-          </section>
-        </section>
-      )
+  componentDidMount() {
+    const cartProducts = JSON.parse(localStorage.getItem('myCartList') || '[]');
+    if (cartProducts.length > 0) {
+      const total = cartProducts.map((item) => (item.quantity * item.price))
+        .reduce((result, item) => result + item);
+      this.setState({ products: cartProducts, totalCart: total })
     }
+  }
+
+  removeItem(id) {
+    const cartProducts = JSON.parse(localStorage.getItem('myCartList'));
+    const cartProductsFiltered = cartProducts.filter((item) => item.id !== id);
+    localStorage.setItem('myCartList', JSON.stringify(cartProductsFiltered));
+    this.setState({ products: cartProductsFiltered })
+  }
+
+  showCart(item) {
     return (
-      <section>
-        <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        <Link to="/">Voltar</Link>
-      </section>
+      <ItemShoppingCart key={item.id} product={item} remove={this.removeItem} />
     )
   }
 
+  emptyCart() {
+    return (
+      <h1 data-testid="shopping-cart-empty-message">
+        Seu carrinho está vazio
+      </h1>
+    )
+  }
+
+  render() {
+    const { products, totalCart } = this.state;
+    return (
+      <div>
+        <div>
+          {products.length > 0 ? products.map((item) => this.showCart(item)) : this.emptyCart() }
+        </div>
+        <div>
+          <h3>{`Total R$ ${(totalCart).toFixed(2)}`}</h3>
+          <Link data-testid="checkout-products" to={{pathname: "/closepurchase", state: { products: products }}}>Fechar Compra</Link>
+        </div>
+        <Link to="/">Voltar</Link>
+
+      </div>
+    );
+  }
 }
 
 export default ShoppingCart;

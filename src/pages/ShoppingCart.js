@@ -28,7 +28,8 @@ class ShoppingCart extends Component {
   }
 
   handleDecreaseAmmount(product) {
-    if (product.ammount === 0) return;
+    const zero = 0;
+    if (product.ammount === zero) return;
     product.ammount -= 1;
     const { cartList } = this.props;
     this.setState({ cartList });
@@ -59,11 +60,15 @@ class ShoppingCart extends Component {
             <span>
               Quantidade:
             </span>
-            <button type="button" onClick={ () => this.handleIncreaseAmmount(product) }>+</button>
+            <button type="button" onClick={ () => this.handleIncreaseAmmount(product) }>
+              +
+            </button>
             <span>
               {product.ammount}
             </span>
-            <button type="button" onClick={ () => this.handleDecreaseAmmount(product) }>-</button>
+            <button type="button" onClick={ () => this.handleDecreaseAmmount(product) }>
+              -
+            </button>
           </div>
         ))}
         <span
@@ -75,7 +80,7 @@ class ShoppingCart extends Component {
         </span>
         <br />
         {cartList.map(({ price, ammount }) => price * ammount)
-          .reduce((acc, currentValue) => acc + currentValue).toFixed(2)}
+          .reduce((acc, currentValue) => acc + currentValue).toFixed('2')}
         <br />
         <Link to="/">Voltar</Link>
       </div>

@@ -8,7 +8,7 @@ import ShoppingCartButton from '../components/ShoppingCartButton';
 class ProductsDetails extends Component {
   render() {
     const { location: { state: { element } } } = this.props;
-    const { handleAddCart, cartList } = this.props;
+    const { handleAddCart } = this.props;
 
     return (
       <div>
@@ -20,7 +20,7 @@ class ProductsDetails extends Component {
         >
           Adicionar
         </button>
-        <ShoppingCartButton cartList={ cartList } />
+        <ShoppingCartButton />
         <Link to="/">Voltar</Link>
       </div>
     );

@@ -28,8 +28,7 @@ class ShoppingCart extends Component {
   }
 
   handleDecreaseAmmount(product) {
-    const zero = 0;
-    if (product.ammount === zero) return;
+    if (product.ammount === 1) return;
     product.ammount -= 1;
     const { cartList } = this.props;
     this.setState({ cartList });

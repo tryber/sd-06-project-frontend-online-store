@@ -20,15 +20,16 @@ class Cards extends React.Component {
     const { shouldRedirect } = this.state;
     if (shouldRedirect) {
       return (
-        <Redirect to={{
-          pathname: "CardDetail",
-          state: { product: item }}} />
+        <Redirect to={ {
+          pathname: 'CardDetail',
+          state: { product: item } } }
+        />
       );
     }
-    
+
     return (
       <div data-testid="product">
-        <div data-testid="product-detail-link" onClick={ this.redirectPage } >
+        <div data-testid="product-detail-link" onClick={ this.redirectPage()} >
           <img alt="{item.title}" src={ thumbnail } />
           <div>
             <p>{title}</p>
@@ -42,5 +43,18 @@ class Cards extends React.Component {
     );
   }
 }
-  
+
+Cards.prop-Types = {
+  item: PropTypes.exact({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    storyline: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    imagePath: PropTypes.string.isRequired,
+    bookmarked: PropTypes.bool.isRequired,
+    genre: PropTypes.string.isRequired, 
+  }).isRequired,
+};
+
 export default Cards;

@@ -41,7 +41,7 @@ class CardDetail extends React.Component {
         </div>
         <AddToCartButton product={ product } testId="product-detail-add-to-cart" />
       </div>
-    )
+    );
   }
 
   render() {

@@ -48,9 +48,9 @@ class ProductDetails extends Component {
             </div>
           </div>
         </div>
-        <div className="formDetailed">
+        <div className="rating">
           <form className="detailedDescription">
-            <p>Avaliação</p>
+            <h4>Avaliação</h4>
             <textarea
               className="labelRating"
               id="labelRating"
@@ -60,7 +60,9 @@ class ProductDetails extends Component {
               rows="5"
               cols="50"
             />
-            <Rater total={ 5 } rating={ 2 } />
+            <div className="rater-div">
+              <Rater total={ 5 } rating={ 2 } />
+            </div>
           </form>
         </div>
         <div className="product-details-buttons">

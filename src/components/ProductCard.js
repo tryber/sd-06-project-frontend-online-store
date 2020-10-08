@@ -9,15 +9,17 @@ class ProductCard extends Component {
     this.addItemsToCart = this.addItemsToCart.bind(this);
     this.state = {
       quantity: 1,
+      total: 0,
     };
   }
 
   addItemsToCart() {
     const { product, addItemCart } = this.props;
     const { title, thumbnail, price, id } = product;
-    const { quantity } = this.state;
+    const { quantity, total } = this.state;
     this.setState({
       quantity,
+      total: price + total,
     });
     addItemCart({ product: { title, thumbnail, price, id, quantity } });
   }

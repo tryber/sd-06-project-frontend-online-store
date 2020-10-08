@@ -4,35 +4,38 @@ import { Link } from 'react-router-dom';
 import CartButton from '../components/CartButton';
 import EvaluationForm from '../components/EvaluationForm';
 import AddToCartButtonDetails from '../components/AddToCartButtonDetails';
+import './ProductDetails.css';
 
 class ProductDetails extends React.Component {
   render() {
     const { location: { state: { product } } } = this.props;
     return (
-      <div>
-        <Link to="/">
+      <div className="main">
+        <Link className="buttonHome" to="/">
           <button type="button">Página Inicial</button>
         </Link>
-        <Link to="/carrinho">
+        <Link className="buttonCart" to="/carrinho">
           <CartButton />
         </Link>
-        <h1>Product details</h1>
-        {/* {<span>{console.log(this.props.location.state)}</span>} */}
-        <h4 data-testid="product-detail-name">{ product.title }</h4>
-        <span>{ `R$ ${product.price}` }</span>
-        <img src={ product.thumbnail } alt={ `Foto de: ${product.title}` } />
-        <div>
-          <ul>
-            { product.attributes.map((atributo) => (
-              <li
-                key={ atributo.name }
-              >
-                { `${atributo.name}: ${atributo.value_name}` }
-              </li>
-            ))}
-          </ul>
+        <h2 className="title" data-testid="product-detail-name">{ product.title }</h2>
+        <h2 className="title">{ `R$ ${product.price}` }</h2>
+        <div className="imgEspec">
+          <img className="image" src={ product.thumbnail } alt={ product.title } />
+          <div className="especificacoes">
+            <h3>Especificações Técnicas</h3>
+            <ul>
+              { product.attributes.map((atributo) => (
+                <li
+                  key={ atributo.name }
+                >
+                  { `${atributo.name}: ${atributo.value_name}` }
+                </li>
+              ))}
+            </ul>
+            <AddToCartButtonDetails product={ product } />
+          </div>
         </div>
-        <AddToCartButtonDetails product={ product } />
+        <h3 className="title">Avaliações</h3>
         <EvaluationForm productId={ product.id } />
       </div>
     );

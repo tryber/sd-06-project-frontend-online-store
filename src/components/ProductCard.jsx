@@ -3,16 +3,21 @@ import { Link } from 'react-router-dom';
 
 export default class ProductCard extends Component {
   handleClick(productObject) {
-    this.props.updateCart(productObject);
+    const { updateCart } = this.props;
+    updateCart(productObject);
   }
 
   render() {
-    const { id, title, price, thumbnail } = this.props.product;
+    const { product } = this.props;
+    const { id, title, price, thumbnail, shipping } = product;
+    const freeShipping = shipping.free_shipping;
+
     return (
       <div data-testid="product" className="product-card">
         <img src={ thumbnail } alt="Thumbnail" />
         <h4>{ title }</h4>
         <h5>{ price }</h5>
+        {freeShipping && <span data-testid="free-shipping">Frete Gratis</span>}
         <Link
           to={ { pathname: `/product/${id}`,
             product: this.props.product,
@@ -26,7 +31,7 @@ export default class ProductCard extends Component {
         <button
           type="button"
           data-testid="product-add-to-cart"
-          onClick={ () => this.handleClick(this.props.product) }
+          onClick={ () => this.handleClick(product) }
         >
           add to cart
         </button>

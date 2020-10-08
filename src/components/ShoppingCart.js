@@ -13,21 +13,23 @@ class ShoppingCart extends Component {
 
     this.state = {
       campo: 0,
-    }
-
-  }
-
-  setandoEstado(estado) {
-    estado.map(item => this.setState({ [item.id]: 1, campo: 1 }));
+    };
   }
 
   componentDidMount() {
-    this.setandoEstado(this.props.location.state);
+    const { location } = this.props;
+    const { state } = location;
+    this.setandoEstado(state);
+  }
+
+  setandoEstado(estado) {
+    estado.map((item) => this.setState({ [item.id]: 1, campo: 1 }));
   }
 
   decreaseButton(event) {
+    const { id } = event;
     this.setState({
-      [event.id]: this.state[event.id] - 1,
+      [id]: this.state[id] - 1,
     });
   }
 
@@ -38,9 +40,10 @@ class ShoppingCart extends Component {
   }
 
   renderQuantity(element) {
-    if (this.state.campo === 0) return 1;
-    else if (this.state[element.id] < 1) return 1;
-    return this.state[element.id]
+    const { campo } = this.state;
+    if (campo < 1) return 1;
+    if (this.state[element.id] < 1) return 1;
+    return this.state[element.id];
   }
 
   renderShoppingCart() {
@@ -56,23 +59,45 @@ class ShoppingCart extends Component {
       <div>
         {state.map((item) => (
           <div key={ item.id }>
-            <p data-testid="shopping-cart-product-name">{item.title}</p>
-            <button data-testid="product-decrease-quantity" onClick={() => this.decreaseButton(item)} type="button">Diminuir</button>
-            <p data-testid="shopping-cart-product-quantity">{this.renderQuantity(item)}</p>
-            <button data-testid="product-increase-quantity" onClick={() => this.increaseButton(item)} type="button">Aumentar</button>
-            <p data-testid="shopping-cart-product-price">{item.price * this.renderQuantity(item)}</p>
+            <p data-testid="shopping-cart-product-name">{ item.title }</p>
+            <button
+              data-testid="product-decrease-quantity"
+              onClick={ () => this.decreaseButton(item) }
+              type="button"
+            >
+              Diminuir
+            </button>
+            <p
+              data-testid="shopping-cart-product-quantity"
+            >
+              { this.renderQuantity(item) }
+            </p>
+            <button
+              data-testid="product-increase-quantity"
+              onClick={ () => this.increaseButton(item) }
+              type="button"
+            >
+              Aumentar
+            </button>
+            <p
+              data-testid="shopping-cart-product-price"
+            >
+              { item.price * this.renderQuantity(item) }
+            </p>
           </div>
         ))}
-        <p>Número total de ítens: {state.length}</p>
+        <p>
+          Número total de ítens:
+          { state.length }
+        </p>
       </div>
     );
   }
 
   render() {
-
     return (
       this.renderShoppingCart()
-    )
+    );
   }
 }
 

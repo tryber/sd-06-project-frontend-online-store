@@ -16,7 +16,7 @@ class ProductDetails extends React.Component {
 
     this.state = {
       productList: state[1],
-    }
+    };
   }
 
   addFromDetails() {
@@ -25,7 +25,7 @@ class ProductDetails extends React.Component {
     const { productList } = this.state;
 
     this.setState({ productList: [...productList, state[0]] });
-  }  
+  }
 
   render() {
     const { location } = this.props;
@@ -69,7 +69,6 @@ class ProductDetails extends React.Component {
 }
 
 ProductDetails.propTypes = {
-  onClick: PropTypes.func.isRequired,
   location: PropTypes.shape({
     state: PropTypes.shape({
       title: PropTypes.string.isRequired,

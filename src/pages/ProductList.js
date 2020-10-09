@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Product } from '../components';
-import shoppingCart from '../images/shopping-cart.png';
+import { Product, ShoppingCart } from '../components';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../App.css';
 
@@ -15,12 +13,14 @@ class ProductList extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleQuery = this.handleQuery.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
 
     this.state = {
       categories: [],
       selectedCategoryId: '',
       searchText: '',
       products: [],
+      cartItems: [],
     };
   }
 
@@ -43,6 +43,12 @@ class ProductList extends React.Component {
       selectedCategoryId, searchText,
     );
     this.setState({ products: requestReturn.results });
+  }
+
+  addItemToCart(item) {
+    this.setState((state) => ({
+      cartItems: [...state.cartItems, item],
+    }));
   }
 
   handleQuery({ target }) {
@@ -76,7 +82,7 @@ class ProductList extends React.Component {
 
   renderProducts() {
     const { products } = this.state;
-    return <Product products={ products } />;
+    return <Product products={ products } addItemToCart={ this.addItemToCart } />;
   }
 
   render() {
@@ -99,12 +105,7 @@ class ProductList extends React.Component {
             >
               Busca
             </button>
-            <Link
-              to="/cart"
-              data-testid="shopping-cart-button"
-            >
-              <img src={ shoppingCart } height="50" alt="carrinho de compras" />
-            </Link>
+            <ShoppingCart />
           </nav>
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.

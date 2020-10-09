@@ -76,7 +76,7 @@
   padding: 10px;
 }
 
-.add-to-cart-button {
+.add-to-cart-button, .checkout-button {
   background-color: #3a3a3a;
   border: 0px;
   border-radius: 10px;
@@ -84,4 +84,66 @@
   font-size: 18px;
   margin: 8px;
   padding: 10px;
+}
+
+.evaluation-textarea {
+  border: 2px solid #3a3a3a;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.checkout-form {
+  border: 2px solid #3a3a3a;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: auto;
+  padding: 25px;
+  width: 50%;
+}
+
+.checkout-form input {
+  height: 30px;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.cart-container {
+  height: 50px;
+  position: relative;
+}
+
+.cart-img {
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.cart-size {
+  align-items: center;
+  background-color: tomato;
+  border-radius: 100%;
+  color: white;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  left: 30px;
+  position: absolute;
+  top: 0;
+  width: 25px;
+}
+
+.item-quantity {
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  color: #3a3a3a;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  padding: 5px;
+}
+
+.free-shipping {
+  background-color: palegoldenrod;
 }

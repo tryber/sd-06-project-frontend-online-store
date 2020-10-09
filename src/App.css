@@ -134,3 +134,12 @@
   top: 0;
   width: 25px;
 }
+
+.item-quantity {
+  border: 1px solid #3a3a3a;
+  border-radius: 10px;
+  color: #3a3a3a;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+  padding: 5px;
+}

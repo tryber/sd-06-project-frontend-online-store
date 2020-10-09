@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { cart } from '../services/CartSize';
+import '../App.css';
 
 class ProductCard extends React.Component {
   constructor() {
@@ -18,11 +19,13 @@ class ProductCard extends React.Component {
 
   render() {
     const { title, thumbnail, price, details } = this.props;
+    const { available_quantity: availableQuantity } = details;
     return (
       <div data-testid="product" className="product-card">
         <h3>{title}</h3>
         <img src={ thumbnail } alt="foto do produto" />
         <p>{`Preço: R$ ${price}`}</p>
+        <p className="item-quantity">{`Quantidade disponível: ${availableQuantity}`}</p>
         <Link
           to={ {
             pathname: './product-details',

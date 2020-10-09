@@ -6,4 +6,9 @@ export function supplyQuantity() {
   return cart.length;
 }
 
-export default { supplyQuantity };
+export function checkForIds(array) {
+  const ids = array.map((item) => item.id);
+  return ids;
+}
+
+export default { supplyQuantity, checkForIds };

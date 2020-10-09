@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { ShoppingCart } from '../components';
+import { cart } from '../services/CartSize';
 import returnArrow from '../images/return-arrow.png';
 import '../App.css';
 
@@ -13,7 +14,7 @@ class ProductDetails extends React.Component {
     this.setInitialState = this.setInitialState.bind(this);
 
     this.state = {
-      totalItems: 0,
+      cartItems: [],
     };
   }
 
@@ -23,36 +24,30 @@ class ProductDetails extends React.Component {
 
   setInitialState() {
     const { location } = this.props;
-    const { totalItems: items } = location;
-    this.setState({ totalItems: items });
+    const { cartItems: items } = location;
+    this.setState({ cartItems: items });
   }
 
   handleClick() {
-    this.setState((state) => ({
-      totalItems: state.totalItems + 1,
-    }));
     const { location } = this.props;
-    const { addFromDetails, product } = location;
-    addFromDetails(product, false);
+    const { product } = location;
+    this.setState((state) => ({
+      cartItems: [...state.cartItems, product],
+    }));
+    cart.push(product);
   }
 
   render() {
-    const { totalItems } = this.state;
     const { location } = this.props;
     const { product } = location;
     if (product) {
       const { title, thumbnail, price } = product;
       return (
         <div>
-          <Link
-            to={ {
-              pathname: '/',
-              totalFromDetails: totalItems,
-            } }
-          >
+          <Link to="/">
             <img src={ returnArrow } alt="retornar" height="50" />
           </Link>
-          <ShoppingCart totalItems={ totalItems } />
+          <ShoppingCart />
           <h3 data-testid="product-detail-name">{ title }</h3>
           <img src={ thumbnail } alt="produto" />
           <p>{`Preço: R$ ${price}`}</p>

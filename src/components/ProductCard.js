@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { cart } from '../services/CartSize';
 
 class ProductCard extends React.Component {
   constructor() {
@@ -9,23 +10,14 @@ class ProductCard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(item, condition) {
-    const cart = [];
-    const items = JSON.parse(localStorage.getItem('cart'));
-    if (items) {
-      cart.push(...items, item);
-    } else {
-      cart.push(item);
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    const { updateCart } = this.props;
-    if (condition) {
-      updateCart();
-    }
+  handleClick(item) {
+    const { addItemToCart, product } = this.props;
+    addItemToCart(product);
+    cart.push(item);
   }
 
   render() {
-    const { title, thumbnail, price, details, totalItems: items } = this.props;
+    const { title, thumbnail, price, details, cartItems: items } = this.props;
     return (
       <div data-testid="product" className="product-card">
         <h3>{title}</h3>
@@ -35,8 +27,7 @@ class ProductCard extends React.Component {
           to={ {
             pathname: './product-details',
             product: details,
-            addFromDetails: this.handleClick,
-            totalItems: items,
+            cartItems: items,
           } }
           data-testid="product-detail-link"
         >
@@ -46,7 +37,7 @@ class ProductCard extends React.Component {
           type="button"
           className="add-to-cart-button"
           data-testid="product-add-to-cart"
-          onClick={ () => this.handleClick(details, true) }
+          onClick={ () => this.handleClick(details) }
         >
           Adicionar ao carrinho
         </button>
@@ -60,8 +51,9 @@ ProductCard.propTypes = {
   thumbnail: PropTypes.string,
   price: PropTypes.number,
   details: PropTypes.shape(),
-  updateCart: PropTypes.func.isRequired,
-  totalItems: PropTypes.number.isRequired,
+  addItemToCart: PropTypes.func.isRequired,
+  cartItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  product: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 ProductCard.defaultProps = {

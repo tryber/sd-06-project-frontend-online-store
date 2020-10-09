@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { cart } from '../services/CartSize';
 import returnArrow from '../images/return-arrow.png';
 import { CartItem } from '../components';
 import '../App.css';
@@ -22,8 +23,7 @@ class Cart extends React.Component {
   }
 
   renderCart() {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    if (!cart) {
+    if (!cart || cart.length < 1) {
       return <h2 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h2>;
     }
     return (

@@ -14,32 +14,32 @@ class ProductList extends React.Component {
     this.getProducts = this.getProducts.bind(this);
     this.renderProducts = this.renderProducts.bind(this);
     this.handleQuery = this.handleQuery.bind(this);
-    this.updateCart = this.updateCart.bind(this);
-    this.setTotalItems = this.setTotalItems.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
+    this.setInitialCartSize = this.setInitialCartSize.bind(this);
 
     this.state = {
       categories: [],
       selectedCategoryId: '',
       searchText: '',
       products: [],
-      totalItems: 0,
+      cartItems: [],
     };
   }
 
   componentDidMount() {
     this.getCategoriesFromApi();
-    this.setTotalItems();
+    this.setInitialCartSize();
   }
 
   onSearchTextChange({ target }) {
     this.setState({ searchText: target.value });
   }
 
-  setTotalItems() {
+  setInitialCartSize() {
     const { location } = this.props;
-    const { totalFromDetails } = location;
-    if (totalFromDetails) {
-      this.setState({ totalItems: totalFromDetails });
+    const { cartItemsFromComponents } = location;
+    if (cartItemsFromComponents) {
+      this.setState({ cartItems: cartItemsFromComponents });
     }
   }
 
@@ -56,8 +56,10 @@ class ProductList extends React.Component {
     this.setState({ products: requestReturn.results });
   }
 
-  updateCart() {
-    this.setState((state) => ({ totalItems: state.totalItems + 1 }));
+  addItemToCart(item) {
+    this.setState((state) => ({
+      cartItems: [...state.cartItems, item],
+    }));
   }
 
   handleQuery({ target }) {
@@ -90,18 +92,19 @@ class ProductList extends React.Component {
   }
 
   renderProducts() {
-    const { products, totalItems } = this.state;
+    const { products, cartItems } = this.state;
     return (
       <Product
         products={ products }
         updateCart={ this.updateCart }
-        totalItems={ totalItems }
+        cartItems={ cartItems }
+        addItemToCart={ this.addItemToCart }
       />
     );
   }
 
   render() {
-    const { products, totalItems } = this.state;
+    const { products, cartItems } = this.state;
     return (
       <div>
         <header className="header-container">
@@ -120,7 +123,7 @@ class ProductList extends React.Component {
             >
               Busca
             </button>
-            <ShoppingCart totalItems={ totalItems } />
+            <ShoppingCart cartItems={ cartItems } />
           </nav>
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -140,7 +143,11 @@ class ProductList extends React.Component {
 }
 
 ProductList.propTypes = {
-  location: PropTypes.arrayOf(PropTypes.object).isRequired,
+  location: PropTypes.shape(PropTypes.object),
+};
+
+ProductList.defaultProps = {
+  location: {},
 };
 
 export default ProductList;

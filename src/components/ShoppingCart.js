@@ -2,14 +2,33 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shoppingCart from '../images/shopping-cart.png';
+import { supplyQuantity } from '../services/CartSize';
 import '../App.css';
 
 class ShoppingCart extends React.Component {
+  constructor() {
+    super();
+
+    this.getcartSize = this.getcartSize.bind(this);
+  }
+
+  getcartSize() {
+    const zero = 0;
+    const { cartItems: items } = this.props;
+    if (items) {
+      return items.length;
+    }
+    return zero;
+  }
+
   render() {
-    const { totalItems } = this.props;
+    const { cartItems: items } = this.props;
     return (
       <Link
-        to="/cart"
+        to={ {
+          pathname: '/cart',
+          cartItems: items,
+        } }
         data-testid="shopping-cart-button"
       >
         <div className="cart-container">
@@ -19,7 +38,12 @@ class ShoppingCart extends React.Component {
             height="50"
             alt="carrinho de compras"
           />
-          <p className="cart-size" data-testid="shopping-cart-size">{totalItems}</p>
+          <p
+            className="cart-size"
+            data-testid="shopping-cart-size"
+          >
+            {supplyQuantity()}
+          </p>
         </div>
       </Link>
     );
@@ -27,7 +51,7 @@ class ShoppingCart extends React.Component {
 }
 
 ShoppingCart.propTypes = {
-  totalItems: PropTypes.number.isRequired,
+  cartItems: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ShoppingCart;

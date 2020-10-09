@@ -54,5 +54,4 @@ class ItemForm extends React.Component {
   }
 }
 
-
 export default ItemForm;

@@ -11,21 +11,10 @@ class ProductDetails extends React.Component {
     super();
 
     this.handleClick = this.handleClick.bind(this);
-    this.setInitialState = this.setInitialState.bind(this);
 
     this.state = {
       cartItems: [],
     };
-  }
-
-  componentDidMount() {
-    this.setInitialState();
-  }
-
-  setInitialState() {
-    const { location } = this.props;
-    const { cartItems: items } = location;
-    this.setState({ cartItems: items });
   }
 
   handleClick() {

@@ -17,7 +17,7 @@ class ProductCard extends React.Component {
   }
 
   render() {
-    const { title, thumbnail, price, details, cartItems: items } = this.props;
+    const { title, thumbnail, price, details } = this.props;
     return (
       <div data-testid="product" className="product-card">
         <h3>{title}</h3>
@@ -27,7 +27,6 @@ class ProductCard extends React.Component {
           to={ {
             pathname: './product-details',
             product: details,
-            cartItems: items,
           } }
           data-testid="product-detail-link"
         >
@@ -52,8 +51,7 @@ ProductCard.propTypes = {
   price: PropTypes.number,
   details: PropTypes.shape(),
   addItemToCart: PropTypes.func.isRequired,
-  cartItems: PropTypes.arrayOf(PropTypes.object).isRequired,
-  product: PropTypes.arrayOf(PropTypes.object).isRequired,
+  product: PropTypes.shape(),
 };
 
 ProductCard.defaultProps = {
@@ -61,6 +59,7 @@ ProductCard.defaultProps = {
   thumbnail: '',
   price: 0,
   details: {},
+  product: {},
 };
 
 export default ProductCard;

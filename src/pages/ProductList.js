@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Product, ShoppingCart } from '../components';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import '../App.css';
@@ -15,7 +14,6 @@ class ProductList extends React.Component {
     this.renderProducts = this.renderProducts.bind(this);
     this.handleQuery = this.handleQuery.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
-    this.setInitialCartSize = this.setInitialCartSize.bind(this);
 
     this.state = {
       categories: [],
@@ -28,19 +26,10 @@ class ProductList extends React.Component {
 
   componentDidMount() {
     this.getCategoriesFromApi();
-    this.setInitialCartSize();
   }
 
   onSearchTextChange({ target }) {
     this.setState({ searchText: target.value });
-  }
-
-  setInitialCartSize() {
-    const { location } = this.props;
-    const { cartItemsFromComponents } = location;
-    if (cartItemsFromComponents) {
-      this.setState({ cartItems: cartItemsFromComponents });
-    }
   }
 
   async getCategoriesFromApi() {
@@ -92,19 +81,12 @@ class ProductList extends React.Component {
   }
 
   renderProducts() {
-    const { products, cartItems } = this.state;
-    return (
-      <Product
-        products={ products }
-        updateCart={ this.updateCart }
-        cartItems={ cartItems }
-        addItemToCart={ this.addItemToCart }
-      />
-    );
+    const { products } = this.state;
+    return <Product products={ products } addItemToCart={ this.addItemToCart } />;
   }
 
   render() {
-    const { products, cartItems } = this.state;
+    const { products } = this.state;
     return (
       <div>
         <header className="header-container">
@@ -123,7 +105,7 @@ class ProductList extends React.Component {
             >
               Busca
             </button>
-            <ShoppingCart cartItems={ cartItems } />
+            <ShoppingCart />
           </nav>
           <h2 data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
@@ -141,13 +123,5 @@ class ProductList extends React.Component {
     );
   }
 }
-
-ProductList.propTypes = {
-  location: PropTypes.shape(PropTypes.object),
-};
-
-ProductList.defaultProps = {
-  location: {},
-};
 
 export default ProductList;

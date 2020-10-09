@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 
 class Product extends React.Component {
   render() {
-    const { products, cartItems, addItemToCart } = this.props;
+    const { products, addItemToCart } = this.props;
     return (
       <div className="product-container">
         {products.map((product) => (
@@ -15,7 +15,6 @@ class Product extends React.Component {
             price={ product.price }
             details={ product }
             addItemToCart={ addItemToCart }
-            cartItems={ cartItems }
           />
         ))}
       </div>
@@ -25,7 +24,6 @@ class Product extends React.Component {
 
 Product.propTypes = {
   products: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cartItems: PropTypes.arrayOf(PropTypes.object).isRequired,
   addItemToCart: PropTypes.func.isRequired,
 };
 

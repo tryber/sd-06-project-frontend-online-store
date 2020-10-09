@@ -6,27 +6,33 @@ class ProductCard extends React.Component {
   render() {
     const { product, addToCart } = this.props;
     return (
-      <div data-testid="product">
-        <h1>{product.title}</h1>
-        <img src={ product.thumbnail } alt="Foto do produto" />
-        <p>{product.price}</p>
-        <button
-          type="button"
-          data-testid="product-add-to-cart"
-          onClick={ () => addToCart(product) }
-        >
-          Adicionar ao carrinho
-        </button>
-        <Link
-          to={ {
-            pathname: `/ProductDetails/${product.id}`,
-            state: product,
-          } }
-          data-testid="product-detail-link"
-        >
+      <div className="product-card" data-testid="product">
+        <h1 className="product-card-title">{product.title}</h1>
+        <img
+          className="product-card-image"
+          src={ product.thumbnail }
+          alt="Foto do produto"
+        />
+        <div className="product-card-body">
+          <p>{product.price}</p>
+          <button
+            type="button"
+            data-testid="product-add-to-cart"
+            onClick={ () => addToCart(product) }
+          >
+            Adicionar ao carrinho
+          </button>
+          <Link
+            to={ {
+              pathname: `/ProductDetails/${product.id}`,
+              state: product,
+            } }
+            data-testid="product-detail-link"
+          >
 
-          <button type="button">Detalhes do produto</button>
-        </Link>
+            <button type="button">Detalhes do produto</button>
+          </Link>
+        </div>
       </div>
     );
   }

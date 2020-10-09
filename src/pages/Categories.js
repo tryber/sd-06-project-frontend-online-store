@@ -28,6 +28,7 @@ class Categories extends React.Component {
 
     return (
       <div>
+        <h2>Categorias</h2>
         { categories.map((itemCategory) => (
           <div key={ itemCategory.id }>
 

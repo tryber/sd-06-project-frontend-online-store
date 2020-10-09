@@ -7,7 +7,7 @@ class ProductList extends React.Component {
   render() {
     const { products, addToCart } = this.props;
     return (
-      <div>
+      <div className="product-list">
         { products.map((product) => (<ProductCard
           key={ product.id }
           product={ product }

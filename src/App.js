@@ -9,21 +9,51 @@ import ShoppingCart from './pages/ShoppingCart';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cartProducts: [], cartQuantity: 0 };
+    this.state = { cartProducts: [] };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
+    this.handleDecreaseQuantity = this.handleDecreaseQuantity.bind(this);
   }
 
   handleAddProduct(newProduct) {
     this.setState((state) => ({
-      cartProducts: state.cartProducts.concat(newProduct),
-      cartQuantity: state.cartQuantity + 1,
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id) {
+            return {
+              ...product,
+              quantity: product.quantity + 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, quantity: 1 }],
     }
     ));
   }
 
+  handleDecreaseQuantity(newProduct) {
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id && product.quantity > 1) {
+            return {
+              ...product,
+              quantity: product.quantity - 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, quantity: 0 }],
+    }));
+  }
+
   render() {
-    const { cartProducts, cartQuantity } = this.state;
+    const { cartProducts } = this.state;
 
     return (
       <BrowserRouter>
@@ -35,6 +65,7 @@ class App extends React.Component {
             render={ (props) => (<Home
               { ...props }
               addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
             />) }
           />
           <Route
@@ -42,6 +73,7 @@ class App extends React.Component {
             render={ (props) => (<ProductDetails
               { ...props }
               addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
               cartProducts={ cartProducts }
             />) }
           />
@@ -50,8 +82,8 @@ class App extends React.Component {
             render={ (props) => (<ShoppingCart
               { ...props }
               addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
               cartProducts={ cartProducts }
-              cartQuantity={ cartQuantity }
             />) }
           />
         </Switch>

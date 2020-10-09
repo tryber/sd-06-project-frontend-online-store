@@ -6,7 +6,7 @@ import CartProduct from './CartProduct';
 
 class ShoppingList extends React.Component {
   render() {
-    const { addToCart, cartProducts, cartQuantity } = this.props;
+    const { addToCart, subtractFromCart, cartProducts } = this.props;
 
     if (cartProducts.length < 1) {
       return (
@@ -21,7 +21,7 @@ class ShoppingList extends React.Component {
             key={ cartProduct.id }
             cartProduct={ cartProduct }
             addToCart={ addToCart }
-            cartQuantity={ cartQuantity }
+            subtractFromCart={ subtractFromCart }
           />
         ))}
       </div>
@@ -32,7 +32,7 @@ class ShoppingList extends React.Component {
 ShoppingList.propTypes = {
   cartProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
   addToCart: PropTypes.func.isRequired,
-  cartQuantity: PropTypes.number.isRequired,
+  subtractFromCart: PropTypes.func.isRequired,
 };
 
 export default ShoppingList;

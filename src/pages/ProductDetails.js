@@ -21,8 +21,6 @@ class ProductDetails extends React.Component {
     const { location: { state: product } } = this.props;
     const { addToCart } = this.props;
 
-    console.log(product);
-
     return (
       <div>
         <div>
@@ -31,7 +29,7 @@ class ProductDetails extends React.Component {
             <img src={ product.thumbnail } alt={ product.title } />
           </div>
           <div>
-            <p>{ product.attibutes }</p>
+            <p>{`Preço: $ ${product.price}`}</p>
           </div>
         </div>
         <div>
@@ -55,7 +53,7 @@ ProductDetails.propTypes = {
     state: PropTypes.shape({
       title: PropTypes.string.isRequired,
       thumbnail: PropTypes.string.isRequired,
-      attibutes: PropTypes.arrayOf(PropTypes.object).isRequired,
+      price: PropTypes.number.isRequired,
     }).isRequired,
   }).isRequired,
   addToCart: PropTypes.func.isRequired,

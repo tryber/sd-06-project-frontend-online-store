@@ -34,8 +34,22 @@ class App extends React.Component {
     ));
   }
 
-  handleDecreaseQuantity() {
-    console.log('click');
+  handleDecreaseQuantity(newProduct) {
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id && product.quantity > 1) {
+            return {
+              ...product,
+              quantity: product.quantity - 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, quantity: 0 }],
+    }));
   }
 
   render() {

@@ -9,6 +9,7 @@ class ProductCard extends React.Component {
     super();
 
     this.handleClick = this.handleClick.bind(this);
+    this.renderFreeShippingSign = this.renderFreeShippingSign.bind(this);
   }
 
   handleClick(item) {
@@ -17,11 +18,24 @@ class ProductCard extends React.Component {
     cart.push(item);
   }
 
+  renderFreeShippingSign() {
+    return (
+      <p
+        className="free-shipping"
+        data-testid="free-shipping"
+      >
+        FRETE GRÁTIS
+      </p>
+    );
+  }
+
   render() {
     const { title, thumbnail, price, details } = this.props;
-    const { available_quantity: availableQuantity } = details;
+    const { available_quantity: availableQuantity, shipping } = details;
+    const { free_shipping: freeShipping } = shipping;
     return (
       <div data-testid="product" className="product-card">
+        {(freeShipping) ? this.renderFreeShippingSign() : ''}
         <h3>{title}</h3>
         <img src={ thumbnail } alt="foto do produto" />
         <p>{`Preço: R$ ${price}`}</p>

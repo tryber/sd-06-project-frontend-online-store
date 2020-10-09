@@ -92,7 +92,7 @@ class App extends React.Component {
 
   ratingSubmit({ id, email, msg, stars }) {
     const { ratingProducts } = this.state;
-    const newRatingArray = [...ratingProducts, { id, email, msg, stars }]
+    const newRatingArray = [...ratingProducts, { id, email, msg, stars }];
     this.setState({ ratingProducts: newRatingArray });
   }
 
@@ -113,7 +113,8 @@ class App extends React.Component {
   }
 
   render() {
-    const { data, textInput, cart, checkedId, productDetails, ratingProducts } = this.state;
+    const { data, textInput, cart, checkedId,
+      productDetails, ratingProducts } = this.state;
     return (
       <Router>
         <Switch>

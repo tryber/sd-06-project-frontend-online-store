@@ -1,5 +1,6 @@
 import React from 'react';
 import ShoppingCartButton from '../components/ShoppingCartButton';
+import ItemForm from '../components/ItemForm';
 
 class CardDetail extends React.Component {
   constructor() {
@@ -39,6 +40,9 @@ class CardDetail extends React.Component {
         </section>
         <section className="shopping-car-button">
           <ShoppingCartButton addtoCart={ cart } />
+        </section>
+        <section>
+          <ItemForm />
         </section>
       </div>
     )

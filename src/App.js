@@ -12,9 +12,7 @@ class App extends React.Component {
     this.state = { cartProducts: [] };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
-
-    this.decreaseQuantity = this.decreaseQuantity.bind(this);
-    this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.handleDecreaseQuantity = this.handleDecreaseQuantity.bind(this);
   }
 
   handleAddProduct(newProduct) {
@@ -36,11 +34,7 @@ class App extends React.Component {
     ));
   }
 
-  decreaseQuantity() {
-    console.log('click');
-  }
-
-  increaseQuantity() {
+  handleDecreaseQuantity() {
     console.log('click');
   }
 
@@ -57,6 +51,7 @@ class App extends React.Component {
             render={ (props) => (<Home
               { ...props }
               addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
             />) }
           />
           <Route
@@ -64,6 +59,7 @@ class App extends React.Component {
             render={ (props) => (<ProductDetails
               { ...props }
               addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
               cartProducts={ cartProducts }
             />) }
           />
@@ -72,6 +68,7 @@ class App extends React.Component {
             render={ (props) => (<ShoppingCart
               { ...props }
               addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
               cartProducts={ cartProducts }
             />) }
           />

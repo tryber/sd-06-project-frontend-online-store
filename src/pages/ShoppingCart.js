@@ -6,7 +6,7 @@ import ShoppingList from '../components/ShoppingList';
 
 class ShoppingCart extends React.Component {
   render() {
-    const { addToCart, cartProducts } = this.props;
+    const { addToCart, subtractFromCart, cartProducts } = this.props;
 
     return (
       <div>
@@ -14,6 +14,7 @@ class ShoppingCart extends React.Component {
         <h1>Carrinho de compras</h1>
         <ShoppingList
           addToCart={ addToCart }
+          subtractFromCart={ subtractFromCart }
           cartProducts={ cartProducts }
         />
       </div>
@@ -23,8 +24,8 @@ class ShoppingCart extends React.Component {
 
 ShoppingCart.propTypes = {
   addToCart: PropTypes.func.isRequired,
+  subtractFromCart: PropTypes.func.isRequired,
   cartProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  cartQuantity: PropTypes.number.isRequired,
 };
 
 export default ShoppingCart;

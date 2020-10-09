@@ -328,7 +328,7 @@ A página, agora, deve poder usar as categorias recuperadas da API para filtrar 
 
 #### 7. CLICAR NA EXIBIÇÃO RESUMIDA DE UM PRODUTO E IR PARA UMA TELA COM SUA EXIBIÇÃO DETALHADA
 
-PRIORIDADE 2 - Como pessoa usuária, eu quero clicar no card do produto e visualizar a exibição detalhada do produto com nome do produto, imagem, preço e especificação técnica. A tela também deve possuir um botão que leve ao carrinho de compras (veja os detalhes no card).
+PRIORIDADE 3 - Como pessoa usuária, eu quero clicar no card do produto e visualizar a exibição detalhada do produto com nome do produto, imagem, preço e especificação técnica. A tela também deve possuir um botão que leve ao carrinho de compras (veja os detalhes no card).
 
 - [Tela - Detalhamento do produto](https://github.com/tryber/sd-06-project-frontend-online-store/tree/master/wireframes/card_07.png)
 

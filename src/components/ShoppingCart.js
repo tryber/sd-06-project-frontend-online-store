@@ -22,8 +22,20 @@ class ShoppingCart extends Component {
     this.setandoEstado(state);
   }
 
+  // setandoQuantity(item) {
+  //   if (this.state[item.id] === this.state[`available-${item.id}`])
+  //     return this.state[`available-${item.id}`];
+  //   return 1;
+  // }
+
   setandoEstado(estado) {
-    estado.map((item) => this.setState({ [item.id]: 1, campo: 1 }));
+    console.log(estado);
+    estado.map((item) => this.setState({
+      campo: 1,
+      [item.id]: 1,
+      [`available-${item.id}`]: item.available_quantity,
+      [`disponible-${item.id}`]: false,
+    }));
   }
 
   decreaseButton(event) {
@@ -37,7 +49,12 @@ class ShoppingCart extends Component {
     const { id } = event;
     this.setState((previousState) => ({
       [id]: previousState[id] + 1,
-    }));
+    }), () => {
+      const key = this.state;
+      if (key[id] >= key[`available-${event.id}`]) {
+        this.setState({ [`disponible-${event.id}`]: true });
+      }
+    });
   }
 
   renderQuantity(element) {
@@ -52,6 +69,7 @@ class ShoppingCart extends Component {
   renderShoppingCart() {
     const { location } = this.props;
     const { state } = location;
+    const key = this.state;
     if (state.length < 1) {
       return (
         <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio.</span>
@@ -79,6 +97,7 @@ class ShoppingCart extends Component {
               data-testid="product-increase-quantity"
               onClick={ () => this.increaseButton(item) }
               type="button"
+              disabled={ key[`disponible-${item.id}`] }
             >
               Aumentar
             </button>

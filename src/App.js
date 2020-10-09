@@ -5,13 +5,14 @@ import {
   faCoffee,
   faBars,
   faShoppingCart,
-  faSearch } from '@fortawesome/free-solid-svg-icons';
+  faSearch, 
+  faTimesCircle} from '@fortawesome/free-solid-svg-icons';
 import { ShopList, ShopCart, ProductDetails, Checkout } from './pages';
 
 import './App.css';
 import './App.scss';
 
-library.add(faCoffee, faBars, faShoppingCart, faSearch);
+library.add(faCoffee, faBars, faShoppingCart, faSearch, faTimesCircle);
 
 class App extends React.Component {
   render() {

@@ -83,7 +83,6 @@ class ShopList extends React.Component {
 
   addToCart(product) {
     const { cartList } = this.state;
-
     const ourProduct = product;
     const item = cartList[product.id];
     if (item && item.available_quantity > item.quantity) {
@@ -97,6 +96,7 @@ class ShopList extends React.Component {
 
   render() {
     const { categories, loading, products, cartList } = this.state;
+    console.log(cartList);
 
 
     return (

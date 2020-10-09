@@ -18,11 +18,12 @@ class ShopCart extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { cartList } = this.state;
     const { cartList: prevCartList } = prevState;
-
-    const prevQuantity = this.sumAllCartItemsQuantity(prevCartList);
-    const currentQuantity = this.sumAllCartItemsQuantity(cartList);
+    const cleanCartList = this.clearCartList(cartList);
+    const cleanPrevCartList = this.clearCartList(prevCartList);
+    const prevQuantity = this.sumAllCartItemsQuantity(cleanPrevCartList);
+    const currentQuantity = this.sumAllCartItemsQuantity(cleanCartList);
     if (prevQuantity !== currentQuantity) {
-      localStorage.setItem('cartlist', JSON.stringify(cartList));
+      localStorage.setItem('cartlist', JSON.stringify(cleanCartList));
     }
   }
 
@@ -47,6 +48,20 @@ class ShopCart extends React.Component {
     const zero = 0;
     if (copyCartList[id].quantity > zero) copyCartList[id].quantity -= 1;
     return copyCartList;
+  }
+
+  clearCartList(cartList) {
+    const cleanCartList = {};
+    const zero = 0;
+    Object.keys(cartList).filter((key) => cartList[key].quantity !== zero)
+      .forEach((key) => { cleanCartList[key] = { ...cartList[key] }; });
+    console.log(cleanCartList, cartList);
+
+    if (Object.keys(cartList).length !== Object.keys(cleanCartList).length) {
+      this.setState({ cartList: cleanCartList });
+      return cleanCartList;
+    }
+    return cartList;
   }
 
   handleChange(id, action) {

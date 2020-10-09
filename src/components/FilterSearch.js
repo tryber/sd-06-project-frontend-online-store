@@ -14,6 +14,7 @@ class FilterSearch extends React.Component {
     this.setState({ showDropDown: !showDropDown });
   }
 
+
   render() {
     const { showDropDown } = this.state;
     return (
@@ -21,11 +22,15 @@ class FilterSearch extends React.Component {
         <button
           className="button__inSearch filter__button"
           type="button"
-          onClick={() => this.handleClickIcon() }
+          onClick={ () => this.handleClickIcon() }
         >
           <FontAwesomeIcon icon="bars" />
         </button>
-        <div className={ showDropDown ? 'dropdown-active' : 'dropdown' }>
+        <div
+          className={ showDropDown ? 'dropdown-active' : 'filter__dropdown' }
+
+
+        >
           <p className="item">first</p>
           <p className="item">second</p>
         </div>

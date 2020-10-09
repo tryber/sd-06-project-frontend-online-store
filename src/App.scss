@@ -70,21 +70,14 @@
     position: absolute;
     z-index: 1000;
     top:40px;
-    transition: .3s;
-    
-    color: #000;
-    
+    transition: .3s;    
+    color: #000;    
     background-color: rgba(250, 250, 250, 0.98);
     height: auto;
-    overflow-y: scroll;
+    overflow-y: scroll;    
     padding:20px;
     max-height: 1000px;
   }
-
-
-
-
-
 
 .productCard {
   box-shadow: 1px solid grey;
@@ -206,20 +199,37 @@
   position: relative;
   display:flex;
   justify-content: center;
+  
 }
 
 .filter__button {
   width:100%;
+  z-index: 1000;
+}
+
+.filter__dropdown {  
+  display:none;  
 }
 
 .dropdown {
-  display: none;
-  
+  height: 0px;  
+  overflow:hidden;  
 }
 
 .item {
   margin:0;
 }
+
+.none {
+  display: none;
+}
+
+.remove-item {
+  position: absolute;
+  top:-5px;
+  padding:10px;
+}
+
 
 .item:hover {
   background-color: #000;
@@ -228,14 +238,40 @@
   transition: .7s;
 }
 
-.dropdown-active {
-  
-  display: block;
+
+
+.dropdown-active {  
+  background-color: #fff;  
   position: absolute;
-  border: 1px solid gray;
+  transition: 1s;
   min-width: 200px;
+  max-height: 400px;
   top:40px;
   right:1px;
   padding: 5px;
-  position: absolute;
+  box-shadow:10px 10px 10px 10px rgba(0, 0, 0, 0.5);
+  overflow-y: scroll;
+}
+
+.dropdown-items {
+  display: grid;
+  grid-template-columns:50px 120px 40px 1fr;
+  
+  position:relative;
+  column-gap: 10px;
+  align-items: center;
+  max-width: 500px;
+  padding-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
+  background-color:#fff;
+  border-bottom: 1px solid rgb(3, 104, 205);
+  font-family: Helvetica;
+  
+  
+}
+
+.img {
+  width:50px;
+  align-self:end;
 }

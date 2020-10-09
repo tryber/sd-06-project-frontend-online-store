@@ -10,8 +10,10 @@ class CategoryList extends React.Component {
       <section
         className={ showSideBar ? 'category-list-active' : 'category-list' }
       >
+        <h1 className="category-title">Departamentos</h1>
         {(categories.length > empty)
           ? categories
+
             .map((category) => (
               <label htmlFor={ category.id } key={ category.id }>
                 <input

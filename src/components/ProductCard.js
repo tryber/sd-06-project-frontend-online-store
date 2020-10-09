@@ -16,7 +16,7 @@ class ProductCard extends React.Component {
         <div className="product__item product__title">{title}</div>
         <Shipping shipping={ product.shipping } />
         <div className="product__item product__price">
-          {`${price.toLocaleString('pt-br', { style: 'currency', currency: 'BRl' })}`}
+          {`${price.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}`}
         </div>
 
         <div className="buttons-container product__item">

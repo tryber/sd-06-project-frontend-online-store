@@ -13,8 +13,6 @@ body {
   width: 25%;
 }
 
-
-
 .radio {
   padding: 5px 0;
 }
@@ -186,4 +184,8 @@ svg {
   margin-top: 135px;
   min-width: 100%;
   position: absolute;
+}
+
+fieldset {
+  width: 600px;
 }

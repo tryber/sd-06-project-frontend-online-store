@@ -19,8 +19,8 @@ class ProductDetails extends React.Component {
           <h4 className="product-title" data-testid="product-detail-name">{data.title}</h4>
           <img src={data.thumbnail} alt={data.title} />
           <div>R$ {data.price}</div>
-          <AddCartButton handleCartItems={handleCartItems} bt="home" data={data} />
-          <AddCartButton handleCartItems={handleCartItems} bt="productDetails" showBtRemove={false} data={data} />
+          <AddCartButton handleCartItems={handleCartItems} bt="productDetails" data={data} />
+          <AddCartButton handleCartItems={handleCartItems} bt="cart" showBtRemove={false} data={data} />
         </div>
       </div>
     );

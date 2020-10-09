@@ -16,7 +16,7 @@ class AddCartButton extends React.Component {
     const { bt, data, handleCartItems } = this.props;
     let testid;
     if (bt === 'home') testid = 'product-add-to-cart';
-    if (bt === 'productDetails' || bt === 'cart') testid = 'product-detail-add-to-cart';
+    if (bt === 'productDetails') testid = 'product-detail-add-to-cart';
 
     return (
       <div id="cart-button">

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import ProductDetails from './components/ProductDetails';
 import * as api from './services/api';
+import Checkout from './pages/Checkout';
 
 class App extends React.Component {
   constructor() {
@@ -150,6 +151,12 @@ class App extends React.Component {
               handleCartItems={ this.handleCartItems }
               handleEventChecked={ this.handleEventChecked }
               checkedId={ checkedId }
+            />) }
+          />
+          <Route
+            path="/checkout"
+            component={ () => (<Checkout
+              cart={ cart }
             />) }
           />
         </Switch>

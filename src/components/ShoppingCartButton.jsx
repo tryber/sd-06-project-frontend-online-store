@@ -7,10 +7,12 @@ class ShoppingCartButton extends React.Component {
       <div>
         <Link to={ { pathname:"/shoppingcart",
           cartProductList: this.props.cartProductList,
-          cartTotalItens: this.props.cartTotalItens
+          cartTotalItens: this.props.cartTotalItens,
+          emptyCart: this.props.emptyCart
         } } data-testid="shopping-cart-button">
-          Carrinho<span>Itens no carrinho: { this.props.cartTotalItens }</span>
+          Carrinho
         </Link>
+        <span data-testid="shopping-cart-size">{ this.props.cartTotalItens }</span>
       </div>
     )
   }

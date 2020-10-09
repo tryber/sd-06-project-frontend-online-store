@@ -12,14 +12,17 @@ export default class Home extends Component {
     this.onClickSearch = this.onClickSearch.bind(this);
     this.updateCart = this.updateCart.bind(this);
     this.isProductFromDetail = this.isProductFromDetail.bind(this);
+    this.saveToLocalStorage = this.saveToLocalStorage.bind(this);
+    this.loadFromLocalStorage = this.loadFromLocalStorage.bind(this);
+    this.clearLocalStorage = this.clearLocalStorage.bind(this);
 
     this.state = {
       products: [],
       categoryId: '',
       categories: [],
       searchText: '',
-      cartProductList: [],
-      cartTotalItens: 0,
+      cartProductList: this.loadFromLocalStorage(),
+      cartTotalItens: this.loadFromLocalStorage().length,
     };
   }
 
@@ -54,17 +57,38 @@ export default class Home extends Component {
     });
   }
 
+  saveToLocalStorage() {
+    const { cartProductList } = this.state;
+    localStorage.setItem('cartProductList', JSON.stringify(cartProductList));
+  }
+
+  loadFromLocalStorage() {
+    const cartProductList = JSON.parse(localStorage.getItem('cartProductList'));
+    return cartProductList ? cartProductList : [];
+  }
+
+  clearLocalStorage() {
+    localStorage.removeItem('cartTotalItens');
+  }
+
   updateCart(productObject) {
-    this.setState({
-      cartProductList: [...this.state.cartProductList, productObject],
-      cartTotalItens: this.state.cartTotalItens + 1,
+    this.clearLocalStorage();
+    this.setState((prevState) => ({
+      cartProductList: [...prevState.cartProductList, productObject],
+      cartTotalItens: prevState.cartTotalItens + 1,
+    }), () => {
+      this.saveToLocalStorage();
     });
   }
 
   isProductFromDetail() {
     if (this.props.location.product) {
-      const { product } = this.props.location
-      this.updateCart(product);
+      const { product, cartProductList } = this.props.location
+      const cartTotalItens = cartProductList.length;
+      this.setState(() => ({
+        cartProductList: [...cartProductList, product],
+        cartTotalItens: cartTotalItens + 1,
+      }));
     }
   }
 
@@ -98,7 +122,11 @@ export default class Home extends Component {
             ))}
           </nav>
           <div>
-            <ProductList products={ products } updateCart={ this.updateCart } />
+            <ProductList
+              products={ products }
+              updateCart={ this.updateCart }
+              cartProductList={ this.state.cartProductList }
+            />
           </div>
         </main>
       </div>

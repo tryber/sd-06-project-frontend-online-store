@@ -16,7 +16,8 @@ export default class ProductCard extends Component {
         <Link
           to={ { pathname: `/product/${id}`,
             product: this.props.product,
-            updateCart: this.props.updateCart
+            updateCart: this.props.updateCart,
+            cartProductList: this.props.cartProductList
           } }
           data-testid="product-detail-link"
         >

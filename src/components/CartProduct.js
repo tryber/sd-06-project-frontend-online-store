@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 
 class CartProduct extends React.Component {
   render() {
-    const { quantity } = this.state;
-    const { cartProduct } = this.props;
-    const { title, thumbnail } = cartProduct;
+    const { cartProduct, addToCart } = this.props;
+    const { title, thumbnail, quantity } = cartProduct;
     return (
       <div>
         <h1 data-testid="shopping-cart-product-name">{title}</h1>
@@ -14,14 +13,13 @@ class CartProduct extends React.Component {
         <button
           type="button"
           data-testid="product-decrease-quantity"
-          onClick={ this.decreaseQuantity }
         >
           -
         </button>
         <button
           type="button"
           data-testid="product-increase-quantity"
-          onClick={ this.increaseQuantity }
+          onClick={ () => addToCart(cartProduct) }
         >
           +
         </button>
@@ -34,8 +32,9 @@ CartProduct.propTypes = {
   cartProduct: PropTypes.shape({
     title: PropTypes.string,
     thumbnail: PropTypes.string,
+    quantity: PropTypes.number,
   }).isRequired,
-  cartQuantity: PropTypes.number.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default CartProduct;

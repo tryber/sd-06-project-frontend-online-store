@@ -31,7 +31,6 @@ class ShoppingList extends React.Component {
 ShoppingList.propTypes = {
   cartProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
   addToCart: PropTypes.func.isRequired,
-  cartQuantity: PropTypes.number.isRequired,
 };
 
 export default ShoppingList;

@@ -9,7 +9,7 @@ import ShoppingCart from './pages/ShoppingCart';
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { cartProducts: [], quantity: [] };
+    this.state = { cartProducts: [] };
 
     this.handleAddProduct = this.handleAddProduct.bind(this);
 
@@ -19,7 +19,19 @@ class App extends React.Component {
 
   handleAddProduct(newProduct) {
     this.setState((state) => ({
-      cartProducts: state.cartProducts.concat(newProduct),
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id) {
+            return {
+              ...product,
+              quantity: product.quantity + 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, quantity: 1 }],
     }
     ));
   }

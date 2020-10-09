@@ -5,7 +5,7 @@ import Product from '../components/Product';
 class Cart extends Component {
   render() {
     const { handleCartItems, saveDetails, removeItem, cart: { products} } = this.props;
-    console.log(products);
+
     return (
       <div className="cart-product">
         {(products && products.length > 0)

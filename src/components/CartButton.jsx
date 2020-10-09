@@ -5,7 +5,7 @@ import { FaShoppingCart } from 'react-icons/fa';
 class CartButton extends React.Component {
   render() {
     const { cart } = this.props
-    console.log(cart);
+
     return (
       <div className="cart-button-container">
         <button className="cart-button" type="button">

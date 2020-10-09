@@ -19,12 +19,14 @@ class App extends React.Component {
     this.removeItem = this.removeItem.bind(this);
     this.saveDetails = this.saveDetails.bind(this);
     // this.calcQtdItems = this.calcQtdItems.bind(this);
+    this.ratingSubmit = this.ratingSubmit.bind(this);
 
     this.state = {
       textInput: '',
       data: null,
       checkedId: null,
       productDetails: null,
+      ratingProducts: [],
       cart: {
         totalPrice: null,
         totalQtd: 0,
@@ -46,7 +48,6 @@ class App extends React.Component {
 
   addOrRemoveProduct(product, op) {
     console.log('Produto adicionado ao carrinho com sucesso!');
-    console.log(product, op);
     const { cart: { products } } = this.state;
     let newListItems = [];
     if (products) {
@@ -89,6 +90,12 @@ class App extends React.Component {
     this.setState({ productDetails: product });
   }
 
+  ratingSubmit({ id, email, msg, stars }) {
+    const { ratingProducts } = this.state;
+    const newRatingArray = [...ratingProducts, { id, email, msg, stars }]
+    this.setState({ ratingProducts: newRatingArray });
+  }
+
   handleEvent({ target }) {
     const query = target.value;
     this.setState({ textInput: query });
@@ -106,13 +113,15 @@ class App extends React.Component {
   }
 
   render() {
-    const { data, textInput, cart, checkedId, productDetails } = this.state;
+    const { data, textInput, cart, checkedId, productDetails, ratingProducts } = this.state;
     return (
       <Router>
         <Switch>
           <Route
             path="/products/:id"
             component={ () => (<ProductDetails
+              ratingProducts={ ratingProducts }
+              ratingSubmit={ this.ratingSubmit }
               cart={ cart }
               productDetails={ productDetails }
               handleCartItems={ this.handleCartItems }

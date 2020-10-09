@@ -35,10 +35,10 @@ class ProductDetails extends React.Component {
 
     return (
       <div>
-        <h1 data-testid="product-detail-name">{title}</h1>
+        <h1 data-testid="product-detail-name">{ title }</h1>
         <p>
           Preço:
-          {price}
+          { price }
         </p>
         <img src={ thumbnail } alt={ title } />
         <form>
@@ -55,12 +55,15 @@ class ProductDetails extends React.Component {
           >
             ADICIONAR AO CARRINHO
           </button>
-          <Link
-            data-testid="shopping-cart-button"
-            to={ { pathname: '/shopping-cart', state: productList } }
-          >
-            <img src={ Carrinho } alt="Carrinho" />
-          </Link>
+          <div>
+            <Link
+              data-testid="shopping-cart-button"
+              to={ { pathname: '/shopping-cart', state: productList } }
+            >
+              <img src={ Carrinho } alt="Carrinho" />
+            </Link>
+            <div data-testid="shopping-cart-size">{ productList.length }</div>
+          </div>
           <ProductRating />
         </div>
       </div>

@@ -99,6 +99,7 @@ class Home extends React.Component {
             <Link to={ { pathname: '/shopping-cart', state: shopCart } }>
               <img data-testid="shopping-cart-button" src={ Carrinho } alt="Carrinho" />
             </Link>
+            <div data-testid="shopping-cart-size">{shopCart.length}</div>
           </div>
         </div>
       </div>

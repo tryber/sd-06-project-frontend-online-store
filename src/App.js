@@ -45,7 +45,7 @@ class App extends React.Component {
         number: '',
         city: '',
         state: '',
-      }
+      },
     };
   }
 
@@ -144,8 +144,8 @@ class App extends React.Component {
         number: '',
         city: '',
         state: '',
-      }
-    })
+      },
+    });
   }
 
   async fetchProducts({ categoryId, query }) {
@@ -155,7 +155,7 @@ class App extends React.Component {
 
   render() {
     const { data, textInput, cart, checkedId,
-      productDetails, ratingProducts, checkout } = this.state;
+      productDetails, ratingProducts } = this.state;
     return (
       <Router>
         <Switch>

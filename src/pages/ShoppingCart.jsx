@@ -8,7 +8,7 @@ class ShoppingCart extends React.Component {
       return (
         <div>
           <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
-        </div >
+        </div>
       )
     }
     const { cartProductList } = this.props.location;

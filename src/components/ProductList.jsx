@@ -7,8 +7,11 @@ export default class ProductList extends Component {
     return (
       <div className="product-list">
         {products.map((element) => (
-          <ProductCard product={element} key={element.id}
-          updateCart={updateCart}
+          <ProductCard
+            product={element}
+            key={element.id}
+            updateCart={updateCart}
+            cartProductList={ this.props.cartProductList }
         />
         ))}
       </div>

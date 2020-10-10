@@ -19,6 +19,7 @@ class ProductDetails extends React.Component {
         <div data-testid="product">
           <h4 className="product-title" data-testid="product-detail-name">{data.title}</h4>
           <img src={data.thumbnail} alt={data.title} />
+          <div>Quantidade disponível: {data.available_quantity}</div>
           <div>R$ {data.price}</div>
           <AddCartButton handleCartItems={handleCartItems} bt="productDetails" data={data} />
           <AddCartButton handleCartItems={handleCartItems} bt="cart" showBtRemove={false} data={data} />

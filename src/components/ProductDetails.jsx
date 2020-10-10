@@ -21,6 +21,7 @@ class ProductDetails extends React.Component {
           <img src={data.thumbnail} alt={data.title} />
           <div>Quantidade disponível: {data.available_quantity}</div>
           <div>R$ {data.price}</div>
+          {(data.shipping.free_shipping) ? <div data-testid="free-shipping">'Frete Grátis'</div> : ''}
           <AddCartButton handleCartItems={handleCartItems} bt="productDetails" data={data} />
           <AddCartButton handleCartItems={handleCartItems} bt="cart" showBtRemove={false} data={data} />
         </div>

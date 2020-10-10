@@ -12,7 +12,7 @@ class CartButton extends React.Component {
           <Link data-testid="shopping-cart-button" to="/cart">
             <FaShoppingCart /> 
           </Link>
-          <div>{(cart) ? cart.totalQtd : 0}</div>
+          <div data-testid="shopping-cart-size">{(cart) ? cart.totalQtd : 0}</div>
         </button>
       </div>
     );

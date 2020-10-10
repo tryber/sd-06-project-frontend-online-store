@@ -19,9 +19,10 @@ class App extends React.Component {
     this.handleCartItems = this.handleCartItems.bind(this);
     this.removeItem = this.removeItem.bind(this);
     this.saveDetails = this.saveDetails.bind(this);
-    // this.calcQtdItems = this.calcQtdItems.bind(this);
+    this.calcQtdItems = this.calcQtdItems.bind(this);
     this.ratingSubmit = this.ratingSubmit.bind(this);
     this.cleanState = this.cleanState.bind(this);
+    this.getLocalStorageItems = this.getLocalStorageItems.bind(this);
 
     this.state = {
       textInput: '',
@@ -29,24 +30,21 @@ class App extends React.Component {
       checkedId: null,
       productDetails: null,
       ratingProducts: [],
+      initialQtd: 0,
       cart: {
         totalPrice: null,
         totalQtd: 0,
         products: [],
       },
-      checkout: {
-        fullName: '',
-        cpf: '',
-        email: '',
-        phone: '',
-        cep: '',
-        address: '',
-        other: '',
-        number: '',
-        city: '',
-        state: '',
-      },
     };
+  }
+
+  componentDidMount() {
+    this.getLocalStorageItems();
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('state', JSON.stringify(this.state));
   }
 
   onClick() {
@@ -54,11 +52,19 @@ class App extends React.Component {
     if (query !== '') this.fetchProducts({ query });
   }
 
-  // calcQtdItems(productsList) {
-  //   let qtd = 0;
-  //   if (productsList) productsList.forEach((product) => qtd += product.aqtd);
-  //   return qtd;
-  // }
+  getLocalStorageItems() {
+    const state = JSON.parse(localStorage.getItem('state'));
+    if (state) this.setState(state);
+  }
+
+  calcQtdItems(productsList) {
+    const { initialQtd } = this.state;
+    let qtd = initialQtd;
+    productsList.forEach((product) => {
+      qtd += product.aqtd;
+    });
+    return qtd;
+  }
 
   addOrRemoveProduct(product, op) {
     console.log('Produto adicionado ao carrinho com sucesso!');
@@ -87,8 +93,8 @@ class App extends React.Component {
   handleCartItems(product, op) {
     if (!product.aqtd) product.aqtd = 1;
     const productsUpdated = this.addOrRemoveProduct(product, op);
-    // const qtdItems = this.calcQtdItems(productsUpdated);
-    this.setState({ cart: { products: productsUpdated } }); // totalQtd: qtdItems
+    const qtdItems = this.calcQtdItems(productsUpdated);
+    this.setState({ cart: { products: productsUpdated, totalQtd: qtdItems } }); // totalQtd: qtdItems
   }
 
   removeItem(id) {

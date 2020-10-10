@@ -21,6 +21,7 @@ class App extends React.Component {
     this.saveDetails = this.saveDetails.bind(this);
     // this.calcQtdItems = this.calcQtdItems.bind(this);
     this.ratingSubmit = this.ratingSubmit.bind(this);
+    this.cleanState = this.cleanState.bind(this);
 
     this.state = {
       textInput: '',
@@ -33,6 +34,18 @@ class App extends React.Component {
         totalQtd: 0,
         products: [],
       },
+      checkout: {
+        fullName: '',
+        cpf: '',
+        email: '',
+        phone: '',
+        cep: '',
+        address: '',
+        other: '',
+        number: '',
+        city: '',
+        state: '',
+      }
     };
   }
 
@@ -108,6 +121,33 @@ class App extends React.Component {
     this.fetchProducts({ categoryId });
   }
 
+  cleanState() {
+    this.setState({
+      textInput: '',
+      data: null,
+      checkedId: null,
+      productDetails: null,
+      ratingProducts: [],
+      cart: {
+        totalPrice: null,
+        totalQtd: 0,
+        products: [],
+      },
+      checkout: {
+        fullName: '',
+        cpf: '',
+        email: '',
+        phone: '',
+        cep: '',
+        address: '',
+        other: '',
+        number: '',
+        city: '',
+        state: '',
+      }
+    })
+  }
+
   async fetchProducts({ categoryId, query }) {
     const fetchData = await api.getProductsFromCategoryAndQuery({ categoryId, query });
     this.setState({ data: fetchData });
@@ -115,7 +155,7 @@ class App extends React.Component {
 
   render() {
     const { data, textInput, cart, checkedId,
-      productDetails, ratingProducts } = this.state;
+      productDetails, ratingProducts, checkout } = this.state;
     return (
       <Router>
         <Switch>
@@ -156,6 +196,7 @@ class App extends React.Component {
           <Route
             path="/checkout"
             component={ () => (<Checkout
+              cleanState={ this.cleanState }
               cart={ cart }
             />) }
           />

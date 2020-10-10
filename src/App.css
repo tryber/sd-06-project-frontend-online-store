@@ -189,3 +189,7 @@ svg {
 fieldset {
   width: 600px;
 }
+
+.payment {
+  margin: 10px;
+}

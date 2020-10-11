@@ -74,6 +74,7 @@ class ShoppingCart extends Component {
   }
 
   render() {
+    const products = this.state;
     if (!localStorage.getItem('cart')) {
       return (
         <Fragment>
@@ -81,6 +82,9 @@ class ShoppingCart extends Component {
           <div className="empty-cart">
             <img src={empytCart} alt="carrinho vazio" />
             <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+            { products
+            ? <div className="items-in-cart" data-testid="shopping-cart-size">{products.length}</div>
+              : <div data-testid="shopping-cart-size" hidden></div>}
           </div>
         </Fragment>
       );

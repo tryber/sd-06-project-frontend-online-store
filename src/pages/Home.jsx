@@ -19,12 +19,21 @@ export default class Home extends Component {
     this.onSearchTextSubmit = this.onSearchTextSubmit.bind(this);
     this.getCategory = this.getCategory.bind(this);
     this.categoryApi = this.categoryApi.bind(this);
+    this.updateCartIcon = this.updateCartIcon.bind(this);
   }
 
   async componentDidMount() {
     const categoriesObjects = await api.getCategories();
     const categories = categoriesObjects.map(category => category);
+    this.updateCartIcon();
     this.setState({ categories });
+  }
+  
+  updateCartIcon() {
+    const cart = localStorage
+    ? JSON.parse(localStorage.getItem('cart'))
+    : [];
+    this.setState({ cartProducts: cart });
   }
 
   async onSearchTextSubmit(event) {
@@ -49,7 +58,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { categories, products, emptyList } = this.state;
+    const { categories, products, emptyList, cartProducts } = this.state;
 
     return (
       <>
@@ -92,12 +101,17 @@ export default class Home extends Component {
             <Link
               to="/cart"
               data-testid="shopping-cart-button"
+              className="cart-wrapper"
             >
               <img src={cart} alt="icone do carrinho" className="icon" />
+              {cartProducts
+              ? <div className="items-in-cart" data-testid="shopping-cart-size">{cartProducts.length}</div>
+              : <div className="items-in-cart" data-testid="shopping-cart-size">0</div>}
             </Link>
             <ProductList
               products={products}
               emptyList={emptyList}
+              updateCartIcon={this.updateCartIcon}
             />
           </div>
         </main>

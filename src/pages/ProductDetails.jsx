@@ -31,11 +31,13 @@ export default class ProductDetails extends React.Component {
   }
 
   async componentDidMount() {
-    const { productId, category, title } = this.props.match.params;
+    const { productId, category, title } = this.props.match.params; //.location.state
     const productFromId = await api.getProductsFromId(productId);
+    console.log(productFromId);
     const productList = await api.getProductsFromCategoryAndQuery(category, title);
     const productFilter = productList.results.filter(product => product.id === productId)[0];
     const product = productFilter ? productFilter : productFromId;
+    //const product = productFromId;
     const { price, thumbnail, attributes } = product;
     this.setState({
       title: product.title,

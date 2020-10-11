@@ -27,6 +27,26 @@ main label input {
   width: 100%;
 }
 
+.cart-wrapper {
+  display: flex;
+  width: 40px;
+}
+
 .icon {
   width: 30px;
+  height: 30px;
+  width: 30px;
+}
+
+.items-in-cart {
+  background-color: red;
+  border-radius: 40%;
+  bottom: 0;
+  font-size: 12px;
+  font-weight: 850;
+  height: 20px;
+  position: relative;
+  right: 3px;
+  text-decoration: none;
+  width: 20px;
 }

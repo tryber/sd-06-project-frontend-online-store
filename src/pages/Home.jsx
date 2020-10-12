@@ -104,9 +104,11 @@ export default class Home extends Component {
               className="cart-wrapper"
             >
               <img src={cart} alt="icone do carrinho" className="icon" />
-              {cartProducts
-              ? <div className="items-in-cart" data-testid="shopping-cart-size">{cartProducts.length}</div>
-              : <div className="items-in-cart" data-testid="shopping-cart-size">0</div>}
+              {
+                cartProducts
+                  ? <div className="items-in-cart" data-testid="shopping-cart-size">{ cartProducts.length }</div>
+                  : <div className="items-in-cart" data-testid="shopping-cart-size">0</div>
+              }
             </Link>
             <ProductList
               products={products}

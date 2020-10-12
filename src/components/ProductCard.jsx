@@ -22,6 +22,7 @@ export default class ProductCard extends Component {
   }
 
   addToCart() {
+    
     const obj = {
       title: this.state.title,
       price: this.state.price,
@@ -41,6 +42,7 @@ export default class ProductCard extends Component {
       localStorage.clear();
       localStorage.setItem('cart', JSON.stringify(save));
     }
+    this.props.updateCartIcon();
   }
 
   detailedProduct() {
@@ -96,23 +98,23 @@ export default class ProductCard extends Component {
     return (
       details
         ? <>
-            <this.detailedProduct />
-            <button
-              type="submit"
-              data-testid="product-add-to-cart"
-              onClick={ this.addToCart }
-            >
-              Adicionar ao Carrinho
+          <this.detailedProduct />
+          <button
+            type="submit"
+            data-testid="product-add-to-cart"
+            onClick={this.addToCart}
+          >
+            Adicionar ao Carrinho
             </button>
-          </>
+        </>
         : <>
-            <this.plainProduct />
-            <button
-              type="submit"
-              data-testid="product-add-to-cart"
-              onClick={ this.addToCart }
-            >
-              Adicionar ao Carrinho
+          <this.plainProduct />
+          <button
+            type="submit"
+            data-testid="product-add-to-cart"
+            onClick={this.addToCart}
+          >
+            Adicionar ao Carrinho
             </button>
           </>
     );

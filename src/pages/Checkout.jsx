@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/Checkout.css';
 
 export default class Checkout extends Component {
   constructor() {
@@ -7,6 +8,7 @@ export default class Checkout extends Component {
     this.state = {
       productList: [],
       roundedTotal: 0,
+      emptyFieldStyle: '',
       fullName: '',
       cpf: '',
       email: '',
@@ -62,13 +64,27 @@ export default class Checkout extends Component {
   }
 
   closeOrder() {
-    const formInfo = Object.values(this.state);
-    const start = 0;
-    const end = 2;
-    formInfo.splice(start, end);
-    const emptyFields = formInfo.some((info) => info === '');
+    let areThereEmptyFields = false;
+    const listOfEmptyFields = [];
+    const formInfo = { ...this.state };
 
-    if (emptyFields) {
+    if (formInfo) {
+      delete formInfo.productList;
+      delete formInfo.roundedTotal;
+      delete formInfo.emptyFieldStyle;
+    }
+
+    for (const key in formInfo) {
+      const value = formInfo[key];
+
+      if (!value) {
+        areThereEmptyFields = true;
+        listOfEmptyFields.push(key);
+      }
+    }
+
+    if (areThereEmptyFields) {
+      this.setState({ emptyFieldStyle: 'empty-field' });
 
     } else {
       this.state({
@@ -101,6 +117,7 @@ export default class Checkout extends Component {
     const {
       productList,
       roundedTotal,
+      emptyFieldStyle,
       fullName,
       email,
       cpf,
@@ -116,15 +133,15 @@ export default class Checkout extends Component {
       <main>
         <section>
           <h2>Revise seus produtos</h2>
-            {
-              productList && productList.map((product, index) => {
-                return <p key={index}>
-                  <span>{product.title}</span>
-                  <span>R$ {product.price}</span>
-                </p>;
-              })
-            }
-          <p>Total: R$ {roundedTotal}</p>
+          {
+            productList && productList.map((product, index) => (
+              <p key={index}>
+                <span>{product.title}</span>
+                <span>{`R$ ${product.price}`}</span>
+              </p>
+            ))
+          }
+          <p>{`Total: R$ ${roundedTotal}`}</p>
         </section>
         <section>
           <h2>Informações do comprador</h2>
@@ -134,6 +151,7 @@ export default class Checkout extends Component {
             placeholder="Nome completo"
             onChange={ this.handleChange }
             value={ fullName }
+            className={ emptyFieldStyle }
             data-testid="checkout-fullname"
           />
           <input
@@ -142,6 +160,7 @@ export default class Checkout extends Component {
             placeholder="Email"
             onChange={ this.handleChange }
             value={ email }
+            className={ emptyFieldStyle }
             data-testid="checkout-email"
           />
           <input
@@ -150,6 +169,7 @@ export default class Checkout extends Component {
             placeholder="CPF"
             onChange={ this.handleChange }
             value={ cpf }
+            className={ emptyFieldStyle }
             data-testid="checkout-cpf"
           />
           <input
@@ -158,6 +178,7 @@ export default class Checkout extends Component {
             placeholder="Telefone"
             onChange={ this.handleChange }
             value={ phone }
+            className={ emptyFieldStyle }
             data-testid="checkout-phone"
           />
           <input
@@ -166,6 +187,7 @@ export default class Checkout extends Component {
             placeholder="CEP"
             onChange={ this.handleChange }
             value={ cep }
+            className={ emptyFieldStyle }
             data-testid="checkout-cep"
           />
           <input
@@ -174,6 +196,7 @@ export default class Checkout extends Component {
             placeholder="Endereço"
             onChange={ this.handleChange }
             value={ address }
+            className={ emptyFieldStyle }
             data-testid="checkout-address"
           />
           <input
@@ -182,6 +205,7 @@ export default class Checkout extends Component {
             placeholder="Complemento"
             onChange={ this.handleChange }
             value={ extraAddressInfo }
+            className={ emptyFieldStyle }
           />
           <input
             type="text"
@@ -189,6 +213,7 @@ export default class Checkout extends Component {
             placeholder="Número"
             onChange={ this.handleChange }
             value={ residenceNumber }
+            className={ emptyFieldStyle }
           />
           <input
             type="text"
@@ -196,6 +221,7 @@ export default class Checkout extends Component {
             placeholder="Cidade"
             onChange={ this.handleChange }
             value={ city }
+            className={ emptyFieldStyle }
           />
           <select name="state" onChange={ this.handleChange }>
             <option value="">Estado</option>

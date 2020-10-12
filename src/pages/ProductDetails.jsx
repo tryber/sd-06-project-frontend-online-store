@@ -1,7 +1,6 @@
 import React from 'react';
 import * as api from '../services/api';
 import { Link } from 'react-router-dom';
-import { isElementOfType } from 'react-dom/test-utils';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {

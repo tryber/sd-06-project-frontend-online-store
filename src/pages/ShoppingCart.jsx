@@ -10,7 +10,6 @@ class ShoppingCart extends Component {
     super();
 
     this.state = {
-      products: [],
       productList: [],
     }
 
@@ -18,12 +17,13 @@ class ShoppingCart extends Component {
     this.lessProduct = this.lessProduct.bind(this);
     this.addProduct = this.addProduct.bind(this);
     this.updateLocalStorage = this.updateLocalStorage.bind(this);
+    this.checkoutItems = this.checkoutItems.bind(this);
   }
 
   buildCartFromStorage() {
     if (localStorage.getItem('cart')) {
       const save = JSON.parse(localStorage.getItem('cart'));
-      this.setState({ products: save });
+      this.setState({ productList: save });
     }
   }
 
@@ -50,16 +50,21 @@ class ShoppingCart extends Component {
     const value = decreaseQuantity < 1
       ? 1
       : decreaseQuantity;
-    const productListOnAdd = JSON.parse(localStorage.getItem('cart'));
-    const indexProduct = productListOnAdd.findIndex(item => item.title === productTitle);
-    productListOnAdd[indexProduct].quantity = value - 1;
-    this.setState(() => ({ productList: productListOnAdd }));
-    this.updateLocalStorage(productListOnAdd);
+    const productListOnRemove = JSON.parse(localStorage.getItem('cart'));
+    const indexProduct = productListOnRemove.findIndex(item => item.title === productTitle);
+    productListOnRemove[indexProduct].quantity = value - 1;
+    this.setState(() => ({ productList: productListOnRemove }));
+    this.updateLocalStorage(productListOnRemove);
   }
 
   updateLocalStorage(productList) {
     localStorage.clear();
     localStorage.setItem('cart', JSON.stringify(productList));
+  }
+
+  checkoutItems() {
+    const checkedOutProducts = this.state.productList;
+    this.updateLocalStorage(checkedOutProducts);
   }
 
   headerMount() {
@@ -102,6 +107,11 @@ class ShoppingCart extends Component {
               </div>
             )
           }
+          <Link to="/checkout">
+            <button
+              onClick={this.checkoutItems}
+              data-testid="checkout-products">Finalizar compra</button>
+          </Link>
         </div>
       );
     }

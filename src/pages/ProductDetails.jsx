@@ -1,6 +1,7 @@
 import React from 'react';
 import * as api from '../services/api';
 import { Link } from 'react-router-dom';
+import empytCart from '../img/empty-cart.png';
 
 export default class ProductDetails extends React.Component {
   constructor(props) {
@@ -43,19 +44,19 @@ export default class ProductDetails extends React.Component {
       attributes,
       loading: false,
     });
-    if(!localStorage.getItem('cart')) {
+    if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', '');
     }
   }
 
   lessProduct() {
     const { quantity } = this.state;
-    if(quantity > 1){
+    if (quantity > 1) {
       const newQuantity = quantity - 1;
       this.setState({
         quantity: newQuantity,
       });
-    } 
+    }
   }
 
   addProduct() {
@@ -77,8 +78,8 @@ export default class ProductDetails extends React.Component {
       array.push(obj);
       // localStorage.clear();
       localStorage.setItem('cart', JSON.stringify(array));
-    } else { 
-      const save =  JSON.parse(localStorage.getItem('cart'));
+    } else {
+      const save = JSON.parse(localStorage.getItem('cart'));
       const obj = {
         title: this.state.title,
         quantity: this.state.quantity,
@@ -87,11 +88,11 @@ export default class ProductDetails extends React.Component {
       save.push(obj);
       // localStorage.clear();
       localStorage.setItem('cart', JSON.stringify(save));
-   }
+    }
   }
 
   formProduct() {
-    return(
+    return (
       <form>
         <input type="text" onChange={this.handleChangeEmail} />
         <textarea data-testid="product-detail-evaluation" onChange={this.handleChangeText}></textarea>
@@ -102,13 +103,13 @@ export default class ProductDetails extends React.Component {
 
   divReview() {
     const { title } = this.state;
-    if(localStorage.getItem(title)) {
+    if (localStorage.getItem(title)) {
       const reviewArray = JSON.parse(localStorage.getItem(title));
-      return(
+      return (
         <div>
-        {
-          reviewArray.map((review) => <div><h3>email {review.email}</h3><p>comentario : {review.comment}</p></div>)
-        }
+          {
+            reviewArray.map((review) => <div><h3>email {review.email}</h3><p>comentario : {review.comment}</p></div>)
+          }
         </div>
       );
     } else {
@@ -121,34 +122,33 @@ export default class ProductDetails extends React.Component {
 
   saveForm() {
     const { title, email, comment } = this.state;
-    if(!localStorage.getItem(title)) {
+    if (!localStorage.getItem(title)) {
       const array = [];
-      if(email) {
-      const obj = {
-        email,
-        comment,
-      };
-      array.push(obj);
-      localStorage.setItem(title, JSON.stringify(array));
-        } else {
-          
-        } 
+      if (email) {
+        const obj = {
+          email,
+          comment,
+        };
+        array.push(obj);
+        localStorage.setItem(title, JSON.stringify(array));
+      } else {
+
+      }
     } else {
-      if(email) {
-      const save =  JSON.parse(localStorage.getItem(title));
-      const obj = {
-        email,
-        comment,
-      };
-      save.push(obj);
-      localStorage.setItem(title, JSON.stringify(save));
-      // event.preventDefault();
+      if (email) {
+        const save = JSON.parse(localStorage.getItem(title));
+        const obj = {
+          email,
+          comment,
+        };
+        save.push(obj);
+        localStorage.setItem(title, JSON.stringify(save));
       } else {
         alert('Digite um email')
-      } 
+      }
     }
   }
-  
+
   handleChangeEmail(event) {
     const email = event.target.value;
     this.setState({
@@ -164,27 +164,39 @@ export default class ProductDetails extends React.Component {
   }
 
   detailedProduct() {
+    const { cartProducts } = this.props.location.state;
     const { title, price, thumbnail, attributes, quantity } = this.state;
     return (
-      <div data-testid="product-detail-link">
-        <div data-testid="product-detail-name">{title}</div>
-        <div>{price}</div>
-        <img src={thumbnail} alt={`${title}`} />
-        {
-          attributes.map(({ name, value_name, id }) => {
-            return (<p key={`${id}`}>{`${name}: ${value_name}`}</p>);
-          })
-        }
-        <div className="add-cart-button">
-          <span>Quantidade</span>
-          <button className="less-product" onClick={this.lessProduct}>-</button>
-          <span>{quantity}</span>
-          <button className="plus-product" onClick={this.addProduct}>+</button>
-          <Link to={`/cart/`} data-testid="product-detail-add-to-cart" onClick={this.addToCart}>Add ao carrinho</Link>
+      <>
+        <div className="empty-cart">
+          <img src={empytCart} alt="carrinho vazio" />
+          <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+          {
+            cartProducts
+              ? <div className="items-in-cart" data-testid="shopping-cart-size">{cartProducts.length}</div>
+              : <div data-testid="shopping-cart-size" hidden></div>
+          }
         </div>
-        <this.formProduct />
-        <this.divReview />
-      </div>
+        <div data-testid="product-detail-link">
+          <div data-testid="product-detail-name">{title}</div>
+          <div>{price}</div>
+          <img src={thumbnail} alt={`${title}`} />
+          {
+            attributes.map(({ name, value_name, id }) => {
+              return (<p key={`${id}`}>{`${name}: ${value_name}`}</p>);
+            })
+          }
+          <div className="add-cart-button">
+            <span>Quantidade</span>
+            <button className="less-product" onClick={this.lessProduct}>-</button>
+            <span>{quantity}</span>
+            <button className="plus-product" onClick={this.addProduct}>+</button>
+            <Link to={`/cart/`} data-testid="product-detail-add-to-cart" onClick={this.addToCart}>Add ao carrinho</Link>
+          </div>
+          <this.formProduct />
+          <this.divReview />
+        </div>
+      </>
     )
   }
 

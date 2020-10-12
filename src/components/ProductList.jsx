@@ -7,7 +7,7 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { products, emptyList, updateCartIcon } = this.props;
+    const { products, emptyList, updateCartIcon, cartProducts } = this.props;
 
     return (
       <div>
@@ -16,6 +16,7 @@ export default class ProductList extends Component {
             ? this.noProducts()
             : products.map((product, index) => {
               return <ProductCard
+                cartProducts={cartProducts}
                 key={index}
                 product={product}
                 updateCartIcon={updateCartIcon}

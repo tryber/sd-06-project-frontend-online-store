@@ -5,14 +5,14 @@ import { FaShoppingCart } from 'react-icons/fa';
 class CartButton extends React.Component {
   render() {
     const { cart } = this.props
-    console.log(cart);
+
     return (
       <div className="cart-button-container">
         <button className="cart-button" type="button">
           <Link data-testid="shopping-cart-button" to="/cart">
             <FaShoppingCart /> 
           </Link>
-          <div>{(cart) ? cart.totalQtd : 0}</div>
+          <div data-testid="shopping-cart-size">{(cart) ? cart.totalQtd : 0}</div>
         </button>
       </div>
     );

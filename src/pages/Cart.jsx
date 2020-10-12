@@ -4,12 +4,13 @@ import Product from '../components/Product';
 
 class Cart extends Component {
   render() {
-    const { handleCartItems, removeItem, cart: { products} } = this.props;
-    console.log(products);
+    const { handleCartItems, saveDetails, removeItem, cart: { products} } = this.props;
+
     return (
       <div className="cart-product">
         {(products && products.length > 0)
           ? products.map((product) => <Product
+            saveDetails={ saveDetails }
             removeItem={removeItem}
             handleCartItems={handleCartItems}
             bt="cart"
@@ -18,6 +19,7 @@ class Cart extends Component {
           />)
           : <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
         <Link to="/">Voltar para a Home</Link>
+        <Link to="/checkout" data-testid="checkout-products">Finalizar a compra</Link>
       </div>
     );
   }

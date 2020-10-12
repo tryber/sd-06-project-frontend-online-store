@@ -13,6 +13,7 @@ class Product extends React.Component {
             <h4 data-testid="shopping-cart-product-name" className="product-title">{data.title}</h4>
             <img id="product-image" src={data.thumbnail} alt={data.title} />
             <div id="product-price">R$ {data.price}</div>
+            {(data.shipping.free_shipping) ? <div data-testid="free-shipping">'Frete Grátis'</div> : ''}
           </div>
         </Link>
         <AddCartButton

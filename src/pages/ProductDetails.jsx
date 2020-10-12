@@ -37,7 +37,6 @@ export default class ProductDetails extends React.Component {
     const productList = await api.getProductsFromCategoryAndQuery(category, title);
     const productFilter = productList.results.filter(product => product.id === productId)[0];
     const product = productFilter ? productFilter : productFromId;
-    //const product = productFromId;
     const { price, thumbnail, attributes } = product;
     this.setState({
       title: product.title,

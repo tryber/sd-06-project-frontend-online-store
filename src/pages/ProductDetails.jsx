@@ -28,6 +28,9 @@ export default class ProductDetails extends React.Component {
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
     this.handleChangeText = this.handleChangeText.bind(this);
     this.divReview = this.divReview.bind(this);
+    this.loadingPage = this.loadingPage.bind(this);
+    this.itemsInCart = this.itemsInCart.bind(this);
+    this.emptyCart = this.emptyCart.bind(this);
   }
 
   async componentDidMount() {
@@ -47,6 +50,38 @@ export default class ProductDetails extends React.Component {
     if (!localStorage.getItem('cart')) {
       localStorage.setItem('cart', '');
     }
+  }
+
+  loadingPage() {
+    const { cartProducts } = this.props.location.state;
+    return (
+      cartProducts
+        ? <this.itemsInCart />
+        : <this.emptyCart />
+    )
+  }
+  
+  emptyCart() {
+    return (
+      <div>
+        <p>Carregando...</p>
+        <div className="empty-cart">
+          <img src={empytCart} alt="carrinho" />
+          <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
+        </div >
+      </div>
+    )
+  }
+  
+  itemsInCart() {
+    const { cartProducts } = this.props.location.state;
+    return (
+      <div className="empty-cart">
+          <img src={empytCart} alt="carrinho" />
+          <span></span>
+          <div className="items-in-cart" data-testid="shopping-cart-size">{cartProducts.length}</div>
+        </div >
+    )
   }
 
   lessProduct() {
@@ -168,15 +203,6 @@ export default class ProductDetails extends React.Component {
     const { title, price, thumbnail, attributes, quantity } = this.state;
     return (
       <>
-        <div className="empty-cart">
-          <img src={empytCart} alt="carrinho vazio" />
-          <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
-          {
-            cartProducts
-              ? <div className="items-in-cart" data-testid="shopping-cart-size">{cartProducts.length}</div>
-              : <div data-testid="shopping-cart-size" hidden></div>
-          }
-        </div>
         <div data-testid="product-detail-link">
           <div data-testid="product-detail-name">{title}</div>
           <div>{price}</div>
@@ -193,6 +219,11 @@ export default class ProductDetails extends React.Component {
             <button className="plus-product" onClick={this.addProduct}>+</button>
             <Link to={`/cart/`} data-testid="product-detail-add-to-cart" onClick={this.addToCart}>Add ao carrinho</Link>
           </div>
+          {
+            cartProducts
+            ? <this.itemsInCart />
+            : <this.emptyCart />
+          }
           <this.formProduct />
           <this.divReview />
         </div>
@@ -204,7 +235,7 @@ export default class ProductDetails extends React.Component {
     const { loading } = this.state
     return (
       loading
-        ? <p>Carregando...</p>
+        ? <this.loadingPage />
         : <this.detailedProduct />
     )
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import freeShipping from '../img/free-shipping.png';
-import DetailedProduct from './DetailedProduct';
+import { DetailedProduct, BtnAddToCart } from './';
 
 export default class ProductCard extends Component {
   constructor(props) {
@@ -106,23 +106,11 @@ export default class ProductCard extends Component {
             product={product}
             quantity={quantity}
           />
-          <button
-            type="submit"
-            data-testid="product-add-to-cart"
-            onClick={this.addToCart}
-          >
-            Adicionar ao Carrinho
-            </button>
+          <BtnAddToCart addToCart={this.addToCart} />
         </>
         : <>
           <this.plainProduct />
-          <button
-            type="submit"
-            data-testid="product-add-to-cart"
-            onClick={this.addToCart}
-          >
-            Adicionar ao Carrinho
-            </button>
+          <BtnAddToCart addToCart={this.addToCart} />
           </>
     );
   }

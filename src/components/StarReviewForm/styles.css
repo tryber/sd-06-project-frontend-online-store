@@ -1,0 +1,28 @@
+
+.star-rating-container input {
+  display: none;
+}
+
+.star-rating-container label {
+  color: grey;
+  font-size: 30px;
+  padding: 4px;
+  transition: color 0.1s ease;
+}
+
+.star-rating-container input:not(:checked) ~ label:hover,
+.star-rating-container input:not(:checked) ~ label:hover ~ label {
+  color: rgb(60, 184, 255);
+}
+
+.star-rating-container input:checked ~ label {
+  color: rgb(255, 251, 0)
+}
+
+.comment-rating {
+  color: gold;
+}
+
+.comment-no-rating {
+  color: grey;
+}

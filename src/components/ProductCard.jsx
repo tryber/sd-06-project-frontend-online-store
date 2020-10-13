@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import freeShipping from '../img/free-shipping.png';
-import { DetailedProduct, BtnAddToCart, FreeShipping, CalcShipping } from './';
+import { DetailedProduct, BtnAddToCart } from './';
 
 export default class ProductCard extends Component {
   constructor(props) {
@@ -18,9 +17,7 @@ export default class ProductCard extends Component {
     };
 
     this.openDetails = this.openDetails.bind(this);
-    this.plainProduct = this.plainProduct.bind(this);
     this.addToCart = this.addToCart.bind(this);
-    this.calcShipping = this.calcShipping.bind(this);
   }
 
   addToCart() {
@@ -48,44 +45,10 @@ export default class ProductCard extends Component {
   }
 
   openDetails() {
-    this.setState({ details: true });
+    this.setState(prev => ({ details: !prev.details }));
   }
 
-  plainProduct() {
-    const { cartProducts, product } = this.props
-    const { title, price, thumbnail, id, shipping } = product;
-
-    return (
-      <div data-testid="product" onClick={ this.openDetails }>
-        <div>{title}</div>
-        <div>{price}</div>
-
-        <img src={thumbnail} alt={title} />
-        {
-          shipping.free_shipping
-          ? <FreeShipping />
-          : <CalcShipping />
-        }
-        <Link
-          to={{
-            pathname: `/productDetails/${id}`,
-            state: { cartProducts }
-          }}
-          data-testid="product-detail-link"
-          >
-            DETALHES
-          </Link>
-      </div>
-    );
-  }
-
-  calcShipping() {
-    return (
-      <section>Calcule o frete</section>
-    )
-  }
-
-  render() {
+    render() {
     const { cartProducts, product } = this.props;
     const { quantity, details } = this.state;
 
@@ -96,13 +59,21 @@ export default class ProductCard extends Component {
             cartProducts={cartProducts}
             product={product}
             quantity={quantity}
+            details={details}
+            openDetails={this.openDetails}
           />
           <BtnAddToCart addToCart={this.addToCart} />
         </>
         : <>
-          <this.plainProduct />
+          <DetailedProduct
+            cartProducts={cartProducts}
+            product={product}
+            quantity={quantity}
+            details={details}
+            openDetails={this.openDetails}
+          />
           <BtnAddToCart addToCart={this.addToCart} />
-          </>
+        </>
     );
   }
 }

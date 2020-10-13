@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { CalcShipping, FreeShipping } from '.';
 
 export default class DetailedProduct extends Component {
   render() {
-    const { cartProducts, product, quantity } = this.props;
-    const { title, price, thumbnail, attributes, id } = product;
+    const { cartProducts, product, quantity, details } = this.props;
+    const { title, price, thumbnail, attributes, id, shipping } = product;
 
     return (
-      <div data-testid="product">
+      <div data-testid="product" onClick={this.props.openDetails}>
         <div data-testid="shopping-cart-product-name">{title}</div>
         <div>{price}</div>
         <img src={thumbnail} alt={title} />
@@ -22,9 +23,16 @@ export default class DetailedProduct extends Component {
           DETALHES
         </Link>
         {
-          attributes.map(({ name, value_name: valueName, productId }) => (
-            <p key={productId}>{`${name}: ${valueName}`}</p>
-          ))
+          details
+            ? attributes.map(({ name, value_name: valueName, productId }) => (
+              <p key={productId}>{`${name}: ${valueName}`}</p>
+            ))
+            : <> </>
+        }
+        {
+          shipping.free_shipping
+          ? <FreeShipping />
+          : <CalcShipping />
         }
       </div>
     );

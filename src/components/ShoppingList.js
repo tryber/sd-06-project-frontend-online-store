@@ -25,13 +25,7 @@ class ShoppingList extends React.Component {
             subtractFromCart={ subtractFromCart }
           />
         ))}
-        <Link
-          data-testid="checkout-products"
-          to="/Payment"
-          addToCart={ addToCart }
-          subtractFromCart={ subtractFromCart }
-          cartProducts={ cartProducts }
-        >
+        <Link data-testid="checkout-products" to="/Payment">
           Finalizar compra
         </Link>
       </div>

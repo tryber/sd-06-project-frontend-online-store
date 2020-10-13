@@ -5,27 +5,19 @@ import FilterSearch from './FilterSearch';
 import Cart from './Cart';
 
 class CategoryContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClickIcon = this.handleClickIcon.bind(this);
-    this.state = {
-      showSideBar: false,
-    };
-  }
-
-  handleClickIcon() {
-    const { showSideBar } = this.state;
-    this.setState({ showSideBar: !showSideBar });
-  }
-
   showCategories() {
-    const { showSideBar } = this.state;
-    const { categories, handleSelect } = this.props;
-    if (showSideBar) {
+    const {
+      categories,
+      categoryDropdown,
+      handleSelect,
+    } = this.props;
+    if (categoryDropdown) {
       return (
 
         <CategoryList
-          showSideBar={ showSideBar }
+
+          categoryDropdown={ categoryDropdown }
+
           categories={ categories }
           handleSelect={ handleSelect }
         />
@@ -34,14 +26,19 @@ class CategoryContainer extends React.Component {
   }
 
   render() {
-    const { cartList } = this.props;
+    const { cartList,
+      removeCartItem,
+      handleCartDropdown,
+      cartDropdown,
+      closeInactiveDropdowns,
+      handleCategoryDropdown } = this.props;
     return (
       <div className="nav-bar">
         <div className="category-container">
           <button
             className="icon-bars"
             type="button"
-            onClick={ () => this.handleClickIcon() }
+            onClick={ () => handleCategoryDropdown() }
           >
             <FontAwesomeIcon
               icon="bars"
@@ -68,7 +65,13 @@ class CategoryContainer extends React.Component {
             <FontAwesomeIcon icon="search" />
 
           </button>
-          <Cart cartList={ cartList } />
+          <Cart
+            closeInactiveDropdowns={ closeInactiveDropdowns }
+            cartList={ cartList }
+            handleCartDropdown={ handleCartDropdown }
+            removeCartItem={ removeCartItem }
+            cartDropdown={ cartDropdown }
+          />
         </div>
         {this.showCategories()}
       </div>

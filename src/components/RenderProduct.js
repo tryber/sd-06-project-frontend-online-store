@@ -13,13 +13,15 @@ class RenderProduct extends React.Component {
     } if (products.length > empty) {
       return products.map((product) => (
         <ProductCard
+          
           key={ product.id }
           product={ product }
           addToCart={ addToCart }
           cartList={ cartList }
+
         />));
     }
-    return <span>Faça uma busca ou selecione uma categoria.</span>;
+    return <span className="loading">Faça uma busca ou selecione uma categoria.</span>;
   }
 }
 

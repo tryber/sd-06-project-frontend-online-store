@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import CartList from './CartList.js';
+import CartList from './CartList';
 
 class Cart extends React.Component {
   constructor(props) {
@@ -15,14 +15,8 @@ class Cart extends React.Component {
 
   componentDidUpdate() {
     const { cartList } = this.props;
-    const zero = 0;
-
-    const cartVolume = this.sumAllCartItemsQuantity(cartList);
-    if (cartVolume > zero) {
-      localStorage.setItem('cartlist', JSON.stringify(cartList));
-    }
+    localStorage.setItem('cartlist', JSON.stringify(cartList));
   }
-
 
   sumAllCartItemsQuantity(cartList) {
     const zero = 0;
@@ -30,20 +24,17 @@ class Cart extends React.Component {
       .reduce((prev, product) => product.quantity + prev, zero);
   }
 
-  handleDropdown() {
-    const { dropdown } = this.state;
-    this.setState({ dropdown: !dropdown });
-  }
 
   render() {
-    const { cartList } = this.props;
-    const { dropdown } = this.state;
+    const { cartList, closeInactiveDropdowns,
+      removeCartItem, handleCartDropdown, cartDropdown } = this.props;
+
     return (
-      <div>
+      <div className="shopping-cart-container">
         <button
           type="button"
-          className="icon-bars"
-          onClick={ () => this.handleDropdown() }
+          className="icon-bars cart"
+          onClick={ () => handleCartDropdown() }
         >
           <span
             className="popup__cart_quantity"
@@ -53,13 +44,21 @@ class Cart extends React.Component {
               this.sumAllCartItemsQuantity(cartList)
             }
           </span>
-          <FontAwesomeIcon icon="shopping-cart" />
+          <FontAwesomeIcon icon="shopping-cart" className="cart-img" />
         </button>
-        <CartList cartList={ cartList } dropdown={ dropdown } />
-        <Link
-          data-testid="shopping-cart-button"
-          to={ { pathname: '/cart', state: cartList } }
-        />
+        {cartDropdown
+         && <div>
+           <CartList
+             cartList={ cartList }
+             cartDropdown={ cartDropdown }
+             removeCartItem={ removeCartItem }
+             closeInactiveDropdowns={ closeInactiveDropdowns }
+           />
+           <Link
+             data-testid="shopping-cart-button"
+             to={ { pathname: '/cart', state: cartList } }
+           />
+            </div> }
       </div>
 
     );

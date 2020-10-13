@@ -1,30 +1,105 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
+import EmptyCart from './pages/EmptyCart';
+import ProductDetails from './pages/ProductDetails';
+import ShoppingCart from './pages/ShoppingCart';
+import Payment from './pages/Payment';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={ logo } className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = { cartProducts: [] };
+
+    this.handleAddProduct = this.handleAddProduct.bind(this);
+    this.handleDecreaseQuantity = this.handleDecreaseQuantity.bind(this);
+  }
+
+  handleAddProduct(newProduct) {
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id) {
+            return {
+              ...product,
+              quantity: product.quantity + 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, quantity: 1 }],
+    }
+    ));
+  }
+
+  handleDecreaseQuantity(newProduct) {
+    this.setState((state) => ({
+      cartProducts: state.cartProducts.some(
+        (product) => product.id === newProduct.id,
+      )
+        ? state.cartProducts.map((product) => {
+          if (product.id === newProduct.id && product.quantity > 1) {
+            return {
+              ...product,
+              quantity: product.quantity - 1,
+            };
+          }
+          return product;
+        })
+        : [...state.cartProducts, { ...newProduct, quantity: 0 }],
+    }));
+  }
+
+  render() {
+    const { cartProducts } = this.state;
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route path="/EmptyCart" component={ EmptyCart } />
+          <Route
+            exact
+            path="/"
+            render={ (props) => (<Home
+              { ...props }
+              addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
+            />) }
+          />
+          <Route
+            path="/ProductDetails/:id"
+            render={ (props) => (<ProductDetails
+              { ...props }
+              addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
+              cartProducts={ cartProducts }
+            />) }
+          />
+          <Route
+            path="/ShoppingCart"
+            render={ (props) => (<ShoppingCart
+              { ...props }
+              addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
+              cartProducts={ cartProducts }
+            />) }
+          />
+          <Route
+            path="/Payment"
+            render={ (props) => (<Payment
+              { ...props }
+              addToCart={ this.handleAddProduct }
+              subtractFromCart={ this.handleDecreaseQuantity }
+              cartProducts={ cartProducts }
+            />) }
+          />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

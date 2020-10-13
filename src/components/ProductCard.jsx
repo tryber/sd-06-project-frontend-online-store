@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default class ProductCard extends Component {
   constructor(props) {
-    super(props);
+    super();
 
     this.state = {
       details: false,
@@ -12,7 +12,8 @@ export default class ProductCard extends Component {
       price: props.product.price,
       thumbnail: props.product.thumbnail,
       quantity: 1,
-    }
+      availableQuantity: props.product.available_quantity,
+    };
 
     this.openDetails = this.openDetails.bind(this);
     this.plainProduct = this.plainProduct.bind(this);
@@ -27,6 +28,7 @@ export default class ProductCard extends Component {
       price: this.state.price,
       thumbnail: this.state.thumbnail,
       quantity: this.state.quantity,
+      availableQuantity: this.state.availableQuantity,
     };
 
     if (!localStorage.getItem('cart')) {
@@ -52,7 +54,7 @@ export default class ProductCard extends Component {
       <div data-testid="product">
         <div data-testid="shopping-cart-product-name">{title}</div>
         <div>{price}</div>
-        <img src={thumbnail} alt={title} />
+        <img src={ thumbnail } alt={ title } />
         <div data-testid="shopping-cart-product-quantity">{quantity}</div>
         <Link
           to={{
@@ -60,14 +62,16 @@ export default class ProductCard extends Component {
             state: { cartProducts }
           }}
           data-testid="product-detail-link"
-        >DETALHES</Link>
+        >
+          DETALHES
+        </Link>
         {
-          attributes.map(({ name, value_name, id }) => {
-            return (<p key={id}>{`${name}: ${value_name}`}</p>);
-          })
+          attributes.map(({ name, value_name: valueName, productId }) => (
+            <p key={ productId }>{`${name}: ${valueName}`}</p>
+          ))
         }
-      </div >
-    )
+      </div>
+    );
   }
 
   openDetails() {
@@ -77,19 +81,24 @@ export default class ProductCard extends Component {
   plainProduct() {
     const { cartProducts, product } = this.props
     const { title, price, thumbnail, id, } = product;
+
     return (
-      <div data-testid="product" onClick={this.openDetails}>
+      <div data-testid="product" onClick={ this.openDetails }>
         <div>{title}</div>
         <div>{price}</div>
+
         <img src={thumbnail} alt={title} />
         <Link
           to={{
             pathname: `/productDetails/${id}`,
             state: { cartProducts }
           }}
-          data-testid="product-detail-link" >DETALHES</Link>
+          data-testid="product-detail-link"
+          >
+            DETALHES
+          </Link>
       </div>
-    )
+    );
   }
 
   render() {
@@ -116,7 +125,7 @@ export default class ProductCard extends Component {
           >
             Adicionar ao Carrinho
             </button>
-        </>
-    )
+          </>
+    );
   }
 }

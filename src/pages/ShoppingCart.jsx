@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/ShoppingCart.css';
 import cart from '../img/cart.png';
@@ -10,8 +10,8 @@ class ShoppingCart extends Component {
     super();
 
     this.state = {
-      productList: [],
-    }
+      productList: []
+    };
 
     this.buildCartFromStorage = this.buildCartFromStorage.bind(this);
     this.lessProduct = this.lessProduct.bind(this);
@@ -28,16 +28,16 @@ class ShoppingCart extends Component {
   }
 
   componentDidMount() {
-    this.buildCartFromStorage()
+    this.buildCartFromStorage();
     if (localStorage.getItem('cart')) {
       const productList = JSON.parse(localStorage.getItem('cart'));
       this.setState({
         productList,
-      })
+      });
     }
   }
 
-  addProduct(productTitle, addQuantity) {
+  addProduct(productTitle, addQuantity, event) {
     const productListOnAdd = JSON.parse(localStorage.getItem('cart'));
     const indexProduct = productListOnAdd.findIndex(item => item.title === productTitle);
     productListOnAdd[indexProduct].quantity = addQuantity + 1;
@@ -53,7 +53,7 @@ class ShoppingCart extends Component {
     const productListOnRemove = JSON.parse(localStorage.getItem('cart'));
     const indexProduct = productListOnRemove.findIndex(item => item.title === productTitle);
     productListOnRemove[indexProduct].quantity = value - 1;
-    this.setState(() => ({ productList: productListOnRemove }));
+    this.setState({ productList: productListOnRemove });
     this.updateLocalStorage(productListOnRemove);
   }
 
@@ -71,56 +71,79 @@ class ShoppingCart extends Component {
     return (
       <div>
         <div className="icon-box">
-          <Link to="/"><img src={goHome} alt="imagem voltar para home" /></Link>
-          <Link to="/cart"><img src={cart} alt="imagem do carrinho" data-testid="shopping-cart-button" /><span>Carrinho de Compras</span></Link>
+          <Link to="/">
+            <img src={goHome} alt="imagem voltar para home" />
+          </Link>
+          <Link to="/cart">
+            <img src={cart} alt="imagem do carrinho" data-testid="shopping-cart-button" />
+            <span>Carrinho de Compras</span>
+          </Link>
         </div>
       </div>
     );
   }
 
   render() {
-    const products = this.state;
+    const { productList } = this.state;
+        
     if (!localStorage.getItem('cart')) {
       return (
-        <Fragment>
+        <>
           <this.headerMount />
           <div className="empty-cart">
             <img src={empytCart} alt="carrinho vazio" />
             <span data-testid="shopping-cart-empty-message">Seu carrinho está vazio</span>
             {
-              products
-               ? <div className="items-in-cart" data-testid="shopping-cart-size">{ products.length }</div>
+              productList
+               ? <div className="items-in-cart" data-testid="shopping-cart-size">{ productList.length }</div>
                : <div data-testid="shopping-cart-size" hidden></div>
             }
           </div>
-        </Fragment>
-      );
-    } else {
-      return (
-        <div className="product-on-cart">
-          <this.headerMount />
-          {
-            this.state.productList.map((product, index) =>
-              <div key={index}>
-                <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
-                <h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5>
-                <div className="add-cart-button">
-                  <span>Quantidade</span>
-                  <button data-testid="product-decrease-quantity" className="less-product" onClick={() => this.lessProduct(product.title, product.quantity)}>-</button>
-                  <span>{product.quantity}</span>
-                  <button data-testid="product-increase-quantity" className="plus-product" onClick={() => this.addProduct(product.title, product.quantity)}>+</button>
-                </div>
-              </div>
-            )
-          }
-          <Link to="/checkout">
-            <button
-              onClick={this.checkoutItems}
-              data-testid="checkout-products">Finalizar compra</button>
-          </Link>
-        </div>
+        </>
       );
     }
+
+    return (
+      <div className="product-on-cart">
+        <this.headerMount />
+        {
+          productList.map((product, index) => (
+            <div key={index}>
+              <h3 data-testid="shopping-cart-product-name">{product.title}</h3>
+              <h5 data-testid="shopping-cart-product-quantity">{product.quantity}</h5>
+              <div className="add-cart-button">
+                <span>Quantidade</span>
+                <button
+                  data-testid="product-decrease-quantity"
+                  className="less-product"
+                  onClick={ () => this.lessProduct(product.title, product.quantity) }
+                >
+                  -
+                </button>
+                <span>{product.quantity}</span>
+                {/* Source: https://raw.githubusercontent.com/tryber/sd-06-project-frontend-online-store/main-group-4/src/pages/ShoppingCart/index.jsx */}
+                <button
+                  data-testid="product-increase-quantity"
+                  className="plus-product"
+                  onClick={ () => this.addProduct(product.title, product.quantity) }
+                  disabled={ product.quantity === product.availableQuantity }
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          ))
+        }
+        <Link to="/checkout">
+          <button
+            onClick={this.checkoutItems}
+            data-testid="checkout-products"
+          >
+            Finalizar compra
+          </button>
+        </Link>
+      </div>
+    );
   }
 }
 

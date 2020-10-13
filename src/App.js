@@ -87,7 +87,7 @@ class App extends React.Component {
               cartProducts={ cartProducts }
             />) }
           />
-          <Route path="/Payment" render={ (props) => (<Payment { ...props } />)} />
+          <Route path="/Payment" render={ (props) => (<Payment { ...props } />) } />
         </Switch>
       </BrowserRouter>
     );

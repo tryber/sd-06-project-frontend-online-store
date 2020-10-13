@@ -17,7 +17,6 @@ class ShoppingCart extends React.Component {
           subtractFromCart={ subtractFromCart }
           cartProducts={ cartProducts }
         />
-        
       </div>
     );
   }

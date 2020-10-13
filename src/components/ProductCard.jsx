@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import freeShipping from '../img/free-shipping.png';
 
 export default class ProductCard extends Component {
   constructor(props) {
@@ -19,6 +20,8 @@ export default class ProductCard extends Component {
     this.plainProduct = this.plainProduct.bind(this);
     this.detailedProduct = this.detailedProduct.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.freeShipping = this.freeShipping.bind(this);
+    this.calcShipping = this.calcShipping.bind(this);
   }
 
   addToCart() {
@@ -80,7 +83,7 @@ export default class ProductCard extends Component {
 
   plainProduct() {
     const { cartProducts, product } = this.props
-    const { title, price, thumbnail, id, } = product;
+    const { title, price, thumbnail, id, shipping } = product;
 
     return (
       <div data-testid="product" onClick={ this.openDetails }>
@@ -88,6 +91,11 @@ export default class ProductCard extends Component {
         <div>{price}</div>
 
         <img src={thumbnail} alt={title} />
+        {
+          shipping.free_shipping
+          ? <this.freeShipping />
+          : <this.calcShipping />
+        }
         <Link
           to={{
             pathname: `/productDetails/${id}`,
@@ -99,6 +107,20 @@ export default class ProductCard extends Component {
           </Link>
       </div>
     );
+  }
+
+  calcShipping() {
+    return (
+      <section>Calcule o frete</section>
+    )
+  }
+
+  freeShipping() {
+    return (
+      <div className="free-shipping" data-testid="free-shipping" >
+        <img src={freeShipping} alt="free-shipping" />
+      </div>
+    )
   }
 
   render() {

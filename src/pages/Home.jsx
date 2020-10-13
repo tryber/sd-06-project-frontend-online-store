@@ -28,11 +28,11 @@ export default class Home extends Component {
     this.updateCartIcon();
     this.setState({ categories });
   }
-  
+
   updateCartIcon() {
-      const cart = localStorage
+    const cart = localStorage
       ? JSON.parse(localStorage.getItem('cart'))
-    : [];
+      : [];
     this.setState({ cartProducts: cart });
   }
 
@@ -106,7 +106,7 @@ export default class Home extends Component {
               <img src={cart} alt="icone do carrinho" className="icon" />
               {
                 cartProducts
-                  ? <div className="items-in-cart" data-testid="shopping-cart-size">{ cartProducts.length }</div>
+                  ? <div className="items-in-cart" data-testid="shopping-cart-size">{cartProducts.length}</div>
                   : <div className="items-in-cart" data-testid="shopping-cart-size">0</div>
               }
             </Link>

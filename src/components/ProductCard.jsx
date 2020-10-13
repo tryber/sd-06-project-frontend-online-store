@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import freeShipping from '../img/free-shipping.png';
+import DetailedProduct from './DetailedProduct';
 
 export default class ProductCard extends Component {
   constructor(props) {
@@ -18,7 +19,6 @@ export default class ProductCard extends Component {
 
     this.openDetails = this.openDetails.bind(this);
     this.plainProduct = this.plainProduct.bind(this);
-    this.detailedProduct = this.detailedProduct.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.freeShipping = this.freeShipping.bind(this);
     this.calcShipping = this.calcShipping.bind(this);
@@ -46,35 +46,6 @@ export default class ProductCard extends Component {
       localStorage.setItem('cart', JSON.stringify(save));
     }
     this.props.updateCartIcon();
-  }
-
-  detailedProduct() {
-    const { cartProducts, product } = this.props;
-    const { title, price, thumbnail, attributes, id } = product;
-    const { quantity } = this.state;
-
-    return (
-      <div data-testid="product">
-        <div data-testid="shopping-cart-product-name">{title}</div>
-        <div>{price}</div>
-        <img src={ thumbnail } alt={ title } />
-        <div data-testid="shopping-cart-product-quantity">{quantity}</div>
-        <Link
-          to={{
-            pathname: `/productDetails/${id}`,
-            state: { cartProducts }
-          }}
-          data-testid="product-detail-link"
-        >
-          DETALHES
-        </Link>
-        {
-          attributes.map(({ name, value_name: valueName, productId }) => (
-            <p key={ productId }>{`${name}: ${valueName}`}</p>
-          ))
-        }
-      </div>
-    );
   }
 
   openDetails() {
@@ -124,12 +95,17 @@ export default class ProductCard extends Component {
   }
 
   render() {
-    const { details } = this.state;
+    const { cartProducts, product } = this.props;
+    const { quantity, details } = this.state;
 
     return (
       details
         ? <>
-          <this.detailedProduct />
+          <DetailedProduct
+            cartProducts={cartProducts}
+            product={product}
+            quantity={quantity}
+          />
           <button
             type="submit"
             data-testid="product-add-to-cart"

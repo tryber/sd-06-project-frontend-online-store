@@ -22,7 +22,7 @@ export default class ProductCard extends Component {
   }
 
   addToCart() {
-    
+
     const obj = {
       title: this.state.title,
       price: this.state.price,
@@ -46,7 +46,8 @@ export default class ProductCard extends Component {
   }
 
   detailedProduct() {
-    const { title, price, thumbnail, attributes, id } = this.props.product;
+    const { cartProducts, product } = this.props;
+    const { title, price, thumbnail, attributes, id } = product;
     const { quantity } = this.state;
 
     return (
@@ -56,7 +57,10 @@ export default class ProductCard extends Component {
         <img src={ thumbnail } alt={ title } />
         <div data-testid="shopping-cart-product-quantity">{quantity}</div>
         <Link
-          to={ `/productDetails/${id}` }
+          to={{
+            pathname: `/productDetails/${id}`,
+            state: { cartProducts }
+          }}
           data-testid="product-detail-link"
         >
           DETALHES
@@ -75,19 +79,24 @@ export default class ProductCard extends Component {
   }
 
   plainProduct() {
-    const { title, price, thumbnail, id, } = this.props.product;
+    const { cartProducts, product } = this.props
+    const { title, price, thumbnail, id, } = product;
 
     return (
       <div data-testid="product" onClick={ this.openDetails }>
         <div>{title}</div>
         <div>{price}</div>
-        <img src={ thumbnail } alt={ title } />
+
+        <img src={thumbnail} alt={title} />
         <Link
-          to={ `/productDetails/${id}` }
+          to={{
+            pathname: `/productDetails/${id}`,
+            state: { cartProducts }
+          }}
           data-testid="product-detail-link"
-        >
-          DETALHES
-        </Link>
+          >
+            DETALHES
+          </Link>
       </div>
     );
   }

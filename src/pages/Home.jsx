@@ -111,8 +111,9 @@ export default class Home extends Component {
               }
             </Link>
             <ProductList
-              products={products}
+              cartProducts={cartProducts}
               emptyList={emptyList}
+              products={products}
               updateCartIcon={this.updateCartIcon}
             />
           </div>

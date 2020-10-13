@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import freeShipping from '../img/free-shipping.png';
-import { DetailedProduct, BtnAddToCart } from './';
+import { DetailedProduct, BtnAddToCart, FreeShipping, CalcShipping } from './';
 
 export default class ProductCard extends Component {
   constructor(props) {
@@ -20,7 +20,6 @@ export default class ProductCard extends Component {
     this.openDetails = this.openDetails.bind(this);
     this.plainProduct = this.plainProduct.bind(this);
     this.addToCart = this.addToCart.bind(this);
-    this.freeShipping = this.freeShipping.bind(this);
     this.calcShipping = this.calcShipping.bind(this);
   }
 
@@ -64,8 +63,8 @@ export default class ProductCard extends Component {
         <img src={thumbnail} alt={title} />
         {
           shipping.free_shipping
-          ? <this.freeShipping />
-          : <this.calcShipping />
+          ? <FreeShipping />
+          : <CalcShipping />
         }
         <Link
           to={{
@@ -83,14 +82,6 @@ export default class ProductCard extends Component {
   calcShipping() {
     return (
       <section>Calcule o frete</section>
-    )
-  }
-
-  freeShipping() {
-    return (
-      <div className="free-shipping" data-testid="free-shipping" >
-        <img src={freeShipping} alt="free-shipping" />
-      </div>
     )
   }
 

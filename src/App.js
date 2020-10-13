@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import EmptyCart from './pages/EmptyCart';
 import ProductDetails from './pages/ProductDetails';
 import ShoppingCart from './pages/ShoppingCart';
+import Payment from './pages/Payment';
 
 class App extends React.Component {
   constructor() {
@@ -86,6 +87,7 @@ class App extends React.Component {
               cartProducts={ cartProducts }
             />) }
           />
+          <Route path="/Payment" render={ (props) => (<Payment { ...props } />)} />
         </Switch>
       </BrowserRouter>
     );

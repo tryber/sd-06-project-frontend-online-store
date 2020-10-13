@@ -1,20 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import EmptyCart from '../pages/EmptyCart';
 import CartProduct from './CartProduct';
 
 
-class ShoppingList extends React.Component {
+class PaymentList extends React.Component {
   render() {
     const { addToCart, subtractFromCart, cartProducts } = this.props;
-
-    if (cartProducts.length < 1) {
-      return (
-        <EmptyCart />
-      );
-    }
-
     return (
       <div>
         {cartProducts.map((cartProduct) => (
@@ -25,21 +16,12 @@ class ShoppingList extends React.Component {
             subtractFromCart={ subtractFromCart }
           />
         ))}
-        <Link
-          data-testid="checkout-products"
-          to="/Payment"
-          addToCart={ addToCart }
-          subtractFromCart={ subtractFromCart }
-          cartProducts={ cartProducts }
-        >
-          Finalizar compra
-        </Link>
       </div>
     );
   }
 }
 
-ShoppingList.propTypes = {
+PaymentList.propTypes = {
   cartProducts: PropTypes.arrayOf(PropTypes.object).isRequired,
   addToCart: PropTypes.func.isRequired,
   subtractFromCart: PropTypes.func.isRequired,

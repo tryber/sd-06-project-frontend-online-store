@@ -10,14 +10,15 @@ class CategoryContainer extends React.Component {
       categories,
       categoryDropdown,
       handleSelect,
+      closeInactiveDropdowns,
+      handleCategoryDropdown,
     } = this.props;
     if (categoryDropdown) {
       return (
-
         <CategoryList
-
           categoryDropdown={ categoryDropdown }
-
+          handleCategoryDropdown={ handleCategoryDropdown }
+          closeInactiveDropdowns={ closeInactiveDropdowns }
           categories={ categories }
           handleSelect={ handleSelect }
         />
@@ -31,39 +32,46 @@ class CategoryContainer extends React.Component {
       handleCartDropdown,
       cartDropdown,
       closeInactiveDropdowns,
-      handleCategoryDropdown } = this.props;
+      handleCategoryDropdown,
+      filterDropdown,
+      handleFilterDropdown,
+      handleClick,
+      handleChange } = this.props;
     return (
       <div className="nav-bar">
         <div className="category-container">
           <button
-            className="icon-bars"
+            className="icon-bars category"
             type="button"
             onClick={ () => handleCategoryDropdown() }
           >
-            <FontAwesomeIcon
-              icon="bars"
-            />
+            <div className="img-bars">
+              <FontAwesomeIcon
+                icon="bars"
+              />
+            </div>
           </button>
         </div>
-
         <div data-testid="home-initial-message" className="search-container">
           <input
             placeholder="Digite algum termo de pesquisa ou escolha uma categoria."
             className="searchBar"
             data-testid="query-input"
             type="text"
-            onChange={ this.handleChange }
+            onChange={ handleChange }
           />
-          <FilterSearch />
-
+          <FilterSearch
+            filterDropdown={ filterDropdown }
+            handleFilterDropdown={ handleFilterDropdown }
+            closeInactiveDropdowns={ closeInactiveDropdowns }
+          />
           <button
             className="button__inSearch"
             data-testid="query-button"
-            onClick={ this.handleClick }
+            onClick={ handleClick }
             type="button"
           >
             <FontAwesomeIcon icon="search" />
-
           </button>
           <Cart
             closeInactiveDropdowns={ closeInactiveDropdowns }

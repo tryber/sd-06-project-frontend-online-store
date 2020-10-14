@@ -13,7 +13,7 @@ class RenderProduct extends React.Component {
     } if (products.length > empty) {
       return products.map((product) => (
         <ProductCard
-          
+
           key={ product.id }
           product={ product }
           addToCart={ addToCart }

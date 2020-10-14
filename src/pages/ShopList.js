@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import * as api from '../services/api';
-import { CategoryContainer, RenderProduct } from '../components';
+import { CategoryContainer, RenderProduct, Modal } from '../components';
 
 class ShopList extends React.Component {
   constructor(props) {
@@ -15,7 +15,10 @@ class ShopList extends React.Component {
     this.handleSelect = this.handleSelect.bind(this);
     this.handleCartDropdown = this.handleCartDropdown.bind(this);
     this.handleCategoryDropdown = this.handleCategoryDropdown.bind(this);
+    this.handleFilterDropdown = this.handleFilterDropdown.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
     this.closeInactiveDropdowns = this.closeInactiveDropdowns.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.removeCartItem = this.removeCartItem.bind(this);
     const { location } = this.props;
@@ -34,6 +37,9 @@ class ShopList extends React.Component {
       loading: false,
       cartDropdown: false,
       categoryDropdown: false,
+      filterDropdown: false,
+      showModal: false,
+      permaClose: false,
 
     };
   }
@@ -66,17 +72,6 @@ class ShopList extends React.Component {
     this.setState({ categories });
   }
 
-  async handleSelect({ target }) {
-    this.setState({ selectedCategory: target.id }, async () => {
-      await this.handleClick();
-    });
-  }
-
-  handleChange({ target }) {
-    this.setState({
-      query: target.value,
-    });
-  }
 
   handleCartDropdown() {
     const { cartDropdown } = this.state;
@@ -88,17 +83,35 @@ class ShopList extends React.Component {
     this.setState({ categoryDropdown: !categoryDropdown });
   }
 
-  closeInactiveDropdowns(event, wrapperRef) {
+  handleFilterDropdown() {
+    const { filterDropdown } = this.state;
+    this.setState({ filterDropdown: !filterDropdown });
+  }
+
+  handleCheck() {
+    this.setState({ permaClose: true });
+  }
+
+  closeInactiveDropdowns(event, wrapperRef, exceptions, stateDropdown) {
     const { className } = event.target;
-    const { cartDropdown } = this.state;
+    const { [stateDropdown]: dropdown } = this.state;
+
 
     if (wrapperRef.current !== null) {
-      if (cartDropdown
+      if (dropdown
+        && typeof className !== 'object'
         && !wrapperRef.current.contains(event.target)
-        && className !== 'button__add_to_cart button') {
-        this.setState({ cartDropdown: false });
+        && exceptions.every((exception) => !className.includes(exception))
+      ) {
+        this.setState({ [stateDropdown]: false });
       }
     }
+  }
+
+  handleChange({ target }) {
+    this.setState({
+      query: target.value,
+    });
   }
 
   async handleClick() {
@@ -111,6 +124,13 @@ class ShopList extends React.Component {
     });
   }
 
+  async handleSelect({ target }) {
+    this.setState({ selectedCategory: target.id }, async () => {
+      this.handleCategoryDropdown();
+      await this.handleClick();
+    });
+  }
+
   addToCart(product) {
     const { cartList } = this.state;
     const ourProduct = product;
@@ -119,9 +139,17 @@ class ShopList extends React.Component {
       item.quantity += 1;
       this.setState({ cartList });
     } else {
-      this.setState({ cartList: { ...cartList, [product.id]: product } });
+      this.setState(
+        { cartList:
+        { ...cartList, [product.id]: product },
+        showModal: true },
+      );
       ourProduct.quantity = 1;
     }
+  }
+
+  closeModal() {
+    this.setState({ showModal: false });
   }
 
   removeCartItem(itemId) {
@@ -151,11 +179,13 @@ class ShopList extends React.Component {
       products,
       cartList,
       cartDropdown,
-      categoryDropdown } = this.state;
+      categoryDropdown,
+      filterDropdown,
+      showModal,
+      permaClose,
+    } = this.state;
     return (
-
       <section
-
         className="wrapper-category-shoplist"
       >
         <CategoryContainer
@@ -165,11 +195,14 @@ class ShopList extends React.Component {
           closeInactiveDropdowns={ this.closeInactiveDropdowns }
           cartDropdown={ cartDropdown }
           categoryDropdown={ categoryDropdown }
+          filterDropdown={ filterDropdown }
+          handleChange={ this.handleChange }
+          handleClick={ this.handleClick }
           handleCartDropdown={ this.handleCartDropdown }
           handleCategoryDropdown={ this.handleCategoryDropdown }
+          handleFilterDropdown={ this.handleFilterDropdown }
           removeCartItem={ this.removeCartItem }
         />
-
         <div className="productsList">
           <RenderProduct
 
@@ -179,10 +212,17 @@ class ShopList extends React.Component {
             cartList={ cartList }
           />
         </div>
+        {
+          !permaClose
+           && showModal
+           && <Modal
+             showModal={ showModal }
+             closeModal={ this.closeModal }
+             handleCheck={ this.handleCheck }
+           />
+        }
 
       </section>
-
-
     );
   }
 }
@@ -196,7 +236,6 @@ ShopList.propTypes = {
     state: PropTypes.shape({
       cartList: PropTypes.objectOf(PropTypes.any),
     }),
-
   }),
 };
 

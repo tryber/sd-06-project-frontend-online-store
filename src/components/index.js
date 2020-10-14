@@ -5,3 +5,4 @@ export { default as CategoryContainer } from './CategoryContainer';
 export { default as RenderProduct } from './RenderProduct';
 export { default as Cart } from './Cart';
 export { default as PaymentForm } from './PaymentForm';
+export { default as Modal } from './Modal';

@@ -6,18 +6,23 @@ class CartList extends React.Component {
   constructor(props) {
     super(props);
     this.wrapperRef = React.createRef();
+    this.listener = this.listener.bind(this);
   }
+
 
   componentDidMount() {
-    const { closeInactiveDropdowns } = this.props;
-    document.addEventListener('mousedown',
-      (event) => closeInactiveDropdowns(event, this.wrapperRef));
+    document.addEventListener('mousedown', this.listener);
   }
 
+
   componentWillUnmount() {
+    document.removeEventListener('mousedown', this.listener);
+  }
+
+  listener(event) {
     const { closeInactiveDropdowns } = this.props;
-    document.removeEventListener('mousedown',
-      (event) => closeInactiveDropdowns(event, this.wrapperRef));
+    const matches = ['button__add_to_cart', 'icon-bars'];
+    closeInactiveDropdowns(event, this.wrapperRef, matches, 'cartDropdown');
   }
 
   render() {

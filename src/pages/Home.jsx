@@ -20,6 +20,7 @@ export default class Home extends Component {
     this.getCategory = this.getCategory.bind(this);
     this.categoryApi = this.categoryApi.bind(this);
     this.updateCartIcon = this.updateCartIcon.bind(this);
+    this.updateCartItems = this.updateCartItems.bind(this);
   }
 
   async componentDidMount() {
@@ -28,11 +29,11 @@ export default class Home extends Component {
     this.updateCartIcon();
     this.setState({ categories });
   }
-  
+
   updateCartIcon() {
-      const cart = localStorage
+    const cart = localStorage
       ? JSON.parse(localStorage.getItem('cart'))
-    : [];
+      : [];
     this.setState({ cartProducts: cart });
   }
 
@@ -57,6 +58,10 @@ export default class Home extends Component {
     this.setState({ products: products.results, emptyList: false });
   }
 
+  updateCartItems(product) {
+    this.setState({ cartProducts: product });
+  }
+
   render() {
     const { categories, products, emptyList, cartProducts } = this.state;
 
@@ -66,14 +71,15 @@ export default class Home extends Component {
           {
             categories.map(category => {
               return (
-                <label htmlFor="category" key={category.name}>
+                <label htmlFor="category" key={category.id}>
                   <input
                     data-testid="category"
                     type="radio"
                     name="category"
                     value={category.id}
-                    onClick={this.getCategory} />
-                  { category.name}
+                    onClick={this.getCategory}
+                  />
+                  {category.name}
                 </label>
               );
             })
@@ -106,8 +112,11 @@ export default class Home extends Component {
               <img src={cart} alt="icone do carrinho" className="icon" />
               {
                 cartProducts
-                  ? <div className="items-in-cart" data-testid="shopping-cart-size">{ cartProducts.length }</div>
-                  : <div className="items-in-cart" data-testid="shopping-cart-size">0</div>
+                  ? <div
+                    data-testid="shopping-cart-size"
+                    className="items-in-cart"
+                  >{cartProducts.length}</div>
+                  : <div data-testid="shopping-cart-size">0</div>
               }
             </Link>
             <ProductList
@@ -115,6 +124,7 @@ export default class Home extends Component {
               emptyList={emptyList}
               products={products}
               updateCartIcon={this.updateCartIcon}
+              updateCartItems={this.updateCartItems}
             />
           </div>
         </main>

@@ -7,7 +7,7 @@ export default class ProductList extends Component {
   }
 
   render() {
-    const { products, emptyList, updateCartIcon, cartProducts } = this.props;
+    const { products, emptyList, updateCartIcon, cartProducts, updateCartItems } = this.props;
 
     return (
       <div>
@@ -20,6 +20,7 @@ export default class ProductList extends Component {
                 key={index}
                 product={product}
                 updateCartIcon={updateCartIcon}
+                updateCartItems={updateCartItems}
               />;
             })
         }

@@ -8,10 +8,17 @@ export default class DetailedProduct extends Component {
     const { title, price, thumbnail, attributes, id, shipping } = product;
 
     return (
-      <div data-testid="product" onClick={this.props.openDetails}>
-        <div data-testid="shopping-cart-product-name">{title}</div>
+      <div data-testid="product">
+        <div
+          data-testid="shopping-cart-product-name"
+          onClick={this.props.openDetails}
+        >{title}</div>
         <div>{price}</div>
-        <img src={thumbnail} alt={title} />
+        <img
+          src={thumbnail}
+          alt={title}
+          onClick={this.props.openDetails}
+        />
         <div data-testid="shopping-cart-product-quantity">{quantity}</div>
         <Link
           to={{

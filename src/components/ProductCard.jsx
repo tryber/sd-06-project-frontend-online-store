@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { DetailedProduct, BtnAddToCart } from './';
 
 export default class ProductCard extends Component {
   constructor(props) {
-    super();
+    super(props);
 
     this.state = {
       details: false,
+      quantity: 1,
       productId: props.product.id,
       title: props.product.title,
       price: props.product.price,
       thumbnail: props.product.thumbnail,
-      quantity: 1,
       availableQuantity: props.product.available_quantity,
     };
 
@@ -21,25 +20,29 @@ export default class ProductCard extends Component {
   }
 
   addToCart() {
-
-    const obj = {
-      title: this.state.title,
-      price: this.state.price,
-      thumbnail: this.state.thumbnail,
-      quantity: this.state.quantity,
-      availableQuantity: this.state.availableQuantity,
+    const { productId, title, price, thumbnail, quantity, availableQuantity } = this.state;
+    const chosenProduct = {
+      productId,
+      title,
+      price,
+      thumbnail,
+      quantity,
+      availableQuantity,
     };
-
     if (!localStorage.getItem('cart')) {
-      const array = [];
-      array.push(obj);
-      localStorage.clear();
-      localStorage.setItem('cart', JSON.stringify(array));
+      localStorage.setItem('cart', JSON.stringify([chosenProduct]));
+      this.props.updateCartItems(() => [chosenProduct]);
     } else {
-      const save = JSON.parse(localStorage.getItem('cart'));
-      save.push(obj);
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      const indexOfItemInCart = cart.findIndex(product =>
+        product.productId === chosenProduct.productId);
+      if (indexOfItemInCart === -1) {
+        cart.push(chosenProduct)
+      } else {
+        cart[indexOfItemInCart].quantity += chosenProduct.quantity;
+      }
       localStorage.clear();
-      localStorage.setItem('cart', JSON.stringify(save));
+      localStorage.setItem('cart', JSON.stringify(cart));
     }
     this.props.updateCartIcon();
   }
@@ -48,7 +51,7 @@ export default class ProductCard extends Component {
     this.setState(prev => ({ details: !prev.details }));
   }
 
-    render() {
+  render() {
     const { cartProducts, product } = this.props;
     const { quantity, details } = this.state;
 

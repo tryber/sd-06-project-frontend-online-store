@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import ItemList from './pages/ItemList';
 import Cart from './pages/Cart';
 import ProductDetails from './pages/ProductDetails';
+import ReviewInfo from './pages/ReviewInfo';
 
 class App extends React.Component {
   constructor() {
@@ -43,6 +44,7 @@ class App extends React.Component {
               />
               ) }
             />
+            <Route path="/ReviewInfo" component={ ReviewInfo } />
           </Switch>
         </BrowserRouter>
       </div>

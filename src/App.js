@@ -16,9 +16,21 @@ class App extends React.Component {
   }
 
   addItem(item) {
-    this.setState((previousState) => (
-      { carrinho: [...previousState.carrinho, item] }
-    ));
+    const { carrinho } = this.state;
+    const isAlreadyThere = carrinho.some((product) => product.id === item.id);
+    if (isAlreadyThere) {
+      const findProduct = carrinho.find((product) => product.id === item.id);
+      const indexWanted = carrinho.indexOf(findProduct);
+      this.setState((previousState) => {
+        console.log(previousState);
+        previousState.carrinho[indexWanted].quantity += 1;
+        return { carrinho: previousState.carrinho };
+      });
+    } else {
+      this.setState((previousState) => (
+        { carrinho: [...previousState.carrinho, item] }
+      ));
+    }
   }
 
   updateItem(item, tag) {

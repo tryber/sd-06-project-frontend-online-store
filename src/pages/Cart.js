@@ -39,22 +39,22 @@ class Cart extends Component {
             <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           </div>
         )
-        : (<div>
-          {cartProducts.map((item) => (
-            <div key={ item.id }>
-
-              <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
-              <span
-                data-testid="shopping-cart-product-quantity"
-              >
-                Quantity:
-                {item.amount}
-              </span>
-            </div>
-          ))}
-          <Link to="/checkout">
-            <button>Checkout</button>
-          </Link>
+        : (
+          <div>
+            {cartProducts.map((item) => (
+              <div key={ item.id }>
+                <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
+                <span
+                  data-testid="shopping-cart-product-quantity"
+                >
+                  Quantity:
+                  {item.amount}
+                </span>
+              </div>
+            ))}
+            <Link to="/checkout">
+              <button type="button" data-testid="checkout-products">Checkout</button>
+            </Link>
           </div>
         )
     );

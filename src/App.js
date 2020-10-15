@@ -22,7 +22,6 @@ class App extends React.Component {
       const findProduct = carrinho.find((product) => product.id === item.id);
       const indexWanted = carrinho.indexOf(findProduct);
       this.setState((previousState) => {
-        console.log(previousState);
         previousState.carrinho[indexWanted].quantity += 1;
         return { carrinho: previousState.carrinho };
       });

@@ -9,39 +9,19 @@ class CartItem extends Component {
     this.goingDown = this.goingDown.bind(this);
   }
 
-  updatePrice(number, event) {
-    event.persist();
-    console.log(event.target.parentNode);
-    event.target.parentNode.lastChild.innerText = number;
-  }
-
-  goingUp(event) {
+  goingUp() {
     const { item, updateItem } = this.props;
-    event.persist();
-    const number = parseInt(event.target.previousElementSibling.innerText, 10);
-    event.target.previousElementSibling.innerText = number + 1;
-    // this.updatePrice(number + 1, event);
     updateItem(item, true);
   }
 
-  goingDown(event) {
-    event.persist();
+  goingDown() {
     const { item, updateItem } = this.props;
-    const number = parseInt(event.target.nextSibling.innerText, 10);
-    // if (number) {
-    // event.target.nextSibling.innerText = 0;
-    // event.target.parentNode.lastChild.innerText = 0;
-    // } else {
-    event.target.nextSibling.innerText = number - 1;
     updateItem(item, false);
-    // this.updatePrice(number - 1, event);
-
-    // }
   }
 
   render() {
     const { item } = this.props;
-    const { title, thumbnail, price } = item;
+    const { title, thumbnail, price, quantity } = item;
     return (
       <div className="cart-item">
         <img src={ thumbnail } alt="selectedProduct" />
@@ -57,7 +37,7 @@ class CartItem extends Component {
           data-testid="shopping-cart-product-quantity"
           className="cart-item-number"
         >
-          { item.quantity }
+          { quantity }
         </div>
         <button
           data-testid="product-increase-quantity"
@@ -66,7 +46,7 @@ class CartItem extends Component {
         >
           +
         </button>
-        <p className="price">{price}</p>
+        <p className="price">{ (price * quantity).toFixed(true + true) }</p>
       </div>
     );
   }

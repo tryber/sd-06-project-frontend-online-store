@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Cart extends Component {
   constructor() {
@@ -39,18 +40,22 @@ class Cart extends Component {
           </div>
         )
         : (
-          cartProducts.map((item) => (
-            <div key={ item.id }>
-
-              <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
-              <span
-                data-testid="shopping-cart-product-quantity"
-              >
-                Quantity:
-                {item.amount}
-              </span>
-            </div>
-          ))
+          <div>
+            {cartProducts.map((item) => (
+              <div key={ item.id }>
+                <h3 data-testid="shopping-cart-product-name">{item.title}</h3>
+                <span
+                  data-testid="shopping-cart-product-quantity"
+                >
+                  Quantity:
+                  {item.amount}
+                </span>
+              </div>
+            ))}
+            <Link to="/checkout">
+              <button type="button" data-testid="checkout-products">Checkout</button>
+            </Link>
+          </div>
         )
     );
   }

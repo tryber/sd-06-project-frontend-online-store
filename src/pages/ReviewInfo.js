@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import './ReviewInfo.css';
 
 
@@ -8,6 +8,7 @@ class ReviewInfo extends Component {
   constructor() {
     super();
     this.onInputChange = this.onInputChange.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
     this.state = {
       fullname: '',
       cpf: '',
@@ -18,13 +19,34 @@ class ReviewInfo extends Component {
       comp: '',
       cep: '',
       city: '',
-      state: '',
+      state: 'AC',
       paymentMethod: '',
     };
   }
 
+  componentDidMount() {
+    const states = ['AC', 'AL', 'AP', 'AM', 'BA',
+      'CE', 'DF', 'ES', 'GO', 'MA', 'MS', 'MT',
+      'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ',
+      'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE',
+      'TO',
+    ];
+    states.map((state) => {
+      const select = document.querySelector('select');
+      const option = document.createElement('option');
+      option.innerText = state;
+      option.value = state;
+      select.appendChild(option);
+      return true;
+    });
+  }
+
   onInputChange({ target }) {
     this.setState({ [target.name]: target.value });
+  }
+
+  onSelectChange({ target }) {
+    this.setState({ state: target.value });
   }
 
   render() {
@@ -108,8 +130,11 @@ class ReviewInfo extends Component {
                 id="city"
                 placeholder="Cidade"
               />
-              <select>
-                <option>RN</option>
+              <select
+                onChange={ this.onSelectChange }
+                value={ this.setState.state }
+              >
+                oi
               </select>
             </fieldset>
           </form>

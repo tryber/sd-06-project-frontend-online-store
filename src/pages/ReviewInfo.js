@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { BsCreditCard } from 'react-icons/bs';
+import { FaCcMastercard, FaCreditCard, FaBarcode } from 'react-icons/fa';
 // import { Link } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import './ReviewInfo.css';
@@ -9,6 +11,7 @@ class ReviewInfo extends Component {
     super();
     this.onInputChange = this.onInputChange.bind(this);
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.onRadioChange = this.onRadioChange.bind(this);
     this.state = {
       fullname: '',
       cpf: '',
@@ -49,8 +52,13 @@ class ReviewInfo extends Component {
     this.setState({ state: target.value });
   }
 
+  onRadioChange(event) {
+    this.setState({ paymentMethod: event.target.id });
+  }
+
   render() {
-    const { fullname, cpf, email, tel, address, number, comp, cep, city } = this.state;
+    const { fullname, cpf, email, tel,
+      address, number, comp, cep, city, state, paymentMethod } = this.state;
     return (
       <div className="main">
         <section>Cart Review</section>
@@ -132,14 +140,67 @@ class ReviewInfo extends Component {
               />
               <select
                 onChange={ this.onSelectChange }
-                value={ this.setState.state }
+                value={ state }
               >
                 oi
               </select>
             </fieldset>
           </form>
         </section>
-        <section>Payment Method</section>
+        <section>
+          <form>
+            <fieldset>
+              <legend>Metodo de pagamento:</legend>
+              <div>
+                <label htmlFor="boleto">
+                  <FaBarcode />
+                  <input
+                    type="radio"
+                    value={ paymentMethod }
+                    onChange={ this.onRadioChange }
+                    id="boleto"
+                    name="paymentMethod"
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="visa">
+                  Visa
+                  <BsCreditCard />
+                  <input
+                    type="radio"
+                    value={ paymentMethod }
+                    onChange={ this.onRadioChange }
+                    id="visa"
+                    name="paymentMethod"
+                  />
+                </label>
+                <label htmlFor="master">
+                  Master
+                  <FaCcMastercard />
+                  <input
+                    type="radio"
+                    value={ paymentMethod }
+                    onChange={ this.onRadioChange }
+                    id="master"
+                    name="paymentMethod"
+                  />
+                </label>
+                <label htmlFor="elo">
+                  Elo
+                  <FaCreditCard />
+                  <input
+                    type="radio"
+                    value={ paymentMethod }
+                    onChange={ this.onRadioChange }
+                    id="elo"
+                    name="paymentMethod"
+                  />
+                </label>
+              </div>
+            </fieldset>
+          </form>
+        </section>
       </div>
     );
   }

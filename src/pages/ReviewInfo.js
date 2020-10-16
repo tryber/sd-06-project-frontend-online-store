@@ -67,6 +67,7 @@ class ReviewInfo extends Component {
             <fieldset>
               <legend>Informacoes para contato:</legend>
               <input
+                data-testid="checkout-fullname"
                 type="text"
                 onChange={ this.onInputChange }
                 value={ fullname }
@@ -75,6 +76,7 @@ class ReviewInfo extends Component {
                 placeholder="Nome Completo"
               />
               <input
+                data-testid="checkout-cpf"
                 type="text"
                 onChange={ this.onInputChange }
                 value={ cpf }
@@ -83,6 +85,7 @@ class ReviewInfo extends Component {
                 placeholder="CPF"
               />
               <input
+                data-testid="checkout-email"
                 type="text"
                 onChange={ this.onInputChange }
                 value={ email }
@@ -91,6 +94,7 @@ class ReviewInfo extends Component {
                 placeholder="Email"
               />
               <input
+                data-testid="checkout-phone"
                 type="text"
                 onChange={ this.onInputChange }
                 value={ tel }
@@ -99,6 +103,7 @@ class ReviewInfo extends Component {
                 placeholder="Telefone"
               />
               <input
+                data-testid="checkout-address"
                 type="text"
                 onChange={ this.onInputChange }
                 value={ address }
@@ -123,6 +128,7 @@ class ReviewInfo extends Component {
                 placeholder="Complemento"
               />
               <input
+                data-testid="checkout-cep"
                 type="text"
                 onChange={ this.onInputChange }
                 value={ cep }

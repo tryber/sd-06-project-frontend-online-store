@@ -10,3 +10,49 @@ input {
 select {
   margin: 5px;
 }
+
+.payment-methods {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.payment-methods-billet {
+  padding: 5px;
+}
+
+.payment-methods-cards {
+  padding: 5px;
+}
+
+.payment-methods-cards input {
+  margin-right: 18px;
+}
+
+.react-icons {
+  font-size: 3em;
+}
+
+.payment-methods-billet label{
+  display: flex;
+  align-items: center;
+}
+
+.payment-methods-cards {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.payment-methods-cards div {
+  display: flex;
+}
+
+.payment-methods-cards div label {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+}
+
+.payment-methods-cards div svg{
+  margin-right: 5px;
+}

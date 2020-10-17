@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BsCreditCard } from 'react-icons/bs';
 import { FaCcMastercard, FaCreditCard, FaBarcode } from 'react-icons/fa';
-// import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import { IconContext } from 'react-icons/lib';
 import './ReviewInfo.css';
 
 
@@ -157,52 +156,66 @@ class ReviewInfo extends Component {
           <form>
             <fieldset>
               <legend>Metodo de pagamento:</legend>
-              <div>
-                <label htmlFor="boleto">
-                  <FaBarcode />
-                  <input
-                    type="radio"
-                    value={ paymentMethod }
-                    onChange={ this.onRadioChange }
-                    id="boleto"
-                    name="paymentMethod"
-                  />
-                </label>
-              </div>
-              <div>
-                <label htmlFor="visa">
-                  Visa
-                  <BsCreditCard />
-                  <input
-                    type="radio"
-                    value={ paymentMethod }
-                    onChange={ this.onRadioChange }
-                    id="visa"
-                    name="paymentMethod"
-                  />
-                </label>
-                <label htmlFor="master">
-                  Master
-                  <FaCcMastercard />
-                  <input
-                    type="radio"
-                    value={ paymentMethod }
-                    onChange={ this.onRadioChange }
-                    id="master"
-                    name="paymentMethod"
-                  />
-                </label>
-                <label htmlFor="elo">
-                  Elo
-                  <FaCreditCard />
-                  <input
-                    type="radio"
-                    value={ paymentMethod }
-                    onChange={ this.onRadioChange }
-                    id="elo"
-                    name="paymentMethod"
-                  />
-                </label>
+              <div className="payment-methods">
+                <div className="payment-methods-billet">
+                  <p>Boleto</p>
+                  <label htmlFor="boleto">
+                    <IconContext.Provider value={ { className: 'react-icons' } }>
+                      <FaBarcode />
+                    </IconContext.Provider>
+                    <input
+                      type="radio"
+                      value={ paymentMethod }
+                      onChange={ this.onRadioChange }
+                      id="boleto"
+                      name="paymentMethod"
+                    />
+                  </label>
+                </div>
+                <div className="payment-methods-cards">
+                  <p>Cartoes de credito</p>
+                  <div>
+                    <IconContext.Provider value={ { className: 'react-icons' } }>
+                      <BsCreditCard />
+                    </IconContext.Provider>
+                    <label htmlFor="visa">
+                      Visa
+                      <input
+                        type="radio"
+                        value={ paymentMethod }
+                        onChange={ this.onRadioChange }
+                        id="visa"
+                        name="paymentMethod"
+                      />
+                    </label>
+                    <IconContext.Provider value={ { className: 'react-icons' } }>
+                      <FaCcMastercard />
+                    </IconContext.Provider>
+                    <label htmlFor="master">
+                      Master
+                      <input
+                        type="radio"
+                        value={ paymentMethod }
+                        onChange={ this.onRadioChange }
+                        id="master"
+                        name="paymentMethod"
+                      />
+                    </label>
+                    <IconContext.Provider value={ { className: 'react-icons' } }>
+                      <FaCreditCard />
+                    </IconContext.Provider>
+                    <label htmlFor="elo">
+                      Elo
+                      <input
+                        type="radio"
+                        value={ paymentMethod }
+                        onChange={ this.onRadioChange }
+                        id="elo"
+                        name="paymentMethod"
+                      />
+                    </label>
+                  </div>
+                </div>
               </div>
             </fieldset>
           </form>

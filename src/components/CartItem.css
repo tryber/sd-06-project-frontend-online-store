@@ -1,0 +1,21 @@
+.cart-item {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.cart-item p {
+  max-width: 15%;
+}
+
+.cart-item button {
+  max-width: 10%;
+}
+
+.cart-item img {
+  width: 10%;
+}
+
+.cart-item-number {
+  max-width: 5%;
+}

@@ -1,27 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import CartItem from '../components/CartItem';
 
 class Cart extends Component {
   render() {
-    const { carrinho } = this.props;
-    console.log(carrinho);
+    const { carrinho, updateItem } = this.props;
     if (!carrinho.length) {
       return <h1 data-testid="shopping-cart-empty-message">Seu carrinho está vazio</h1>;
     }
     return (
       <div>
         {
-          carrinho.map((iten) => (
-            <div key={ iten.name }>
-              <h2 data-testid="shopping-cart-product-name" key={ iten }>
-                { iten.title }
-              </h2>
-              <p data-testid="shopping-cart-product-quantity">
-                { iten.quantity }
-              </p>
-            </div>))
+          carrinho.map((item) => (
+            <CartItem key={ item.id } item={ item } updateItem={ updateItem } />
+          ))
         }
         <Link to="/">
           <button type="button"> Voltar </button>
@@ -33,6 +26,7 @@ class Cart extends Component {
 
 Cart.propTypes = {
   carrinho: PropTypes.shape(PropTypes.object).isRequired,
+  updateItem: PropTypes.func.isRequired,
 };
 
 export default Cart;

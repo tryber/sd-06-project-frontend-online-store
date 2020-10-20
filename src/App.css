@@ -1,38 +1,71 @@
-.App {
+.category-list {
+  border: 1px solid;
+  border-radius: 5px;
+  padding: 5px;
+  width: 250px;
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+}
+
+.campo-busca {
+  width: max-content;
+  float: left;
+}
+
+.campo-busca input {
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+.campo-busca button {
+  font-size: 15px;
+  padding: 5px;
+}
+
+.cart-img-div {
+  /* border: 1px solid; */
+  width: 80px;
+  float: right;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.cart-img {
+  width: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+main {
+  /* border: 1px solid; */
+  width: 900px;
+  text-align: center;
+  padding: 10px 25px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+main input {
+  width: 700px;
+}
+
+.listagem {
+  margin-top: 30px;
+  border: 1px solid white;
+}
+
+.detalhe-produto {
+  border: 1px solid;
+  border-radius: 5px;
+  width: 600px;
+  margin: auto;
+  margin-top: 15px;
+  text-align: center;
+  
 }

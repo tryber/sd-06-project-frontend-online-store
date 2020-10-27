@@ -19,6 +19,9 @@ class Cart extends Component {
         <Link to="/">
           <button type="button"> Voltar </button>
         </Link>
+        <Link to="/ReviewInfo">
+          <button data-testid="checkout-products" type="button"> Finalizar </button>
+        </Link>
       </div>
     );
   }
